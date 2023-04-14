@@ -1,3 +1,5 @@
+`#RRGGBB`
+![logo](https://myoctocat.com/assets/images/base-octocat.svg)
 # InstaRepas
 
 InstaRepas est une application web qui génère des menus personnalisés en fonction des préférences alimentaires de l'utilisateur. L'application permet à l'utilisateur de sélectionner ses préférences, telles que végétarien, sans porc, sans gluten, végétalien, etc., ainsi que le nombre de jours de menu qu'il souhaite générer. Le programme effectue ensuite des associations cohérentes entre les aliments pour créer des petits déjeuners, déjeuners et dîners sans recettes spécifiques. Les combinaisons d'aliments sont générées de manière aléatoire, mais cohérente, en veillant à inclure des protéines, des féculents et des légumes pour chaque repas.
@@ -11,9 +13,9 @@ Les utilisateurs peuvent également s'enregistrer et ajouter leurs propres recet
 
 # Contributeurs
 
-[Marcelo](lien)
-[Antonin](lien)
-[Tolga](lien)
+[Marcelo](lien)<br/>;
+[Antonin](lien)<br/>;
+[Tolga](lien)<br/>;
 
 # InstaRepas
 
@@ -28,6 +30,6 @@ Users can also register and add their own recipes to the website.
 
 # Contributors
 
-[Marcelo](lien)
-[Antonin](lien)
-[Tolga](lien)
+[Marcelo](lien)<br/>;
+[Antonin](lien)<br/>;
+[Tolga](lien)<br/>;
