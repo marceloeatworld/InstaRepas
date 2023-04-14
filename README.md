@@ -1,6 +1,6 @@
 <p align="center">
 <img src="https://myoctocat.com/assets/images/base-octocat.svg" width=10% height=10% >
-p><br/>
+<p><br/>
 
 # InstaRepas
 
