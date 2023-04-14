@@ -5,9 +5,15 @@ InstaRepas est une application web qui génère des menus personnalisés en fonc
 Les utilisateurs peuvent également s'enregistrer et ajouter leurs propres recettes au site web.
 
 # Technologies utilisées
+- HTML
+- CSS
+- JavaScript
 
+# Contributeurs
 
-
+[Marcelo](lien)
+[Antonin](lien)
+[Tolga](lien)
 
 # InstaRepas
 
@@ -16,3 +22,12 @@ InstaRepas is a web application that generates customized menus based on the use
 Users can also register and add their own recipes to the website.
 
 # Technologies used
+- HTML
+- CSS
+- JavaScript
+
+# Contributors
+
+[Marcelo](lien)
+[Antonin](lien)
+[Tolga](lien)
