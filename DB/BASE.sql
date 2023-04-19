@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Apr 19, 2023 at 12:45 PM
+-- Generation Time: Apr 19, 2023 at 01:34 PM
 -- Server version: 10.3.38-MariaDB-0ubuntu0.20.04.1
 -- PHP Version: 8.2.5
 
@@ -276,7 +276,7 @@ INSERT INTO `combinations_foods` (`id`, `combination_id`, `food_id`) VALUES
 
 CREATE TABLE `dietary_restrictions` (
   `id` int(11) NOT NULL,
-  `name` enum('vegetarian','pork_free','gluten_free','vegan','lactose_free','fish','meat','contains_meat','contains_pork','contains_gluten','contains_animal_products','contains_lactose','contains_fish') DEFAULT NULL
+  `name` enum('contains_meat','contains_pork','contains_gluten','contains_animal_products','contains_lactose','contains_fish') DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
