@@ -70,6 +70,9 @@ git pull origin main
 Maintenant, votre branche principale locale est à jour avec les modifications de la branche de fonctionnalité. Vous pouvez continuer à travailler sur de nouvelles fonctionnalités ou corrections en répétant ces étapes.
 
 ### si vous avez cette erreur
+<p align="center">
+<img src="erreur.png" width=30% height=30% >
+<p><br/>
 
 1. Verifie vous avez bien commit
 ```php
