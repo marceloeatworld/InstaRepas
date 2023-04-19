@@ -68,3 +68,23 @@ git pull origin main
 ```
 
 Maintenant, votre branche principale locale est à jour avec les modifications de la branche de fonctionnalité. Vous pouvez continuer à travailler sur de nouvelles fonctionnalités ou corrections en répétant ces étapes.
+
+### si vous avez cette erreur
+
+1. Verifie vous avez bien commit
+```php
+git add .
+git commit -m "Your commit message here"
+```
+2. fetch les changement
+```php
+git fetch origin
+```
+3. merger la branch local
+```php
+git merge origin/marcelo
+```
+4. push normalement cela fonctionne
+```php
+git push origin marcelo
+```
