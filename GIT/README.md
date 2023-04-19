@@ -29,7 +29,7 @@ git push origin nom_de_votre_branche
 1. Assurez-vous que votre dépôt local est à jour en récupérant les dernières modifications du dépôt distant :
 
 ```php
-git fetch
+git fetch origin
 ```
 2. Passez à la branche principale (par exemple, main) :
 
@@ -41,6 +41,7 @@ git checkout main
 
 ```php
 git pull origin main
+
 ```
 4. Créez une nouvelle branche pour votre fonctionnalité ou correction, en vous basant sur la branche principale à jour :
 
