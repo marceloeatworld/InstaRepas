@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Apr 18, 2023 at 01:54 PM
+-- Generation Time: Apr 19, 2023 at 12:45 PM
 -- Server version: 10.3.38-MariaDB-0ubuntu0.20.04.1
--- PHP Version: 8.2.4
+-- PHP Version: 8.2.5
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -1025,7 +1025,8 @@ CREATE TABLE `recipes` (
   `cooking_time` int(11) DEFAULT NULL,
   `servings` int(11) DEFAULT NULL,
   `recipe_category_id` int(11) DEFAULT NULL,
-  `creation_date` datetime NOT NULL
+  `creation_date` datetime NOT NULL,
+  `image_url` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
