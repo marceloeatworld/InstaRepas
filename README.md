@@ -1,5 +1,5 @@
 <p align="center">
-<img src="https://raw.githubusercontent.com/marceloeatworld/InstaRepas/main/logo_tmp.png?token=GHSAT0AAAAAACAD2GXZAXOTAWT7QMJKA34EZCADNPA" width=30% height=30% >
+<img src="logo_tmp.png" width=30% height=30% >
 <p><br/>
 
 # InstaRepas
