@@ -24,7 +24,7 @@ git push origin nom_de_votre_branche
 ```
 ---
 
-# Travailler en équipe avec Git implique généralement de travailler sur des branches distinctes pour chaque fonctionnalité ou correction, puis de fusionner ces branches dans la branche principale (généralement main ou master) une fois que le travail est terminé et validé
+### Travailler en équipe avec Git implique généralement de travailler sur des branches distinctes pour chaque fonctionnalité ou correction, puis de fusionner ces branches dans la branche principale (généralement main ou master) une fois que le travail est terminé et validé
 
 1. Assurez-vous que votre dépôt local est à jour en récupérant les dernières modifications du dépôt distant :
 

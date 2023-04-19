@@ -1,5 +1,5 @@
 <p align="center">
-<img src="https://myoctocat.com/assets/images/base-octocat.svg" width=10% height=10% >
+<img src="https://raw.githubusercontent.com/marceloeatworld/InstaRepas/main/logo_tmp.png?token=GHSAT0AAAAAACAD2GXYVHINO3DJZV5HE2KWZCADDUQ" width=30% height=30% >
 <p><br/>
 
 # InstaRepas
