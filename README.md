@@ -1,5 +1,5 @@
 <p align="center">
-<img src="https://myoctocat.com/assets/images/base-octocat.svg" width=10% height=10% >
+<img src="https://raw.githubusercontent.com/marceloeatworld/InstaRepas/main/logo_tmp.png?token=GHSAT0AAAAAACAD2GXZAXOTAWT7QMJKA34EZCADNPA" width=30% height=30% >
 <p><br/>
 
 # InstaRepas
@@ -17,7 +17,7 @@ Les utilisateurs peuvent également s'enregistrer et ajouter leurs propres recet
 # Contributeurs
 
 [Marcelo](lien)<br/>
-[Antonin](lien)<br/>
+[Antonin](https://github.com/antodvm)<br/>
 [Tolga](https://github.com/tonytolgadev)<br/>
 
 # InstaRepas
@@ -35,5 +35,5 @@ Users can also register and add their own recipes to the website.
 # Contributors
 
 [Marcelo](lien)<br/>
-[Antonin](lien)<br/>
+[Antonin](https://github.com/antodvm)<br/>
 [Tolga](https://github.com/tonytolgadev)<br/>

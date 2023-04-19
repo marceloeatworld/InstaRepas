@@ -22,3 +22,7 @@ git commit -m "Description de vos modifications"
 Enfin, poussez les modifications sur votre branche distante en utilisant la commande suivante :
 
 git push origin nom_de_votre_branche
+
+
+//RECUPER LES MODIF DE MAIN
+git pull origin main
