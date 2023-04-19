@@ -17,7 +17,7 @@ Les utilisateurs peuvent également s'enregistrer et ajouter leurs propres recet
 # Contributeurs
 
 [Marcelo](lien)<br/>
-[Antonin](lien)<br/>
+[Antonin](https://github.com/antodvm)<br/>
 [Tolga](https://github.com/tonytolgadev)<br/>
 
 # InstaRepas
@@ -35,5 +35,5 @@ Users can also register and add their own recipes to the website.
 # Contributors
 
 [Marcelo](lien)<br/>
-[Antonin](lien)<br/>
+[Antonin](https://github.com/antodvm)<br/>
 [Tolga](https://github.com/tonytolgadev)<br/>
