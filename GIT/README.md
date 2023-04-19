@@ -71,7 +71,7 @@ Maintenant, votre branche principale locale est à jour avec les modifications d
 
 ### si vous avez cette erreur
 <p align="center">
-<img src="error.png" width=30% height=30% >
+<img src="error.png" width=50% height=50% >
 <p><br/>
 
 1. Verifie vous avez bien commit
