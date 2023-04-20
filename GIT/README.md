@@ -75,12 +75,12 @@ Maintenant, votre branche principale locale est à jour avec les modifications d
 <img src="error.png" width=50% height=50% >
 <p><br/>
 
-1. Verifie vous avez bien commit
+1. Vérifie vous avez bien commit
 ```php
 git add .
 git commit -m "Your commit message here"
 ```
-2. fetch les changement
+2. fetch les changements
 ```php
 git fetch origin
 ```
