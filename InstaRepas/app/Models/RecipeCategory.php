@@ -8,4 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class RecipeCategory extends Model
 {
     use HasFactory;
+
+    protected $fillable = ['name'];
+
+    public function recipes()
+    {
+        return $this->hasMany(Recipe::class, 'recipe_category_id');
+    }
 }
