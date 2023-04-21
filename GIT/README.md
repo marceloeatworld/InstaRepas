@@ -92,3 +92,9 @@ git merge origin/marcelo
 ```php
 git push origin marcelo
 ```
+# GIT Command Cheat Sheet  
+<p align="center">
+<img src="git.jpeg" width=50% height=50% >
+<p><br/>
+Credit [Shubham_pen](https://twitter.com/Shubham_pen).
+
