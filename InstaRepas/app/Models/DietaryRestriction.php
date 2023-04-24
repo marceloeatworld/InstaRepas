@@ -13,16 +13,16 @@ class DietaryRestriction extends Model
 
     public function users()
     {
-        return $this->belongsToMany(User::class, 'user_preferences');
+        return $this->belongsToMany(User::class, 'user_preferences', 'preference_id', 'user_id');
     }
 
     public function foods()
     {
-        return $this->belongsToMany(Food::class, 'foods_restrictions');
+        return $this->belongsToMany(Food::class, 'foods_restrictions', 'restriction_id', 'food_id');
     }
 
     public function recipes()
     {
-        return $this->belongsToMany(Recipe::class, 'recipes_restrictions');
+        return $this->belongsToMany(Recipe::class, 'recipes_restrictions', 'restriction_id', 'recipe_id');
     }
 }

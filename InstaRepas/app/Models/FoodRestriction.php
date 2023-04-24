@@ -1,12 +1,13 @@
 <?php
+
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class FoodsSeason extends Model
+class FoodRestriction extends Model
 {
     use HasFactory;
-
-    protected $fillable = ['food_id', 'season_id'];
+    protected $table = 'foods_restrictions';
+    protected $fillable = ['food_id', 'restriction_id'];
 }
