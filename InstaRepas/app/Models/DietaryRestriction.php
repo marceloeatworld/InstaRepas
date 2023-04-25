@@ -9,20 +9,24 @@ class DietaryRestriction extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name'];
+    public $timestamps = false;
 
-    public function users()
+    protected $fillable = [
+        'name',
+    ];
+
+    public function recipes()
     {
-        return $this->belongsToMany(User::class, 'user_preferences', 'preference_id', 'user_id');
+        return $this->belongsToMany(Recipe::class, 'recipes_restrictions');
     }
 
     public function foods()
     {
-        return $this->belongsToMany(Food::class, 'foods_restrictions', 'restriction_id', 'food_id');
+        return $this->belongsToMany(Food::class, 'foods_restrictions');
     }
 
-    public function recipes()
+    public function users()
     {
-        return $this->belongsToMany(Recipe::class, 'recipes_restrictions', 'restriction_id', 'recipe_id');
+        return $this->belongsToMany(User::class, 'user_preferences');
     }
 }

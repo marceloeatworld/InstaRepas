@@ -26,24 +26,31 @@ class MealController extends Controller
     }
 
     // Filter foods based on seasons
-    if ($seasonal) {
-        $currentMonth = Carbon::now()->month;
-        $currentSeason = Season::whereHas('months', function ($query) use ($currentMonth) {
-            $query->where('month', $currentMonth);
-        })->first();
-        if ($currentSeason) {
-            $foods = $foods->filter(function ($food) use ($currentSeason) {
-                return $food->seasons->contains('id', $currentSeason->id);
-            });
-        }
+
+if ($seasonal) {
+    $currentMonth = Carbon::now()->month;
+    $currentSeason = Season::getSeasonByMonth($currentMonth);
+    
+    if ($currentSeason) {
+        $foods->whereHas('seasons', function ($query) use ($currentSeason) {
+            $query->where('id', $currentSeason->id);
+        });
     }
+}
+
+
     $foods = $foods->get();
 
     $meatCategoryId = FoodCategory::where('name', 'Meat')->first()->id;
+    $fishCategoryId = FoodCategory::where('name', 'Fish')->first()->id;
     $grainsCategoryId = FoodCategory::where('name', 'Grains')->first()->id;
     $fruitsCategoryId = FoodCategory::where('name', 'Fruits')->first()->id;
     $vegetablesCategoryId = FoodCategory::where('name', 'Vegetables')->first()->id;
     $oilsCategoryId = FoodCategory::where('name', 'Oils')->first()->id;
+    $dairyCategoryId = FoodCategory::where('name', 'Dairy')->first()->id;
+    $nutsCategoryId = FoodCategory::where('name', 'Nuts')->first()->id; 
+    $eggsCategoryId = FoodCategory::where('name', 'Eggs')->first()->id;
+    $breadCategoryId = FoodCategory::where('name', 'Bread')->first()->id;
 
     $breakfasts = [];
     $lunches = [];
@@ -53,63 +60,64 @@ class MealController extends Controller
         // Generate meals for the specified number of days
         for ($day = 0; $day < $days; $day++) {
             // Generate breakfast using available foods
-$breakfast_protein = $foods->where('category_id', $meatCategoryId)
-        ->reject(function ($food) {
-            return $food->restrictions->where('name', 'contains_fish')->count() > 0
-                || $food->restrictions->where('name', 'contains_meat')->count() > 0;
-        })
-        ->random();
-    
+            $breakfast_protein = $foods->where('category_id', $dairyCategoryId)->random();
+            $breakfast_carbohydrate = $foods->where('category_id', $breadCategoryId)
+                ->where('nutritional_type', 'carbohydrates')
+                ->random();
+        
             $breakfasts[] = [
                 'protein' => $breakfast_protein,
-                'carbohydrate' => $foods->where('category_id', FoodCategory::where('name', 'Grains')->first()->id)
-                    ->where('nutritional_type', 'carbohydrates')
-                    ->random(),
-                'fruit' => $foods->where('category_id', FoodCategory::where('name', 'Fruits')->first()->id)->random(),
+                'carbohydrate' => $breakfast_carbohydrate,
+                'fruit' => $foods->where('category_id', $fruitsCategoryId)->random(),
             ];
     
             // Generate lunch
-            $lunch_protein = $foods->where('category_id', $meatCategoryId)
+            $lunch_protein = $foods->whereIn('category_id', [$meatCategoryId, $fishCategoryId, $eggsCategoryId])
             ->reject(function ($food) {
                 return $food->restrictions->where('name', 'contains_lactose')->count() > 0;
             })
             ->random();
-    
-    
+
+            $lunch_carbohydrate = $foods->where('category_id', $grainsCategoryId)
+            ->where('nutritional_type', 'carbohydrates')
+            ->where('id', '!=', $breadCategoryId)
+            ->random();
+
             $lunches[] = [
-                'protein' => $lunch_protein,
-                'carbohydrate' => $foods->where('category_id', FoodCategory::where('name', 'Grains')->first()->id)
-                    ->where('nutritional_type', 'carbohydrates')
-                    ->random(),
-                'vegetable' => $foods->where('category_id', FoodCategory::where('name', 'Vegetables')->first()->id)->random(),
-                'lipid' => $foods->where('category_id', FoodCategory::where('name', 'Oils')->first()->id)->random(),
+            'protein' => $lunch_protein,
+            'carbohydrate' => $lunch_carbohydrate,
+            'vegetable' => $foods->where('category_id', $vegetablesCategoryId)->random(),
+            'lipid' => $foods->where('category_id', $oilsCategoryId)->random(),
             ];
-    
+
+            // Generate dinner (similar to lunch)
+            $dinner_protein = $foods->whereIn('category_id', [$meatCategoryId, $fishCategoryId, $eggsCategoryId])
+            ->reject(function ($food) {
+                return $food->restrictions->where('name', 'contains_fish')->count() > 0;
+            })
+            ->random();
+
+            $dinner_carbohydrate = $foods->where('category_id', $grainsCategoryId)
+            ->where('nutritional_type', 'carbohydrates')
+            ->where('id', '!=', $breadCategoryId)
+            ->random();
+
+            $dinners[] = [
+            'protein' => $dinner_protein,
+            'carbohydrate' => $dinner_carbohydrate,
+            'vegetable' => $foods->where('category_id', $vegetablesCategoryId)->random(),
+            'lipid' => $foods->where('category_id', $oilsCategoryId)->random(),
+            ];
+
             if ($include_snacks) {
-                            // Generate snacks using available foods
+            // Generate snacks using available foods
             for ($snack = 0; $snack < $days; $snack++) {
+                $snack_food = $foods->whereIn('category_id', [$fruitsCategoryId, $nutsCategoryId])->random();
                 $snacks[] = [
-                    'snack' => $foods->random(),
+                    'snack' => $snack_food,
                 ];
             }
-        }
-
-        // Generate dinner
-        $dinner_protein = $foods->where('category_id', $meatCategoryId)
-        ->reject(function ($food) {
-            return $food->restrictions->where('name', 'contains_fish')->count() > 0;
-        })
-        ->random();
-
-
-        $dinners[] = [
-            'protein' => $dinner_protein,
-            'carbohydrate' => $foods->where('category_id', FoodCategory::where('name', 'Grains')->first()->id)
-                ->where('nutritional_type', 'carbohydrates')
-                ->random(),
-            'vegetable' => $foods->where('category_id', FoodCategory::where('name', 'Vegetables')->first()->id)->random(),
-            'lipid' => $foods->where('category_id', FoodCategory::where('name', 'Oils')->first()->id)->random(),
-        ];
+            }
     }
 
     return view('meals', [

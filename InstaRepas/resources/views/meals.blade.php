@@ -36,7 +36,12 @@
                 Vegetable: {{ $lunches[$day]['vegetable']->name }}<br>
                 Lipid: {{ $lunches[$day]['lipid']->name }}
             </div>
-
+            @if($include_snacks)
+                <h4>Snack</h4>
+                <div>
+                    Snack: {{ $snacks[$day]['snack']->name }}
+                </div>
+            @endif
             <h4>Dinner</h4>
             <div>
                 Protein: {{ $dinners[$day]['protein']->name }}<br>
@@ -45,12 +50,7 @@
                 Lipid: {{ $dinners[$day]['lipid']->name }}
             </div>
 
-            @if($include_snacks)
-                <h4>Snack</h4>
-                <div>
-                    Snack: {{ $snacks[$day]['snack']->name }}
-                </div>
-            @endif
+    
         </div>
     @endfor
 
