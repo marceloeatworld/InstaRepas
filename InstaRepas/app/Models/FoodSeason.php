@@ -5,19 +5,24 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class CombinationFood extends Model
+class FoodSeason extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['combination_id', 'food_id'];
+    protected $table = 'foods_seasons';
 
-    public function mealCombination()
-    {
-        return $this->belongsTo(MealCombination::class, 'combination_id');
-    }
+    protected $fillable = [
+        'food_id',
+        'season_id',
+    ];
 
     public function food()
     {
         return $this->belongsTo(Food::class, 'food_id');
+    }
+
+    public function season()
+    {
+        return $this->belongsTo(Season::class, 'season_id');
     }
 }

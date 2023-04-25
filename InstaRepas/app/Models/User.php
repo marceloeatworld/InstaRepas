@@ -3,23 +3,18 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\Model;
 
-class User extends Authenticatable
+class User extends Model
 {
-    use HasFactory, Notifiable;
+    use HasFactory;
 
     protected $fillable = [
         'username',
         'email',
         'password',
         'registration_date',
-        'is_admin'
-    ];
-
-    protected $hidden = [
-        'password',
+        'is_admin',
     ];
 
     public function foods()
@@ -34,6 +29,6 @@ class User extends Authenticatable
 
     public function preferences()
     {
-        return $this->belongsToMany(DietaryRestriction::class, 'user_preferences');
+        return $this->belongsToMany(DietaryRestriction::class, 'user_preferences', 'user_id', 'preference_id');
     }
 }

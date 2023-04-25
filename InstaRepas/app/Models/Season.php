@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -8,7 +9,11 @@ class Season extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['season_name'];
+    public $timestamps = false;
+
+    protected $fillable = [
+        'season_name',
+    ];
 
     public function foods()
     {

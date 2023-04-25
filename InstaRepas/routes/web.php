@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\MealController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -12,6 +14,8 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+
+Route::post('/generate-meals', [MealController::class, 'generate'])->name('generate_meals');
 
 Route::get('/', function () {
     return view('home');
