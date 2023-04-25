@@ -19,4 +19,23 @@ class Season extends Model
     {
         return $this->belongsToMany(Food::class, 'foods_seasons');
     }
+
+  
+    public static function getSeasonByMonth($month)
+    {
+        
+        $season = null;
+        if ($month >= 3 && $month <= 5) {
+            $season = 'spring';
+        } elseif ($month >= 6 && $month <= 8) {
+            $season = 'summer';
+        } elseif ($month >= 9 && $month <= 11) {
+            $season = 'fall';
+        } else {
+            $season = 'winter';
+        }
+
+        
+        return self::where('season_name', $season)->first();
+    }
 }

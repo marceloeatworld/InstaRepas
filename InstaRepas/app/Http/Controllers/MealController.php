@@ -32,7 +32,8 @@ class MealController extends Controller
 
             if ($currentSeason) {
                 $foods->whereHas('seasons', function ($query) use ($currentSeason) {
-                    $query->where('id', $currentSeason->id);
+                    $query->where('seasons.id', $currentSeason->id);
+
                 });
             }
         }
@@ -44,6 +45,7 @@ class MealController extends Controller
         $dinners = [];
         $snacks = [];
 
+        
         // Generate meals for the specified number of days
         for ($day = 0; $day < $days; $day++) {
             $breakfasts[] = $this->generateBreakfast($foods);
