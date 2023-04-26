@@ -17,7 +17,8 @@
 </head>
 <body>
     <h1>Meal Plan</h1>
-
+    <p>Date: {{ $current_date }}</p>
+    <p>Season: {{ $current_season }}</p>
     @for($day = 0; $day < count($breakfasts); $day++)
         <div class="card">
             <h3>Day {{ $day + 1 }}</h3>
