@@ -4,6 +4,7 @@ CREATE TABLE food_categories (
     name VARCHAR(255) NOT NULL UNIQUE
 );
 INSERT INTO food_categories (name)
+
 VALUES ('Meat'), ('Fish'), ('Vegetables'), ('Fruits'), ('Grains'), ('Dairy'), ('Nuts'), ('Oils'), ('Eggs'), ('Bread');
 
 -- Seasons table
