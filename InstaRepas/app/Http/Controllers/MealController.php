@@ -15,56 +15,65 @@ class MealController extends Controller
         $seasonal = $request->input('seasonal', false);
         $include_snacks = $request->input('include_snacks', false);
         $days = $request->input('days', 1);
-
+        $currentMonth = Carbon::now()->month;
+        $currentSeason = null;
+    
         $foods = Food::query();
-
+    
         // Filter foods based on restrictions
         foreach ($restrictions as $restriction) {
             $foods->whereDoesntHave('restrictions', function ($query) use ($restriction) {
                 $query->where('name', $restriction);
             });
         }
-
+    
         // Filter foods based on seasons
         if ($seasonal) {
-            $currentMonth = Carbon::now()->month;
             $currentSeason = Season::getSeasonByMonth($currentMonth);
-
             if ($currentSeason) {
-                $foods->whereHas('seasons', function ($query) use ($currentSeason) {
-                    $query->where('seasons.id', $currentSeason->id);
-
+                $foods->where(function ($query) use ($currentSeason) {
+                    $query->whereHas('seasons', function ($query) use ($currentSeason) {
+                        $query->where('seasons.id', $currentSeason->id);
+                    })->orWhereDoesntHave('seasons');
                 });
             }
         }
 
+    
         $foods = $foods->get();
-
+    
+        if ($foods->count() === 0) {
+            return abort(500, 'There are no foods available that match your criteria.');
+        }
+    
         $breakfasts = [];
         $lunches = [];
         $dinners = [];
         $snacks = [];
-
-        
+    
         // Generate meals for the specified number of days
         for ($day = 0; $day < $days; $day++) {
             $breakfasts[] = $this->generateBreakfast($foods);
             $lunches[] = $this->generateLunchOrDinner($foods);
             $dinners[] = $this->generateLunchOrDinner($foods);
-
+    
             if ($include_snacks) {
                 $snacks[] = $this->generateSnack($foods);
             }
         }
-
+    
         return view('meals', [
             'breakfasts' => $breakfasts,
             'lunches' => $lunches,
             'dinners' => $dinners,
             'snacks' => $snacks,
             'include_snacks' => $include_snacks,
+            'current_date' => Carbon::now()->toFormattedDateString(),
+            'current_season' => $currentSeason ? $currentSeason->season_name : 'Unknown',
+
         ]);
     }
+    
 
     private function generateBreakfast($foods)
     {
@@ -83,8 +92,8 @@ class MealController extends Controller
             'vegetable' => $foods->where('category.name', 'Vegetables')->random(),
             'lipid' => $foods->where('category.name', 'Oils')->random(),
         ];
+       
     }
-
     private function generateSnack($foods)
     {
         return [

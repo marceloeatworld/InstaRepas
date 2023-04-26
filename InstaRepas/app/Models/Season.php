@@ -26,13 +26,13 @@ class Season extends Model
         
         $season = null;
         if ($month >= 3 && $month <= 5) {
-            $season = 'spring';
+            $season = 'Spring';
         } elseif ($month >= 6 && $month <= 8) {
-            $season = 'summer';
+            $season = 'Summer';
         } elseif ($month >= 9 && $month <= 11) {
-            $season = 'fall';
+            $season = 'Fall';
         } else {
-            $season = 'winter';
+            $season = 'Winter';
         }
 
         
