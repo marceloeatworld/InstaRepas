@@ -5,17 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class RecipeFood extends Model
+class RecipeRestriction extends Model
 {
     use HasFactory;
 
-    protected $table = 'recipes_foods';
-
     protected $fillable = [
         'recipe_id',
-        'food_id',
-        'quantity',
-        'unit_of_measure',
+        'restriction_id',
     ];
 
     public function recipe()
@@ -23,8 +19,8 @@ class RecipeFood extends Model
         return $this->belongsTo(Recipe::class, 'recipe_id');
     }
 
-    public function food()
+    public function restriction()
     {
-        return $this->belongsTo(Food::class, 'food_id');
+        return $this->belongsTo(DietaryRestriction::class, 'restriction_id');
     }
 }
