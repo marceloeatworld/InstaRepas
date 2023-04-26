@@ -20,4 +20,8 @@ class FoodRestriction extends Model
     {
         return $this->belongsTo(DietaryRestriction::class, 'restriction_id');
     }
+<<<<<<< HEAD:InstaRepas/app/Models/FoodsRestriction.php
 }
+=======
+}
+>>>>>>> 352efbe116555cd79854ecceed60ddb979589544:InstaRepas/app/Models/FoodRestriction.php
