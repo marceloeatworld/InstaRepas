@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -18,7 +19,7 @@ class Recipe extends Model
         'servings',
         'recipe_category_id',
         'creation_date',
-        'image_url'
+        'image_url',
     ];
 
     public function user()
@@ -33,7 +34,7 @@ class Recipe extends Model
 
     public function restrictions()
     {
-        return $this->belongsToMany(DietaryRestriction::class, 'recipes_restrictions');
+        return $this->belongsToMany(DietaryRestriction::class, 'recipes_restrictions', 'recipe_id', 'restriction_id');
     }
 
     public function foods()

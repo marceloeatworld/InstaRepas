@@ -1,17 +1,30 @@
 <?php
+
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class RecipesFood extends Model
+class RecipeFood extends Model
 {
     use HasFactory;
+
+    protected $table = 'recipes_foods';
 
     protected $fillable = [
         'recipe_id',
         'food_id',
         'quantity',
-        'unit_of_measure'
+        'unit_of_measure',
     ];
+
+    public function recipe()
+    {
+        return $this->belongsTo(Recipe::class, 'recipe_id');
+    }
+
+    public function food()
+    {
+        return $this->belongsTo(Food::class, 'food_id');
+    }
 }
