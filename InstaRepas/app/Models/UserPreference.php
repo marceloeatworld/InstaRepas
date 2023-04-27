@@ -20,8 +20,4 @@ class UserPreference extends Model
     {
         return $this->belongsTo(DietaryRestriction::class, 'preference_id');
     }
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> 352efbe116555cd79854ecceed60ddb979589544

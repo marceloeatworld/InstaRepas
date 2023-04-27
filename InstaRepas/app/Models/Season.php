@@ -38,8 +38,4 @@ class Season extends Model
         
         return self::where('season_name', $season)->first();
     }
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> 352efbe116555cd79854ecceed60ddb979589544
