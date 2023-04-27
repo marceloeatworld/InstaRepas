@@ -32,7 +32,7 @@
 
             <h4>Lunch</h4>
             <div>
-                Protein: {{ $lunches[$day]['protein']->name }}<br>
+                Protein: {{ isset($lunches[$day]['protein']) ? $lunches[$day]['protein']->name : 'No protein available' }}<br>
                 Carbohydrate: {{ $lunches[$day]['carbohydrate']->name }}<br>
                 Vegetable: {{ $lunches[$day]['vegetable']->name }}<br>
                 Lipid: {{ $lunches[$day]['lipid']->name }}
@@ -46,7 +46,7 @@
             @endif
             <h4>Dinner</h4>
             <div>
-                Protein: {{ $dinners[$day]['protein']->name }}<br>
+                Protein: {{ isset($dinners[$day]['protein']) ? $dinners[$day]['protein']->name : 'No protein available' }}<br>
                 Carbohydrate: {{ $dinners[$day]['carbohydrate']->name }}<br>
                 Vegetable: {{ $dinners[$day]['vegetable']->name }}<br>
                 Lipid: {{ $dinners[$day]['lipid']->name }}
