@@ -67,9 +67,10 @@
         </fieldset>
 
         <fieldset>
-            <legend>Nombre de jours</legend>
-            <input type="number" name="days" min="1" value="1">
-        </fieldset>
+    <legend>Nombre de jours</legend>
+    <input type="number" name="days" min="1" max="60" value="1">
+</fieldset>
+
 
         <button type="submit">Générer des repas</button>
     </form>
