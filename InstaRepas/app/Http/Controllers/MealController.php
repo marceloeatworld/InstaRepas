@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Food;
+use App\Models\MealCombination;
+use App\Models\CombinationFood;
 use App\Models\Season;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -14,7 +16,7 @@ class MealController extends Controller
         $restrictions = $request->input('restrictions', []);
         $seasonal = $request->input('seasonal', false);
         $include_snacks = $request->input('include_snacks', false);
-        $days = $request->input('days', 1);
+        $days = max(1, min($request->input('days', 1), 60));
         $currentMonth = Carbon::now()->month;
         $currentSeason = null;
     
@@ -39,29 +41,28 @@ class MealController extends Controller
             }
         }
 
-    
         $foods = $foods->get();
-    
+
         if ($foods->count() === 0) {
             return abort(500, 'There are no foods available that match your criteria.');
         }
-    
+
         $breakfasts = [];
         $lunches = [];
         $dinners = [];
         $snacks = [];
-    
+
         // Generate meals for the specified number of days
         for ($day = 0; $day < $days; $day++) {
             $breakfasts[] = $this->generateBreakfast($foods);
             $lunches[] = $this->generateLunchOrDinner($foods);
             $dinners[] = $this->generateLunchOrDinner($foods);
-    
+
             if ($include_snacks) {
                 $snacks[] = $this->generateSnack($foods);
             }
         }
-    
+
         return view('meals', [
             'breakfasts' => $breakfasts,
             'lunches' => $lunches,
@@ -70,34 +71,51 @@ class MealController extends Controller
             'include_snacks' => $include_snacks,
             'current_date' => Carbon::now()->toFormattedDateString(),
             'current_season' => $currentSeason ? $currentSeason->season_name : 'Unknown',
-
         ]);
     }
-    
 
     private function generateBreakfast($foods)
     {
+        $breakfastCombination = MealCombination::where('meal_type', 'Breakfast')->first();
+        $breakfastFoods = CombinationFood::where('combination_id', $breakfastCombination->id)->get();
+
+        if (!$breakfastCombination) {
+            return abort(500, 'There are no breakfast combinations available that match your criteria.');
+        }
+
+        $breakfastFoods = $breakfastCombination->foods()->whereIn('foods.id', $foods->pluck('id'))->get();
+
         return [
-            'protein' => $foods->where('category.name', 'Dairy')->random(),
-            'carbohydrate' => $foods->where('category.name', 'Bread')->where('nutritional_type', 'carbohydrates')->random(),
-            'fruit' => $foods->where('category.name', 'Fruits')->random(),
+            'protein' => $breakfastFoods->where('category.name', 'Dairy')->random(),
+            'carbohydrate' => $breakfastFoods->where('category.name', 'Bread')->where('nutritional_type', 'carbohydrates')->random(),
+            'fruit' => $breakfastFoods->where('category.name', 'Fruits')->random(),
         ];
     }
 
     private function generateLunchOrDinner($foods)
     {
+        $lunchOrDinnerCombination = MealCombination::where('meal_type', 'other_meals')->inRandomOrder()->first();
+        $lunchOrDinnerFoods = CombinationFood::where('combination_id', $lunchOrDinnerCombination->id)->get();
+        $lunchOrDinnerFoods = $lunchOrDinnerCombination->foods()->whereIn('foods.id', $foods->pluck('id'))->get();
+    
         return [
-            'protein' => $foods->whereIn('category.name', ['Meat', 'Fish', 'Eggs'])->random(),
-            'carbohydrate' => $foods->where('category.name', 'Grains')->where('nutritional_type', 'carbohydrates')->random(),
-            'vegetable' => $foods->where('category.name', 'Vegetables')->random(),
-            'lipid' => $foods->where('category.name', 'Oils')->random(),
+            'protein' => $lunchOrDinnerFoods->whereIn('category.name', ['Meat', 'Fish', 'Eggs'])->random(),
+            'carbohydrate' => $lunchOrDinnerFoods->where('category.name', 'Grains')->where('nutritional_type', 'carbohydrates')->random(),
+            'vegetable' => $lunchOrDinnerFoods->where('category.name', 'Vegetables')->random(),
+            'lipid' => $lunchOrDinnerFoods->where('category.name', 'Oils')->random(),
         ];
-       
     }
+    
+
     private function generateSnack($foods)
     {
+        $snackCombination = MealCombination::where('meal_type', 'snack')->inRandomOrder()->first();
+        $snackFoods = CombinationFood::where('combination_id', $snackCombination->id)->get();
+        $snackFoods = $snackCombination->foods->whereIn('id', $foods->pluck('id'));
+
         return [
-            'snack' => $foods->whereIn('category.name', ['Fruits', 'Nuts'])->random(),
+            'snack' => $snackFoods->whereIn('category.name', ['Fruits', 'Nuts'])->random(),
         ];
     }
 }
+

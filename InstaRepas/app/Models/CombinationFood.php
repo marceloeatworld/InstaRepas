@@ -1,6 +1,6 @@
 <?php
 
-namespace  App\Models;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -9,9 +9,16 @@ class CombinationFood extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['combination_id', 'food_id'];
+    protected $table = 'combinations_foods';
 
-    public function mealCombination()
+    protected $fillable = [
+        'combination_id',
+        'food_id',
+    ];
+
+    public $timestamps = false;
+
+    public function combination()
     {
         return $this->belongsTo(MealCombination::class, 'combination_id');
     }

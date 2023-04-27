@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class UserPreference extends Model
 {
     use HasFactory;
+    protected $table = 'user_preferences';
 
     protected $fillable = ['user_id', 'preference_id'];
 

@@ -11,6 +11,8 @@ class DietaryRestriction extends Model
 
     public $timestamps = false;
 
+    protected $table = 'dietary_restrictions';
+
     protected $fillable = [
         'name',
     ];

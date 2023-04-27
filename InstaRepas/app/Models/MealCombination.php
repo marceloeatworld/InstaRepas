@@ -1,13 +1,15 @@
 <?php
 
-namespace  App\Models;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class CombinationFood extends Model
+class MealCombination extends Model
 {
     use HasFactory;
+    protected $table = 'meal_combinations';
+
 
     protected $fillable = [
         'meal_type',
