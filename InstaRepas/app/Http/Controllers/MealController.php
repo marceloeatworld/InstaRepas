@@ -110,7 +110,7 @@ class MealController extends Controller
 
     private function generateLunchOrDinner($foods)
     {
-        $proteinCategory = in_array('contains_animal_products', $this->restrictions) ? 'Vegetables' : ['Meat', 'Fish', 'Eggs'];
+        $proteinCategory = in_array('contains_animal_products', $this->restrictions) ? 'Vegetables' : ['Meat', 'Fish', 'Eggs','Pork'];
         $proteinFood = $foods->whereIn('category.name', $proteinCategory)->count() > 0 ? $foods->whereIn('category.name', $proteinCategory)->random() : null;
     
         if (in_array('contains_animal_products', $this->restrictions)) {
