@@ -40,7 +40,8 @@
             @if($include_snacks)
                 <h4>Snack</h4>
                 <div>
-                    Snack: {{ $snacks[$day]['snack']->name }}
+                    Fruit: {{ $snacks[$day]['fruit'] ? $snacks[$day]['fruit']->name : 'No fruit available' }}<br>
+                    Other Snack: {{ $snacks[$day]['other_snack'] ? $snacks[$day]['other_snack']->name : 'No other snack available' }}
                 </div>
             @endif
             <h4>Dinner</h4>
@@ -51,7 +52,6 @@
                 Lipid: {{ $dinners[$day]['lipid']->name }}
             </div>
 
-    
         </div>
     @endfor
 
