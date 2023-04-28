@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models;
+namespace  App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -9,11 +9,17 @@ class DietaryRestriction extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name'];
+    public $timestamps = false;
 
-    public function users()
+    protected $table = 'dietary_restrictions';
+
+    protected $fillable = [
+        'name',
+    ];
+
+    public function recipes()
     {
-        return $this->belongsToMany(User::class, 'user_preferences');
+        return $this->belongsToMany(Recipe::class, 'recipes_restrictions');
     }
 
     public function foods()
@@ -21,8 +27,8 @@ class DietaryRestriction extends Model
         return $this->belongsToMany(Food::class, 'foods_restrictions');
     }
 
-    public function recipes()
+    public function users()
     {
-        return $this->belongsToMany(Recipe::class, 'recipes_restrictions');
+        return $this->belongsToMany(User::class, 'user_preferences');
     }
 }

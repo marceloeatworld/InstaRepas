@@ -1,5 +1,6 @@
 <?php
-namespace App\Models;
+
+namespace  App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -7,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Recipe extends Model
 {
     use HasFactory;
+    protected $table = 'recipes';
 
     protected $fillable = [
         'user_id',
@@ -18,7 +20,7 @@ class Recipe extends Model
         'servings',
         'recipe_category_id',
         'creation_date',
-        'image_url'
+        'image_url',
     ];
 
     public function user()
@@ -33,7 +35,7 @@ class Recipe extends Model
 
     public function restrictions()
     {
-        return $this->belongsToMany(DietaryRestriction::class, 'recipes_restrictions');
+        return $this->belongsToMany(DietaryRestriction::class, 'recipes_restrictions', 'recipe_id', 'restriction_id');
     }
 
     public function foods()
