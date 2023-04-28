@@ -42,12 +42,23 @@ class MealController extends Controller
                 });
             }
         }
+        
+        
+/*         if ($seasonal) {
+            $currentSeason = Season::getSeasonByMonth($currentMonth);
+            if ($currentSeason) {
+                $foods->where(function ($query) use ($currentSeason) {
+                    $query->whereHas('seasons', function ($query) use ($currentSeason) {
+                        $query->where('seasons.id', $currentSeason->id);
+                    })->orWhere(function ($query) {
+                        $query->doesntHave('seasons');
+                    });
+                });
+            }
+        }
+         */
 
         $foods = $foods->get();
-
-        if ($foods->count() === 0) {
-            return abort(500, 'There are no foods available that match your criteria.');
-        }
 
         $breakfasts = [];
         $lunches = [];
@@ -80,7 +91,9 @@ class MealController extends Controller
     {
         $mealCombination = MealCombination::where('meal_type', $mealType)->inRandomOrder()->first();
         if (!$mealCombination) {
-            return abort(500, "There are no {$mealType} combinations available that match your criteria.");
+            return [
+                'error_message' => "There are no {$mealType} combinations available that match your criteria.",
+            ];
         }
 
         $mealFoods = $mealCombination->foods()->whereIn('foods.id', $foods->pluck('id'))->get();
@@ -98,9 +111,9 @@ class MealController extends Controller
 
     private function generateBreakfast($foods)
     {
-        $proteinFood = $foods->where('category.name', 'Dairy')->random();
-        
+        $proteinFood = $foods->where('category.name', 'Dairy')->count() > 0 ? $foods->where('category.name', 'Dairy')->random() : null;
 
+        
         return [
             'protein' => $proteinFood,
             'carbohydrate' => $foods->where('category.name', 'Bread')->where('nutritional_type', 'carbohydrates')->random(),
@@ -110,11 +123,13 @@ class MealController extends Controller
 
     private function generateLunchOrDinner($foods)
     {
-        $proteinCategory = in_array('contains_animal_products', $this->restrictions) ? 'Vegetables' : ['Meat', 'Fish', 'Eggs','Pork'];
+        $proteinCategory = in_array('contains_animal_products', $this->restrictions) ? 'Vegetables' : ['Meat', 'Fish', 'Eggs', 'Pork'];
         $proteinFood = $foods->whereIn('category.name', $proteinCategory)->count() > 0 ? $foods->whereIn('category.name', $proteinCategory)->random() : null;
-    
+
+        $carbohydrateFood = null;
+        $fiberFood = null;
         if (in_array('contains_animal_products', $this->restrictions)) {
-            $carbohydrateFood = $foods->where('category.name', 'Vegetables')->where('nutritional_type', 'carbohydrates')->count() > 0 ? $foods->where('category.name', 'Vegetables')->where('nutritional_type', 'carbohydrates')->random() : null;
+            $carbohydrateFood = $foods->where('category.name', 'Grains')->where('nutritional_type', 'carbohydrates')->count() > 0 ? $foods->where('category.name', 'Grains')->where('nutritional_type', 'carbohydrates')->random() : null;
             $fiberFood = $foods->where('category.name', 'Vegetables')->where('nutritional_type', 'fibers')->count() > 0 ? $foods->where('category.name', 'Vegetables')->where('nutritional_type', 'fibers')->random() : null;
         }
     
@@ -130,9 +145,11 @@ class MealController extends Controller
     private function generateSnack($foods)
     {
         $snackCombination = MealCombination::where('meal_type', 'snack')->inRandomOrder()->first();
-    
+
         if (!$snackCombination) {
-            return abort(500, "There are no snack combinations available that match your criteria.");
+            return [
+                'error_message' => "There are no snack combinations available that match your criteria.",
+            ];
         }
     
         $snackFoods = $snackCombination->foods()->whereIn('foods.id', $foods->pluck('id'))->get();
@@ -146,6 +163,5 @@ class MealController extends Controller
             'other_snack' => $otherSnack,
         ];
     }
-    
-    
 }
+

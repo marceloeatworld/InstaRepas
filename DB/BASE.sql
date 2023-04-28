@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Apr 19, 2023 at 01:34 PM
+-- Generation Time: Apr 28, 2023 at 01:25 PM
 -- Server version: 10.3.38-MariaDB-0ubuntu0.20.04.1
 -- PHP Version: 8.2.5
 
@@ -412,7 +412,7 @@ INSERT INTO `foods` (`id`, `name`, `category_id`, `user_id`, `is_valid`, `nutrit
 (99, 'Poulet', 1, 1, 1, 'proteins'),
 (100, 'Chapon', 1, 1, 1, 'proteins'),
 (101, 'Canard', 1, 1, 1, 'proteins'),
-(102, 'Œufs', 9, 1, 1, 'proteins'),
+(102, 'Oeufs', 9, 1, 1, 'proteins'),
 (103, 'Ignames', 5, 1, 1, 'carbohydrates'),
 (104, 'Polenta', 5, 1, 1, 'carbohydrates'),
 (105, 'Vermicelles de riz', 5, 1, 1, 'carbohydrates'),
@@ -436,8 +436,8 @@ INSERT INTO `foods` (`id`, `name`, `category_id`, `user_id`, `is_valid`, `nutrit
 (123, 'Fusilli de blé complet', 5, 1, 1, 'carbohydrates'),
 (124, 'Pâtes d\'épeautre', 5, 1, 1, 'carbohydrates'),
 (125, 'Pommes de terre', 3, 1, 1, 'carbohydrates'),
-(126, 'Œufs brouillés', 9, 1, 1, 'proteins'),
-(127, 'Œufs durs', 9, 1, 1, 'proteins'),
+(126, 'Oeufs brouillés', 9, 1, 1, 'proteins'),
+(127, 'Oeufs durs', 9, 1, 1, 'proteins'),
 (142, 'Pain de mie', 10, 1, 1, 'carbohydrates'),
 (143, 'Pain au levain', 10, 1, 1, 'carbohydrates'),
 (144, 'Pain de mie complet', 10, 1, 1, 'carbohydrates'),
@@ -1012,6 +1012,18 @@ INSERT INTO `meal_combinations` (`id`, `meal_type`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `migrations`
+--
+
+CREATE TABLE `migrations` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `migration` varchar(255) NOT NULL,
+  `batch` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `recipes`
 --
 
@@ -1107,16 +1119,22 @@ CREATE TABLE `users` (
   `username` varchar(50) NOT NULL,
   `email` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
   `registration_date` datetime NOT NULL,
-  `is_admin` tinyint(1) DEFAULT 0
+  `is_admin` tinyint(1) DEFAULT 0,
+  `first_name` varchar(50) NOT NULL,
+  `last_name` varchar(50) NOT NULL,
+  `remember_token` varchar(100) DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `username`, `email`, `password`, `registration_date`, `is_admin`) VALUES
-(1, 'me', 'me@me.me', '123', '2023-04-15 22:33:57', 1);
+INSERT INTO `users` (`id`, `username`, `email`, `password`, `updated_at`, `registration_date`, `is_admin`, `first_name`, `last_name`, `remember_token`, `created_at`) VALUES
+(1, 'me', 'me@me.me', '123', NULL, '2023-04-15 22:33:57', 1, '', '', NULL, '2023-04-28 13:14:12'),
+(2, 'rrrrr', 'me@me.fr', '$2y$10$hk1eMNd37tP9p332SGNllOubcCIz01Ma0UK6Xooy0ZGMncHo/mXv.', '2023-04-28 11:24:51', '2023-04-28 13:24:51', 0, 'rrrrr', 'rrrrr', NULL, '2023-04-28 11:24:51');
 
 -- --------------------------------------------------------
 
@@ -1184,6 +1202,12 @@ ALTER TABLE `food_categories`
 -- Indexes for table `meal_combinations`
 --
 ALTER TABLE `meal_combinations`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `migrations`
+--
+ALTER TABLE `migrations`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -1287,6 +1311,12 @@ ALTER TABLE `meal_combinations`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
+-- AUTO_INCREMENT for table `migrations`
+--
+ALTER TABLE `migrations`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `recipes`
 --
 ALTER TABLE `recipes`
@@ -1320,7 +1350,7 @@ ALTER TABLE `seasons`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `user_preferences`

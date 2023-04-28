@@ -18,14 +18,17 @@ VALUES ('Winter'), ('Spring'), ('Summer'), ('Autumn');
 CREATE TABLE users (
     id INT PRIMARY KEY AUTO_INCREMENT,
     username VARCHAR(50) NOT NULL UNIQUE,
+    first_name VARCHAR(50) NOT NULL,
+    last_name VARCHAR(50) NOT NULL,
     email VARCHAR(255) NOT NULL UNIQUE,
     password VARCHAR(255) NOT NULL,
     registration_date DATETIME NOT NULL,
-    is_admin BOOLEAN DEFAULT FALSE
+    is_admin BOOLEAN DEFAULT FALSE,
+    remember_token VARCHAR(100) NULL
 );
 
-INSERT INTO users (username, email, password, registration_date, is_admin)
-VALUES ('me', 'me@me.me', '123', NOW(), TRUE);
+INSERT INTO users (username, email, password, registration_date, is_admin, first_name, last_name, remember_token)
+VALUES ('me', 'me@me.me', '123', NOW(), TRUE, 'John', 'Doe', NULL);
 
 
 -- Dietary restrictions table
