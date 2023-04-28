@@ -72,6 +72,7 @@
         </fieldset>
 
         <button type="submit">Générer des repas</button>
-    </form>
+        </form>
+    <p>Si vous souhaitez enregistrer vos préférences, veuillez vous <a href="/register">inscrire</a> ou vous <a href="/login">connecter</a>.</p>
 </body>
 </html>
