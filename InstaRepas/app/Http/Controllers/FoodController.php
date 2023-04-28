@@ -32,11 +32,16 @@ class FoodController extends Controller
     public function store(Request $request)
     {
         $food = Food::create($request->all());
-
-        $food->restrictions()->sync($request->input('restrictions', []));
-        $food->seasons()->sync($request->input('seasons', []));
+    
+        // Attribuer plusieurs MealCombination
         $food->mealCombinations()->sync($request->input('meal_combinations', []));
-
+    
+        // Attribuer plusieurs Season
+        $food->seasons()->sync($request->input('seasons', []));
+    
+        // Attribuer plusieurs DietaryRestriction
+        $food->restrictions()->sync($request->input('restrictions', []));
+    
         return redirect()->route('admin.foods.index');
     }
 
@@ -47,28 +52,31 @@ class FoodController extends Controller
 
     public function edit(Food $food)
     {
+        // Récupérer toutes les catégories, restrictions, saisons et combinaisons de repas
         $categories = FoodCategory::all();
         $restrictions = DietaryRestriction::all();
         $seasons = Season::all();
         $meal_combinations = MealCombination::all();
+    
+        // Récupérer les CombinationFood associées au Food spécifié
         $combination_foods = CombinationFood::with('combination')->where('food_id', $food->id)->get();
-        
+    
+        // Passer les données à la vue et retourner la vue
         return view('admin.foods.edit', compact('food', 'categories', 'restrictions', 'seasons', 'meal_combinations', 'combination_foods'));
     }
-    
 
     public function update(Request $request, Food $food)
     {
         $food->update($request->all());
     
-        // Update associated restrictions
-        $food->restrictions()->sync($request->input('restrictions', []));
+        // Mettre à jour les MealCombination associés
+        $food->mealCombinations()->sync($request->input('meal_combinations', []));
     
-        // Update associated seasons
+        // Mettre à jour les Season associés
         $food->seasons()->sync($request->input('seasons', []));
     
-        // Update associated meal combinations
-        $food->mealCombinations()->sync($request->input('meal_combinations', []));
+        // Mettre à jour les DietaryRestriction associés
+        $food->restrictions()->sync($request->input('restrictions', []));
     
         return redirect()->route('admin.foods.index');
     }

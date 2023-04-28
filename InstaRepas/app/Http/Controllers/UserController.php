@@ -35,12 +35,12 @@ class UserController extends Controller
     public function access_account(Request $request)
     {
         $this->validate($request, ['email' => 'required', 'password' => 'required']);
-
+    
         $user = $request->only('email', 'password');
-
+    
         if (Auth::attempt($user)) {
             if (Auth::user()->is_admin) {
-                return redirect()->route('admin.foods.index');
+                return redirect()->route('admin.index');
             } else {
                 return redirect('/');
             }
