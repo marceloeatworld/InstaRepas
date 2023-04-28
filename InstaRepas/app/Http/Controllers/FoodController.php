@@ -25,7 +25,8 @@ class FoodController extends Controller
         $categories = FoodCategory::all();
         $restrictions = DietaryRestriction::all();
         $seasons = Season::all();
-        return view('admin.foods.create', compact('categories', 'restrictions', 'seasons'));
+        $meal_combinations = MealCombination::all();
+        return view('admin.foods.create', compact('categories', 'restrictions', 'seasons', 'meal_combinations'));
     }
 
     public function store(Request $request)
@@ -34,6 +35,7 @@ class FoodController extends Controller
 
         $food->restrictions()->sync($request->input('restrictions', []));
         $food->seasons()->sync($request->input('seasons', []));
+        $food->mealCombinations()->sync($request->input('meal_combinations', []));
 
         return redirect()->route('admin.foods.index');
     }
@@ -48,22 +50,44 @@ class FoodController extends Controller
         $categories = FoodCategory::all();
         $restrictions = DietaryRestriction::all();
         $seasons = Season::all();
-        return view('admin.foods.edit', compact('food', 'categories', 'restrictions', 'seasons'));
+        $meal_combinations = MealCombination::all();
+        $combination_foods = CombinationFood::with('combination')->where('food_id', $food->id)->get();
+        
+        return view('admin.foods.edit', compact('food', 'categories', 'restrictions', 'seasons', 'meal_combinations', 'combination_foods'));
     }
+    
 
     public function update(Request $request, Food $food)
     {
         $food->update($request->all());
-
+    
+        // Update associated restrictions
         $food->restrictions()->sync($request->input('restrictions', []));
+    
+        // Update associated seasons
         $food->seasons()->sync($request->input('seasons', []));
-
+    
+        // Update associated meal combinations
+        $food->mealCombinations()->sync($request->input('meal_combinations', []));
+    
         return redirect()->route('admin.foods.index');
     }
 
     public function destroy(Food $food)
     {
+        // Delete associated restrictions
+        $food->restrictions()->detach();
+    
+        // Delete associated seasons
+        $food->seasons()->detach();
+    
+        // Delete associated meal combinations
+        $food->mealCombinations()->detach();
+    
+        // Delete the food
         $food->delete();
+    
         return redirect()->route('admin.foods.index');
     }
+    
 }

@@ -11,7 +11,7 @@ use Illuminate\Support\Carbon;
 class User extends Model implements AuthenticatableContract
 {
     use HasFactory, Authenticatable;
-
+    //public $timestamps = false;
     protected $table = 'users';
 
     protected $fillable = [

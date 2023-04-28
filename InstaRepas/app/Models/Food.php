@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Food extends Model
 {
     use HasFactory;
-
+    public $timestamps = false;
     protected $table = 'foods';
 
     protected $fillable = [
@@ -47,6 +47,6 @@ class Food extends Model
 
     public function mealCombinations()
     {
-        return $this->belongsToMany(MealCombination::class, 'combinations_foods');
+        return $this->belongsToMany(MealCombination::class, 'combinations_foods', 'food_id', 'combination_id');
     }
 }

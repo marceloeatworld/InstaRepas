@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class RecipeRestriction extends Model
 {
     use HasFactory;
+    public $timestamps = false;
     protected $table = 'recipes_restrictions';
 
     protected $fillable = [

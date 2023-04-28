@@ -29,3 +29,15 @@
         @endforeach
     </select>
 </div>
+
+<div class="form-group">
+    <label for="meal_combinations">Meal Combinations</label>
+    <select multiple name="meal_combinations[]" id="meal_combinations" class="form-control">
+        @foreach($meal_combinations as $combination)
+            <option value="{{ $combination->id }}"
+                {{ in_array($combination->id, old('meal_combinations', isset($combination_foods) ? $combination_foods->pluck('combination.id')->toArray() : [])) ? 'selected' : '' }}>
+                {{ $combination->meal_type }}
+            </option>
+        @endforeach
+    </select>
+</div>
