@@ -16,6 +16,7 @@ class CreateUsersTable extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->id();
 <<<<<<< HEAD
+<<<<<<< HEAD
             $table->string('lastname')->default('');
             $table->string('name')->default('');
             $table->string('email')->unique();
@@ -28,6 +29,13 @@ class CreateUsersTable extends Migration
             $table->dateTime('registration_date');
             $table->boolean('is_admin')->default(false);
 >>>>>>> 597fc93643cef5bb016b667e61ede7ddcc1b52d5
+=======
+            $table->string('username', 50)->unique();
+            $table->string('email')->unique();
+            $table->string('password');
+            $table->dateTime('registration_date');
+            $table->boolean('is_admin')->default(false);
+>>>>>>> origin/tolga
         });
     }
 
