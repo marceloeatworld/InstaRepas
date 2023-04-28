@@ -11,7 +11,7 @@ use App\Http\Controllers\MealController;
 |--------------------------------------------------------------------------
 | Web Routes
 |--------------------------------------------------------------------------
-|
+    |
 | Here is where you can register web routes for your application. These
 | routes are loaded by the RouteServiceProvider and all of them will
 | be assigned to the "web" middleware group. Make something great!
@@ -30,7 +30,7 @@ Route::get('/generate', function () {
 Route::post('/generate-meals', [MealController::class, 'generate'])->name('generate_meals');
 
 
-//admin 
+//admin
 Route::prefix('admin')->middleware(['auth', 'admin'])->group(function () {
     // ... autres routes pour les administrateurs
 

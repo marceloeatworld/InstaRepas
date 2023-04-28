@@ -28,9 +28,11 @@ class GoogleAuthController extends Controller
         $user = User::firstOrCreate(
             ['email' => $googleUser->email],
             [
-                'name' => $firstName,
-                'lastname' => $lastName,
-                'password' => bcrypt(rand(100000, 999999))
+                'username' => $firstName . ' ' . $lastName, // Ajoutez une valeur pour 'username' si nécessaire
+                'first_name' => $firstName,
+                'last_name' => $lastName,
+                'password' => bcrypt(rand(100000, 999999)),
+                'registration_date' => now(), // Ajoutez cette ligne pour définir la date d'enregistrement
             ]
         );
 
@@ -38,6 +40,7 @@ class GoogleAuthController extends Controller
 
         return redirect('/');
     }
+
 
     public function logout()
     {
