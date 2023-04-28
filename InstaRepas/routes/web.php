@@ -18,16 +18,16 @@ use App\Http\Controllers\MealController;
 |
 */
 
-Route::post('/generate-meals', [MealController::class, 'generate'])->name('generate_meals');
 
 Route::get('/', function () {
     return view('home');
 });
 
+// Route for the meals generator
 Route::get('/generate', function () {
     return view('generate');
 });
-
+Route::post('/generate-meals', [MealController::class, 'generate'])->name('generate_meals');
 
 Route::get('/recipes', [RecipeController::class, 'index'])->name('recipes.index');
 Route::get('/recipes/create', [RecipeController::class, 'create'])->name('recipes.create');
