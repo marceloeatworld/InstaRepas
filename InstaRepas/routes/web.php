@@ -1,5 +1,5 @@
 <?php
-
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\GoogleAuthController;
@@ -32,8 +32,7 @@ Route::post('/generate-meals', [MealController::class, 'generate'])->name('gener
 
 //admin 
 Route::prefix('admin')->middleware(['auth', 'admin'])->group(function () {
-    // ... autres routes pour les administrateurs
-
+    Route::get('/', [FoodController::class, 'index'])->name('admin.index');
     Route::get('/foods', [FoodController::class, 'index'])->name('admin.foods.index');
     Route::get('/foods/create', [FoodController::class, 'create'])->name('admin.foods.create');
     Route::post('/foods', [FoodController::class, 'store'])->name('admin.foods.store');
