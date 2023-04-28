@@ -1,14 +1,11 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-<<<<<<< HEAD
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\GoogleAuthController;
-=======
 use App\Http\Controllers\RecipeController;
 
 use App\Http\Controllers\MealController;
->>>>>>> 597fc93643cef5bb016b667e61ede7ddcc1b52d5
 
 /*
 |--------------------------------------------------------------------------
