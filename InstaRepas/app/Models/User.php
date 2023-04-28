@@ -1,13 +1,17 @@
 <?php
 
-namespace  App\Models;
+namespace App\Models;
+
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Auth\Authenticatable;
+use Illuminate\Support\Carbon;
 
 class User extends Model implements AuthenticatableContract
 {
     use HasFactory, Authenticatable;
+
     protected $table = 'users';
 
     protected $fillable = [
@@ -19,6 +23,16 @@ class User extends Model implements AuthenticatableContract
         'registration_date',
         'is_admin',
         'remember_token',
+    ];
+
+    protected $dates = [
+        'created_at',
+        'updated_at',
+        'registration_date'
+    ];
+
+    protected $casts = [
+        'is_admin' => 'boolean',
     ];
 
     public function foods()
