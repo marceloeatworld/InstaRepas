@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class FoodSeason extends Model
 {
     use HasFactory;
-
+    public $timestamps = false;
     protected $table = 'foods_seasons';
 
     protected $fillable = [

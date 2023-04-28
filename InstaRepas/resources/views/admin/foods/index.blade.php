@@ -15,25 +15,30 @@
     </nav>
 
     <h1>Food List</h1>
-    <table>
-        <thead>
+<table>
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach($foods as $food)
             <tr>
-                <th>ID</th>
-                <th>Name</th>
-                <th>Actions</th>
+                <td>{{ $food->id }}</td>
+                <td>{{ $food->name }}</td>
+                <td>
+                    <a href="{{ route('admin.foods.edit', $food->id) }}">Edit</a>
+                    <a href="#" onclick="event.preventDefault(); if(confirm('Are you sure you want to delete this food?')){ document.getElementById('delete-form-{{ $food->id }}').submit(); }">Delete</a>
+                    <form id="delete-form-{{ $food->id }}" action="{{ route('admin.foods.destroy', $food->id) }}" method="POST" style="display: none;">
+                        @csrf
+                        @method('DELETE')
+                    </form>
+                </td>
             </tr>
-        </thead>
-        <tbody>
-            @foreach($foods as $food)
-                <tr>
-                    <td>{{ $food->id }}</td>
-                    <td>{{ $food->name }}</td>
-                    <td>
-                        <a href="{{ route('admin.foods.edit', $food->id) }}">Edit</a>
-                    </td>
-                </tr>
-            @endforeach
-        </tbody>
-    </table>
+        @endforeach
+    </tbody>
+</table>
 </body>
 </html>
