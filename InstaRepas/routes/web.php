@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\GoogleAuthController;
 use App\Http\Controllers\RecipeController;
 
 use App\Http\Controllers\MealController;
@@ -37,6 +39,16 @@ Route::get('/recipes/{recipe}', [RecipeController::class, 'show'])->name('recipe
 Route::get('/login', function () {
     return view('login');
 });
+
+Route::post('/create_account', [UserController::class, 'create_account']);
+Route::post('/access_account', [UserController::class, 'access_account']);
+// Route::get('/logout', [UserController::class, 'logout']);
+
+// Connexion Google
+Route::get('/auth/google', [GoogleAuthController::class, 'redirectToGoogle']);
+Route::get('/auth/google/callback', [GoogleAuthController::class, 'handleGoogleCallback']);
+Route::get('/logout', [GoogleAuthController::class, 'logout'])->name('logout');
+
 
 Route::get('/register', function () {
     return view('register');

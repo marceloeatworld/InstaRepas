@@ -1,6 +1,6 @@
-<head>
-    @include('head')
-</head>
+@extends('layouts.app')
+
+@section('content')
 
 <h1 class="mb-5">Ajouter une recette</h1>
 
@@ -134,5 +134,4 @@
   }
 </script>
 
-</body>
-</html>
+@endsection
