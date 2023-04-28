@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Food;
 use App\Models\MealCombination;
+use App\Models\CombinationFood;
+use App\Models\Season;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
@@ -19,22 +21,24 @@ class MealController extends Controller
         $days = max(1, min($request->input('days', 1), 60));
         $currentMonth = Carbon::now()->month;
         $currentSeason = null;
-
+    
         $foods = Food::query();
-
+    
         // Filter foods based on restrictions
         foreach ($this->restrictions as $restriction) {
             $foods->whereDoesntHave('restrictions', function ($query) use ($restriction) {
                 $query->where('name', $restriction);
             });
         }
-
+    
         // Filter foods based on seasons
         if ($seasonal) {
             $currentSeason = Season::getSeasonByMonth($currentMonth);
             if ($currentSeason) {
-                $foods->whereHas('seasons', function ($query) use ($currentSeason) {
-                    $query->where('seasons.id', $currentSeason->id);
+                $foods->where(function ($query) use ($currentSeason) {
+                    $query->whereHas('seasons', function ($query) use ($currentSeason) {
+                        $query->where('seasons.id', $currentSeason->id);
+                    })->orWhereDoesntHave('seasons');
                 });
             }
         }
@@ -57,7 +61,7 @@ class MealController extends Controller
             $dinners[] = $this->generateMeal('other_meals', $foods);
 
             if ($include_snacks) {
-                $snacks[] = $this->generateMeal('snack', $foods);
+                $snacks[] = $this->generateSnack($foods);
             }
         }
 
@@ -74,16 +78,19 @@ class MealController extends Controller
 
     private function generateMeal($mealType, $foods)
     {
-        $mealFoods = $foods->whereIn('meal_combinations.meal_type', [$mealType])->get();
+        $mealCombination = MealCombination::where('meal_type', $mealType)->inRandomOrder()->first();
+        if (!$mealCombination) {
+            return abort(500, "There are no {$mealType} combinations available that match your criteria.");
+        }
+
+        $mealFoods = $mealCombination->foods()->whereIn('foods.id', $foods->pluck('id'))->get();
 
         $result = [];
 
         if ($mealType === 'breakfast') {
             $result = $this->generateBreakfast($mealFoods);
-        } elseif ($mealType === 'other_meals') {
+        } else if ($mealType === 'other_meals') {
             $result = $this->generateLunchOrDinner($mealFoods);
-        } elseif ($mealType === 'snack') {
-            $result = $this->generateSnack($mealFoods);
         }
 
         return $result;
@@ -92,6 +99,7 @@ class MealController extends Controller
     private function generateBreakfast($foods)
     {
         $proteinFood = $foods->where('category.name', 'Dairy')->random();
+        
 
         return [
             'protein' => $proteinFood,
@@ -104,34 +112,40 @@ class MealController extends Controller
     {
         $proteinCategory = in_array('contains_animal_products', $this->restrictions) ? 'Vegetables' : ['Meat', 'Fish', 'Eggs', 'Pork'];
         $proteinFood = $foods->whereIn('category.name', $proteinCategory)->count() > 0 ? $foods->whereIn('category.name', $proteinCategory)->random() : null;
-
+    
         if (in_array('contains_animal_products', $this->restrictions)) {
             $carbohydrateFood = $foods->where('category.name', 'Vegetables')->where('nutritional_type', 'carbohydrates')->count() > 0 ? $foods->where('category.name', 'Vegetables')->where('nutritional_type', 'carbohydrates')->random() : null;
             $fiberFood = $foods->where('category.name', 'Vegetables')->where('nutritional_type', 'fibers')->count() > 0 ? $foods->where('category.name', 'Vegetables')->where('nutritional_type', 'fibers')->random() : null;
-        } else {
-            $carbohydrateFood = $foods->where('category.name', 'Grains')->where('nutritional_type', 'carbohydrates')->count() > 0 ? $foods->where('category.name', 'Grains')->where('nutritional_type', 'carbohydrates')->random() : null;
-            $fiberFood = null;
         }
-
+    
         return [
             'protein' => $proteinFood,
-            'carbohydrate' => $carbohydrateFood,
-            'fiber' => $fiberFood,
+            'carbohydrate' => in_array('contains_animal_products', $this->restrictions) ? $carbohydrateFood : ($foods->where('category.name', 'Grains')->where('nutritional_type', 'carbohydrates')->count() > 0 ? $foods->where('category.name', 'Grains')->where('nutritional_type', 'carbohydrates')->random() : null),
+            'fiber' => in_array('contains_animal_products', $this->restrictions) ? $fiberFood : null,
             'vegetable' => $foods->where('category.name', 'Vegetables')->count() > 0 ? $foods->where('category.name', 'Vegetables')->random() : null,
             'lipid' => $foods->where('category.name', 'Oils')->count() > 0 ? $foods->where('category.name', 'Oils')->random() : null,
         ];
     }
-
+    
     private function generateSnack($foods)
     {
+        $snackCombination = MealCombination::where('meal_type', 'snack')->inRandomOrder()->first();
+    
+        if (!$snackCombination) {
+            return abort(500, "There are no snack combinations available that match your criteria.");
+        }
+    
+        $snackFoods = $snackCombination->foods()->whereIn('foods.id', $foods->pluck('id'))->get();
         $fruitFoods = $foods->where('category.name', 'Fruits');
-
+    
         $fruit = $fruitFoods->count() > 0 ? $fruitFoods->random() : null;
-        $otherSnack = $foods->where('category.name', '!=', 'Fruits')->count() > 0 ? $foods->where('category.name', '!=', 'Fruits')->random() : null;
-
+        $otherSnack = $snackFoods->where('category.name', '!=', 'Fruits')->count() > 0 ? $snackFoods->where('category.name', '!=', 'Fruits')->random() : null;
+    
         return [
             'fruit' => $fruit,
             'other_snack' => $otherSnack,
         ];
     }
+    
+    
 }
