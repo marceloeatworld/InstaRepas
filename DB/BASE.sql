@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Apr 19, 2023 at 01:34 PM
+-- Generation Time: Apr 28, 2023 at 09:39 AM
 -- Server version: 10.3.38-MariaDB-0ubuntu0.20.04.1
 -- PHP Version: 8.2.5
 
@@ -1108,15 +1108,18 @@ CREATE TABLE `users` (
   `email` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
   `registration_date` datetime NOT NULL,
-  `is_admin` tinyint(1) DEFAULT 0
+  `is_admin` tinyint(1) DEFAULT 0,
+  `first_name` varchar(50) NOT NULL,
+  `last_name` varchar(50) NOT NULL,
+  `remember_token` varchar(100) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `username`, `email`, `password`, `registration_date`, `is_admin`) VALUES
-(1, 'me', 'me@me.me', '123', '2023-04-15 22:33:57', 1);
+INSERT INTO `users` (`id`, `username`, `email`, `password`, `registration_date`, `is_admin`, `first_name`, `last_name`, `remember_token`) VALUES
+(1, 'me', 'me@me.me', '123', '2023-04-15 22:33:57', 1, '', '', NULL);
 
 -- --------------------------------------------------------
 

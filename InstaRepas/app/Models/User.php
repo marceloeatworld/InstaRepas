@@ -12,10 +12,13 @@ class User extends Model
 
     protected $fillable = [
         'username',
+        'first_name',
+        'last_name',
         'email',
         'password',
         'registration_date',
         'is_admin',
+        'remember_token',
     ];
 
     public function foods()
