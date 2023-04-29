@@ -14,11 +14,27 @@ use Illuminate\Http\Request;
 
 class FoodController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $foods = Food::all();
-        return view('admin.foods.index', compact('foods'));
+        $search = $request->input('search');
+        $selectedCategory = $request->input('category');
+    
+        $foods = Food::with('category')
+            ->when($search, function ($query) use ($search) {
+                return $query->where('name', 'LIKE', "%{$search}%");
+            })
+            ->when($selectedCategory, function ($query) use ($selectedCategory) {
+                return $query->where('category_id', $selectedCategory);
+            })
+            ->get();
+    
+        // Récupérer toutes les catégories pour les afficher dans le menu déroulant
+        $categories = FoodCategory::all();
+    
+        return view('admin.foods.index', compact('foods', 'search', 'categories', 'selectedCategory'));
     }
+    
+    
 
     public function create()
     {
