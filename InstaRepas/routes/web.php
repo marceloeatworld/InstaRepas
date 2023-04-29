@@ -72,6 +72,7 @@ Route::post('/profile', [UserController::class, 'updateProfile'])->middleware('a
 Route::get('/profile/preferences', [UserController::class, 'showPreferences'])->middleware('auth')->name('user.preferences');
 Route::get('/profile/preferences', [UserController::class, 'preferences'])->middleware('auth')->name('user.preferences');
 
+Route::get('/profile/informations', [UserController::class, 'ShowInformations'])->middleware('auth')->name('user.informations');
 
 Route::get('/register', function () {
     return view('register');

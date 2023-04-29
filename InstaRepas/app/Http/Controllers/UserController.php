@@ -71,30 +71,18 @@ class UserController extends Controller
         $user->preferences()->sync($preferences);
         return redirect()->route('user.profile')->with('status', 'Votre profil a été mis à jour avec succès !');
     }
-    public function preferences()
-{
-    $dietaryRestrictions = DietaryRestriction::all();
-    return view('profile.preferences', compact('dietaryRestrictions'));
-}
+        public function preferences()
+    {
+        $dietaryRestrictions = DietaryRestriction::all();
+        return view('profile.preferences', compact('dietaryRestrictions'));
+    }
 
-public function savePreferences(Request $request)
-{
-    $this->validate($request, [
-        'restrictions' => 'nullable|array',
-        'restrictions.*' => 'exists:dietary_restrictions,id',
-        'seasonal' => 'nullable|boolean',
-        'include_snacks' => 'nullable|boolean',
-        'days' => 'required|integer|min:1',
-    ]);
 
-    $user = Auth::user();
-    $user->preferences()->sync($request->input('restrictions'));
-    $user->seasonal = $request->input('seasonal');
-    $user->include_snacks = $request->input('include_snacks');
-    $user->days = $request->input('days');
-    $user->save();
-
-    return redirect()->route('user.profile')->with('status', 'Vos préférences ont été enregistrées avec succès !');
-}
+    public function showInformations()
+    {
+        $personalInfos = Auth::user();
+        return view('profile.infos', ['informations' => $personalInfos]);
+    }
+    
 
 }
