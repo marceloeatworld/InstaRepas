@@ -60,6 +60,11 @@ class RecipeController extends Controller
         return view('recipes.show', compact('recipe'));
     }
 
-
+    public function index()
+    {
+        $recipes = Recipe::all();
+        return view('recipes', compact('recipes'));
+    }
+    
     
 }
