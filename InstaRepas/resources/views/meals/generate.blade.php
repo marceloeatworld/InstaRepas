@@ -1,32 +1,6 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Préférences alimentaires</title>
-    <style>
-        label {
-            display: block;
-            margin-bottom: 10px;
-        }
-        input[type="number"] {
-            width: 60px;
-        }
-        button {
-            display: inline-block;
-            margin-top: 20px;
-            padding: 10px 20px;
-            background-color: #007bff;
-            color: #fff;
-            text-align: center;
-            text-decoration: none;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-    </style>
-</head>
-<body>
+@extends('layouts.app')
+
+@section('content')
     <h1>Préférences alimentaires</h1>
     <form action="{{ route('generate_meals') }}" method="post">
         @csrf
@@ -74,5 +48,6 @@
         <button type="submit">Générer des repas</button>
         </form>
     <p>Si vous souhaitez enregistrer vos préférences, veuillez vous <a href="/register">inscrire</a> ou vous <a href="/login">connecter</a>.</p>
-</body>
-</html>
+
+    
+    @endsection
