@@ -6,7 +6,7 @@ use App\Http\Controllers\GoogleAuthController;
 use App\Http\Controllers\RecipeController;
 use App\Http\Controllers\FoodController;
 use App\Http\Controllers\MealController;
-
+use App\Http\Controllers\DashboardController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -32,7 +32,8 @@ Route::post('/generate-meals', [MealController::class, 'generate'])->name('gener
 
 //admin
 Route::prefix('admin')->middleware(['auth', 'admin'])->group(function () {
-    Route::get('/', [FoodController::class, 'index'])->name('admin.index');
+    Route::get('/', [DashboardController::class, 'index'])->name('admin.index');
+
     Route::get('/foods', [FoodController::class, 'index'])->name('admin.foods.index');
     Route::get('/foods/create', [FoodController::class, 'create'])->name('admin.foods.create');
     Route::post('/foods', [FoodController::class, 'store'])->name('admin.foods.store');
@@ -64,6 +65,12 @@ Route::post('/access_account', [UserController::class, 'access_account']);
 Route::get('/auth/google', [GoogleAuthController::class, 'redirectToGoogle']);
 Route::get('/auth/google/callback', [GoogleAuthController::class, 'handleGoogleCallback']);
 Route::get('/logout', [GoogleAuthController::class, 'logout'])->name('logout');
+
+//voir son profile
+Route::get('/profile', [UserController::class, 'showProfile'])->middleware('auth')->name('user.profile');
+Route::post('/profile', [UserController::class, 'updateProfile'])->middleware('auth')->name('user.updateProfile');
+Route::get('/profile/preferences', [UserController::class, 'showPreferences'])->middleware('auth')->name('user.preferences');
+Route::get('/profile/preferences', [UserController::class, 'preferences'])->middleware('auth')->name('user.preferences');
 
 
 Route::get('/register', function () {
