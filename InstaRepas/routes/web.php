@@ -25,8 +25,9 @@ Route::get('/', function () {
 
 // Route for the meals generator
 Route::get('/generate', function () {
-    return view('generate');
+    return view('meals.generate');
 });
+
 Route::post('/generate-meals', [MealController::class, 'generate'])->name('generate_meals');
 
 

@@ -76,7 +76,7 @@ class MealController extends Controller
             }
         }
 
-        return view('meals', [
+        return view('meals.meals', [
             'breakfasts' => $breakfasts,
             'lunches' => $lunches,
             'dinners' => $dinners,
