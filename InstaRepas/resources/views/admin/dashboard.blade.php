@@ -13,7 +13,6 @@
             <li><a href="{{ route('admin.foods.create') }}">Ajouter Food</a></li>
         </ul>
     </nav>
-blabla
-
+HEY
     </body>
 </html>
