@@ -66,7 +66,7 @@ Route::get('/auth/google', [GoogleAuthController::class, 'redirectToGoogle']);
 Route::get('/auth/google/callback', [GoogleAuthController::class, 'handleGoogleCallback']);
 Route::get('/logout', [GoogleAuthController::class, 'logout'])->name('logout');
 
-//voir son profile
+//voir son profile et autre infos
 Route::get('/profile', [UserController::class, 'showProfile'])->middleware('auth')->name('user.profile');
 Route::post('/profile', [UserController::class, 'updateProfile'])->middleware('auth')->name('user.updateProfile');
 Route::get('/profile/preferences', [UserController::class, 'showPreferences'])->middleware('auth')->name('user.preferences');
