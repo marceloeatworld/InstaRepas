@@ -1,21 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Meal Plan</title>
-    <style>
-        .card {
-            border: 1px solid #ccc;
-            padding: 1rem;
-            margin-bottom: 1rem;
-            display: inline-block;
-            width: calc(33.33% - 2rem);
-            box-sizing: border-box;
-        }
-    </style>
-</head>
-<body>
+@extends('layouts.app')
+
+@section('content')
     <h1>Meal Plan</h1>
     <p>Date: {{ $current_date }}</p>
     <p>Season: {{ $current_season }}</p>
@@ -55,5 +40,4 @@
         </div>
     @endfor
 
-</body>
-</html>
+    @endsection
