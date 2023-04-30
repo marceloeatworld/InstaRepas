@@ -7,6 +7,9 @@ use App\Http\Controllers\RecipeController;
 use App\Http\Controllers\FoodController;
 use App\Http\Controllers\MealController;
 use App\Http\Controllers\DashboardController;
+use App\Models\UserPreference;
+use App\Models\DietaryRestriction;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -24,12 +27,10 @@ Route::get('/', function () {
 });
 
 // Route for the meals generator
-Route::get('/generate', function () {
-    return view('meals.generate');
-});
+Route::get('/generate', [MealController::class, 'generateForm']);
+
 
 Route::post('/generate-meals', [MealController::class, 'generate'])->name('generate_meals');
-
 
 //admin
 Route::prefix('admin')->middleware(['auth', 'admin'])->group(function () {
@@ -71,7 +72,8 @@ Route::get('/logout', [GoogleAuthController::class, 'logout'])->name('logout');
 Route::get('/profile', [UserController::class, 'showProfile'])->middleware('auth')->name('user.profile');
 Route::post('/profile', [UserController::class, 'updateProfile'])->middleware('auth')->name('user.updateProfile');
 Route::get('/profile/preferences', [UserController::class, 'showPreferences'])->middleware('auth')->name('user.preferences');
-Route::get('/profile/preferences', [UserController::class, 'preferences'])->middleware('auth')->name('user.preferences');
+Route::post('/profile/preferences', [UserController::class, 'updatePreferences'])->middleware('auth')->name('user.updatePreferences');
+
 
 Route::get('/profile/informations', [UserController::class, 'ShowInformations'])->middleware('auth')->name('user.informations');
 
