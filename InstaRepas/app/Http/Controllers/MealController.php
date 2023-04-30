@@ -8,6 +8,10 @@ use App\Models\CombinationFood;
 use App\Models\Season;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use App\Models\User;
+use App\Models\UserPreference;
+use App\Models\DietaryRestriction;
 
 class MealController extends Controller
 {
@@ -15,13 +19,18 @@ class MealController extends Controller
 
     public function generate(Request $request)
     {
+
+
+
         $this->restrictions = $request->input('restrictions', []);
         $seasonal = $request->input('seasonal', false);
         $include_snacks = $request->input('include_snacks', false);
         $days = max(1, min($request->input('days', 1), 60));
         $currentMonth = Carbon::now()->month;
         $currentSeason = null;
-    
+        $availableDietaryRestrictions = DietaryRestriction::all();
+
+
         $foods = Food::query();
     
         // Filter foods based on restrictions
@@ -43,20 +52,6 @@ class MealController extends Controller
             }
         }
         
-        
-/*         if ($seasonal) {
-            $currentSeason = Season::getSeasonByMonth($currentMonth);
-            if ($currentSeason) {
-                $foods->where(function ($query) use ($currentSeason) {
-                    $query->whereHas('seasons', function ($query) use ($currentSeason) {
-                        $query->where('seasons.id', $currentSeason->id);
-                    })->orWhere(function ($query) {
-                        $query->doesntHave('seasons');
-                    });
-                });
-            }
-        }
-         */
 
         $foods = $foods->get();
 
@@ -77,6 +72,7 @@ class MealController extends Controller
         }
 
         return view('meals.meals', [
+
             'breakfasts' => $breakfasts,
             'lunches' => $lunches,
             'dinners' => $dinners,
@@ -86,7 +82,28 @@ class MealController extends Controller
             'current_season' => $currentSeason ? $currentSeason->season_name : 'Unknown',
         ]);
     }
+    public function generateForm()
+    {
 
+        $displayNames = [
+            'contains_gluten' => 'Sans gluten',
+            'contains_fish' => 'Sans poisson',
+            'contains_meat' => 'Sans viande',
+            'contains_lactose' => 'Sans lactose',
+            'contains_animal_products' => 'Sans produit animal',
+            'contains_pork' => 'Sans porc',
+        ];
+        
+        $userPreferences = [];
+        if (Auth::check()) {
+            $userPreferences = UserPreference::where('user_id', Auth::id())->pluck('preference_id')->toArray();
+        }
+
+        $availableDietaryRestrictions = DietaryRestriction::all();
+
+        return view('meals.generate', ['userPreferences' => $userPreferences, 'availableDietaryRestrictions' => $availableDietaryRestrictions, 'displayNames' => $displayNames]);
+
+    }
     private function generateMeal($mealType, $foods)
     {
         $mealCombination = MealCombination::where('meal_type', $mealType)->inRandomOrder()->first();

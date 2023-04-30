@@ -59,8 +59,18 @@ class UserController extends Controller
     
     public function showPreferences()
     {
+        $displayNames = [
+            'contains_gluten' => 'Sans gluten',
+            'contains_fish' => 'Sans poisson',
+            'contains_meat' => 'Sans viande',
+            'contains_lactose' => 'Sans lactose',
+            'contains_animal_products' => 'Sans produit animal',
+            'contains_pork' => 'Sans porc',
+        ];
         $dietaryRestrictions = DietaryRestriction::all();
-        return view('profile.preferences', ['dietaryRestrictions' => $dietaryRestrictions]);
+
+        return view('profile.preferences', ['dietaryRestrictions' => $dietaryRestrictions, 'displayNames' => $displayNames]);
+
     }
     
     
@@ -83,6 +93,17 @@ class UserController extends Controller
         $personalInfos = Auth::user();
         return view('profile.infos', ['informations' => $personalInfos]);
     }
+    public function updatePreferences(Request $request)
+    {
+        $user = Auth::user();
+    
+        $preferences = $request->input('restrictions', []);
+        $user->preferences()->sync($preferences);
+    
+        return redirect()->route('user.preferences')->with('status', 'Vos préférences ont été mises à jour avec succès !');
+
+    }
+    
     
 
 }
