@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: May 03, 2023 at 05:04 PM
+-- Generation Time: May 03, 2023 at 05:45 PM
 -- Server version: 10.3.38-MariaDB-0ubuntu0.20.04.1
 -- PHP Version: 8.2.5
 
@@ -1193,6 +1193,21 @@ CREATE TABLE `units_of_measure` (
   `unit_name` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Dumping data for table `units_of_measure`
+--
+
+INSERT INTO `units_of_measure` (`id`, `unit_name`) VALUES
+(5, 'cuillère à café (càc)'),
+(6, 'cuillère à soupe (càs)'),
+(1, 'gramme (g)'),
+(2, 'kilogramme (kg)'),
+(3, 'litre (L)'),
+(4, 'millilitre (mL)'),
+(7, 'pincée'),
+(8, 'tasse'),
+(9, 'verre');
+
 -- --------------------------------------------------------
 
 --
@@ -1485,7 +1500,7 @@ ALTER TABLE `seasons`
 -- AUTO_INCREMENT for table `units_of_measure`
 --
 ALTER TABLE `units_of_measure`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `users`
