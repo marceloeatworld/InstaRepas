@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
 use App\Models\DietaryRestriction;
 
+
 class ProfileController extends Controller
 {
     /**
