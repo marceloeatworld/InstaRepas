@@ -1,6 +1,6 @@
 <?php
 
-namespace  App\Models;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -15,7 +15,7 @@ class RecipeFood extends Model
         'recipe_id',
         'food_id',
         'quantity',
-        'unit_of_measure',
+        'unit_of_measure_id',
     ];
 
     public function recipe()
@@ -26,5 +26,10 @@ class RecipeFood extends Model
     public function food()
     {
         return $this->belongsTo(Food::class, 'food_id');
+    }
+
+    public function unitOfMeasure()
+    {
+        return $this->belongsTo(UnitOfMeasure::class, 'unit_of_measure_id');
     }
 }

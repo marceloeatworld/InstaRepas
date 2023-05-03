@@ -2,15 +2,27 @@
 
 namespace Tests\Unit;
 
-use PHPUnit\Framework\TestCase;
+use App\Models\Food;
+use App\Models\User;
+use Illuminate\Foundation\Testing\RefreshDatabase;
+use Tests\TestCase;
 
-class ExampleTest extends TestCase
+class FoodTest extends TestCase
 {
-    /**
-     * A basic test example.
-     */
-    public function test_that_true_is_true(): void
+    use RefreshDatabase;
+
+    /** @test */
+    public function a_food_belongs_to_a_user()
     {
-        $this->assertTrue(true);
+        // Créer un utilisateur
+        $user = User::factory()->create();
+
+        // Créer un nouvel enregistrement Food avec un user_id valide
+        $food = Food::factory()->create([
+            'user_id' => $user->id,
+        ]);
+
+        // Vérifier si le user_id est correctement défini
+        $this->assertEquals($user->id, $food->user_id);
     }
 }

@@ -1,35 +1,34 @@
 <?php
-use Illuminate\Support\Facades\Auth;
+
+use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\UserController;
-use App\Http\Controllers\GoogleAuthController;
+use App\Http\Controllers\Auth\ProviderController;
+
+use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\RecipeController;
 use App\Http\Controllers\FoodController;
 use App\Http\Controllers\MealController;
 use App\Http\Controllers\DashboardController;
 use App\Models\UserPreference;
 use App\Models\DietaryRestriction;
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
 |--------------------------------------------------------------------------
-    |
+|
 | Here is where you can register web routes for your application. These
 | routes are loaded by the RouteServiceProvider and all of them will
 | be assigned to the "web" middleware group. Make something great!
 |
 */
 
-
 Route::get('/', function () {
-    return view('home');
+    return view('welcome');
 });
+
 
 // Route for the meals generator
 Route::get('/generate', [MealController::class, 'generateForm']);
-
-
 Route::post('/generate-meals', [MealController::class, 'generate'])->name('generate_meals');
 
 //admin
@@ -45,9 +44,7 @@ Route::prefix('admin')->middleware(['auth', 'admin'])->group(function () {
     Route::delete('/foods/{food}', [FoodController::class, 'destroy'])->name('admin.foods.destroy');
 });
 
-
-
-
+//recette
 Route::get('/recipes', [RecipeController::class, 'index'])->name('recipes.index');
 Route::get('/recipes/create', [RecipeController::class, 'create'])->name('recipes.create');
 Route::post('/recipes', [RecipeController::class, 'store'])->name('recipes.store');
@@ -55,28 +52,32 @@ Route::get('/recipes/{recipe}', [RecipeController::class, 'show'])->name('recipe
 
 
 
-Route::get('/login', function () {
-    return view('login');
-})->name('login');
-
-Route::post('/create_account', [UserController::class, 'create_account']);
-Route::post('/access_account', [UserController::class, 'access_account']);
-// Route::get('/logout', [UserController::class, 'logout']);
-
-// Connexion Google
-Route::get('/auth/google', [GoogleAuthController::class, 'redirectToGoogle']);
-Route::get('/auth/google/callback', [GoogleAuthController::class, 'handleGoogleCallback']);
-Route::get('/logout', [GoogleAuthController::class, 'logout'])->name('logout');
-
-//voir son profile et autre infos
-Route::get('/profile', [UserController::class, 'showProfile'])->middleware('auth')->name('user.profile');
-Route::post('/profile', [UserController::class, 'updateProfile'])->middleware('auth')->name('user.updateProfile');
-Route::get('/profile/preferences', [UserController::class, 'showPreferences'])->middleware('auth')->name('user.preferences');
-Route::post('/profile/preferences', [UserController::class, 'updatePreferences'])->middleware('auth')->name('user.updatePreferences');
+//google login
+Route::get('/auth/{provider}/redirect', [ProviderController::class, 'redirect']);
+Route::get('/auth/{provider}/callback', [ProviderController::class, 'callback']);
 
 
-Route::get('/profile/informations', [UserController::class, 'ShowInformations'])->middleware('auth')->name('user.informations');
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::get('/register', function () {
-    return view('register');
+
+Route::middleware('auth')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
+    //preferences
+    Route::get('/profile/preferences', [ProfileController::class, 'showPreferences'])->name('profile.preferences');
+    Route::post('/profile/preferences', [ProfileController::class, 'updatePreferences'])->name('profile.updatePreferences');
+
+    //recettes cree etc...
+
+
 });
+
+
+
+
+
+require __DIR__.'/auth.php';

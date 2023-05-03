@@ -1,105 +1,36 @@
-<!doctype html>
-<html lang="fr">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
-    <title>InstaRepas</title>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-    <link href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round" rel="stylesheet">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
-  </head>
-  <body>
+<!DOCTYPE html>
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="csrf-token" content="{{ csrf_token() }}">
 
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand" href="#">InstaRepas</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <div class="collapse navbar-collapse" id="navbarNav">
-    <ul class="navbar-nav">
-      <li class="nav-item active">
-        <a class="nav-link" href="{{ url('/') }}">Accueil</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="{{ url('generate') }}">Générer</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="{{ url('recipes') }}">Recettes</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="{{ url('login') }}">Login</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="{{ url('admin') }}">Admin</a>
-      </li>
+        <title>{{ config('app.name', 'Laravel') }}</title>
 
-      <li class="nav-item">
-        <a class="nav-link" href="{{ url('profile') }}">User Profile</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="{{ url('register') }}">Register</a>
-      </li>
+        <!-- Fonts -->
+        <link rel="preconnect" href="https://fonts.bunny.net">
+        <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
 
-    </ul>
-  </div>
-</nav>
+        <!-- Scripts -->
+        @vite(['resources/css/app.css', 'resources/js/app.js'])
+    </head>
+    <body class="font-sans antialiased">
+        <div class="min-h-screen bg-gray-100">
+            @include('layouts.navigation')
 
-@yield('content')
+            <!-- Page Heading -->
+            @if (isset($header))
+                <header class="bg-white shadow">
+                    <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+                        {{ $header }}
+                    </div>
+                </header>
+            @endif
 
-<footer class="bg-light text-center text-lg-start">
-  <div class="container p-4">
-    <div class="row">
-      <div class="col-lg-6 col-md-12 mb-4 mb-md-0">
-        <h5 class="text-uppercase">À propos de nous</h5>
-        <p>
-          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Iste atque ea quis
-          molestias. Fugiat pariatur maxime quis culpa corporis vitae repudiandae
-          aliquam voluptatem veniam, est atque cumque eum delectus sint!
-        </p>
-      </div>
-      <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
-        <h5 class="text-uppercase">Liens</h5>
-        <ul class="list-unstyled mb-0">
-          <li>
-            <a href="#!" class="text-dark">Lien 1</a>
-          </li>
-          <li>
-            <a href="#!" class="text-dark">Lien 2</a>
-          </li>
-          <li>
-            <a href="#!" class="text-dark">Lien 3</a>
-          </li>
-          <li>
-            <a href="#!" class="text-dark">Lien 4</a>
-          </li>
-        </ul>
-      </div>
-      <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
-        <h5 class="text-uppercase mb-0">Liens</h5>
-        <ul class="list-unstyled">
-          <li>
-            <a href="#!" class="text-dark">Lien 1</a>
-          </li>
-          <li>
-            <a href="#!" class="text-dark">Lien 2</a>
-          </li>
-          <li>
-            <a href="#!" class="text-dark">Lien 3</a>
-          </li>
-          <li>
-            <a href="#!" class="text-dark">Lien 4</a>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </div>
-  <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
-    © 2023 Toyan
-  </div>
-</footer>
-
-</body>
+            <!-- Page Content -->
+            <main>
+                {{ $slot }}
+            </main>
+        </div>
+    </body>
 </html>

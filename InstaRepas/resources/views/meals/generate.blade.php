@@ -1,6 +1,4 @@
-@extends('layouts.app')
 
-@section('content')
 <div style="display: flex; justify-content: center;">
     <div style="max-width: 600px;">
         <h1 style="text-align: center;">Préférences alimentaires</h1>
@@ -44,4 +42,4 @@
         <p style="text-align: center;">Si vous souhaitez enregistrer vos préférences, veuillez vous <a href="/register">inscrire</a> ou vous <a href="/login">connecter</a>.</p>
     </div>
 </div>
-@endsection
+

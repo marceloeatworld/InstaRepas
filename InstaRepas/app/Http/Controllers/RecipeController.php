@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\Recipe;
 use App\Models\RecipeCategory;
 use App\Models\DietaryRestriction;
 use App\Models\Food;
+use Illuminate\Http\Request;
 
 class RecipeController extends Controller
 {
@@ -15,7 +15,7 @@ class RecipeController extends Controller
         $categories = RecipeCategory::all();
         $restrictions = DietaryRestriction::all();
         $foods = Food::all();
-        return view('CreateRecipe', compact('categories', 'restrictions', 'foods'));
+        return view('recipes.CreateRecipe', compact('categories', 'restrictions', 'foods'));
     }
 
     public function store(Request $request)
@@ -52,18 +52,18 @@ class RecipeController extends Controller
         $recipe->foods()->attach($validatedData['foods']);
         $recipe->restrictions()->attach($validatedData['restrictions']);
 
-        return redirect()->route('recipes.show', $recipe);
+        return redirect()->route('recipes.recipes.show', $recipe);
     }
 
     public function show(Recipe $recipe)
     {
-        return view('recipes.show', compact('recipe'));
+        return view('recipes.recipes.show', compact('recipe'));
     }
 
     public function index()
     {
         $recipes = Recipe::all();
-        return view('recipes', compact('recipes'));
+        return view('recipes.recipes', compact('recipes'));
     }
     
     

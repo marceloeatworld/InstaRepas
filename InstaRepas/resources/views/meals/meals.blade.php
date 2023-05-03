@@ -1,6 +1,4 @@
-@extends('layouts.app')
 
-@section('content')
     <h1>Meal Plan</h1>
     <p>Date: {{ $current_date }}</p>
     <p>Season: {{ $current_season }}</p>
@@ -40,4 +38,3 @@
         </div>
     @endfor
 
-    @endsection

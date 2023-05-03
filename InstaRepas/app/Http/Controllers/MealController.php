@@ -7,11 +7,11 @@ use App\Models\MealCombination;
 use App\Models\CombinationFood;
 use App\Models\Season;
 use Carbon\Carbon;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use App\Models\UserPreference;
 use App\Models\DietaryRestriction;
+use Illuminate\Http\Request;
 
 class MealController extends Controller
 {
@@ -181,4 +181,3 @@ class MealController extends Controller
         ];
     }
 }
-

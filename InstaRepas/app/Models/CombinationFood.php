@@ -8,7 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class CombinationFood extends Model
 {
     use HasFactory;
-
     protected $table = 'combinations_foods';
 
     protected $fillable = [

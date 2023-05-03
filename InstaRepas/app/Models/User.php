@@ -2,38 +2,70 @@
 
 namespace App\Models;
 
-use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Auth\Authenticatable;
-use Illuminate\Support\Carbon;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
+use Laravel\Sanctum\HasApiTokens;
+use Str;
 
-class User extends Model implements AuthenticatableContract
+class User extends Authenticatable implements MustVerifyEmail
 {
-    use HasFactory, Authenticatable;
-    public $timestamps = false;
-    protected $table = 'users';
+    use HasApiTokens, HasFactory, Notifiable;
 
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array<int, string>
+     */
     protected $fillable = [
         'username',
-        'first_name',
-        'last_name',
         'email',
         'password',
         'registration_date',
         'is_admin',
+        'points',
+        'provider',
+        'provider_id',
+        'provider_token',
+    ];
+
+
+    /**
+     * The attributes that should be hidden for serialization.
+     *
+     * @var array<int, string>
+     */
+    protected $hidden = [
+        'password',
         'remember_token',
     ];
 
-    protected $dates = [
-        'created_at',
-        'updated_at',
-        'registration_date'
-    ];
-
+    /**
+     * The attributes that should be cast.
+     *
+     * @var array<string, string>
+     */
     protected $casts = [
+        'email_verified_at' => 'datetime',
+        'registration_date' => 'datetime',
         'is_admin' => 'boolean',
     ];
+
+    public static function generateUserName($username)
+    {
+        if($username == null)
+        {
+            $username = Str::lower(Str::random(8));
+        }
+        if(User::where('username', $username)->exists())
+        {
+            $newUsername = $username.Str::lower(Str::random(3));
+            $username = self::generateUserName($newUsername);
+        }
+
+        return $username;
+    }
 
     public function foods()
     {
@@ -49,4 +81,5 @@ class User extends Model implements AuthenticatableContract
     {
         return $this->belongsToMany(DietaryRestriction::class, 'user_preferences', 'user_id', 'preference_id');
     }
+
 }
