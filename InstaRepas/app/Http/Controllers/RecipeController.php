@@ -7,16 +7,27 @@ use App\Models\RecipeCategory;
 use App\Models\DietaryRestriction;
 use App\Models\Food;
 use Illuminate\Http\Request;
+use App\Models\FoodCategory;
+use App\Models\Season;
+use App\Models\MealCombination;
+use App\Models\UnitOfMeasure;
+
 
 class RecipeController extends Controller
 {
     public function create()
     {
-        $categories = RecipeCategory::all();
+        $categories = FoodCategory::all();
         $restrictions = DietaryRestriction::all();
+        $seasons = Season::all();
+        $meal_combinations = MealCombination::all();
         $foods = Food::all();
-        return view('profile.recipes.create', compact('categories', 'restrictions', 'foods'));
+        $units_of_measure = UnitOfMeasure::all();
+
+
+        return view('profile.recipes.create', compact('categories', 'restrictions', 'seasons', 'meal_combinations', 'foods', 'units_of_measure'));
     }
+    
 
     public function store(Request $request)
     {
@@ -36,6 +47,29 @@ class RecipeController extends Controller
             'restrictions' => 'array',
             'restrictions.*' => 'required|exists:dietary_restrictions,id',
         ]);
+        $user = auth()->user();
+
+        // Ajout de points pour la création de la recette
+        $user->points += 2;
+    
+        // Ajout de points pour les nouveaux ingrédients
+        foreach ($validatedData['foods'] as $food) {
+            $foodExists = Food::find($food['id']);
+            if (!$foodExists) {
+                $user->points += 1;
+            }
+        }
+    
+        $user->save();
+    
+        // Traitement du fichier image
+        if ($request->hasFile('image')) {
+            $path = $request->file('image')->store('public/images');
+            $imageUrl = '/storage/' . substr($path, strlen('public/'));
+        } else {
+            $imageUrl = $validatedData['image_url'] ?? null;
+        }
+    
 
         $recipe = Recipe::create([
             'user_id' => auth()->id(),
@@ -46,7 +80,7 @@ class RecipeController extends Controller
             'cooking_time' => $validatedData['cooking_time'],
             'servings' => $validatedData['servings'],
             'recipe_category_id' => $validatedData['recipe_category_id'],
-            'image_url' => $validatedData['image_url'],
+            'image_url' => $imageUrl,
         ]);
 
         $recipe->foods()->attach($validatedData['foods']);
@@ -66,5 +100,13 @@ class RecipeController extends Controller
         return view('recipes.recipes', compact('recipes'));
     }
     
-    
+    public function searchFoods(Request $request)
+{
+    $query = $request->input('search');
+    $foods = Food::where('name', 'like', '%' . $query . '%')->get();
+    return response()->json($foods);
+}
+
+
+
 }
