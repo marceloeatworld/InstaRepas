@@ -35,6 +35,7 @@ Route::post('/generate-meals', [MealController::class, 'generate'])->name('gener
 Route::prefix('admin')->middleware(['auth', 'admin'])->group(function () {
     Route::get('/', [DashboardController::class, 'index'])->name('admin.index');
 
+    //gerer les aliments
     Route::get('/foods', [FoodController::class, 'index'])->name('admin.foods.index');
     Route::get('/foods/create', [FoodController::class, 'create'])->name('admin.foods.create');
     Route::post('/foods', [FoodController::class, 'store'])->name('admin.foods.store');
@@ -42,12 +43,17 @@ Route::prefix('admin')->middleware(['auth', 'admin'])->group(function () {
     Route::get('/foods/{food}/edit', [FoodController::class, 'edit'])->name('admin.foods.edit');
     Route::put('/foods/{food}', [FoodController::class, 'update'])->name('admin.foods.update');
     Route::delete('/foods/{food}', [FoodController::class, 'destroy'])->name('admin.foods.destroy');
+
+    //gerer les utilisateurs
+    Route::get('/users', [DashboardController::class, 'users'])->name('admin.users.index');
+    Route::put('/users/{user}/admin', [DashboardController::class, 'toggleAdmin'])->name('admin.users.toggleAdmin');
+    Route::put('/users/{user}/points', [DashboardController::class, 'updatePoints'])->name('admin.users.updatePoints');
+    Route::delete('/users/{user}', [DashboardController::class, 'destroy'])->name('admin.users.destroy');
+    
 });
 
-//recette
+//recettes accecible a tous
 Route::get('/recipes', [RecipeController::class, 'index'])->name('recipes.index');
-Route::get('/recipes/create', [RecipeController::class, 'create'])->name('recipes.create');
-Route::post('/recipes', [RecipeController::class, 'store'])->name('recipes.store');
 Route::get('/recipes/{recipe}', [RecipeController::class, 'show'])->name('recipes.show');
 
 
@@ -72,11 +78,10 @@ Route::middleware('auth')->group(function () {
     Route::post('/profile/preferences', [ProfileController::class, 'updatePreferences'])->name('profile.updatePreferences');
 
     //recettes cree etc...
-
+    Route::get('/profile/recipes/create', [RecipeController::class, 'create'])->name('recipes.create');
+    Route::post('/recipes', [RecipeController::class, 'store'])->name('recipes.store');
 
 });
-
-
 
 
 

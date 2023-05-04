@@ -15,9 +15,9 @@
     </nav>
 
     <h1>Food List</h1>
-    <div class="container">
+<div class="container">
     <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-4">
             <form action="{{ route('admin.foods.index') }}" method="GET" class="mb-3">
                 <div class="input-group">
                     <label for="search" class="input-group-text">Search:</label>
@@ -27,7 +27,7 @@
                 </div>
             </form>
         </div>
-        <div class="col-md-6">
+        <div class="col-md-4">
             <form action="{{ route('admin.foods.index') }}" method="GET" class="mb-3">
                 <div class="input-group">
                     <label for="category" class="input-group-text">Category:</label>
@@ -42,39 +42,53 @@
                 </div>
             </form>
         </div>
+        <div class="col-md-4">
+            <form action="{{ route('admin.foods.index') }}" method="GET" class="mb-3">
+                <div class="input-group">
+                
+                    <input type="hidden" name="search" value="{{ $search ?? '' }}">
+                    <input type="hidden" name="category" value="{{ $selectedCategory ?? '' }}">
+
+                    <a href="{{ route('admin.foods.index', ['not_validated' => 1]) }}" class="btn btn-secondary">Show not validated foods</a>
+
+                </div>
+            </form>
+        </div>
     </div>
 </div>
 
-
-    <table>
+<table>
     <thead>
-    <tr>
-        <th>ID</th>
-        <th>Name</th>
-        <th>Category</th>
-        <th>Actions</th>
-    </tr>
-</thead>
-<tbody>
-    @foreach($foods as $food)
         <tr>
-            <td>{{ $food->id }}</td>
-            <td>{{ $food->name }}</td>
-            <td>{{ $food->category->name }}</td>
-            <td>
-                        <a href="{{ route('admin.foods.edit', $food->id) }}">Edit</a>
-                        <a href="#" onclick="event.preventDefault(); if(confirm('Are you sure you want to delete this food?')){ document.getElementById('delete-form-{{ $food->id }}').submit(); }">Delete</a>
-                        <form id="delete-form-{{ $food->id }}" action="{{ route('admin.foods.destroy', $food->id) }}" method="POST">
-                            @csrf
-                            @method('DELETE')
-                            <input type="submit" value="Delete" style="display: none;">
-                            
-                        </form>
-                    </td>
-                </tr>
-            @endforeach
-        </tbody>
-    </table>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Category</th>
+            <th>Added by</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach($foods as $food)
+            <tr>
+                <td>{{ $food->id }}</td>
+                <td @if(!$food->is_valid) style="color: red;" @endif>{{ $food->name }}</td>
+                <td>{{ $food->category->name }}</td>
+                <td>{{ $food->user->name }}</td>
+                <td>
+                    <a href="{{ route('admin.foods.edit', $food->id) }}">Edit</a>
+                    <a href="#" onclick="event.preventDefault(); if(confirm('Are you sure you want to delete this food?')){ document.getElementById('delete-form-{{$food->id }}').submit(); }">Delete</a>
+                    <form id="delete-form-{{ $food->id }}" action="{{ route('admin.foods.destroy', $food->id) }}" method="POST">
+                        @csrf
+                        @method('DELETE')
+                        <input type="submit" value="Delete" style="display: none;">
+                    </form>
+                </td>
+            </tr>
+        @endforeach
+    </tbody>
+</table>
+
+
         </div>
 
     </div>

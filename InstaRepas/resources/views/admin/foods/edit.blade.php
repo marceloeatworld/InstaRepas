@@ -6,4 +6,3 @@
         @include('admin.foods.form')
         <button type="submit" class="btn btn-primary">Update Food</button>
     </form>
-

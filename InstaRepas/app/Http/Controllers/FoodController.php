@@ -15,24 +15,29 @@ use Illuminate\Http\Request;
 class FoodController extends Controller
 {
     public function index(Request $request)
-    {
-        $search = $request->input('search');
-        $selectedCategory = $request->input('category');
-    
-        $foods = Food::with('category')
-            ->when($search, function ($query) use ($search) {
-                return $query->where('name', 'LIKE', "%{$search}%");
-            })
-            ->when($selectedCategory, function ($query) use ($selectedCategory) {
-                return $query->where('category_id', $selectedCategory);
-            })
-            ->get();
-    
-        // Récupérer toutes les catégories pour les afficher dans le menu déroulant
-        $categories = FoodCategory::all();
-    
-        return view('admin.foods.index', compact('foods', 'search', 'categories', 'selectedCategory'));
-    }
+{
+    $search = $request->input('search');
+    $selectedCategory = $request->input('category');
+    $notValidated = $request->input('not_validated');
+
+    $foods = Food::with('category')
+        ->when($search, function ($query) use ($search) {
+            return $query->where('name', 'LIKE', "%{$search}%");
+        })
+        ->when($selectedCategory, function ($query) use ($selectedCategory) {
+            return $query->where('category_id', $selectedCategory);
+        })
+        ->when($notValidated, function ($query) {
+            return $query->where('is_valid', false);
+        })
+        ->get();
+
+    // Récupérer toutes les catégories pour les afficher dans le menu déroulant
+    $categories = FoodCategory::all();
+
+    return view('admin.foods.index', compact('foods', 'search', 'categories', 'selectedCategory', 'notValidated'));
+}
+
     
     
 
