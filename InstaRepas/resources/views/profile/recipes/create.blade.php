@@ -1,6 +1,6 @@
 <h1 class="mb-5">Ajouter une recette</h1>
 
-<form method="POST" action="{{ route('recipes.store') }}">
+<form method="POST" action="{{ route('recipes.store') }}" enctype="multipart/form-data">
   @csrf
   <div class="form-group">
     <label for="title">Titre</label>
@@ -72,18 +72,18 @@
   </div>
 
   <div class="form-group">
-  <label for="foods">Ingrédients</label>
-  <select name="foods[]" id="foods" class="form-control">
-    <option value="">Sélectionnez un ingrédient</option>
-    @foreach($foods as $food)
-      <option value="{{ $food->id }}">{{ $food->name }}</option>
-    @endforeach
-    <select name="unit_of_measure" id="unit_of_measure" class="form-control">
-    <option value="">Sélectionnez une unité de mesure</option>
-    @foreach($units_of_measure as $unit_of_measure)
-        <option value="{{ $unit_of_measure->id }}">{{ $unit_of_measure->unit_name }}</option>
-    @endforeach
-</select>
+    <label for="foods">Ingrédients</label>
+    <input type="text" id="food-search" class="form-control" placeholder="Sélectionnez un ingrédient">
+    <div id="food-search-results" class="list-group mt-2" style="display: none;"></div>
+    <select name="unit_of_measure" id="unit_of_measure" class="form-control mt-2">
+      <option value="">Sélectionnez une unité de mesure</option>
+      @foreach($units_of_measure as $unit_of_measure)
+          <option value="{{ $unit_of_measure->id }}">{{ $unit_of_measure->unit_name }}</option>
+      @endforeach
+    </select>
+    <button type="button" id="add-food" class="btn btn-primary mt-2">Ajouter</button>
+    <ul id="foods-list" class="list-group mt-2"></ul>
+  </div>
 
 
   </select>
@@ -169,7 +169,7 @@
 </form>
 
 <script>
-  var foodsList = [];
+  
 
   document.getElementById('add-food').addEventListener('click', function() {
   var selectFood = document.getElementById('foods');
@@ -260,28 +260,40 @@ document.getElementById('ingredient-search').addEventListener('input', function(
     searchIngredient(this.value);
   }
 });
-
+document.getElementById('food-search').addEventListener('input', function() {
+    if (this.value.length >= 2) {
+      searchIngredient(this.value);
+    }
+  });
 function searchIngredient(query) {
-  // Remplacez cette URL par l'URL de l'API qui renvoie les ingrédients correspondants
-  var apiUrl = '/api/foods?search=' + encodeURIComponent(query);
+    var apiUrl = '/api/foods?search=' + encodeURIComponent(query);
 
-  fetch(apiUrl)
-    .then(function(response) {
-      return response.json();
-    })
-    .then(function(ingredients) {
-      if (ingredients.length > 0) {
-        console.log('Ingrédients trouvés :', ingredients);
-        // Si l'ingrédient existe, vous pouvez soit l'ajouter à la liste déroulante, soit afficher un message pour informer l'utilisateur
-      } else {
-        console.log('Aucun ingrédient trouvé.');
-        // Si l'ingrédient n'existe pas, affichez le formulaire d'ajout d'un nouvel ingrédient
-        var formContainer = document.getElementById('new-food-form-container');
-        formContainer.classList.remove('d-none');
-      }
-    });
-}
-
+    fetch(apiUrl)
+      .then(function(response) {
+        return response.json();
+      })
+      .then(function(ingredients) {
+        var resultsContainer = document.getElementById('food-search-results');
+        resultsContainer.innerHTML = '';
+        ingredients.forEach(function(ingredient) {
+          var item = document.createElement('div');
+          item.classList.add('list-group-item');
+          item.textContent = ingredient.name;
+          item.addEventListener('click', function() {
+            document.getElementById('food-search').value = ingredient.name;
+            var food = {
+              id: ingredient.id,
+              name: ingredient.name
+            };
+            foodsList.push(food);
+            updateFoodsList();
+            resultsContainer.style.display = 'none';
+          });
+          resultsContainer.appendChild(item);
+        });
+        resultsContainer.style.display = ingredients.length > 0 ? 'block' : 'none';
+      });
+  }
 
 
 </script>
