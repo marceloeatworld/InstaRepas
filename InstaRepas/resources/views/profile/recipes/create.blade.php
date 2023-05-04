@@ -1,3 +1,4 @@
+<x-app-layout>
 <h1 class="mb-5">Ajouter une recette</h1>
 
 <form method="POST" action="{{ route('recipes.store') }}" enctype="multipart/form-data">
@@ -297,3 +298,4 @@ function searchIngredient(query) {
 
 
 </script>
+</x-app-layout>

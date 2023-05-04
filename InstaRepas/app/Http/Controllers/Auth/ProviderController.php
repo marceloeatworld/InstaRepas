@@ -21,7 +21,7 @@ class ProviderController extends Controller
 
     try {
         $SocialUser = Socialite::driver($provider)->user();
-       
+
         $user = User::where([
             'provider' => $provider,
             'provider_id' => $SocialUser->id
@@ -46,16 +46,25 @@ class ProviderController extends Controller
                 'password' => Hash::make($password),
             ]);
         }
+
+
         Auth::login($user);
-        return redirect('/dashboard');
+
+        // Permet de diriger un compte Google "admin" sur la page admin
+        $user = Auth::user();
+        if ($user->is_admin) {
+            return redirect()->route('admin.index');
+        } else {
+            return redirect()->route('dashboard');
+        }
 
     } catch (\Exception $e) {
         return redirect('/login');
     }
 
- 
- 
 
-    
+
+
+
    }
 }

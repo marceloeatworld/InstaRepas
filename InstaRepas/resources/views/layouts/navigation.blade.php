@@ -18,7 +18,7 @@
                     <x-nav-link :href="route('generate')" :active="request()->routeIs('generate')">
                         {{ __('Generer Menu') }}
                     </x-nav-link>
-                 
+
                     <x-nav-link :href="route('recipes.create')" :active="request()->routeIs('recipes.create')">
                         {{ __('Créer une recette') }}
                     </x-nav-link>

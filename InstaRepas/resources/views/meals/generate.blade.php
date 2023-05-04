@@ -1,3 +1,4 @@
+<x-app-layout>
 
 <div style="display: flex; justify-content: center;">
     <div style="max-width: 600px;">
@@ -43,3 +44,4 @@
     </div>
 </div>
 
+</x-app-layout>
