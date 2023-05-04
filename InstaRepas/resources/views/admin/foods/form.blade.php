@@ -41,3 +41,9 @@
         </div>
     @endforeach
 </div>
+
+<div class="form-group">
+    <label for="is_valid">Validated</label>
+    <input type="hidden" name="is_valid" value="0">
+    <input type="checkbox" name="is_valid" id="is_valid" class="form-check-input" value="1" {{ (isset($food) && $food->is_valid) ? 'checked' : '' }}>
+</div>

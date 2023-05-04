@@ -15,7 +15,7 @@ class RecipeController extends Controller
         $categories = RecipeCategory::all();
         $restrictions = DietaryRestriction::all();
         $foods = Food::all();
-        return view('recipes.CreateRecipe', compact('categories', 'restrictions', 'foods'));
+        return view('profile.recipes.create', compact('categories', 'restrictions', 'foods'));
     }
 
     public function store(Request $request)
