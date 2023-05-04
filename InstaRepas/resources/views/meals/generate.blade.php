@@ -50,6 +50,7 @@
 @endauth
 
 @guest
+<x-guest-layout>
 <div style="display: flex; justify-content: center;">
     <div style="max-width: 600px;">
         <h1 style="text-align: center;">Préférences alimentaires</h1>
@@ -89,8 +90,12 @@
             <div style="text-align: center;">
                 <button type="submit">Générer des repas</button>
             </div>
+
+
+            
         </form>
         <p style="text-align: center;">Si vous souhaitez enregistrer vos préférences, veuillez vous <a href="/register">inscrire</a> ou vous <a href="/login">connecter</a>.</p>
     </div>
 </div>
+</x-guest-layout>
 @endguest
