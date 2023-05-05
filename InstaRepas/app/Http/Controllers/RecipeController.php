@@ -3,15 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Models\Recipe;
-use App\Models\RecipeCategory;
-use App\Models\DietaryRestriction;
 use App\Models\Food;
-use Illuminate\Http\Request;
 use App\Models\FoodCategory;
+use App\Models\DietaryRestriction;
 use App\Models\Season;
 use App\Models\MealCombination;
 use App\Models\UnitOfMeasure;
-
+use Illuminate\Http\Request;
 
 class RecipeController extends Controller
 {
@@ -23,7 +21,6 @@ class RecipeController extends Controller
         $meal_combinations = MealCombination::all();
         $foods = Food::all();
         $units_of_measure = UnitOfMeasure::all();
-
 
         return view('profile.recipes.create', compact('categories', 'restrictions', 'seasons', 'meal_combinations', 'foods', 'units_of_measure'));
     }
@@ -101,12 +98,38 @@ class RecipeController extends Controller
     }
     
     public function searchFoods(Request $request)
-{
-    $query = $request->input('search');
-    $foods = Food::where('name', 'like', '%' . $query . '%')->get();
-    return response()->json($foods);
-}
+    {
+        $query = $request->input('search');
+        $foods = Food::where('name', 'like', '%' . $query . '%')->get();
 
+        if ($foods->isEmpty()) {
+            return response()->json([
+                'message' => "Aucun aliment trouvé. Voulez-vous en ajouter un nouveau ?",
+                'query' => $query
+            ]);
+        }
 
+        return response()->json($foods);
+    }
 
+    public function addFood(Request $request)
+    {
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'food_category_id' => 'required|exists:food_categories,id'
+        ]);
+    
+        $food = Food::create([
+            'name' => $request->input('name'),
+            'food_category_id' => $request->input('food_category_id'),
+            'user_id' => auth()->user()->id, // Ajout du user_id
+            'is_valid' => 0 // Définition de la valeur is_valid à 0
+        ]);
+    
+        return response()->json([
+            'message' => 'Aliment ajouté avec succès.',
+            'food' => $food
+        ]);
+    }
+    
 }
