@@ -1,6 +1,7 @@
 <x-app-layout>
 <h1 class="mb-5">Ajouter une recette</h1>
 
+<div class="container-left mt-3">
 <form method="POST" action="{{ route('recipes.store') }}" enctype="multipart/form-data">
   @csrf
   <div class="form-group">
@@ -168,6 +169,7 @@
 
   <button type="submit" class="btn btn-primary">Créer la recette</button>
 </form>
+</div>
 
 <script>
   
