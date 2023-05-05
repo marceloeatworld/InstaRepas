@@ -92,7 +92,7 @@
             </div>
 
 
-            
+
         </form>
         <p style="text-align: center;">Si vous souhaitez enregistrer vos préférences, veuillez vous <a href="/register">inscrire</a> ou vous <a href="/login">connecter</a>.</p>
     </div>
