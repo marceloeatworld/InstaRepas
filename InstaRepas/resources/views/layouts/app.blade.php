@@ -11,6 +11,9 @@
         <link rel="preconnect" href="https://fonts.bunny.net">
         <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
 
+        <!-- Bootstrap CSS -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-5XrIIr7wLr0oGwZmLk5n6nuTj3rMlUz5nBwvxOeVgK8eZa4a1YXoGzFpFYeXZg9L" crossorigin="anonymous">
+
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
@@ -32,5 +35,8 @@
                 {{ $slot }}
             </main>
         </div>
+
+        <!-- Bootstrap Scripts -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-TzVq1XJwJf8HqpZlZ3KdA5VJq8OYB5Qz+7SHI++/J0OqyE9Lw1mK0FfQ2xjHnY5L" crossorigin="anonymous"></script>
     </body>
 </html>
