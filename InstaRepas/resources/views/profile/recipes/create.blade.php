@@ -1,8 +1,11 @@
 <x-app-layout>
   <h1 class="mb-5">Ajouter une recette</h1>
 
+
   <form method="POST" action="{{ route('recipes.store') }}" enctype="multipart/form-data">
     @csrf
+
+
   <div class="form-group">
     <label for="title">Titre</label>
     <input type="text" name="title" id="title" class="form-control @error('title') is-invalid @enderror" value="{{ old('title') }}" required>
@@ -159,6 +162,7 @@
   </form>
 
   </x-app-layout>
+
 
 <script>
   
