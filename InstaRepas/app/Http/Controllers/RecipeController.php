@@ -24,7 +24,7 @@ class RecipeController extends Controller
 
         return view('profile.recipes.create', compact('categories', 'restrictions', 'seasons', 'meal_combinations', 'foods', 'units_of_measure'));
     }
-    
+
 
     public function store(Request $request)
     {
@@ -48,7 +48,7 @@ class RecipeController extends Controller
 
         // Ajout de points pour la création de la recette
         $user->points += 2;
-    
+
         // Ajout de points pour les nouveaux ingrédients
         foreach ($validatedData['foods'] as $food) {
             $foodExists = Food::find($food['id']);
@@ -56,9 +56,9 @@ class RecipeController extends Controller
                 $user->points += 1;
             }
         }
-    
+
         $user->save();
-    
+
         // Traitement du fichier image
         if ($request->hasFile('image')) {
             $path = $request->file('image')->store('public/images');
@@ -66,7 +66,7 @@ class RecipeController extends Controller
         } else {
             $imageUrl = $validatedData['image_url'] ?? null;
         }
-    
+
 
         $recipe = Recipe::create([
             'user_id' => auth()->id(),
@@ -96,7 +96,9 @@ class RecipeController extends Controller
         $recipes = Recipe::all();
         return view('recipes.recipes', compact('recipes'));
     }
-    
+
+
+    // Récupere les aliments de la BDD pour le faire afficher dans la vue sous forme JSON quand on recherche un aliment
     public function searchFoods(Request $request)
     {
         $query = $request->input('search');

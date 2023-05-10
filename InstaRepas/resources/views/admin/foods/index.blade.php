@@ -45,7 +45,7 @@
         <div class="col-md-4">
             <form action="{{ route('admin.foods.index') }}" method="GET" class="mb-3">
                 <div class="input-group">
-                
+
                     <input type="hidden" name="search" value="{{ $search ?? '' }}">
                     <input type="hidden" name="category" value="{{ $selectedCategory ?? '' }}">
 
