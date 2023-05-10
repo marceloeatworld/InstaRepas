@@ -13,7 +13,7 @@
 
         <!-- Bootstrap CSS -->
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-5XrIIr7wLr0oGwZmLk5n6nuTj3rMlUz5nBwvxOeVgK8eZa4a1YXoGzFpFYeXZg9L" crossorigin="anonymous">
-
+        <link href="css/welcome.css" rel="stylesheet">
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
