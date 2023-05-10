@@ -1,0 +1,24 @@
+.bg-cover-meal {
+    background-image: url('../imgs/flatlay-iron-skillet-with-meat-and-other-food.jpg');
+  }
+
+.bg-cover-season{
+    background-image: url('../imgs/FatMarcelo_organic_theme_for_food_and_organic_products_4_on_whi_839821f8-d0e3-4fdf-98d2-30646cc57221.png');
+}
+
+
+
+.bg-cover-season {
+  margin: 0;
+  background-size: cover;
+  background-position: center;
+  height: 800px;
+}
+
+
+.grid {
+  margin: 0 auto;
+  max-width: 1200px; /* adjust the value to your needs /
+  width: 90%; / adjust the value to your needs */
+}
+

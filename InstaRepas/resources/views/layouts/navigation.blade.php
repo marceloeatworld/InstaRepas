@@ -5,7 +5,7 @@
             <div class="flex">
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center">
-                    <a href="{{ route('dashboard') }}">
+                    <a href="/">
                         <x-application-logo class="block h-9 w-auto fill-current text-gray-800" />
                     </a>
                 </div>
@@ -15,6 +15,7 @@
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
                     </x-nav-link>
+
                     <x-nav-link :href="route('generate')" :active="request()->routeIs('generate')">
                         {{ __('Generer Menu') }}
                     </x-nav-link>
@@ -89,7 +90,7 @@
 
         <!-- Responsive Settings Options -->
         <div class="pt-4 pb-1 border-t border-gray-200">
-            <div class="px-4"> 
+            <div class="px-4">
             @if (Auth::user())
     <div class="font-medium text-base text-gray-800">{{ Auth::user()->name }}</div>
     <div class="font-medium text-sm text-gray-500">{{ Auth::user()->email }}</div>
