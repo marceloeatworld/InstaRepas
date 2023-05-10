@@ -80,6 +80,8 @@ Route::middleware('auth')->group(function () {
     //recettes cree etc...
     Route::get('/profile/recipes/create', [RecipeController::class, 'create'])->name('recipes.create');
     Route::post('/recipes', [RecipeController::class, 'store'])->name('recipes.store');
+    Route::post('/recipes/add-food', [RecipeController::class, 'addFood'])->name('recipes.add-food');
+
 
 });
 

@@ -1,8 +1,11 @@
 <x-app-layout>
-<h1 class="mb-5">Ajouter une recette</h1>
+  <h1 class="mb-5">Ajouter une recette</h1>
 
-<form method="POST" action="{{ route('recipes.store') }}" enctype="multipart/form-data">
-  @csrf
+
+  <form method="POST" action="{{ route('recipes.store') }}" enctype="multipart/form-data">
+    @csrf
+
+
   <div class="form-group">
     <label for="title">Titre</label>
     <input type="text" name="title" id="title" class="form-control @error('title') is-invalid @enderror" value="{{ old('title') }}" required>
@@ -99,75 +102,67 @@
 
 
 
-  <div id="new-food-form-container" class="d-none mt-3">
-  <h3>Ajouter un nouvel ingrédient</h3>
-
-  <div class="form-group">
-    <label for="name">Nom</label>
-    <input type="text" name="name" id="name" class="form-control" value="{{ old('name') }}" required>
-  </div>
-
-  <div class="form-group">
-    <label for="category_id">Catégorie</label>
-    <select name="category_id" id="category_id" class="form-control" required>
-      @foreach($categories as $category)
-        <option value="{{ $category->id }}">{{ $category->name }}</option>
-      @endforeach
-    </select>
-  </div>
-
-  <div class="form-group">
-    <label for="restrictions">Restrictions alimentaires</label><br>
-    @foreach($restrictions as $restriction)
-      <div class="form-check form-check-inline">
-        <input class="form-check-input" type="checkbox" name="restrictions[]" value="{{ $restriction->id }}">
-        <label class="form-check-label" for="restriction_{{ $restriction->id }}">{{ $restriction->name }}</label>
+<div id="new-food-form-container" class="d-none mt-3">
+      <h3>Ajouter un nouvel ingrédient</h3>
+  
+      <div class="form-group">
+        <label for="name">Nom</label>
+        <input type="text" name="name" id="name" class="form-control" value="{{ old('name') }}" required>
       </div>
-    @endforeach
-  </div>
-
-  <div class="form-group">
-    <label for="seasons">Saisons</label><br>
-    @foreach($seasons as $season)
-      <div class="form-check form-check-inline">
-        <input class="form-check-input" type="checkbox" name="seasons[]" value="{{ $season->id }}">
-        <label class="form-check-label" for="season_{{ $season->id }}">{{ $season->season_name }}</label>
+  
+      <div class="form-group">
+        <label for="category_id">Catégorie</label>
+        <select name="category_id" id="category_id" class="form-control" required>
+          @foreach($categories as $category)
+            <option value="{{ $category->id }}">{{ $category->name }}</option>
+          @endforeach
+        </select>
       </div>
-    @endforeach
-  </div>
-
-  <div class="form-group">
-    <label for="meal_combinations">Combinations de repas</label><br>
-    @foreach($meal_combinations as $combination)
-      <div class="form-check form-check-inline">
-        <input class="form-check-input" type="checkbox" name="meal_combinations[]" value="{{ $combination->id }}">
-        <label class="form-check-label" for="meal_combination_{{ $combination->id }}">{{ $combination->meal_type }}</label>
+  
+      <div class="form-group">
+        <label for="restrictions">Restrictions alimentaires</label><br>
+        @foreach($restrictions as $restriction)
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" name="restrictions[]" value="{{ $restriction->id }}">
+            <label class="form-check-label" for="restriction_{{ $restriction->id }}">{{ $restriction->name }}</label>
+          </div>
+        @endforeach
       </div>
-    @endforeach
-  </div>
-
-  <button type="button" id="submit-new-food" class="btn btn-primary">Ajouter l'ingrédient</button>
-</div>
-
-
-
-
-
-  <div class="form-group">
-    <label for="restrictions">Restrictions alimentaires</label>
-    @foreach($restrictions as $restriction)
-      <div class="form-check">
-        <input type="checkbox" name="restrictions[]" id="restriction-{{ $restriction->id }}" value="{{ $restriction->id }}" class="form-check-input @error('restrictions') is-invalid @enderror" {{ in_array($restriction->id, old('restrictions', [])) ? 'checked' : '' }}>
-        <label for="restriction-{{ $restriction->id }}" class="form-check-label">{{ $restriction->name }}</label>
+  
+      <div class="form-group">
+        <label for="seasons">Saisons</label><br>
+        @foreach($seasons as $season)
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" name="seasons[]" value="{{ $season->id }}">
+            <label class="form-check-label" for="season_{{ $season->id }}">{{ $season->season_name }}</label>
+          </div>
+        @endforeach
       </div>
-    @endforeach
-    @error('restrictions')
-      <span class="invalid-feedback">{{ $message }}</span>
-    @enderror
-  </div>
+  
+      <div class="form-group">
+        <label for="meal_combinations">Combinations de repas</label><br>
+        @foreach($meal_combinations as $combination)
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" name="meal_combinations[]" value="{{ $combination->id }}">
+            <label class="form-check-label" for="meal_combination_{{ $combination->id }}">{{ $combination->meal_type }}</label>
+          </div>
+        @endforeach
+      </div>
+  
+      <button type="button" id="submit-new-food" class="btn btn-primary">Ajouter l'ingrédient</button>
+    </div>
 
-  <button type="submit" class="btn btn-primary">Créer la recette</button>
-</form>
+
+
+
+
+<input class="w-full py-2 px-4 bg-blue-500 text-white font-semibold rounded-lg shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75" type="submit" value="Submit">
+
+
+  </form>
+
+  </x-app-layout>
+
 
 <script>
   
@@ -298,4 +293,3 @@ function searchIngredient(query) {
 
 
 </script>
-</x-app-layout>
