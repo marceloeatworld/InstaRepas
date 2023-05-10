@@ -58,5 +58,16 @@
 </a>
         </div>
 
-        
+        <div class="separator-container">
+            <hr>
+            <span>Vous êtes déjà inscrit ?</span>
+            <hr>
+        </div>
+
+        <div class="signup-container">
+            <a href="{{ route('login') }}"><button type="submit">Se connecter</button></a>
+
+        </div>
+
+
 </x-guest-layout>
