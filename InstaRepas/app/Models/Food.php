@@ -10,6 +10,7 @@ class Food extends Model
     use HasFactory;
     public $timestamps = false;
     protected $table = 'foods';
+    const NUTRITIONAL_TYPES = ['proteins', 'carbohydrates', 'fibers', 'lipids', 'fruits'];
 
     protected $fillable = [
         'name',

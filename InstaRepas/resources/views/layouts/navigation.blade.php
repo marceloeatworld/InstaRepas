@@ -12,6 +12,7 @@
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
                     </x-nav-link>
@@ -20,7 +21,7 @@
                         {{ __('Generer Menu') }}
                     </x-nav-link>
 
-<!--                     <x-nav-link :href="route('recipes.create')" :active="request()->routeIs('recipes.create')">
+<!--<x-nav-link :href="route('recipes.create')" :active="request()->routeIs('recipes.create')">
                         {{ __('Créer une recette') }}
                     </x-nav-link> -->
 
@@ -42,17 +43,17 @@
             </div>
         </button>
     @endif
-      <!-- Login /Register  -->
-      @if (Route::has('login'))
-    <div class="sm:fixed sm:top-0 sm:right-0 p-6 text-right">
-        @auth
-        @else
-            @if (Route::has('register'))
-                <a href="{{ route('login') }}" class="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Connexion/Inscription</a>
-            @endif
-        @endauth
-    </div>
-@endif
+            <!-- Login /Register  -->
+            @if (Route::has('login'))
+            <div class="sm:fixed sm:top-0 sm:right-0 p-6 text-right">
+                @auth
+                @else
+                    @if (Route::has('register'))
+                        <a href="{{ route('login') }}" class="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Connexion/Inscription</a>
+                    @endif
+                @endauth
+            </div>
+        @endif
 
 </x-slot>
 

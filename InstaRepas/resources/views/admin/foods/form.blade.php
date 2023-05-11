@@ -43,6 +43,16 @@
 </div>
 
 <div class="form-group">
+    <label for="nutritional_type">Nutritional Type</label>
+    <select name="nutritional_type" id="nutritional_type" class="form-control" required>
+        @foreach($nutritional_types as $type)
+            <option value="{{ $type }}" {{ (old('nutritional_type', $food->nutritional_type ?? '') == $type) ? 'selected' : '' }}>{{ ucfirst($type) }}</option>
+        @endforeach
+    </select>
+</div>
+
+
+<div class="form-group">
     <label for="is_valid">Validated</label>
     <input type="hidden" name="is_valid" value="0">
     <input type="checkbox" name="is_valid" id="is_valid" class="form-check-input" value="1" {{ (isset($food) && $food->is_valid) ? 'checked' : '' }}>

@@ -11,6 +11,7 @@ use App\Http\Controllers\MealController;
 use App\Http\Controllers\DashboardController;
 use App\Models\UserPreference;
 use App\Models\DietaryRestriction;
+use App\Http\Controllers\FoodCategoryController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -50,6 +51,17 @@ Route::prefix('admin')->middleware(['auth', 'admin'])->group(function () {
     Route::put('/users/{user}/points', [DashboardController::class, 'updatePoints'])->name('admin.users.updatePoints');
     Route::delete('/users/{user}', [DashboardController::class, 'destroy'])->name('admin.users.destroy');
     
+    // Gérer les catégories
+    Route::resource('/food-categories', FoodCategoryController::class)->names([
+        'index' => 'admin.food-categories.index',
+        'create' => 'admin.food-categories.create',
+        'store' => 'admin.food-categories.store',
+        'show' => 'admin.food-categories.show',
+        'edit' => 'admin.food-categories.edit',
+        'update' => 'admin.food-categories.update',
+        'destroy' => 'admin.food-categories.destroy',
+]);
+
 });
 
 //recettes accecible a tous
