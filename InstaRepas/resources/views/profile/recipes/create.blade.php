@@ -1,295 +1,214 @@
-<x-app-layout>
-  <h1 class="mb-5">Ajouter une recette</h1>
 
-
-  <form method="POST" action="{{ route('recipes.store') }}" enctype="multipart/form-data">
-    @csrf
-
-
-  <div class="form-group">
-    <label for="title">Titre</label>
-    <input type="text" name="title" id="title" class="form-control @error('title') is-invalid @enderror" value="{{ old('title') }}" required>
-    @error('title')
-      <span class="invalid-feedback">{{ $message }}</span>
-    @enderror
-  </div>
-
-  <div class="form-group">
-    <label for="description">Description</label>
-    <textarea name="description" id="description" class="form-control @error('description') is-invalid @enderror" required>{{ old('description') }}</textarea>
-    @error('description')
-      <span class="invalid-feedback">{{ $message }}</span>
-    @enderror
-  </div>
-
-  <div class="form-group">
-    <label for="preparation_steps">Étapes de préparation</label>
-    <textarea name="preparation_steps" id="preparation_steps" class="form-control @error('preparation_steps') is-invalid @enderror" required>{{ old('preparation_steps') }}</textarea>
-    @error('preparation_steps')
-      <span class="invalid-feedback">{{ $message }}</span>
-    @enderror
-  </div>
-
-  <div class="form-group">
-    <label for="preparation_time">Temps de préparation (en minutes)</label>
-    <input type="number" name="preparation_time" id="preparation_time" class="form-control @error('preparation_time') is-invalid @enderror" value="{{ old('preparation_time') }}" required>
-    @error('preparation_time')
-      <span class="invalid-feedback">{{ $message }}</span>
-    @enderror
-  </div>
-
-  <div class="form-group">
-    <label for="cooking_time">Temps de cuisson (en minutes)</label>
-    <input type="number" name="cooking_time" id="cooking_time" class="form-control @error('cooking_time') is-invalid @enderror" value="{{ old('cooking_time') }}" required>
-    @error('cooking_time')
-      <span class="invalid-feedback">{{ $message }}</span>
-    @enderror
-  </div>
-
-  <div class="form-group">
-    <label for="servings">Nombre de portions</label>
-    <input type="number" name="servings" id="servings" class="form-control @error('servings') is-invalid @enderror" value="{{ old('servings') }}" required>
-    @error('servings')
-      <span class="invalid-feedback">{{ $message }}</span>
-    @enderror
-  </div>
-
-  <div class="form-group">
-    <label for="recipe_category_id">Catégorie</label>
-    <select name="recipe_category_id" id="recipe_category_id" class="form-control @error('recipe_category_id') is-invalid @enderror" required>
-      <option value="">Sélectionnez une catégorie</option>
-      @foreach($categories as $category)
-        <option value="{{ $category->id }}" {{ old('recipe_category_id') == $category->id ? 'selected' : '' }}>{{ $category->name }}</option>
-      @endforeach
+    <h1>Create a Recipe</h1>
+    <form method="post" action="{{ route('recipes.store') }}" enctype="multipart/form-data">
+        @csrf
+        <div>
+            <label>Title</label>
+            <input type="text" name="title" required>
+        </div>
+        <div>
+            <label>Description</label>
+            <textarea name="description" required></textarea>
+        </div>
+        <div>
+            <label>Preparation Steps</label>
+            <textarea name="preparation_steps" required></textarea>
+        </div>
+        <div>
+            <label>Preparation Time (minutes)</label>
+            <input type="number" name="preparation_time" required>
+        </div>
+        <div>
+            <label>Cooking Time (minutes)</label>
+            <input type="number" name="cooking_time" required>
+        </div>
+        <div>
+            <label>Servings</label>
+            <input type="number" name="servings" required>
+        </div>
+        <div>
+    <label>Meal Category</label>
+    <select name="meal_category_id" required>
+        @foreach($recipeCategories as $category)
+            <option value="{{ $category->id }}">{{ $category->name }}</option>
+        @endforeach
     </select>
-    @error('recipe_category_id')
-      <span class="invalid-feedback">{{ $message }}</span>
-    @enderror
-  </div>
-
-  <div class="form-group">
-    <label for="image">Image</label>
-    <input type="file" name="image" id="image" class="form-control @error('image') is-invalid @enderror">
-    @error('image')
-      <span class="invalid-feedback">{{ $message }}</span>
-    @enderror
-  </div>
-
-  <div class="form-group">
-    <label for="foods">Ingrédients</label>
-    <input type="text" id="food-search" class="form-control" placeholder="Sélectionnez un ingrédient">
-    <div id="food-search-results" class="list-group mt-2" style="display: none;"></div>
-    <select name="unit_of_measure" id="unit_of_measure" class="form-control mt-2">
-      <option value="">Sélectionnez une unité de mesure</option>
-      @foreach($units_of_measure as $unit_of_measure)
-          <option value="{{ $unit_of_measure->id }}">{{ $unit_of_measure->unit_name }}</option>
-      @endforeach
-    </select>
-    <button type="button" id="add-food" class="btn btn-primary mt-2">Ajouter</button>
-    <ul id="foods-list" class="list-group mt-2"></ul>
-  </div>
-
-
-  </select>
-  <button type="button" id="add-food" class="btn btn-primary mt-2">Ajouter</button>
-  <button type="button" id="add-new-food" class="btn btn-secondary mt-2">Ajouter un nouvel ingrédient</button>
-  <ul id="foods-list" class="list-group mt-2"></ul>
-  <div class="mt-3">
-    <label for="ingredient-search">Rechercher un ingrédient</label>
-    <input type="text" name="ingredient-search" id="ingredient-search" class="form-control">
-  </div>
 </div>
 
+<div>
+    <label>Image</label>
+    <input type="file" name="image" id="image" required>
+</div>
+<div>
+    <label>Image Preview</label>
+    <img id="image_preview" src="#" alt="Image Preview" style="width: 200px; height: auto; display: none;">
+</div>
 
-
-<div id="new-food-form-container" class="d-none mt-3">
-      <h3>Ajouter un nouvel ingrédient</h3>
-  
-      <div class="form-group">
-        <label for="name">Nom</label>
-        <input type="text" name="name" id="name" class="form-control" value="{{ old('name') }}" required>
-      </div>
-  
-      <div class="form-group">
-        <label for="category_id">Catégorie</label>
-        <select name="category_id" id="category_id" class="form-control" required>
-          @foreach($categories as $category)
-            <option value="{{ $category->id }}">{{ $category->name }}</option>
-          @endforeach
-        </select>
-      </div>
-  
-      <div class="form-group">
-        <label for="restrictions">Restrictions alimentaires</label><br>
-        @foreach($restrictions as $restriction)
-          <div class="form-check form-check-inline">
-            <input class="form-check-input" type="checkbox" name="restrictions[]" value="{{ $restriction->id }}">
-            <label class="form-check-label" for="restriction_{{ $restriction->id }}">{{ $restriction->name }}</label>
-          </div>
-        @endforeach
-      </div>
-  
-      <div class="form-group">
-        <label for="seasons">Saisons</label><br>
-        @foreach($seasons as $season)
-          <div class="form-check form-check-inline">
-            <input class="form-check-input" type="checkbox" name="seasons[]" value="{{ $season->id }}">
-            <label class="form-check-label" for="season_{{ $season->id }}">{{ $season->season_name }}</label>
-          </div>
-        @endforeach
-      </div>
-  
-      <div class="form-group">
-        <label for="meal_combinations">Combinations de repas</label><br>
-        @foreach($meal_combinations as $combination)
-          <div class="form-check form-check-inline">
-            <input class="form-check-input" type="checkbox" name="meal_combinations[]" value="{{ $combination->id }}">
-            <label class="form-check-label" for="meal_combination_{{ $combination->id }}">{{ $combination->meal_type }}</label>
-          </div>
-        @endforeach
-      </div>
-  
-      <button type="button" id="submit-new-food" class="btn btn-primary">Ajouter l'ingrédient</button>
+<div id="create-ingredient-form" style="display:none;">
+    <h3>Create new ingredient</h3>
+    <div class="form-group">
+        <label for="new_name">Name</label>
+        <input type="text" name="new_name" id="new_name" class="form-control" required>
     </div>
+    <div class="form-group">
+    <label for="new_category_id">Category</label>
+    <select name="new_category_id" id="new_category_id" class="form-control" required>
+        @foreach($categories as $category)
+            <option value="{{ $category->id }}">{{ $category->name }}</option>
+        @endforeach
+    </select>
+</div>
 
+<div class="form-group">
+    <label for="new_restrictions">Dietary Restrictions</label><br>
+    @foreach($restrictions as $restriction)
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" name="new_restrictions[]" id="new_restriction_{{ $restriction->id }}" value="{{ $restriction->id }}">
+            <label class="form-check-label" for="new_restriction_{{ $restriction->id }}">{{ $restriction->name }}</label>
+        </div>
+    @endforeach
+</div>
 
+<div class="form-group">
+    <label for="new_seasons">Seasons</label><br>
+    @foreach($seasons as $season)
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" name="new_seasons[]" id="new_season_{{ $season->id }}" value="{{ $season->id }}">
+            <label class="form-check-label" for="new_season_{{ $season->id }}">{{ $season->season_name }}</label>
+        </div>
+    @endforeach
+</div>
 
+<div class="form-group">
+    <label for="new_meal_combinations">Meal Combinations</label><br>
+    @foreach($combinations as $combination)
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" name="new_meal_combinations[]" id="new_meal_combination_{{ $combination->id }}" value="{{ $combination->id }}">
+            <label class="form-check-label" for="new_meal_combination_{{ $combination->id }}">{{ $combination->meal_type }}</label>
+        </div>
+    @endforeach
+</div>
+<button type="button" id="submit-new-ingredient" class="btn btn-primary">Add Ingredient</button>
+</div>
 
+</div>
 
-<input class="w-full py-2 px-4 bg-blue-500 text-white font-semibold rounded-lg shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75" type="submit" value="Submit">
-
-
-  </form>
-
-  </x-app-layout>
-
-
+<h2>Ingredients</h2>
+<div id="ingredients">
+    <!-- Dynamically add ingredients here -->
+</div>
+<div>
+    <input type="text" id="ingredient-search" placeholder="Search for ingredients">
+    <div id="search-results" style="display: none;"></div>
+</div>
+<div>
+    <button type="button" id="add-ingredient">Add Ingredient</button>
+</div>
+<button type="submit">Create Recipe</button>
+</form>
 <script>
-  
+// Recherche d'ingrédients
+const ingredientSearch = document.getElementById('ingredient-search');
+const searchResults = document.getElementById('search-results');
+const createIngredientForm = document.getElementById('create-ingredient-form');
 
-  document.getElementById('add-food').addEventListener('click', function() {
-  var selectFood = document.getElementById('foods');
-  var optionFood = selectFood.options[selectFood.selectedIndex];
-  var selectUnit = document.getElementById('units_of_measure');
-  var optionUnit = selectUnit.options[selectUnit.selectedIndex];
-  var quantity = prompt('Quantité :');
+ingredientSearch.addEventListener('input', async (event) => {
+    const query = event.target.value;
+    if (query.length < 2) {
+        searchResults.style.display = 'none';
+        createIngredientForm.style.display = 'none';
+        return;
+    }
 
-  var food = {
-    id: optionFood.value,
-    name: optionFood.text,
-    quantity: quantity,
-    unit: optionUnit.value,
-    unit_name: optionUnit.text
-  };
-  foodsList.push(food);
-  updateFoodsList();
+    const response = await fetch('/foods?query=' + query);
+    const foods = await response.json();
+    searchResults.innerHTML = '';
+    foods.forEach(food => {
+        const foodElement = document.createElement('div');
+        foodElement.textContent = food.name;
+        foodElement.style.cursor = 'pointer';
+        foodElement.addEventListener('click', () => {
+            // Add selected ingredient to the form
+            addIngredient(food);
+            // Hide search results
+            searchResults.style.display = 'none';
+            createIngredientForm.style.display = 'none';
+        });
+        searchResults.appendChild(foodElement);
+    });
+
+    searchResults.style.display = foods.length ? 'block' : 'none';
+    createIngredientForm.style.display = foods.length ? 'none' : 'block';
 });
 
+// Ajouter un ingrédient
+function addIngredient(food = null) {
+    const ingredientsDiv = document.getElementById('ingredients');
+    const newIngredient = document.createElement('div');
 
-
-function updateFoodsList() {
-  var list = document.getElementById('foods-list');
-  list.innerHTML = '';
-  foodsList.forEach(function(food) {
-    var item = document.createElement('li');
-    item.classList.add('list-group-item');
-    item.textContent = food.name + ' (' + food.quantity + ' ' + food.unit_name + ')';
-    list.appendChild(item);
-  });
+    newIngredient.innerHTML = `
+        <div>
+            <label>Ingredient Name</label>
+            <input type="text" name="ingredients[]" value="${food ? food.name : ''}" required>
+        </div>
+        <div>
+            <label>Quantity</label>
+            <input type="number" name="quantities[]" required>
+        </div>
+        <div>
+            <label>Unit of Measure</label>
+            <select name="units_of_measure[]">
+                @foreach($units as $unit)
+                    <option value="{{ $unit->id }}">{{ $unit->unit_name }}</option>
+                @endforeach
+            </select>
+        </div>
+    `;
+    ingredientsDiv.appendChild(newIngredient);
 }
 
-
-
-  // Code pour gérer l'autocomplétion des aliments
-  var foodSearch = document.getElementById('food-search');
-  var foodSearchResults = document.getElementById('food-search-results');
-
-  foodSearch.addEventListener('input', function() {
-    if (foodSearch.value.length > 1) {
-      searchFoods(foodSearch.value).then(function(foods) {
-        foodSearchResults.innerHTML = '';
-        foods.forEach(function(food) {
-          var item = document.createElement('div');
-          item.classList.add('list-group-item');
-          item.textContent = food.name;
-          item.addEventListener('click', function() {
-            foodSearch.value = food.name;
-            foodSearchResults.style.display = 'none';
-          });
-          foodSearchResults.appendChild(item);
-        });
-        foodSearchResults.style.display = 'block';
-      });
-    } else {
-      foodSearchResults.style.display = 'none';
-    }
-  });
-
-  document.body.addEventListener('click', function(event) {
-    if (event.target !== foodSearch && event.target !== foodSearchResults) {
-      foodSearchResults.style.display = 'none';
-    }
-  });
-
-  document.getElementById('add-food').addEventListener('click', function() {
-    var select = document.getElementById('foods');
-    var option = select.options[select.selectedIndex];
-    var quantity = prompt('Quantité :');
-    var unit = prompt('Unité de mesure :');
-    var food = {
-      id: option.value,
-      name: option.text,
-      quantity: quantity,
-      unit: unit
-    };
-    foodsList.push(food);
-    updateFoodsList();
-  });
-
-  document.getElementById('add-new-food').addEventListener('click', function() {
-  var formContainer = document.getElementById('new-food-form-container');
-  formContainer.classList.toggle('d-none');
+document.getElementById('add-ingredient').addEventListener('click', () => {
+    addIngredient();
 });
 
-document.getElementById('ingredient-search').addEventListener('input', function() {
-  if (this.value.length >= 2) {
-    searchIngredient(this.value);
-  }
+// Soumettre le formulaire de création d'un nouvel ingrédient
+document.getElementById('submit-new-ingredient').addEventListener('click', async () => {
+    const name = document.getElementById('new_name').value;
+    const categoryId = document.getElementById('new_category_id').value;
+    const restrictions = Array.from(document.querySelectorAll('input[name="new_restrictions[]"]:checked')).map(input => input.value);
+    const seasons = Array.from(document.querySelectorAll('input[name="new_seasons[]"]:checked')).map(input => input.value);
+    const mealCombinations = Array.from(document.querySelectorAll('input[name="new_meal_combinations[]"]:checked')).map(input => input.value);
+
+    const response = await fetch('/foods', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({name, categoryId, restrictions, seasons, mealCombinations})
+    });
+
+    const newFood = await response.json();
+    addIngredient(newFood);
+
+    // Réinitialiser le formulaire
+    document.getElementById('new_name').value = '';
+    document.getElementById('new_category_id').value = '';
+    document.querySelectorAll('input[name="new_restrictions[]"]').forEach(input => input.checked = false);
+    document.querySelectorAll('input[name="new_seasons[]"]').forEach(input => input.checked = false);
+    document.querySelectorAll('input[name="new_meal_combinations[]"]').forEach(input => input.checked = false);
+    createIngredientForm.style.display = 'none';
 });
-document.getElementById('food-search').addEventListener('input', function() {
-    if (this.value.length >= 2) {
-      searchIngredient(this.value);
-    }
-  });
-function searchIngredient(query) {
-    var apiUrl = '/api/foods?search=' + encodeURIComponent(query);
-
-    fetch(apiUrl)
-      .then(function(response) {
-        return response.json();
-      })
-      .then(function(ingredients) {
-        var resultsContainer = document.getElementById('food-search-results');
-        resultsContainer.innerHTML = '';
-        ingredients.forEach(function(ingredient) {
-          var item = document.createElement('div');
-          item.classList.add('list-group-item');
-          item.textContent = ingredient.name;
-          item.addEventListener('click', function() {
-            document.getElementById('food-search').value = ingredient.name;
-            var food = {
-              id: ingredient.id,
-              name: ingredient.name
-            };
-            foodsList.push(food);
-            updateFoodsList();
-            resultsContainer.style.display = 'none';
-          });
-          resultsContainer.appendChild(item);
-        });
-        resultsContainer.style.display = ingredients.length > 0 ? 'block' : 'none';
-      });
-  }
 
 
-</script>
+
+
+        //prévisualiser l'image
+        document.getElementById('image').addEventListener('change', function(event) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            document.getElementById('image_preview').setAttribute('src', e.target.result);
+            document.getElementById('image_preview').style.display = 'block';
+        }
+        reader.readAsDataURL(event.target.files[0]);
+    });
+    </script>

@@ -5,7 +5,7 @@
             <div class="flex">
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center">
-                    <a href="{{ route('dashboard') }}">
+                    <a href="/">
                         <x-application-logo class="block h-9 w-auto fill-current text-gray-800" />
                     </a>
                 </div>
@@ -20,9 +20,9 @@
                         {{ __('Generer Menu') }}
                     </x-nav-link>
 
-                    <x-nav-link :href="route('recipes.create')" :active="request()->routeIs('recipes.create')">
+<!--                     <x-nav-link :href="route('recipes.create')" :active="request()->routeIs('recipes.create')">
                         {{ __('Créer une recette') }}
-                    </x-nav-link>
+                    </x-nav-link> -->
 
                 </div>
             </div>
@@ -42,6 +42,18 @@
             </div>
         </button>
     @endif
+      <!-- Login /Register  -->
+      @if (Route::has('login'))
+    <div class="sm:fixed sm:top-0 sm:right-0 p-6 text-right">
+        @auth
+        @else
+            @if (Route::has('register'))
+                <a href="{{ route('login') }}" class="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Connexion/Inscription</a>
+            @endif
+        @endauth
+    </div>
+@endif
+
 </x-slot>
 
 
@@ -113,7 +125,9 @@
                         {{ __('Log Out') }}
                     </x-responsive-nav-link>
                 </form>
+                
             </div>
+            
         </div>
     </div>
 </nav>
