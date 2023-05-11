@@ -82,5 +82,10 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->belongsToMany(DietaryRestriction::class, 'user_preferences', 'user_id', 'preference_id');
     }
 
+    public function isAdmin()
+{
+    return $this->is_admin;
+}
+
 
 }

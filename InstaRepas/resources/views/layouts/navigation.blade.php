@@ -13,9 +13,18 @@
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
 
-                    <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                        {{ __('Dashboard') }}
-                    </x-nav-link>
+                    @if (Auth::check()) <!-- Vérifie si un utilisateur est co -->
+                    @if(Auth::user()->isAdmin()) <!-- Vérifie si c un admin -->
+                        <x-nav-link :href="route('admin.index')" :active="request()->routeIs('admin.index')">
+                            {{ __('Dashboard') }}
+                        </x-nav-link>
+                    @else
+                        <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
+                            {{ __('Dashboard') }}
+                        </x-nav-link>
+                    @endif
+                @endif
+
 
                     <x-nav-link :href="route('generate')" :active="request()->routeIs('generate')">
                         {{ __('Generer Menu') }}
@@ -28,10 +37,23 @@
                 </div>
             </div>
 
+      <!-- Login /Register  -->
+     @if (Route::has('login'))
+    <div class="sm:fixed sm:top-0 sm:right-0 p-6 text-right">
+        @auth
+        @else
+            @if (Route::has('register'))
+                <a href="{{ route('login') }}" class="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Connexion/Inscription</a>
+            @endif
+        @endauth
+    </div>
+        @endif
+
             <!-- Settings Dropdown -->
             <div class="hidden sm:flex sm:items-center sm:ml-6">
                 <x-dropdown align="right" width="48">
                 <x-slot name="trigger">
+
     @if (Auth::user())
         <button class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150">
             <div>{{ Auth::user()->username }}</div>
@@ -43,17 +65,7 @@
             </div>
         </button>
     @endif
-            <!-- Login /Register  -->
-            @if (Route::has('login'))
-            <div class="sm:fixed sm:top-0 sm:right-0 p-6 text-right">
-                @auth
-                @else
-                    @if (Route::has('register'))
-                        <a href="{{ route('login') }}" class="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Connexion/Inscription</a>
-                    @endif
-                @endauth
-            </div>
-        @endif
+
 
 </x-slot>
 
@@ -126,9 +138,9 @@
                         {{ __('Log Out') }}
                     </x-responsive-nav-link>
                 </form>
-                
+
             </div>
-            
+
         </div>
     </div>
 </nav>
