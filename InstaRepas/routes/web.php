@@ -50,6 +50,7 @@ Route::prefix('admin')->middleware(['auth', 'admin'])->group(function () {
     Route::put('/users/{user}/admin', [DashboardController::class, 'toggleAdmin'])->name('admin.users.toggleAdmin');
     Route::put('/users/{user}/points', [DashboardController::class, 'updatePoints'])->name('admin.users.updatePoints');
     Route::delete('/users/{user}', [DashboardController::class, 'destroy'])->name('admin.users.destroy');
+
     
     // Gérer les catégories
     Route::resource('/food-categories', FoodCategoryController::class)->names([
@@ -61,6 +62,7 @@ Route::prefix('admin')->middleware(['auth', 'admin'])->group(function () {
         'update' => 'admin.food-categories.update',
         'destroy' => 'admin.food-categories.destroy',
 ]);
+
 
 });
 
