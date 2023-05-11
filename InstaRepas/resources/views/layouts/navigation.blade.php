@@ -12,6 +12,7 @@
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+
                     @if (Auth::check()) <!-- Vérifie si un utilisateur est co -->
                     @if(Auth::user()->isAdmin()) <!-- Vérifie si c un admin -->
                         <x-nav-link :href="route('admin.index')" :active="request()->routeIs('admin.index')">
@@ -29,7 +30,7 @@
                         {{ __('Generer Menu') }}
                     </x-nav-link>
 
-<!--                     <x-nav-link :href="route('recipes.create')" :active="request()->routeIs('recipes.create')">
+<!--<x-nav-link :href="route('recipes.create')" :active="request()->routeIs('recipes.create')">
                         {{ __('Créer une recette') }}
                     </x-nav-link> -->
 

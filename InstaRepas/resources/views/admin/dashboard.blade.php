@@ -10,6 +10,7 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
         <nav>
         <ul>
+            <li><a href="{{ route('admin.food-categories.index') }}">Categories</a></li>
             <li><a href="{{ route('admin.foods.index') }}">Food</a></li>
             <li><a href="{{ route('admin.foods.create') }}">Ajouter Food</a></li>
             <li><a href="{{ route('admin.users.index') }}">Users</a></li>
