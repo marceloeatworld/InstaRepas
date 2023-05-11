@@ -47,4 +47,4 @@
         @endforeach
     </tbody>
 </table>
-<x-app-layout>
+</x-app-layout>
