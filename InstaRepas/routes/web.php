@@ -49,7 +49,7 @@ Route::prefix('admin')->middleware(['auth', 'admin'])->group(function () {
     Route::put('/users/{user}/admin', [DashboardController::class, 'toggleAdmin'])->name('admin.users.toggleAdmin');
     Route::put('/users/{user}/points', [DashboardController::class, 'updatePoints'])->name('admin.users.updatePoints');
     Route::delete('/users/{user}', [DashboardController::class, 'destroy'])->name('admin.users.destroy');
-    
+
 });
 
 //recettes accecible a tous
