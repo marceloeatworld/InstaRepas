@@ -27,8 +27,10 @@
 
 
                     <x-nav-link :href="route('generate')" :active="request()->routeIs('generate')">
-                        {{ __('Generer Menu') }}
+                        {{ __('Génerer Menu') }}
                     </x-nav-link>
+
+
 
 <!--<x-nav-link :href="route('recipes.create')" :active="request()->routeIs('recipes.create')">
                         {{ __('Créer une recette') }}
@@ -38,16 +40,18 @@
             </div>
 
       <!-- Login /Register  -->
-     @if (Route::has('login'))
-    <div class="sm:fixed sm:top-0 sm:right-0 p-6 text-right">
-        @auth
-        @else
-            @if (Route::has('register'))
-                <a href="{{ route('login') }}" class="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Connexion/Inscription</a>
+                @if (Route::has('login'))
+                @auth
+                @else
+                    @if (Route::has('register'))
+                        <x-nav-link :href="route('login')" :active="request()->routeIs('login')">
+                            {{ __('Connexion/Inscription') }}
+                        </x-nav-link>
+                    @endif
+                @endauth
             @endif
-        @endauth
-    </div>
-        @endif
+
+
 
             <!-- Settings Dropdown -->
             <div class="hidden sm:flex sm:items-center sm:ml-6">

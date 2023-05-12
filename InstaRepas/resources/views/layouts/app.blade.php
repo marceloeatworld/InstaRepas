@@ -16,6 +16,36 @@
         <link href="css/welcome.css" rel="stylesheet">
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
+
+        <style>
+            /* Admin Menu Styles */
+            .admin-menu {
+                list-style: none;
+                padding: 0;
+                margin: 0;
+            }
+
+            .admin-menu li {
+                display: inline-block;
+                margin-right: 10px;
+            }
+
+            .admin-menu li a {
+                text-decoration: none;
+                padding: 5px 10px;
+                border-radius: 3px;
+                background-color: #f0f0f0;
+                color: #333;
+            }
+
+            .admin-menu li a:hover {
+                background-color: #ddd;
+            }
+
+            /* Additional Admin Styles */
+            /* Add your custom styles for the admin theme here */
+
+        </style>
     </head>
     <body class="font-sans antialiased">
         <div class="min-h-screen bg-gray-100">
