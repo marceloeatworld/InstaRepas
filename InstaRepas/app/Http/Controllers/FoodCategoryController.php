@@ -22,33 +22,29 @@ class FoodCategoryController extends Controller
     public function store(Request $request)
     {
         $category = FoodCategory::create($request->all());
-        return redirect()->route('food-categories.index');
-    }
-    
-    public function edit(FoodCategory $category)
-    {
-        return view('admin.food-categories.edit', compact('category'));
-    }
-    
-    public function update(Request $request, FoodCategory $category)
-    {
-        $category->update($request->all());
         return redirect()->route('admin.food-categories.index');
     }
-    
+    public function edit(FoodCategory $food_category)
+{
+    return view('admin.food-categories.edit', compact('food_category'));
+}
 
-    public function show(FoodCategory $category)
-    {
-        return view('admin.food-categories.show', compact('category'));
-    }
-    
+public function update(Request $request, FoodCategory $food_category)
+{
+    $food_category->update($request->all());
+    return redirect()->route('admin.food-categories.index');
+}
 
+public function show(FoodCategory $food_category)
+{
+    return view('admin.food-categories.show', compact('food_category'));
+}
 
-    public function destroy(FoodCategory $category)
-    {
-        $category->delete();
-    
-        return redirect()->route('admin.food-categories.index');
-    }
+public function destroy(FoodCategory $food_category)
+{
+    $food_category->delete();
+    return redirect()->route('admin.food-categories.index');
+}
+
     
 }
