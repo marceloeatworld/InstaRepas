@@ -12,6 +12,7 @@ use App\Models\MealCombination;
 use App\Models\Season;
 use Illuminate\Http\Request;
 
+
 class FoodController extends Controller
 {
     public function index(Request $request)
@@ -47,7 +48,8 @@ class FoodController extends Controller
         $restrictions = DietaryRestriction::all();
         $seasons = Season::all();
         $meal_combinations = MealCombination::all();
-        return view('admin.foods.create', compact('categories', 'restrictions', 'seasons', 'meal_combinations'));
+        $nutritional_types = Food::NUTRITIONAL_TYPES;
+        return view('admin.foods.create', compact('categories', 'restrictions', 'seasons', 'meal_combinations', 'nutritional_types'));
     }
 
     public function store(Request $request)
@@ -78,12 +80,12 @@ class FoodController extends Controller
         $restrictions = DietaryRestriction::all();
         $seasons = Season::all();
         $meal_combinations = MealCombination::all();
-    
+        $nutritional_types = Food::NUTRITIONAL_TYPES;
         // Récupérer les CombinationFood associées au Food spécifié
         $combination_foods = CombinationFood::with('combination')->where('food_id', $food->id)->get();
     
         // Passer les données à la vue et retourner la vue
-        return view('admin.foods.edit', compact('food', 'categories', 'restrictions', 'seasons', 'meal_combinations', 'combination_foods'));
+        return view('admin.foods.edit', compact('food', 'categories', 'restrictions', 'seasons', 'meal_combinations', 'combination_foods', 'nutritional_types'));
     }
 
     public function update(Request $request, Food $food)
@@ -118,4 +120,5 @@ class FoodController extends Controller
     
         return redirect()->route('admin.foods.index');
     }
+
 }

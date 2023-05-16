@@ -12,25 +12,52 @@
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                        {{ __('Dashboard') }}
-                    </x-nav-link>
+
+                    @if (Auth::check()) <!-- Vérifie si un utilisateur est co -->
+                    @if(Auth::user()->isAdmin()) <!-- Vérifie si c un admin -->
+                        <x-nav-link :href="route('admin.index')" :active="request()->routeIs('admin.index')">
+                            {{ __('Dashboard') }}
+                        </x-nav-link>
+                    @else
+                        <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
+                            {{ __('Dashboard') }}
+                        </x-nav-link>
+                    @endif
+                @endif
+
 
                     <x-nav-link :href="route('generate')" :active="request()->routeIs('generate')">
-                        {{ __('Generer Menu') }}
+                        {{ __('Génerer Menu') }}
                     </x-nav-link>
 
-                    <x-nav-link :href="route('recipes.create')" :active="request()->routeIs('recipes.create')">
+
+
+<!--<x-nav-link :href="route('recipes.create')" :active="request()->routeIs('recipes.create')">
                         {{ __('Créer une recette') }}
-                    </x-nav-link>
+                    </x-nav-link> -->
 
                 </div>
             </div>
+
+      <!-- Login /Register  -->
+                @if (Route::has('login'))
+                @auth
+                @else
+                    @if (Route::has('register'))
+                        <x-nav-link :href="route('login')" :active="request()->routeIs('login')">
+                            {{ __('Connexion/Inscription') }}
+                        </x-nav-link>
+                    @endif
+                @endauth
+            @endif
+
+
 
             <!-- Settings Dropdown -->
             <div class="hidden sm:flex sm:items-center sm:ml-6">
                 <x-dropdown align="right" width="48">
                 <x-slot name="trigger">
+
     @if (Auth::user())
         <button class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150">
             <div>{{ Auth::user()->username }}</div>
@@ -42,6 +69,8 @@
             </div>
         </button>
     @endif
+
+
 </x-slot>
 
 
@@ -113,7 +142,9 @@
                         {{ __('Log Out') }}
                     </x-responsive-nav-link>
                 </form>
+
             </div>
+
         </div>
     </div>
 </nav>
