@@ -38,7 +38,7 @@ return [
         'contains_fish' => 'Contient du poisson',
         'contains_meat' => 'Contient de la viande',
         'contains_lactose' => 'Contient du lactose',
-        'contains_animal_products' => 'Contient des produits animaux',
+        'contains_animal_products' => 'Contient des produits d\'origine animale',
         'contains_pork' => 'Contient du porc',
     ],
 ];
