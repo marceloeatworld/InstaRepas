@@ -5,6 +5,8 @@
 <div style="display: flex; justify-content: center;">
     <div style="max-width: 600px;">
         <h1 style="text-align: center;">Préférences alimentaires</h1>
+
+        
         <form action="{{ route('generate_meals') }}" method="post">
             @csrf
             <fieldset>
