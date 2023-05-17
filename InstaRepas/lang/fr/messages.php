@@ -6,7 +6,7 @@ return [
         'Fruits' => 'Fruit',
         'Vegetables' => 'Légume',
         'Meat' => 'Viande',
-        'Dairy' => 'Produits laitiers',
+        'Dairy' => 'Produits laitiers d\'origine animale ou alternative',
         'Grains' => 'Céréales',
         'Bread' => 'Pain',
         'Fish' => 'Poisson',
