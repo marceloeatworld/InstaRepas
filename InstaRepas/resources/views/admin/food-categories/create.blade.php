@@ -1,6 +1,10 @@
 <!-- /resources/views/food-categories/create.blade.php -->
 
 <x-app-layout>
+<div class="py-12">
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+
+
     <div class="w-full p-6 border border-gray-200 rounded-lg shadow flex items-center justify-center text-center mb-5" style="background-color: #082f49;">
         <img class="w-16 h-16 rounded-full object-cover" src="{{ asset('images/image.png') }}" alt="Image1">
         <a href="#">

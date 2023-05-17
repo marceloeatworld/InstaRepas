@@ -1,14 +1,10 @@
 <!-- /resources/views/food-categories/index.blade.php -->
 <x-app-layout>
 
-    <div class="py-12">
+<div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-        <nav>
-        <ul>
-            <li><a href="{{ route('admin.foods.index') }}">Food</a></li>
-            <li><a href="{{ route('admin.foods.create') }}">Ajouter Food</a></li>
-        </ul>
-    </nav>
+
+
 
     <div class="w-full p-6 border border-gray-200 rounded-lg shadow flex items-center justify-center text-center" style="background-color: #082f49;">
         <img class="w-16 h-16 rounded-full object-cover" src="{{ asset('images/image.png') }}" alt="Image1">
@@ -46,13 +42,14 @@
                 <td class="px-6 py-4">
                     <a href="{{ route('admin.food-categories.edit', $category) }}" class="text-white bg-gradient-to-r from-green-400 via-green-500 to-green-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-green-800 shadow-lg shadow-green-500/50 dark:shadow-lg dark:shadow-green-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">Modifier</a>
 
-                <form action="{{ route('admin.food-categories.destroy', $category) }}" method="POST" style="display: inline-block;">
+                    <form action="{{ route('admin.food-categories.destroy', $category) }}" method="POST" style="display: inline-block;" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cette catégorie ?');">
 
-                            @csrf
-                            @method('DELETE')
-                            <button type="button" class="text-white bg-gradient-to-r from-red-400 via-red-500 to-red-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 shadow-lg shadow-red-500/50 dark:shadow-lg dark:shadow-red-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">Supprimer</button>
+@csrf
+@method('DELETE')
+<button type="submit" class="text-white bg-gradient-to-r from-red-400 via-red-500 to-red-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 shadow-lg shadow-red-500/50 dark:shadow-lg dark:shadow-red-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">Supprimer</button>
 
-                        </form>
+</form>
+
                 </td>
             </tr>
             @endforeach
