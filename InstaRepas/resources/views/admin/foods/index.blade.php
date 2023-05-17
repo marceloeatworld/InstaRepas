@@ -15,7 +15,7 @@
 
 
 
-
+    <div class="py-12">
     <div class="col-md-4">
 
         <form action="{{ route('admin.foods.index') }}" method="GET" class="mb-3">
@@ -55,7 +55,7 @@
 
 
     </div>
-
+    <div class="py-12">
 
 
 <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
