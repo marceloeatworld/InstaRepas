@@ -7,7 +7,7 @@
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-        <h2>Create Food</h2>
+ 
     <form action="{{ route('admin.foods.store') }}" method="post">
         @csrf
         @include('admin.foods.form')
