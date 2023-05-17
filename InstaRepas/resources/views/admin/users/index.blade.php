@@ -13,7 +13,7 @@
         </a>
         <img class="w-16 h-16 rounded-full object-cover" src="{{ asset('images/image.png') }}" alt="Image2">
     </div>
-
+    <div class="py-12">
 
     <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
         <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
@@ -21,7 +21,7 @@
                 <th scope="col" class="px-6 py-3">ID</th>
                 <th scope="col" class="px-6 py-3">Username</th>
                 <th scope="col" class="px-6 py-3">Email</th>
-                <th scope="col" class="px-6 py-3">Is Admin</th>
+                <th scope="col" class="px-6 py-3">Est Admin</th>
                 <th scope="col" class="px-6 py-3">Points</th>
                 <th scope="col" class="px-6 py-3">Actions</th>
             </tr>
@@ -40,7 +40,7 @@
                             @csrf
                             @method('PUT')
                             <input type="hidden" name="is_admin" value="{{ $user->is_admin ? 0 : 1 }}">
-                            <button type="submit" class="text-white bg-gradient-to-r from-purple-500 to-pink-500 hover:bg-gradient-to-l focus:ring-4 focus:outline-none focus:ring-purple-200 dark:focus:ring-purple-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">{{ $user->is_admin ? 'Yes' : 'No' }}</button>
+                            <button type="submit" class="text-white bg-gradient-to-r from-purple-500 to-pink-500 hover:bg-gradient-to-l focus:ring-4 focus:outline-none focus:ring-purple-200 dark:focus:ring-purple-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">{{ $user->is_admin ? 'Oui' : 'Non' }}</button>
                         </form>
                     </td>
                     <td class="px-6 py-4">
