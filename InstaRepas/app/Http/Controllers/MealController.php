@@ -125,7 +125,9 @@ class MealController extends Controller
 
     private function generateBreakfast($foods)
     {
-        $proteinFood = $foods->where('category.name', 'Dairy')->count() > 0 ? $foods->where('category.name', 'Dairy')->random() : null;
+        $proteinCategories = ['Dairy', 'Eggs'];
+        $proteinFood = $foods->whereIn('category.name', $proteinCategories)->count() > 0 ? $foods->whereIn('category.name', $proteinCategories)->random() : null;
+
 
         
         return [

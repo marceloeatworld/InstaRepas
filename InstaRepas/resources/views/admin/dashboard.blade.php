@@ -5,11 +5,12 @@
         <img class="w-16 h-16 rounded-full object-cover" src="{{ asset('images/image.png') }}" alt="Image1">
         <a href="#">
             <h5 class="mb-2 text-2xl font-bold tracking-tight text-white mx-4 tracking-wider">Bienvenue sur la page d'administration</h5>
+            
         </a>
         <img class="w-16 h-16 rounded-full object-cover" src="{{ asset('images/image.png') }}" alt="Image2">
     </div>
 
-
+    <p class="text-center border border-gray-300 p-4 text-red-500" >Veuillez éviter de modifier les noms des catégories qui sont actuellement en anglais.</p>
 
 
 
