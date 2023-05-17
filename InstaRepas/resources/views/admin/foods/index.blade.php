@@ -13,7 +13,11 @@
         <img class="w-16 h-16 rounded-full object-cover" src="{{ asset('images/image.png') }}" alt="Image2">
     </div>
 
-
+    @if(Session::has('success'))
+        <x-yellow-button >
+                    {{ Session::get('success') }}
+                </x-yellow-button>
+            @endif
 
     <div class="py-12">
     <div class="col-md-4">
@@ -39,7 +43,7 @@
                             <option value="">Tout</option>
                             @foreach($categories as $category)
                             <option value="{{ $category->id }}" {{ (old('category_id', $food->category_id ?? '') == $category->id) ? 'selected' : '' }}>
-        {{ __('messages.categories.' . $category->name) }}
+                                                                                                     {{ __('messages.categories.' . $category->name) }}
     </option>
                             @endforeach
                         </select>
