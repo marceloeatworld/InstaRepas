@@ -41,7 +41,7 @@
             @foreach($categories as $category)
             <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                 <th scope="row" class="text-lg px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                    {{ $category->name }}
+                    {{ __('messages.categories.' . $category->name) }}
                 </th>
                 <td class="px-6 py-4">
                     <a href="{{ route('admin.food-categories.edit', $category) }}" class="text-white bg-gradient-to-r from-green-400 via-green-500 to-green-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-green-800 shadow-lg shadow-green-500/50 dark:shadow-lg dark:shadow-green-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">Modifier</a>
