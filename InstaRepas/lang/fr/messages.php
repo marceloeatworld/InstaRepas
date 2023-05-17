@@ -27,11 +27,11 @@ return [
         'snack' => 'Collation',
     ],
     'nutritional_types' => [
-        'proteins' => 'Protéine',
-        'carbohydrates' => 'Glucide',
-        'lipids' => 'Lipide',
-        'fruits' => 'Fruit',
-        'fibers' => 'Fibre',
+        'proteins' => 'Protéines',
+        'carbohydrates' => 'Glucides complexes',
+        'lipids' => 'Lipides',
+        'fruits' => 'Fruits',
+        'fibers' => 'Fibres',
     ],
     'restrictions' => [
         'contains_gluten' => 'Contient du gluten',

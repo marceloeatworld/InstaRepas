@@ -110,8 +110,10 @@ class FoodController extends Controller
     
         // Mettre à jour les DietaryRestriction associés
         $food->restrictions()->sync($request->input('restrictions', []));
-    
+
+        Session::flash('success', 'Aliment a été modifié avec succès!');
         return redirect()->route('admin.foods.index');
+
     }
 
     public function destroy(Food $food)
@@ -127,7 +129,7 @@ class FoodController extends Controller
     
         // Delete the food
         $food->delete();
-    
+        Session::flash('success', 'Aliment a été supprimer avec succès!');
         return redirect()->route('admin.foods.index');
     }
 

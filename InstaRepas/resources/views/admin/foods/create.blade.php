@@ -4,9 +4,9 @@
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
         @if(Session::has('success'))
-                <div class="alert alert-success">
+        <x-yellow-button >
                     {{ Session::get('success') }}
-                </div>
+                </x-yellow-button>
             @endif
             <br>
     <form action="{{ route('admin.foods.store') }}" method="post">
