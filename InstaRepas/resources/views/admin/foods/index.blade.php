@@ -14,73 +14,77 @@
         </ul>
     </nav>
 
-    <h1>Food List</h1>
-<div class="container">
-    <div class="row">
-        <div class="col-md-4">
-            <form action="{{ route('admin.foods.index') }}" method="GET" class="mb-3">
-                <div class="input-group">
-                    <label for="search" class="input-group-text">Search:</label>
-                    <input type="text" name="search" id="search" class="form-control" value="{{ $search ?? '' }}">
-                    <input type="hidden" name="category" value="{{ $selectedCategory ?? '' }}">
-                    <button type="submit" class="btn btn-primary">Search</button>
-                </div>
-            </form>
-        </div>
-        <div class="col-md-4">
-            <form action="{{ route('admin.foods.index') }}" method="GET" class="mb-3">
-                <div class="input-group">
-                    <label for="category" class="input-group-text">Category:</label>
-                    <select name="category" id="category" class="form-select">
-                        <option value="">All</option>
-                        @foreach($categories as $category)
-                            <option value="{{ $category->id }}" {{ ($selectedCategory == $category->id) ? 'selected' : '' }}>{{ $category->name }}</option>
-                        @endforeach
-                    </select>
-                    <input type="hidden" name="search" value="{{ $search ?? '' }}">
-                    <button type="submit" class="btn btn-primary">Filter</button>
-                </div>
-            </form>
-        </div>
-        <div class="col-md-4">
-            <form action="{{ route('admin.foods.index') }}" method="GET" class="mb-3">
-                <div class="input-group">
-
-                    <input type="hidden" name="search" value="{{ $search ?? '' }}">
-                    <input type="hidden" name="category" value="{{ $selectedCategory ?? '' }}">
-
-                    <a href="{{ route('admin.foods.index', ['not_validated' => 1]) }}" class="btn btn-secondary">Show not validated foods</a>
-
-                </div>
-            </form>
-        </div>
+    <div class="w-full p-6 border border-gray-200 rounded-lg shadow flex items-center justify-center text-center" style="background-color: #082f49;">
+        <img class="w-16 h-16 rounded-full object-cover" src="{{ asset('images/image.png') }}" alt="Image1">
+        <a href="#">
+            <h5 class="mb-2 text-2xl font-bold tracking-tight text-white mx-4 tracking-wider">Les nourritures</h5>
+        </a>
+        <img class="w-16 h-16 rounded-full object-cover" src="{{ asset('images/image.png') }}" alt="Image2">
     </div>
-</div>
 
-<table>
-    <thead>
+
+
+
+    <div class="col-md-4">
+
+        <form action="{{ route('admin.foods.index') }}" method="GET" class="mb-3">
+            <div class="flex">
+                <div class="relative w-full">
+                    <input type="search" name="search" id="search-dropdown" class="block p-2.5 w-full z-20 text-sm text-gray-900 bg-gray-50 rounded-r-lg border-l-gray-50 border-l-2 border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-l-gray-700  dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:border-blue-500" placeholder="Search foods..." value="{{ $search ?? '' }}" required>
+                    <button type="submit" class="absolute top-0 right-0 p-2.5 text-sm font-medium text-white bg-blue-700 rounded-r-lg border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                        <svg aria-hidden="true" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                        <span class="sr-only">Search</span>
+                    </button>
+                </div>
+
+            </div>
+
+            <div class="col-md-4">
+                <form action="{{ route('admin.foods.index') }}" method="GET" class="mb-3">
+                    <div class="input-group">
+                        <label for="category" class="input-group-text">Category:</label>
+                        <select name="category" id="category" class="form-select">
+                            <option value="">All</option>
+                            @foreach($categories as $category)
+                                <option value="{{ $category->id }}" {{ ($selectedCategory == $category->id) ? 'selected' : '' }}>{{ $category->name }}</option>
+                            @endforeach
+                        </select>
+                        <input type="hidden" name="search" value="{{ $search ?? '' }}">
+                        <button type="submit" class="btn btn-primary">Filter</button>
+                    </div>
+                </form>
+            </div>
+            <input type="hidden" name="category" value="{{ $selectedCategory ?? '' }}">
+            <a href="{{ route('admin.foods.index', ['not_validated' => 1]) }}" class="btn btn-secondary">Show not validated foods</a>
+        </form>
+    </div>
+
+
+
+<table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+    <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
         <tr>
-            <th>ID</th>
-            <th>Name</th>
-            <th>Category</th>
-            <th>Added by</th>
-            <th>Actions</th>
+            <th scope="col" class="px-6 py-3">ID</th>
+            <th scope="col" class="px-6 py-3">Name</th>
+            <th scope="col" class="px-6 py-3">Category</th>
+            <th scope="col" class="px-6 py-3">Added by</th>
+            <th scope="col" class="px-6 py-3">Actions</th>
         </tr>
     </thead>
     <tbody>
         @foreach($foods as $food)
-            <tr>
-                <td>{{ $food->id }}</td>
-                <td @if(!$food->is_valid) style="color: red;" @endif>{{ $food->name }}</td>
-                <td>{{ $food->category->name }}</td>
-                <td>{{ $food->user->name }}</td>
-                <td>
-                    <a href="{{ route('admin.foods.edit', $food->id) }}">Edit</a>
-                    <a href="#" onclick="event.preventDefault(); if(confirm('Are you sure you want to delete this food?')){ document.getElementById('delete-form-{{$food->id }}').submit(); }">Delete</a>
-                    <form id="delete-form-{{ $food->id }}" action="{{ route('admin.foods.destroy', $food->id) }}" method="POST">
+            <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                <td class="px-6 py-4">{{ $food->id }}</td>
+                <td @if(!$food->is_valid) style="color: red;" @endif class="px-6 py-4">{{ $food->name }}</td>
+                <td class="px-6 py-4">{{ $food->category->name }}</td>
+                <td class="px-6 py-4">{{ $food->user->name }}</td>
+                <td class="px-6 py-4">
+                    <a href="{{ route('admin.foods.edit', $food->id) }}" class="text-white bg-gradient-to-r from-green-400 via-green-500 to-green-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-green-800 shadow-lg shadow-green-500/50 dark:shadow-lg dark:shadow-green-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">Edit</a>
+
+                    <form action="{{ route('admin.foods.destroy', $food->id) }}" method="POST" style="display: inline-block;">
                         @csrf
                         @method('DELETE')
-                        <input type="submit" value="Delete" style="display: none;">
+                        <button type="button" class="text-white bg-gradient-to-r from-red-400 via-red-500 to-red-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 shadow-lg shadow-red-500/50 dark:shadow-lg dark:shadow-red-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">Delete</button>
                     </form>
                 </td>
             </tr>
@@ -89,7 +93,9 @@
 </table>
 
 
+
         </div>
 
     </div>
+
 </x-app-layout>
