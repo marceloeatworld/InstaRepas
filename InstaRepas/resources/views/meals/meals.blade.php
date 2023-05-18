@@ -17,22 +17,21 @@
 
                 <h4 class="text-lg mb-2">Petit-déjeuner</h4>
                 <div class="mb-4">
-                
-             
-               
-                    Proteine: {{ $breakfasts[$day]['protein']->name }}<br>
-
-                    Féculent: {{ $breakfasts[$day]['carbohydrate']->preparation_style }}<br>
-                    Fruit: {{ $breakfasts[$day]['fruit']->preparation_style }}
+                    {{ sprintf("Commencez votre journée avec %s, accompagné de %s et d'un fruit frais : %s.", 
+                        $breakfasts[$day]['protein']->name,
+                        $breakfasts[$day]['carbohydrate']->preparation_style,
+                        $breakfasts[$day]['fruit']->preparation_style) }}
                 </div>
+
 
                 <h4 class="text-lg mb-2">Déjeuner</h4>
-                <div class="mb-4">
-                    Proteine: {{ isset($lunches[$day]['protein']) ? $lunches[$day]['protein']->preparation_style : 'No protein available' }}<br>
-                    Féculent: {{ $lunches[$day]['carbohydrate']->preparation_style }}<br>
-                    Légumes: {{ $lunches[$day]['vegetable']->preparation_style }}<br>
-                   
-                </div>
+                    <div class="mb-4">
+                        {{ sprintf("%s et %s, servi avec %s.", 
+                            $lunches[$day]['protein']->preparation_style,
+                            $lunches[$day]['carbohydrate']->preparation_style,
+                            $lunches[$day]['vegetable']->preparation_style) }}
+                    </div>
+
                 @if($include_snacks)
                     <h4 class="text-lg mb-2">Snack</h4>
                     <div class="mb-4">
@@ -42,11 +41,12 @@
                 @endif
                 <h4 class="text-lg mb-2">Dîner</h4>
                 <div class="mb-4">
-                    Proteine: {{ isset($dinners[$day]['protein']) ? $dinners[$day]['protein']->preparation_style : 'No protein available' }}<br>
-                    Féculent: {{ $dinners[$day]['carbohydrate']->preparation_style }}<br>
-                    Légumes: {{ $dinners[$day]['vegetable']->preparation_style }}<br>
-                   
+                    {{ sprintf("%s et %s, servi avec %s.", 
+                        isset($dinners[$day]['protein']) ? $dinners[$day]['protein']->preparation_style : 'No protein available',
+                        $dinners[$day]['carbohydrate']->preparation_style,
+                        $dinners[$day]['vegetable']->preparation_style) }}
                 </div>
+
 
             </div>
         </div>
