@@ -1,17 +1,19 @@
 <?php
 
-use App\Http\Controllers\ProfileController;
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Auth\ProviderController;
-
-use Illuminate\Support\Facades\Auth;
-use App\Http\Controllers\RecipeController;
-use App\Http\Controllers\FoodController;
-use App\Http\Controllers\MealController;
-use App\Http\Controllers\DashboardController;
 use App\Models\UserPreference;
 use App\Models\DietaryRestriction;
+use Illuminate\Support\Facades\Auth;
+
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\FoodController;
+use App\Http\Controllers\MealController;
+use App\Http\Controllers\RecipeController;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\FoodCategoryController;
+use App\Http\Controllers\Auth\ProviderController;
+use App\Http\Controllers\CookingAdviceController;
+use App\Http\Controllers\NutritionInfoController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -64,6 +66,8 @@ Route::prefix('admin')->middleware(['auth', 'admin'])->group(function () {
 ]);
 
 
+
+
 });
 
 //recettes accecible a tous
@@ -92,10 +96,6 @@ Route::middleware('auth')->group(function () {
     Route::post('/profile/preferences', [ProfileController::class, 'updatePreferences'])->name('profile.updatePreferences');
 
     //recettes cree etc...
- //   Route::get('/profile/recipes/create', [RecipeController::class, 'create'])->name('recipes.create');
-  //  Route::post('/recipes', [RecipeController::class, 'store'])->name('recipes.store');
- //   Route::post('/recipes/add-food', [RecipeController::class, 'addFood'])->name('recipes.add-food');
-
 
 Route::get('recipes', [RecipeController::class, 'index'])->name('recipes.index');
 Route::get('/profile/recipes/create', [RecipeController::class, 'create'])->name('recipes.create');
@@ -103,13 +103,28 @@ Route::post('recipes', [RecipeController::class, 'store'])->name('recipes.store'
 Route::get('recipes/user/{userId}', [RecipeController::class, 'userRecipes'])->name('recipes.user_recipes');
 Route::get('foods', [RecipeController::class, 'searchFoods'])->name('foods.search');
 Route::post('foods', [RecipeController::class, 'addFood'])->name('foods.add');
-
-
 });
 
 
 Route::get('/foods/search', [RecipeController::class, 'searchFoods'])->name('foods.search');
 Route::post('/foods', [RecipeController::class, 'storeFood'])->name('foods.store');
+
+
+    Route::get('/profile/recipes/create', [RecipeController::class, 'create'])->name('recipes.create');
+    Route::post('/recipes', [RecipeController::class, 'store'])->name('recipes.store');
+    Route::post('/recipes/add-food', [RecipeController::class, 'addFood'])->name('recipes.add-food');
+    
+
+Route::get('/a-propos', function () {
+    return view('about');
+});
+
+// informations alimentaires
+
+Route::get('/conseil-de-cuisine', [CookingAdviceController::class, 'index'])->name('CookingAdvice.index');
+
+Route::get('/information-nutrition', [NutritionInfoController::class, 'index'])->name('NutritionInfo.index');
+
 
 
 require __DIR__.'/auth.php';

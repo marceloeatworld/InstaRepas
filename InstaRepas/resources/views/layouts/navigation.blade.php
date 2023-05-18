@@ -36,6 +36,19 @@
                         {{ __('Créer une recette') }}
                     </x-nav-link> -->
 
+                    <x-nav-link :href="'/conseil-de-cuisine'">
+                         {{ __('conseil de cuisine') }}
+                    </x-nav-link>
+
+                    <x-nav-link :href="'/information-nutrition'">
+                         {{ __('information nutrition') }}
+                    </x-nav-link>
+
+                    <x-nav-link :href="'/a-propos'">
+                         {{ __('À propos') }}
+                    </x-nav-link>
+
+
                 </div>
             </div>
 

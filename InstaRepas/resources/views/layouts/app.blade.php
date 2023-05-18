@@ -65,7 +65,7 @@
                 {{ $slot }}
             </main>
         </div>
-
+        @include('layouts.footer')
         <!-- Bootstrap Scripts -->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-TzVq1XJwJf8HqpZlZ3KdA5VJq8OYB5Qz+7SHI++/J0OqyE9Lw1mK0FfQ2xjHnY5L" crossorigin="anonymous"></script>
     </body>
