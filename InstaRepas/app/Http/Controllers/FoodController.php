@@ -17,6 +17,7 @@ use Illuminate\Support\Facades\Session;
 class FoodController extends Controller
 {
 
+
     public function index(Request $request)
 {
     $search = $request->input('search');
@@ -45,7 +46,7 @@ class FoodController extends Controller
     // Récupérer toutes les catégories pour les afficher dans le menu déroulant
     $categories = FoodCategory::all();
 
-    return view('admin.foods.index', compact('foods', 'search', 'categories', 'selectedCategory', 'notValidated'));
+    return view('admin.foods.index', compact('foods', 'search', 'categories', 'selectedCategory', 'notValidated', $this));
 }
 
     
