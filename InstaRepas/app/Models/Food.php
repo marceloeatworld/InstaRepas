@@ -50,4 +50,36 @@ class Food extends Model
     {
         return $this->belongsToMany(MealCombination::class, 'combinations_foods', 'food_id', 'combination_id');
     }
+
+
+    //ajouter un mode de preparation en fonction de la categorie
+    public function getPreparationStyleAttribute()
+    {
+        $preparationStyles = [
+            'Fruits' => ['before' => ['Jus de']],
+            'Vegetables' => ['before' => ['Sauté de ', 'Vapeur']],
+            'Meat' => ['before' => ['Grillé', 'Rôti', 'Braisé']],
+            'Fish' => ['before' => ['Frit', 'Grillé', 'Vapeur']],
+            'Pomme de terre' => ['before' => ['Purée de', 'Gratin de', 'Frites de']],
+            'Bread' => ['after' => ['avec du beurre de noix', 'avec de la purée d\'amande', 'avec du fromage à tartiner']]
+        ];
+    
+        $category = $this->category->name;
+    
+        if (array_key_exists($category, $preparationStyles)) {
+            if (isset($preparationStyles[$category]['before'])) {
+                $styles = $preparationStyles[$category]['before'];
+                $randomStyle = $styles[array_rand($styles)];
+                return $randomStyle . ' ' . $this->name;
+            } elseif (isset($preparationStyles[$category]['after'])) {
+                $styles = $preparationStyles[$category]['after'];
+                $randomStyle = $styles[array_rand($styles)];
+                return $this->name . ' ' . $randomStyle;
+            }
+        } else {
+            return $this->name;
+        }
+    }
+    
+
 }
