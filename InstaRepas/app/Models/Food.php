@@ -63,7 +63,6 @@ class Food extends Model
             ],
             'Vegetables' => [
                 'after' => ['sauté', 'vapeur'],
-                'Pomme de terre' => ['before' => ['Purée de', 'Gratin de', 'Frites de']],
                 'Laitue' => ['before' => ['Salade de']],
                 'Betterave' => ['before' => ['Salade de']],
                 'Artichaut' => ['after' => ['vapeur']],
@@ -77,7 +76,12 @@ class Food extends Model
             ],
             "Bread" => [
                 'after' => ['avec une noix de beurre', 'avec de la purée d\'amande', 'avec du fromage à tartiner']
+            ],
+            'Grains' => [
+                'Pomme de terre' => ['before' => ['Purée de', 'Gratin de', 'Frites de']],
+                'after' => ['avec une noix de beurre', 'avec un filet d\'huile d\'olive']
             ]
+           
         ];
     
         // Récupérer le nom de la catégorie et de l'aliment

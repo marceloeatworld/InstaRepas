@@ -24,7 +24,7 @@ class FoodController extends Controller
     $selectedCategory = $request->input('category');
     $notValidated = $request->input('not_validated');
 
-    $foods = Food::with('category', 'user')
+    $foods = Food::with('category')
         ->when($search, function ($query) use ($search) {
             return $query->where('name', 'LIKE', "%{$search}%");
         })
@@ -46,7 +46,7 @@ class FoodController extends Controller
     // Récupérer toutes les catégories pour les afficher dans le menu déroulant
     $categories = FoodCategory::all();
 
-    return view('admin.foods.index', compact('foods', 'search', 'categories', 'selectedCategory', 'notValidated', $this));
+    return view('admin.foods.index', compact('foods', 'search', 'categories', 'selectedCategory', 'notValidated'));
 }
 
     
