@@ -23,7 +23,6 @@ class MealController extends Controller
 
 
         $this->restrictions = $request->input('restrictions', []);
-        $seasonal = $request->input('seasonal', false);
         $include_snacks = $request->input('include_snacks', false);
         $days = max(1, min($request->input('days', 1), 60));
         $currentMonth = Carbon::now()->month;
@@ -40,18 +39,16 @@ class MealController extends Controller
             });
         }
     
-        // Filter foods based on seasons
-        if ($seasonal) {
-            $currentSeason = Season::getSeasonByMonth($currentMonth);
-            if ($currentSeason) {
-                $foods->where(function ($query) use ($currentSeason) {
-                    $query->whereHas('seasons', function ($query) use ($currentSeason) {
-                        $query->where('seasons.id', $currentSeason->id);
-                    })->orWhereDoesntHave('seasons');
-                });
-            }
+        // Always filter foods based on seasons
+        $currentSeason = Season::getSeasonByMonth($currentMonth);
+        if ($currentSeason) {
+            $foods->where(function ($query) use ($currentSeason) {
+                $query->whereHas('seasons', function ($query) use ($currentSeason) {
+                    $query->where('seasons.id', $currentSeason->id);
+                })->orWhereDoesntHave('seasons');
+            });
         }
-        
+            
 
         $foods = $foods->get();
 
@@ -128,7 +125,9 @@ class MealController extends Controller
 
     private function generateBreakfast($foods)
     {
-        $proteinFood = $foods->where('category.name', 'Dairy')->count() > 0 ? $foods->where('category.name', 'Dairy')->random() : null;
+        $proteinCategories = ['Dairy', 'Eggs'];
+        $proteinFood = $foods->whereIn('category.name', $proteinCategories)->count() > 0 ? $foods->whereIn('category.name', $proteinCategories)->random() : null;
+
 
         
         return [

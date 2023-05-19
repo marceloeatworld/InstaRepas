@@ -5,6 +5,8 @@
 <div style="display: flex; justify-content: center;">
     <div style="max-width: 600px;">
         <h1 style="text-align: center;">Préférences alimentaires</h1>
+
+        
         <form action="{{ route('generate_meals') }}" method="post">
             @csrf
             <fieldset>
@@ -17,21 +19,6 @@
     </fieldset>
 
 
-
-
-            <fieldset>
-                <legend>Produits en fonction des saisons</legend>
-                <label>
-                    <input type="checkbox" name="seasonal" value="1"> Utiliser seulement les produits de saison
-                </label>
-            </fieldset>
-
-            <fieldset>
-                <legend>Snacks</legend>
-                <label>
-                    <input type="checkbox" name="include_snacks" value="1"> Inclure des snacks
-                </label>
-            </fieldset>
 
             <fieldset>
                 <legend>Nombre de jours</legend>

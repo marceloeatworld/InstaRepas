@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Models\User;
 
 use App\Models\CombinationFood;
 use App\Models\DietaryRestriction;
@@ -11,17 +12,19 @@ use App\Models\FoodSeason;
 use App\Models\MealCombination;
 use App\Models\Season;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Session;
 
 class FoodController extends Controller
 {
+
+
     public function index(Request $request)
 {
     $search = $request->input('search');
     $selectedCategory = $request->input('category');
     $notValidated = $request->input('not_validated');
 
-    $foods = Food::with('category')
+    $foods = Food::with('category', 'user')
         ->when($search, function ($query) use ($search) {
             return $query->where('name', 'LIKE', "%{$search}%");
         })
@@ -33,10 +36,17 @@ class FoodController extends Controller
         })
         ->get();
 
+
+            // Pour tester, affichons les informations de l'utilisateur pour le premier aliment
+/*     $firstFood = $foods->first();
+    if($firstFood){
+        $user = $firstFood->user;
+        dd($user);  // pour afficher les informations de l'utilisateur
+    } */
     // Récupérer toutes les catégories pour les afficher dans le menu déroulant
     $categories = FoodCategory::all();
 
-    return view('admin.foods.index', compact('foods', 'search', 'categories', 'selectedCategory', 'notValidated'));
+    return view('admin.foods.index', compact('foods', 'search', 'categories', 'selectedCategory', 'notValidated', $this));
 }
 
     
@@ -55,7 +65,9 @@ class FoodController extends Controller
     public function store(Request $request)
     {
         $food = Food::create($request->all());
-    
+
+        $food->user_id = auth()->id();
+        $food->save();
         // Attribuer plusieurs MealCombination
         $food->mealCombinations()->sync($request->input('meal_combinations', []));
     
@@ -64,14 +76,13 @@ class FoodController extends Controller
     
         // Attribuer plusieurs DietaryRestriction
         $food->restrictions()->sync($request->input('restrictions', []));
+
+        Session::flash('success', 'Aliment ajouté avec succès!');
     
-        return redirect()->route('admin.foods.index');
+        return redirect()->route('admin.foods.create');
     }
 
-    public function show(Food $food)
-    {
-        return view('admin.foods.show', compact('food'));
-    }
+
 
     public function edit(Food $food)
     {
@@ -100,8 +111,10 @@ class FoodController extends Controller
     
         // Mettre à jour les DietaryRestriction associés
         $food->restrictions()->sync($request->input('restrictions', []));
-    
+
+        Session::flash('success', 'Aliment a été modifié avec succès!');
         return redirect()->route('admin.foods.index');
+
     }
 
     public function destroy(Food $food)
@@ -117,8 +130,12 @@ class FoodController extends Controller
     
         // Delete the food
         $food->delete();
-    
+        Session::flash('success', 'Aliment a été supprimer avec succès!');
         return redirect()->route('admin.foods.index');
     }
+
+
+
+
 
 }
