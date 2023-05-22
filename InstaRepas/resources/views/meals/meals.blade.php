@@ -17,7 +17,7 @@
 
                 <h4 class="text-lg mb-2">Petit-déjeuner</h4>
                 <div class="mb-4">
-                    {{ sprintf("Commencez votre journée avec %s, accompagné de %s et d'un fruit frais : %s.", 
+                    {{ sprintf("%s, accompagné de %s et d'un fruit frais : %s.", 
                         $breakfasts[$day]['protein']->name,
                         $breakfasts[$day]['carbohydrate']->preparation_style,
                         $breakfasts[$day]['fruit']->preparation_style) }}

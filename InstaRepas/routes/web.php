@@ -53,7 +53,6 @@ Route::prefix('admin')->middleware(['auth', 'admin'])->group(function () {
     Route::put('/users/{user}/points', [DashboardController::class, 'updatePoints'])->name('admin.users.updatePoints');
     Route::delete('/users/{user}', [DashboardController::class, 'destroy'])->name('admin.users.destroy');
 
-    
     // Gérer les catégories
     Route::resource('/food-categories', FoodCategoryController::class)->names([
         'index' => 'admin.food-categories.index',
@@ -64,8 +63,6 @@ Route::prefix('admin')->middleware(['auth', 'admin'])->group(function () {
         'update' => 'admin.food-categories.update',
         'destroy' => 'admin.food-categories.destroy',
 ]);
-
-
 
 
 });

@@ -7,11 +7,11 @@
 
 
     <div class="w-full p-6 border border-gray-200 rounded-lg shadow flex items-center justify-center text-center" style="background-color: #082f49;">
-        <img class="w-16 h-16 rounded-full object-cover" src="{{ asset('images/image.png') }}" alt="Image1">
-        <a href="#">
+  
+        <a href="{{ route('admin.users.index') }}">
             <h5 class="mb-2 text-2xl font-bold tracking-tight text-white mx-4 tracking-wider">Les utilisateurs</h5>
         </a>
-        <img class="w-16 h-16 rounded-full object-cover" src="{{ asset('images/image.png') }}" alt="Image2">
+
     </div>
     <div class="py-12">
 
@@ -63,5 +63,6 @@
         </tbody>
     </table>
         </div>
+        
 </x-app-layout>
 
