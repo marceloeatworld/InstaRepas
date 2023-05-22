@@ -16,7 +16,7 @@
                     @if (Auth::check()) <!-- Vérifie si un utilisateur est co -->
                     @if(Auth::user()->isAdmin()) <!-- Vérifie si c un admin -->
                         <x-nav-link :href="route('admin.index')" :active="request()->routeIs('admin.index')">
-                            {{ __('Dashboard') }}
+                            {{ __('Dashboard Admin') }}
                         </x-nav-link>
                     @else
                         <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
@@ -27,14 +27,27 @@
 
 
                     <x-nav-link :href="route('generate')" :active="request()->routeIs('generate')">
-                        {{ __('Génerer Menu') }}
+                        {{ __('Menu Équilibre') }}
                     </x-nav-link>
 
 
 
-<!--<x-nav-link :href="route('recipes.create')" :active="request()->routeIs('recipes.create')">
+                    <!--<x-nav-link :href="route('recipes.create')" :active="request()->routeIs('recipes.create')">
                         {{ __('Créer une recette') }}
                     </x-nav-link> -->
+
+                    <x-nav-link :href="'/conseil-de-cuisine'">
+                         {{ __('Astuces Culinaire') }}
+                    </x-nav-link>
+
+                    <x-nav-link :href="'/information-nutrition'">
+                         {{ __('Guide Nutrition') }}
+                    </x-nav-link>
+
+                    <x-nav-link :href="'/a-propos'">
+                         {{ __('À propos') }}
+                    </x-nav-link>
+
 
                 </div>
             </div>
