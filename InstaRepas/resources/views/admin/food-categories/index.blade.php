@@ -7,7 +7,7 @@
 
 
 
-    <div class="w-full p-6 border border-gray-200 rounded-lg shadow flex items-center justify-center text-center" style="background-color: #082f49;">
+    <div class="w-full p-6 border border-gray-200 rounded-lg shadow flex items-center justify-center text-center" style="background-color: #6495ED;">
 
         <a href="{{ route('admin.food-categories.index') }}">
             <h5 class="mb-2 text-2xl font-bold tracking-tight text-white mx-4 tracking-wider">Les catégories</h5>

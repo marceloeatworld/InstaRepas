@@ -54,9 +54,10 @@ class FoodController extends Controller
         $seasons = Season::all();
         $meal_combinations = MealCombination::all();
         $nutritional_types = Food::NUTRITIONAL_TYPES;
+        $food = new Food();
 
         // Renvoi à la vue avec les données récupérées
-        return view('admin.foods.create', compact('categories', 'restrictions', 'seasons', 'meal_combinations', 'nutritional_types'));
+        return view('admin.foods.create', compact('food', 'categories', 'restrictions', 'seasons', 'meal_combinations', 'nutritional_types'));
     }
 
     // Méthode pour enregistrer un nouvel aliment
@@ -126,18 +127,5 @@ class FoodController extends Controller
         return redirect()->route('admin.foods.index');
     }
 
-
-    public function searchFoods(Request $request)
-{
-    $searchTerm = $request->input('term');
-
-    $foods = Food::where('name', 'LIKE', "%{$searchTerm}%")
-        ->get()
-        ->map(function($food) {
-            return ['value' => $food->name];
-        });
-
-    return response()->json($foods);
-}
 
 }

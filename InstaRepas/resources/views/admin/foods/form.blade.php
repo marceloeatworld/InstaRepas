@@ -10,14 +10,14 @@
     <label for="category_id" class="text-2xl">Catégories</label><br>
     <select name="category_id" id="category_id" class="form-control" required>
     @foreach($categories as $category)
-    <option value="{{ $category->id }}" {{ (request()->input('category') == $category->id) ? 'selected' : '' }}>
-        @if(\Lang::has('messages.categories.' . $category->name))
-            {{ __('messages.categories.' . $category->name) }}
-        @else
-            {{ $category->name }}
-        @endif
-    </option>
-@endforeach
+        <option value="{{ $category->id }}" {{ optional($food)->category_id == $category->id ? 'selected' : '' }}>
+            @if(\Lang::has('messages.categories.' . $category->name))
+                {{ __('messages.categories.' . $category->name) }}
+            @else
+                {{ $category->name }}
+            @endif
+        </option>
+    @endforeach
 
 
     </select>
