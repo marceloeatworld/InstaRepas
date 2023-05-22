@@ -68,6 +68,9 @@ class Food extends Model
                 'Artichaut' => ['after' => ['vapeur']],
                 'Radis' => ['before' => ['Salade de']],
             ],
+            'Legumes' => [
+                'after' => ['sauté', 'vapeur']
+            ],
             'Meat' => [
                 'after' => ['grillé', 'rôti', 'braisé']
             ],

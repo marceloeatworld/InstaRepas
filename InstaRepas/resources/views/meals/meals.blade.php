@@ -27,10 +27,11 @@
                 <h4 class="text-lg mb-2">Déjeuner</h4>
                     <div class="mb-4">
                         {{ sprintf("%s et %s, servi avec %s.", 
-                            $lunches[$day]['protein']->preparation_style,
-                            $lunches[$day]['carbohydrate']->preparation_style,
-                            $lunches[$day]['vegetable']->preparation_style) }}
+                            isset($lunches[$day]['protein']) ? $lunches[$day]['protein']->preparation_style : 'Aucune protéine',
+                            isset($lunches[$day]['carbohydrate']) ? $lunches[$day]['carbohydrate']->preparation_style : 'Aucun glucide',
+                            isset($lunches[$day]['vegetable']) ? $lunches[$day]['vegetable']->preparation_style : 'Aucun légume') }}
                     </div>
+
 
                 @if($include_snacks)
                     <h4 class="text-lg mb-2">Snack</h4>
@@ -42,7 +43,7 @@
                 <h4 class="text-lg mb-2">Dîner</h4>
                 <div class="mb-4">
                     {{ sprintf("%s et %s, servi avec %s.", 
-                        isset($dinners[$day]['protein']) ? $dinners[$day]['protein']->preparation_style : 'No protein available',
+                        isset($dinners[$day]['protein']) ? $dinners[$day]['protein']->preparation_style : 'Aucune protéine',
                         $dinners[$day]['carbohydrate']->preparation_style,
                         $dinners[$day]['vegetable']->preparation_style) }}
                 </div>

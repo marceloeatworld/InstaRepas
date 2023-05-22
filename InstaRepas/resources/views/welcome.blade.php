@@ -37,19 +37,19 @@
 <div class='bg-cover bg-center h-screen flex flex-col justify-center items-center bg-cover-season' role='contentinfo' aria-label='Seasonal Foods'>
 <h2 class='text-white font-bold text-5xl mb-8 shadow-text' tabindex="0">Aliments de saison : le choix santé</h2>
   <div class='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 px-5 md:px-0' role='list'>
-        <div class='bg-white rounded-lg shadow-md p-4 transition-all ease-in-out duration-500 transform translate-x-0 sm:translate-x-32 delay-75' role='listitem'>
+        <div class='food-card bg-white rounded-lg shadow-md p-4 transition-all ease-in-out duration-500 transform translate-x-0 sm:translate-x-32 delay-75' role='listitem'>
             <h3 class='text-lg font-bold mb-2 text-gray-800' tabindex="0">Automne</h3>
             <p class='text-gray-700 leading-relaxed' tabindex="0">Les pommes croquantes, les courges douces et les noix savoureuses abondent. La nature est généreuse, alors profitons de cette saison de récolte!</p>
         </div>
-        <div class='bg-white rounded-lg shadow-md p-4 transition-all ease-in-out duration-500 transform translate-x-0 sm:translate-x-32 delay-150' role='listitem'>
+        <div class='food-card bg-white rounded-lg shadow-md p-4 transition-all ease-in-out duration-500 transform translate-x-0 sm:translate-x-32 delay-150' role='listitem'>
             <h3 class='text-lg font-bold mb-2 text-gray-800' tabindex="0">Hiver</h3>
             <p class='text-gray-700 leading-relaxed' tabindex="0">Les oranges juteuses et les légumes-racines robustes sont les stars. Il fait froid dehors, mais ces aliments nous réchauffent de l'intérieur.</p>
         </div>
-        <div class='bg-white rounded-lg shadow-md p-4 transition-all ease-in-out duration-500 transform translate-x-0 sm:translate-x-32 delay-225' role='listitem'>
+        <div class='food-card bg-white rounded-lg shadow-md p-4 transition-all ease-in-out duration-500 transform translate-x-0 sm:translate-x-32 delay-225' role='listitem'>
             <h3 class='text-lg font-bold mb-2 text-gray-800' tabindex="0">Printemps</h3>
             <p class='text-gray-700 leading-relaxed' tabindex="0">Les premières pousses vertes émergent de la terre. Les légumes printaniers frais et croquants nous réveillent après l'hiver.</p>
         </div>
-        <div class='bg-white rounded-lg shadow-md p-4 transition-all ease-in-out duration-500 transform translate-x-0 sm:translate-x-32 delay-300' role='listitem'>
+        <div class='food-card bg-white rounded-lg shadow-md p-4 transition-all ease-in-out duration-500 transform translate-x-0 sm:translate-x-32 delay-300' role='listitem'>
             <h3 class='text-lg font-bold mb-2 text-gray-800' tabindex="0">Été</h3>
             <p class='text-gray-700 leading-relaxed' tabindex="0">C'est le moment des tomates juteuses, des baies sucrées et des herbes fraîches. La chaleur du soleil se retrouve dans chaque bouchée.</p>
         </div>
@@ -102,6 +102,49 @@
 
 
 <script>
+// Créer une fonction pour appliquer notre animation à un lien
+function applyAnimation(link) {
+    link.addEventListener('mouseover', function() {
+        anime({
+            targets: link,
+            scale: 1.1,
+            color: '#6495ED',
+            duration: 200,
+            easing: 'easeInOutQuad'
+        });
+    });
+
+    link.addEventListener('mouseout', function() {
+        anime({
+            targets: link,
+            scale: 1.0,
+            color: '#000000',
+            duration: 200,
+            easing: 'easeInOutQuad'
+        });
+    });
+}
+
+// Créer un MutationObserver pour écouter les modifications du DOM
+let observer = new MutationObserver(function(mutations) {
+    mutations.forEach(function(mutation) {
+        if (mutation.addedNodes) {
+            mutation.addedNodes.forEach(function(node) {
+                if (node.nodeType === 1 && node.matches('nav a')) {
+                    applyAnimation(node);
+                }
+            });
+        }
+    });
+});
+
+// Commencer à observer le document avec la configuration appropriée
+observer.observe(document, { childList: true, subtree: true });
+
+// Appliquer l'animation à tous les liens existants au chargement initial de la page
+document.querySelectorAll('nav a').forEach(applyAnimation);
+
+
 
 let originalFoodsArray = [
     { name: '🍏 Pomme', season: 'Automne', benefits: 'Riches en fibres et vitamine C, les pommes peuvent améliorer la santé cardiaque.' },
@@ -135,15 +178,16 @@ let originalFoodsArray = [
     { name: '🍒 Cerise', season: 'Été', benefits: 'Les cerises sont pleines d\'antioxydants et d\'anti-inflammatoires.' },
     { name: '🍈 Melon', season: 'Été', benefits: 'Le melon est riche en vitamines A et C et est également une bonne source d\'hydratation.' },
     { name: '🫐 Myrtilles', season: 'Été', benefits: 'Les myrtilles sont l\'un des aliments les plus riches en antioxydants. Elles sont également riches en vitamines C et K.' },
-    { name: '🌽 Courgette', season: 'Été', benefits: 'Les courgettes sont faibles en calories et riches en fibres, ce qui les rend idéales pour une alimentation équilibrée.' },
+    { name: '🍇 Raisins', season: 'Été', benefits: 'Les raisins sont une excellente source de vitamines C et K, et contiennent également de nombreux antioxydants bénéfiques.' }
+
 ];
 
-// Faire une copie de originalFoodsArray pour garder l'original intact
+// On fait une copie de originalFoodsArray pour garder l'original intact
 let seasonalFoods = [...originalFoodsArray];
 
-// Fonction pour obtenir la saison à partir du mois
+// Cette fonction détermine la saison en fonction du mois donné
 function getSeasonFromMonth(month) {
-    // Les mois sont indexés à partir de 0 (janvier = 0, février = 1, etc.)
+    // Le mois est basé sur un index de 0 (Janvier = 0, Février = 1, etc.)
     if (month < 2 || month === 11) {
         return 'Hiver';
     } else if (month < 5) {
@@ -155,17 +199,18 @@ function getSeasonFromMonth(month) {
     }
 }
 
-// Fonction pour mettre à jour les cartes d'aliments en fonction de la saison
+
+// Cette fonction met à jour les cartes d'aliments en fonction de la saison
 function updateFoodCards(season) {
     // Filtrer les aliments en fonction de la saison
     seasonalFoods = originalFoodsArray.filter(food => food.season === season);
     // Recréer les cartes d'aliments
-    createFoodCards();
+    createFoodCards(season);
 }
 
-// Fonction pour créer les cartes d'aliments
-function createFoodCards() {
-    // Récupérer le conteneur de nourriture
+// Cette fonction crée les cartes d'aliments
+function createFoodCards(season) {
+    // Obtenir le conteneur de nourriture
     const foodContainer = document.querySelector('.grid');
 
     // Supprimer toutes les cartes d'aliments existantes
@@ -176,7 +221,8 @@ function createFoodCards() {
     // Créer une nouvelle carte pour chaque aliment
     for (const food of seasonalFoods) {
         const foodCard = document.createElement('div');
-        foodCard.className = 'bg-white rounded-lg shadow-md p-4 transition-all ease-in-out duration-500 transform translate-x-32';
+        foodCard.className = 'food-card bg-white rounded-lg shadow-md p-4 transition-all ease-in-out duration-500 transform translate-x-32';
+
 
         const foodName = document.createElement('h3');
         foodName.className = 'text-lg font-bold mb-2';
@@ -194,13 +240,38 @@ function createFoodCards() {
         foodCard.appendChild(foodName);
         foodCard.appendChild(foodSeason);
         foodCard.appendChild(foodBenefits);
+        // Ajouter la carte à la grille
         foodContainer.appendChild(foodCard);
     }
 
-    // Ajouter l'animation aux nouvelles cartes d'aliments
-    const cards = document.querySelectorAll('.bg-white');
-    cards.forEach(card => {
-        card.classList.add('animate');
+    // Animer les cartes
+    animateCards(season);
+}
+
+// Fonction pour animer les cartes en fonction de la saison
+function animateCards(season) {
+    const cards = document.querySelectorAll('.food-card');
+    let animation;
+    switch (season) {
+        case 'Hiver':
+            animation = { translateX: [-100, 0], opacity: [0, 1] };
+            break;
+        case 'Printemps':
+            animation = { translateY: [-100, 0], opacity: [0, 1] };
+            break;
+        case 'Été':
+            animation = { scale: [0.5, 1], opacity: [0, 1] };
+            break;
+        case 'Automne':
+            animation = { rotate: ['90deg', '0deg'], opacity: [0, 1] };
+            break;
+    }
+    anime({
+        targets: cards,
+        ...animation,
+        duration: 500,
+        easing: 'easeInOutQuad',
+        delay: anime.stagger(100),
     });
 }
 
@@ -219,22 +290,20 @@ document.querySelectorAll('.season-button').forEach(button => {
     });
 });
 
-// Ajouter l'animation lors du chargement de la page
+// Quand la page est complètement chargée
 window.onload = function() {
-    // Animation des liens de la barre de navigation
     const navLinks = document.querySelectorAll('.navbar a');
     navLinks.forEach(link => {
         link.addEventListener('mouseover', function() {
-          anime({
+            anime({
                 targets: link,
                 scale: 1.2,
                 duration: 200,
                 easing: 'easeInOutQuad'
             });
         });
-
         link.addEventListener('mouseout', function() {
-          anime({
+            anime({
                 targets: link,
                 scale: 1.0,
                 duration: 200,
@@ -243,20 +312,16 @@ window.onload = function() {
         });
     });
 
-    // Utiliser IntersectionObserver pour animer les cartes lorsque l'utilisateur fait défiler la page
     let observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
-                // Animer la carte si elle est visible
                 animateCard(entry.target);
-                // Arrêter d'observer la carte après l'animation
                 observer.unobserve(entry.target);
             }
         });
     }, { rootMargin: '0px 0px -200px 0px' });
 
-    // Commencer à observer toutes les cartes
-    const cards = document.querySelectorAll('.bg-white');
+    const cards = document.querySelectorAll('.food-card');
     cards.forEach(card => {
         observer.observe(card);
     });
@@ -269,7 +334,6 @@ window.onload = function() {
             duration: 500,
             easing: 'easeInOutQuad'
         });
-  
         card.addEventListener('mouseover', function() {
             anime({
                 targets: card,
@@ -278,7 +342,6 @@ window.onload = function() {
                 easing: 'easeInOutQuad'
             });
         });
-  
         card.addEventListener('mouseout', function() {
             anime({
                 targets: card,

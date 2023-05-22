@@ -154,9 +154,9 @@ class MealController extends Controller
         {
             // Récupère un aliment contenant des protéines. 
             // Si l'utilisateur a une restriction alimentaire qui interdit les produits animaux, sélectionne une protéine végétale.
-            $proteinCategory = in_array('contains_animal_products', $this->restrictions) ? 'Vegetables' : ['Meat', 'Fish', 'Eggs', 'Pork'];
+            $proteinCategory = in_array('contains_animal_products', $this->restrictions) ? 'Legumes' : ['Meat', 'Fish', 'Eggs', 'Pork'];
             $proteinFood = $foods->whereIn('category.name', $proteinCategory)->count() > 0 ? $foods->whereIn('category.name', $proteinCategory)->random() : null;
-
+            
             $carbohydrateFood = null;
             $fiberFood = null;
             
@@ -168,11 +168,13 @@ class MealController extends Controller
 
             return [
                 'protein' => $proteinFood,
+
                 'carbohydrate' => in_array('contains_animal_products', $this->restrictions) ? $carbohydrateFood : ($foods->where('category.name', 'Grains')->where('nutritional_type', 'carbohydrates')->count() > 0 ? $foods->where('category.name', 'Grains')->where('nutritional_type', 'carbohydrates')->random() : null),
                 'fiber' => in_array('contains_animal_products', $this->restrictions) ? $fiberFood : null,
                 'vegetable' => $foods->where('category.name', 'Vegetables')->count() > 0 ? $foods->where('category.name', 'Vegetables')->random() : null,
                 'lipid' => $foods->where('category.name', 'Oils')->count() > 0 ? $foods->where('category.name', 'Oils')->random() : null,
             ];
+            
         }
 
         // Cette fonction génère un snack en fonction des aliments disponibles.
