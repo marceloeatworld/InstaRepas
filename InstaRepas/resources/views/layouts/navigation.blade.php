@@ -27,7 +27,7 @@
 
 
                     <x-nav-link :href="route('generate')" :active="request()->routeIs('generate')">
-                        {{ __('Génerer Menu') }}
+                        {{ __('Menu Équilibre') }}
                     </x-nav-link>
 
 
