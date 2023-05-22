@@ -11,9 +11,10 @@
         <link rel="preconnect" href="https://fonts.bunny.net">
         <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
 
-        <!-- Bootstrap CSS -->
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-5XrIIr7wLr0oGwZmLk5n6nuTj3rMlUz5nBwvxOeVgK8eZa4a1YXoGzFpFYeXZg9L" crossorigin="anonymous">
-        <link href="css/welcome.css" rel="stylesheet">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.13.2/jquery-ui.min.js"></script>
+
+       <link href="{{ asset('css/welcome.css') }}" rel="stylesheet">
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
 
@@ -48,6 +49,7 @@
         </style>
     </head>
     <body class="font-sans antialiased">
+
         <div class="min-h-screen bg-gray-100">
             @include('layouts.navigation')
 
@@ -66,8 +68,7 @@
             </main>
         </div>
         @include('layouts.footer')
-        <!-- Bootstrap Scripts -->
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-TzVq1XJwJf8HqpZlZ3KdA5VJq8OYB5Qz+7SHI++/J0OqyE9Lw1mK0FfQ2xjHnY5L" crossorigin="anonymous"></script>
+
         <script src="https://kit.fontawesome.com/7fdee4801e.js" crossorigin="anonymous"></script>
 
         {{-- TAILWIND SCRIPT --}}
