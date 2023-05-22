@@ -32,16 +32,16 @@
 
 
 
-<!--<x-nav-link :href="route('recipes.create')" :active="request()->routeIs('recipes.create')">
+                    <!--<x-nav-link :href="route('recipes.create')" :active="request()->routeIs('recipes.create')">
                         {{ __('Créer une recette') }}
                     </x-nav-link> -->
 
                     <x-nav-link :href="'/conseil-de-cuisine'">
-                         {{ __('conseil de cuisine') }}
+                         {{ __('Astuces Culinaire') }}
                     </x-nav-link>
 
                     <x-nav-link :href="'/information-nutrition'">
-                         {{ __('information nutrition') }}
+                         {{ __('Guide Nutrition') }}
                     </x-nav-link>
 
                     <x-nav-link :href="'/a-propos'">

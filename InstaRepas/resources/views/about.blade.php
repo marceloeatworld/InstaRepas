@@ -9,7 +9,7 @@
       <div class="w-full md:w-1/3 px-4 mb-8 order-2 md:order-1">
         <a href="https://www.instagram.com/foodequilibre/" target="_blank">
           <div class="relative">
-            <img src="imgs\104104954_288533489002340_8513457204929792488_n.jpg" alt="Logo foodequilibre" class="rounded-lg shadow-md w-500">
+            <img src="imgs\foodequilibre.jpg" alt="Logo foodequilibre" class="rounded-lg shadow-md w-500">
             <div class="absolute bottom-0 left-0 bg-white bg-opacity-75 p-2">
               <span class="text-gray-800 font-bold">Suivez-nous sur Instagram</span>
             </div>

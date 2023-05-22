@@ -1,6 +1,6 @@
 <x-app-layout>
     
-<div class="w-full p-6 border border-gray-200 rounded-lg shadow flex flex-col items-center justify-center text-center overflow-y-hidden" style="background-color: #082f49;">
+<div class="w-full p-6 border border-gray-200 rounded-lg shadow flex flex-col items-center justify-center text-center overflow-y-hidden" style="background-color: #6495ED;;">
     <h5 class="mb-2 text-2xl font-bold tracking-tight text-white mx-4 tracking-wider">Plan alimentaire</h5>
     <p class="mb-2 text-sm font-bold tracking-tight text-white mx-4 tracking-wider">Date: {{ \Carbon\Carbon::parse($current_date)->locale('fr')->isoFormat('LL') }}</p>
     <p class="mb-2 text-sm font-bold tracking-tight text-white mx-4 tracking-wider">Saison: {{ __('messages.seasons.' . $current_season) }}</p>

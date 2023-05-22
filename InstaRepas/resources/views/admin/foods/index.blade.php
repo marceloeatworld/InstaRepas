@@ -2,7 +2,7 @@
 
     <div class="py-12 max-w-7xl mx-auto sm:px-6 lg:px-8">
 
-        <div class="w-full p-6 border border-gray-200 rounded-lg shadow flex items-center justify-center text-center mb-6" style="background-color: #082f49;">
+        <div class="w-full p-6 border border-gray-200 rounded-lg shadow flex items-center justify-center text-center mb-6" style="background-color: #6495ED;">
             <a href="{{ route('admin.foods.index') }}">
                 <h5 class="mb-2 text-2xl font-bold tracking-tight text-white mx-4 tracking-wider">Les aliments</h5>
             </a>
@@ -48,15 +48,24 @@
                         <label for="category" class="input-group-text">Categories:</label>
                         <select name="category" id="category" class="form-select">
                             <option value="">Tout</option>
+                            <!-- Boucle à travers toutes les catégories passées à la vue -->
                             @foreach($categories as $category)
-                            <option value="{{ $category->id }}" {{ (request()->input('category') == $category->id) ? 'selected' : '' }}>
-                                @if(\Lang::has('messages.categories.' . $category->name))
-                                    {{ __('messages.categories.' . $category->name) }}
-                                @else
-                                    {{ $category->name }}
-                                @endif
-                            </option>
-                        @endforeach
+                                <!-- Crée une option dans le select pour chaque catégorie, la valeur de l'option est l'ID de la catégorie -->
+                                <!-- Si l'ID de la catégorie est la même que celle présente dans la requête (i.e., la catégorie sélectionnée), l'option est marquée comme sélectionnée {{ (request()->input('category') == $category->id) ? 'selected' : '' }}> -->
+                                <option value="{{ $category->id }}" {{ (request()->input('category') == $category->id) ? 'selected' : '' }}>
+                                
+                                    <!-- Vérifie si une traduction existe pour le nom de la catégorie dans le fichier de langues -->
+                                    @if(\Lang::has('messages.categories.' . $category->name))
+                                        <!-- Si une traduction existe, utilise cette traduction -->
+                                        {{ __('messages.categories.' . $category->name) }}
+                                    @else
+                                        <!-- Si aucune traduction n'existe, utilise simplement le nom de la catégorie -->
+                                        {{ $category->name }}
+                                    @endif
+                                </option>
+                            @endforeach
+
+
 
                         </select>
                         <input type="hidden" name="search" value="{{ $search ?? '' }}">
