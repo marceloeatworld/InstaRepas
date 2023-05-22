@@ -56,6 +56,8 @@
     </div>
 </div>
 
+
+
 <!-- 4ème partie : -->
 <div class='h-auto flex flex-col justify-center items-center py-12'>
   <h2 class='text-5xl font-bold mb-8'>Food Équilibre : Un choix adapté à vos préférences</h2>
@@ -117,14 +119,14 @@ let seasonalFoods = [
     { name: '🥦 Brocoli', season: 'Printemps', benefits: 'Le brocoli est riche en fibres, vitamine C et K, et il est une bonne source de folate.' },
     { name: '🍍 Ananas', season: 'Printemps', benefits: 'L\'ananas est riche en vitamine C et contient une enzyme appelée bromélaïne, qui peut combattre l\'inflammation et aider à la digestion.' },
     { name: '🍠 Asperges', season: 'Printemps', benefits: 'Les asperges sont une excellente source de fibres, de folate, de vitamines A, C, E et K.' },
-    { name: '🍓 Radis', season: 'Printemps', benefits: 'Les radis sont une bonne source de vitamine C. Ils sont également faibles en calories et peuvent aider à la digestion.' },
+    { name: '🥒 Concombre', season: 'Printemps', benefits: 'Les concombres sont hydratants et faibles en calories. Ils contiennent des antioxydants importants et peuvent aider à la digestion.' },
     { name: '🍅 Tomate', season: 'Été', benefits: 'Les tomates sont une excellente source de vitamine C, de potassium, de folate et de vitamine K.' },
     { name: '🍉 Pastèque', season: 'Été', benefits: 'La pastèque est hydratante et riche en vitamines A et C.' },
     { name: '🍑 Pêche', season: 'Été', benefits: 'Les pêches sont riches en fibres, vitamines A, C, E et K et contiennent de nombreux minéraux essentiels.' },
     { name: '🌶️ Poivron', season: 'Été', benefits: 'Les poivrons sont très riches en antioxydants et en vitamine C.' },
     { name: '🍒 Cerise', season: 'Été', benefits: 'Les cerises sont pleines d\'antioxydants et d\'anti-inflammatoires.' },
     { name: '🍈 Melon', season: 'Été', benefits: 'Le melon est riche en vitamines A et C et est également une bonne source d\'hydratation.' },
-    { name: '🍓 Myrtilles', season: 'Été', benefits: 'Les myrtilles sont l\'un des aliments les plus riches en antioxydants. Elles sont également riches en vitamines C et K.' },
+    { name: '🫐 Myrtilles', season: 'Été', benefits: 'Les myrtilles sont l\'un des aliments les plus riches en antioxydants. Elles sont également riches en vitamines C et K.' },
     { name: '🌽 Courgette', season: 'Été', benefits: 'Les courgettes sont faibles en calories et riches en fibres, ce qui les rend idéales pour une alimentation équilibrée.' },
 ];
 
@@ -155,7 +157,7 @@ function createFoodCards() {
         foodSeason.textContent = `Saison: ${food.season}`;
 
         const foodBenefits = document.createElement('p');
-        foodBenefits.className = 'text-gray-500 text-sm';
+        foodBenefits.className = 'text-gray-900 font-medium mb-6';
         foodBenefits.textContent = `Bienfaits: ${food.benefits}`;
 
         foodCard.appendChild(foodName);
