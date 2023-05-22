@@ -16,13 +16,13 @@
 <!-- 2ème partie : -->
 <div class='flex flex-col md:flex-row items-center justify-center py-16 bg-gray-100 mx-auto'>
   <div class='md:w-1/2 p-4'>
-    <img src='/imgs/logo_for_foodequlibre.png' alt='Logo InstaRepas' class='max-w-xs mx-auto'>
+    <img src='/imgs/logo_for_foodequlibre.png' alt='Logo Food Équilibre' class='max-w-xs mx-auto'>
   </div>
   <div class='md:w-1/2 p-4 text-center md:text-left'>
-    <h2 class='text-5xl font-bold mb-4'>InstaRepas</h2>
+    <h2 class='text-5xl font-bold mb-4'>Food Équilibre</h2>
     <h3 class='text-3xl font-bold mb-4'>Réinventez votre alimentation</h3>
     <p class='text-gray-700 leading-relaxed mb-8 text-lg font-medium'>
-      Avec <strong>InstaRepas</strong>, la nutrition n'a jamais été aussi simple et délicieuse. Notre plateforme innovante vous offre la possibilité de créer des <strong>repas personnalisés</strong> adaptés à vos besoins et préférences. Enrichissez votre menu avec de nouveaux aliments saisonniers, et profitez d'une <strong>alimentation variée et riche en nutriments</strong> tout au long de l'année.
+      Avec <strong>Food Équilibre</strong>, la nutrition n'a jamais été aussi simple et délicieuse. Notre plateforme innovante vous offre la possibilité de créer des <strong>repas personnalisés</strong> adaptés à vos besoins et préférences. Enrichissez votre menu avec de nouveaux aliments saisonniers, et profitez d'une <strong>alimentation variée et riche en nutriments</strong> tout au long de l'année.
     </p>
     <div class='flex justify-center md:justify-start'>
       <a href='/generate' class='bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full'>
@@ -58,38 +58,33 @@
 
 <!-- 4ème partie : -->
 <div class='h-auto flex flex-col justify-center items-center py-12'>
-  <h2 class='text-5xl font-bold mb-8'>InstaRepas : Un choix adapté à vos préférences</h2>
+  <h2 class='text-5xl font-bold mb-8'>Food Équilibre : Un choix adapté à vos préférences</h2>
   <p class='text-gray-700 text-xl mb-4 text-center'>
-    Que vous soyez végétalien, sans gluten, ou que vous aimiez tout simplement la viande, InstaRepas crée des repas parfaitement adaptés à votre style de vie. En vous inscrivant, vous pouvez sauvegarder vos préférences et les retrouver à chaque connexion. Fini le temps perdu à refaire constamment vos choix, avec InstaRepas, votre sélection reste à portée de main. Découvrez l'expérience de la personnalisation alimentaire poussée à son paroxysme. Allez-y, inscrivez-vous et commencez à découvrir votre nouvel allié nutritionnel.
+    Que vous soyez végétalien, sans gluten, ou que vous aimiez tout simplement la viande, Food Équilibre crée des repas parfaitement adaptés à votre style de vie. En vous inscrivant, vous pouvez sauvegarder vos préférences et les retrouver à chaque connexion. Fini le temps perdu à refaire constamment vos choix, avec Food Équilibre, votre sélection reste à portée de main. Découvrez l'expérience de la personnalisation alimentaire poussée à son paroxysme. Allez-y, inscrivez-vous et commencez à découvrir votre nouvel allié nutritionnel.
   </p>
   <a href='/register' class='bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-full'>Inscrivez-vous maintenant</a>
 </div>
 
 <!-- 5ème partie : -->
 <div class='bg-gray-100 py-16'>
-<div class='container mx-auto'>
-    <h2 class='text-3xl font-bold mb-8'>Notre Histoire</h2>
-    <div class='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8'>
-        <div class='bg-white rounded-lg shadow-md p-4'>
-            <p class='text-gray-700 leading-relaxed mb-4'>
-                Trois étudiants passionnés par la technologie et l'innovation ont décidé d'apporter une solution à une problématique sociale : améliorer l'alimentation quotidienne.
-            </p>
-        </div>
-        <div class='bg-white rounded-lg shadow-md p-4'>
-            <p class='text-gray-700 leading-relaxed mb-4'>
-                S'associant avec une organisation caritative, ils ont utilisé leurs compétences en programmation pour concevoir InstaRepas, une plateforme facilitant la création de repas équilibrés et personnalisés.
-            </p>
-        </div>
-        <div class='bg-white rounded-lg shadow-md p-4'>
-            <p class='text-gray-700 leading-relaxed mb-4'>
-                Ce projet est un exemple vibrant de "social coding", où la technologie est utilisée pour résoudre des problèmes concrets et apporter des bénéfices tangibles à la société. Nous sommes ravis de partager cette solution avec vous et nous sommes impatients de recevoir vos commentaires.
-            </p>
-            <a href='/contact' class='bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-full'>Contactez-nous</a>
+    <div class='container mx-auto px-4 sm:px-6 lg:px-8'>
+        <h2 class='text-3xl font-bold mb-8 text-center'>Notre Histoire</h2>
+        <div class='flex justify-center'>
+            <div class='bg-white rounded-lg shadow-md p-8 md:p-16 max-w-2xl'>
+                <p class='text-gray-700 leading-relaxed mb-6'>
+                    Trois étudiants passionnés par la technologie et l'innovation ont décidé d'apporter une solution à une problématique sociale : améliorer l'alimentation quotidienne. S'associant avec une organisation caritative, ils ont utilisé leurs compétences en programmation pour concevoir Food Équilibre, une plateforme facilitant la création de repas équilibrés et personnalisés.
+                </p>
+                <p class='text-gray-700 leading-relaxed mb-6'>
+                    Ce projet est un exemple vibrant de "social coding", où la technologie est utilisée pour résoudre des problèmes concrets et apporter des bénéfices tangibles à la société. Nous sommes ravis de partager cette solution avec vous et nous sommes impatients de recevoir vos commentaires.
+                </p>
+                <div class='text-center'>
+                    <a href='/contact' class='bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-full'>Contactez-nous</a>
+                </div>
+            </div>
         </div>
     </div>
 </div>
 
-</div>
 
 
 
@@ -172,25 +167,104 @@ function createFoodCards() {
 
     // Ajout de l'animation après que le contenu est chargé
     // TODO: Ajouter ici votre code d'animation
-    window.onload = function() {
-    // Récupère toutes les cartes
-    const cards = document.querySelectorAll('.bg-white');
-    
-    // Parcours toutes les cartes et applique une animation
-    cards.forEach((card, index) => {
-        // Ajoute un délai en fonction de l'index de la carte
-        let delay = index * 100;
-        
-        // Crée une animation avec anime.js
-        anime({
+// Fonction pour animer les cartes avec anime.js
+window.onload = function() {
+  // Récupère tous les liens de la navbar
+  const navLinks = document.querySelectorAll('.navbar a');
+
+  // Ajoute une animation de survol aux liens de la navbar
+  navLinks.forEach(link => {
+    link.addEventListener('mouseover', function() {
+      anime({
+        targets: link,
+        scale: 1.2,
+        duration: 200,
+        easing: 'easeInOutQuad'
+      });
+    });
+
+    link.addEventListener('mouseout', function() {
+      anime({
+        targets: link,
+        scale: 1.0,
+        duration: 200,
+        easing: 'easeInOutQuad'
+      });
+    });
+  });
+
+  // Récupère toutes les cartes
+  const cards = document.querySelectorAll('.bg-white');
+
+  // Création de l'Intersection Observer
+  let observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        // Parcours toutes les cartes et applique une animation
+        cards.forEach((card, index) => {
+          // Ajoute un délai en fonction de l'index de la carte
+          let delay = index * 100;
+
+          // Anime.js pour le chargement de l'animation
+          anime({
             targets: card,
-            translateX: [-32, 0],
+            scale: [0.1, 1],
+            opacity: [0, 1],
             delay: delay,
             duration: 500,
             easing: 'easeInOutQuad'
+          });
+  
+          // Anime.js pour l'animation de survol
+          card.addEventListener('mouseover', function() {
+            anime({
+              targets: card,
+              scale: 1.05,
+              duration: 200,
+              easing: 'easeInOutQuad'
+            });
+          });
+  
+          card.addEventListener('mouseout', function() {
+            anime({
+              targets: card,
+              scale: 1.0,
+              duration: 200,
+              easing: 'easeInOutQuad'
+            });
+          });
         });
+
+        observer.unobserve(entry.target);
+      }
     });
+  }, { rootMargin: '0px 0px -200px 0px' });
+
+  // Utilisation de l'observer pour chaque carte
+  cards.forEach(card => {
+    observer.observe(card);
+  });
 };
+
+
+// Création de l'Intersection Observer
+let observer = new IntersectionObserver((entries, observer) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      // Si la carte entre dans le viewport, l'animer
+      animateCard(entry.target);
+
+      // Une fois la carte animée, désactiver l'observation
+      observer.unobserve(entry.target);
+    }
+  });
+}, { rootMargin: '0px 0px -200px 0px' }); // Déclenche l'animation un peu avant que la carte ne soit complètement visible
+
+// Utilisation de l'observer pour chaque carte
+document.querySelectorAll('.bg-white').forEach(card => {
+  observer.observe(card);
+});
+
 
 }
 
