@@ -16,7 +16,7 @@
 <!-- 2ème partie : -->
 <div class='flex flex-col md:flex-row items-center justify-center py-16 bg-gray-100 mx-auto'>
   <div class='md:w-1/2 p-4'>
-    <img src='/imgs/logo_for_foodequlibre.png' alt='Logo Food Équilibre' class='max-w-xs mx-auto'>
+    <img id='logo' src='/imgs/logo_for_foodequlibre.png' alt='Logo Food Équilibre' class='max-w-xs mx-auto'>
   </div>
   <div class='md:w-1/2 p-4 text-center md:text-left'>
     <h2 class='text-5xl font-bold mb-4'>Food Équilibre</h2>
@@ -54,6 +54,15 @@
             <p class='text-gray-700 leading-relaxed' tabindex="0">C'est le moment des tomates juteuses, des baies sucrées et des herbes fraîches. La chaleur du soleil se retrouve dans chaque bouchée.</p>
         </div>
     </div>
+
+    <div class="seasons-switch flex justify-center mt-6">
+  <button id="Automne" class="season-button bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-l mr-2">Automne</button>
+  <button id="Hiver" class="season-button bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 mr-2">Hiver</button>
+  <button id="Printemps" class="season-button bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-2 px-4 mr-2">Printemps</button>
+  <button id="Été" class="season-button bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-r">Été</button>
+</div>
+
+
 </div>
 
 
@@ -94,8 +103,7 @@
 
 <script>
 
- // Simule une base de données d'aliments de saison
-let seasonalFoods = [
+let originalFoodsArray = [
     { name: '🍏 Pomme', season: 'Automne', benefits: 'Riches en fibres et vitamine C, les pommes peuvent améliorer la santé cardiaque.' },
     { name: '🍄 Champignon', season: 'Automne', benefits: 'Les champignons sont une excellente source de vitamines B et de sélénium, qui soutiennent le système immunitaire.' },
     { name: '🌰 Châtaigne', season: 'Automne', benefits: 'Les châtaignes sont une bonne source de vitamines B, de minéraux et de fibres.' },
@@ -130,26 +138,49 @@ let seasonalFoods = [
     { name: '🌽 Courgette', season: 'Été', benefits: 'Les courgettes sont faibles en calories et riches en fibres, ce qui les rend idéales pour une alimentation équilibrée.' },
 ];
 
-// Crée et ajoute les cartes d'aliments à la page
+// Faire une copie de originalFoodsArray pour garder l'original intact
+let seasonalFoods = [...originalFoodsArray];
+
+// Fonction pour obtenir la saison à partir du mois
+function getSeasonFromMonth(month) {
+    // Les mois sont indexés à partir de 0 (janvier = 0, février = 1, etc.)
+    if (month < 2 || month === 11) {
+        return 'Hiver';
+    } else if (month < 5) {
+        return 'Printemps';
+    } else if (month < 8) {
+        return 'Été';
+    } else {
+        return 'Automne';
+    }
+}
+
+// Fonction pour mettre à jour les cartes d'aliments en fonction de la saison
+function updateFoodCards(season) {
+    // Filtrer les aliments en fonction de la saison
+    seasonalFoods = originalFoodsArray.filter(food => food.season === season);
+    // Recréer les cartes d'aliments
+    createFoodCards();
+}
+
+// Fonction pour créer les cartes d'aliments
 function createFoodCards() {
+    // Récupérer le conteneur de nourriture
     const foodContainer = document.querySelector('.grid');
 
-    // Supprime toutes les cartes d'aliments existantes
+    // Supprimer toutes les cartes d'aliments existantes
     while (foodContainer.firstChild) {
         foodContainer.firstChild.remove();
     }
-    // Crée une nouvelle carte pour chaque aliment
+
+    // Créer une nouvelle carte pour chaque aliment
     for (const food of seasonalFoods) {
         const foodCard = document.createElement('div');
         foodCard.className = 'bg-white rounded-lg shadow-md p-4 transition-all ease-in-out duration-500 transform translate-x-32';
 
         const foodName = document.createElement('h3');
         foodName.className = 'text-lg font-bold mb-2';
-
-        // Divisez la chaîne de caractères du nom en émoji et texte
         const [emoji, text] = food.name.split(' ');
-
-        // Enveloppez l'émoji dans une balise span et attribuez-lui une classe
         foodName.innerHTML = `<span class="big-emoji">${emoji}</span> ${text}`;
 
         const foodSeason = document.createElement('p');
@@ -166,135 +197,133 @@ function createFoodCards() {
         foodContainer.appendChild(foodCard);
     }
 
+    // Ajouter l'animation aux nouvelles cartes d'aliments
+    const cards = document.querySelectorAll('.bg-white');
+    cards.forEach(card => {
+        card.classList.add('animate');
+    });
+}
 
-    // Ajout de l'animation après que le contenu est chargé
-    // TODO: Ajouter ici votre code d'animation
-// Fonction pour animer les cartes avec anime.js
+// Obtenir le mois actuel
+const currentMonth = new Date().getMonth();
+// Obtenir la saison actuelle à partir du mois
+const currentSeason = getSeasonFromMonth(currentMonth);
+// Mettre à jour les cartes d'aliments pour la saison actuelle
+updateFoodCards(currentSeason);
+
+// Ajouter un écouteur d'événements à chaque bouton de saison
+document.querySelectorAll('.season-button').forEach(button => {
+    button.addEventListener('click', function(event) {
+        // Mettre à jour les cartes d'aliments lorsque le bouton est cliqué
+        updateFoodCards(event.target.id);
+    });
+});
+
+// Ajouter l'animation lors du chargement de la page
 window.onload = function() {
-  // Récupère tous les liens de la navbar
-  const navLinks = document.querySelectorAll('.navbar a');
-
-  // Ajoute une animation de survol aux liens de la navbar
-  navLinks.forEach(link => {
-    link.addEventListener('mouseover', function() {
-      anime({
-        targets: link,
-        scale: 1.2,
-        duration: 200,
-        easing: 'easeInOutQuad'
-      });
-    });
-
-    link.addEventListener('mouseout', function() {
-      anime({
-        targets: link,
-        scale: 1.0,
-        duration: 200,
-        easing: 'easeInOutQuad'
-      });
-    });
-  });
-
-  // Récupère toutes les cartes
-  const cards = document.querySelectorAll('.bg-white');
-
-  // Création de l'Intersection Observer
-  let observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        // Parcours toutes les cartes et applique une animation
-        cards.forEach((card, index) => {
-          // Ajoute un délai en fonction de l'index de la carte
-          let delay = index * 100;
-
-          // Anime.js pour le chargement de l'animation
+    // Animation des liens de la barre de navigation
+    const navLinks = document.querySelectorAll('.navbar a');
+    navLinks.forEach(link => {
+        link.addEventListener('mouseover', function() {
           anime({
+                targets: link,
+                scale: 1.2,
+                duration: 200,
+                easing: 'easeInOutQuad'
+            });
+        });
+
+        link.addEventListener('mouseout', function() {
+          anime({
+                targets: link,
+                scale: 1.0,
+                duration: 200,
+                easing: 'easeInOutQuad'
+            });
+        });
+    });
+
+    // Utiliser IntersectionObserver pour animer les cartes lorsque l'utilisateur fait défiler la page
+    let observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                // Animer la carte si elle est visible
+                animateCard(entry.target);
+                // Arrêter d'observer la carte après l'animation
+                observer.unobserve(entry.target);
+            }
+        });
+    }, { rootMargin: '0px 0px -200px 0px' });
+
+    // Commencer à observer toutes les cartes
+    const cards = document.querySelectorAll('.bg-white');
+    cards.forEach(card => {
+        observer.observe(card);
+    });
+
+    function animateCard(card) {
+        anime({
             targets: card,
             scale: [0.1, 1],
             opacity: [0, 1],
-            delay: delay,
             duration: 500,
             easing: 'easeInOutQuad'
-          });
-  
-          // Anime.js pour l'animation de survol
-          card.addEventListener('mouseover', function() {
-            anime({
-              targets: card,
-              scale: 1.05,
-              duration: 200,
-              easing: 'easeInOutQuad'
-            });
-          });
-  
-          card.addEventListener('mouseout', function() {
-            anime({
-              targets: card,
-              scale: 1.0,
-              duration: 200,
-              easing: 'easeInOutQuad'
-            });
-          });
         });
-
-        observer.unobserve(entry.target);
-      }
-    });
-  }, { rootMargin: '0px 0px -200px 0px' });
-
-  // Utilisation de l'observer pour chaque carte
-  cards.forEach(card => {
-    observer.observe(card);
-  });
+  
+        card.addEventListener('mouseover', function() {
+            anime({
+                targets: card,
+                scale: 1.05,
+                duration: 200,
+                easing: 'easeInOutQuad'
+            });
+        });
+  
+        card.addEventListener('mouseout', function() {
+            anime({
+                targets: card,
+                scale: 1.0,
+                duration: 200,
+                easing: 'easeInOutQuad'
+            });
+        });
+    }
 };
 
 
-// Création de l'Intersection Observer
-let observer = new IntersectionObserver((entries, observer) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      // Si la carte entre dans le viewport, l'animer
-      animateCard(entry.target);
-
-      // Une fois la carte animée, désactiver l'observation
-      observer.unobserve(entry.target);
-    }
+//animer le logo
+var animation = anime.timeline({
+    loop: true,
+    endDelay: 3000 // pause de 3 secondes à la fin de chaque rotation
   });
-}, { rootMargin: '0px 0px -200px 0px' }); // Déclenche l'animation un peu avant que la carte ne soit complètement visible
 
-// Utilisation de l'observer pour chaque carte
-document.querySelectorAll('.bg-white').forEach(card => {
-  observer.observe(card);
-});
+  animation
+    .add({
+      targets: '#logo',
+      rotateY:  {value: 360, duration: 2000},
+      easing: 'easeInOutSine'
+    });
 
 
+  //titre page 
+  function wrapEveryLetter(element) {
+  let text = element.innerHTML;
+  let newText = "";
+  for(let i = 0; i < text.length; i++) {
+    newText += `<span class="letter">${text[i]}</span>`;
+  }
+  element.innerHTML = newText;
 }
-
-// Met à jour les cartes d'aliments chaque fois que la saison change
-function updateFoodCards() {
-    const currentMonth = new Date().getMonth();
-    const season = getSeasonFromMonth(currentMonth);
-    seasonalFoods = seasonalFoods.filter(food => food.season === season);
-    createFoodCards();
-}
-
-// Convertit un mois en saison
-function getSeasonFromMonth(month) {
-    if (month < 2 || month === 11) {
-        return 'Hiver';
-    } else if (month < 5) {
-        return 'Printemps';
-    } else if (month < 8) {
-        return 'Été';
-    } else {
-        return 'Automne';
-    }
-}
-
-// Initialise la page
-updateFoodCards();
-
-
+let element = document.querySelector('.text-white');
+wrapEveryLetter(element);
+anime.timeline({loop: false})
+  .add({
+    targets: '.text-white .letter',
+    opacity: [0,1],
+    easing: "easeInOutQuad",
+    duration: 1250,
+    delay: (el, i) => 50 * (i+1)
+  });
 
 
 </script>
