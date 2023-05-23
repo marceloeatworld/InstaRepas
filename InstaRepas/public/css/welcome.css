@@ -1,3 +1,10 @@
+/* Couleurs personnalisées */
+:root {
+  --color-primary: #B5F0EE;
+  --color-secondary: #FFDB58;
+  --color-accent: #E8A48D;
+}
+
 .bg-cover-meal {
     background-image: url('../imgs/test1.png');
   }
@@ -31,6 +38,7 @@
 }
 
 
+
  
 /* Admin Menu Styles */
 .admin-menu {
@@ -55,3 +63,34 @@
 .admin-menu li a:hover {
   background-color: #ddd;
 }
+
+@import 'tailwindcss/utilities';
+
+/* Styles personnalisés */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideInLeft {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+.container {
+  animation: fadeIn 1s ease-in-out;
+}
+
+section {
+  animation: slideInLeft 1s ease-in-out;
+}
+
+
