@@ -118,10 +118,13 @@ Route::get('/a-propos', function () {
 });
 
 // informations alimentaires
-
 Route::get('/conseil-de-cuisine', [CookingAdviceController::class, 'index'])->name('CookingAdvice.index');
-
 Route::get('/information-nutrition', [NutritionInfoController::class, 'index'])->name('NutritionInfo.index');
+
+//mention legal
+Route::get('/legal', function () {
+    return view('legal');
+})->name('legal');
 
 
 

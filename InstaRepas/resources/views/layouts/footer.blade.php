@@ -5,8 +5,9 @@
         <h4 class="text-lg font-bold mb-3">Liens rapides</h4>
         <ul class="list-reset">
           <li><a href="/" class="hover:text-gray-500">Accueil</a></li>
+          <li><a href="/contact" class="hover:text-gray-500">Nous-contacter</a></li>
           <li><a href="/a-propos" class="hover:text-gray-500">À propos</a></li>
-          <li><a href="/contact" class="hover:text-gray-500">Contact</a></li>
+          <li><a href="{{ route('legal') }}" class="hover:text-gray-500">Mentions légales</a></li>
         </ul>
       </div>
       <div class="w-full md:w-1/3 lg:w-1/4 px-3 mb-6">
