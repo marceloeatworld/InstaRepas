@@ -1,23 +1,22 @@
-name: Deploy
-
-on:
-  workflow_dispatch:
-
+name: Build and Deploy
+on: [push]
+permissions:
+  contents: write
 jobs:
-  deploy:
+  build-and-deploy:
+    concurrency: ci-${{ github.ref }}
     runs-on: ubuntu-latest
-
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v3
+      - name: Checkout 🛎️
+        uses: actions/checkout@v3
 
-    - name: Deploy to Server
-      uses: easingthemes/ssh-deploy@v4.1.8
-      with:
-        SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
-        SOURCE: "InstaRepas/"
-        ARGS: "cd /var/www/html/instarepas/ && composer install --no-dev && npm install --production && npm run production && php artisan migrate --force && sudo systemctl restart apache2"
-        REMOTE_HOST: ${{ secrets.REMOTE_HOST }}
-        REMOTE_USER: ${{ secrets.REMOTE_USER }}
-        REMOTE_PORT: ${{ secrets.REMOTE_PORT }}
-        TARGET: /var/www/html/instarepas
+      - name: Install and Build 🔧
+        run: |
+          npm ci
+          npm run build
+
+      - name: Deploy 🚀
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          folder: build
+          ssh-key: ${{ secrets.SSH_PRIVATE_KEY }} # This should be the SSH key stored in your repository secrets.
