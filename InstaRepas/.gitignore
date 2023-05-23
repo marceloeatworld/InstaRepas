@@ -17,3 +17,8 @@ yarn-error.log
 /.fleet
 /.idea
 /.vscode
+/README.md
+/tests
+/vite.config.js
+/tailwind.config.js
+/postcss.config.js
