@@ -11,9 +11,15 @@
 
 @csrf
 <fieldset>
-<legend>Restrictions alimentaires</legend>
+    <div class="w-full p-6 border border-gray-200 rounded-lg shadow flex items-center justify-center text-center" style="background-color: #6495ED;">
+
+        <a href="{{ route('admin.users.index') }}">
+            <h5 class="mb-2 text-2xl font-bold tracking-tight text-white mx-4 tracking-wider">Restrictions alimentaires</h5>
+        </a>
+
+    </div>
 @foreach($dietaryRestrictions as $restriction)
-<label>
+<label class="block mb-2">
     <input type="checkbox" name="restrictions[]" value="{{ $restriction->id }}" {{ Auth::user()->preferences->contains($restriction) ? 'checked' : '' }}> {{ $displayNames[$restriction->name] }}
 </label>
 @endforeach
@@ -21,11 +27,8 @@
 
 
 
-<div class="p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-lg">
-                <div class="max-w-xl">
-                <button type="submit">Enregistrer les préférences</button>
-                </div>
-            </div>
+
+                    <button type="submit" class="text-gray-900 bg-gradient-to-r from-teal-200 to-lime-200 hover:bg-gradient-to-l hover:from-teal-200 hover:to-lime-200 focus:ring-4 focus:outline-none focus:ring-lime-200 dark:focus:ring-teal-700 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">Enregistrer les préférences</button>
 
 </form>
 
