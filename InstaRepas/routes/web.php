@@ -14,6 +14,7 @@ use App\Http\Controllers\FoodCategoryController;
 use App\Http\Controllers\Auth\ProviderController;
 use App\Http\Controllers\CookingAdviceController;
 use App\Http\Controllers\NutritionInfoController;
+use App\Http\Controllers\ContactController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -117,11 +118,19 @@ Route::get('/a-propos', function () {
 });
 
 // informations alimentaires
-
 Route::get('/conseil-de-cuisine', [CookingAdviceController::class, 'index'])->name('CookingAdvice.index');
-
 Route::get('/information-nutrition', [NutritionInfoController::class, 'index'])->name('NutritionInfo.index');
 
+//mention legal
+Route::get('/legal', function () {
+    return view('legal');
+})->name('legal');
 
+
+
+
+// contact
+Route::post('/contact/submit', [ContactController::class, 'submit'])->name('contact.submit');
+Route::get('/contact', [ContactController::class, 'index'])->name('contact');
 
 require __DIR__.'/auth.php';

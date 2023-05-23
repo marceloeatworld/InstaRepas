@@ -16,39 +16,19 @@
 
         <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha512-z4OUqw38qNLpn1libAN9BsoDx6nbNFio5lA6CuTp9NlK83b89hgyCVq+N5FdBJptINztxn1Z3SaKSKUS5UP60Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
+        
+        
+        <script src="https://kit.fontawesome.com/7fdee4801e.js" crossorigin="anonymous"></script>
+
+        {{-- TAILWIND SCRIPT --}}
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.5/flowbite.min.js"></script>
+        
+        <script src="{{ asset('js/js.js') }}"></script>
+
        <link href="{{ asset('css/welcome.css') }}" rel="stylesheet">
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
 
-        <style>
-            /* Admin Menu Styles */
-            .admin-menu {
-                list-style: none;
-                padding: 0;
-                margin: 0;
-            }
-
-            .admin-menu li {
-                display: inline-block;
-                margin-right: 10px;
-            }
-
-            .admin-menu li a {
-                text-decoration: none;
-                padding: 5px 10px;
-                border-radius: 3px;
-                background-color: #f0f0f0;
-                color: #333;
-            }
-
-            .admin-menu li a:hover {
-                background-color: #ddd;
-            }
-
-            /* Additional Admin Styles */
-            /* Add your custom styles for the admin theme here */
-
-        </style>
     </head>
     <body class="font-sans antialiased">
 
@@ -70,12 +50,6 @@
             </main>
         </div>
         @include('layouts.footer')
-
-        <script src="https://kit.fontawesome.com/7fdee4801e.js" crossorigin="anonymous"></script>
-
-        {{-- TAILWIND SCRIPT --}}
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.5/flowbite.min.js"></script>
-
 
     </body>
 </html>
