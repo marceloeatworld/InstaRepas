@@ -11,23 +11,23 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - name: Install Node.js
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v3
         with:
-          node-version: '14.x'
+          node-version: '16.x'
       - name: Install npm dependencies
         run: npm ci
       - name: Run build task
         run: npm run build --if-present
       - name: Deploy to Server
-        uses: easingthemes/ssh-deploy@v2.1.11
+        uses: easingthemes/ssh-deploy@v4.1.8
         env:
           SSH_PRIVATE_KEY: ${{ secrets.SERVER_SSH_KEY }}
           ARGS: "-avz --delete"
           REMOTE_HOST: ${{ secrets.REMOTE_HOST }}
           REMOTE_PORT: ${{ secrets.REMOTE_PORT }}
           REMOTE_USER: ${{ secrets.REMOTE_USER }}
-          TARGET: ${{ secrets.REMOTE_TARGET }}
+          TARGET: /var/www/html/instarepas/
           SOURCE: "./"
           EXCLUDE: "/.git, /.github, /dist/, /node_modules/"
