@@ -5,7 +5,7 @@
             <div class="w-full p-6 border border-gray-200 rounded-lg shadow flex items-center justify-center text-center" style="background-color: #6495ED;">
 
                 <a href="{{ route('admin.users.index') }}">
-                    <h5 class="mb-2 text-2xl font-bold tracking-tight text-white mx-4 tracking-wider">Préférences alimenaites</h5>
+                    <h5 class="mb-2 text-2xl font-bold tracking-tight text-white mx-4 tracking-wider">Préférences alimentaires</h5>
                 </a>
 
             </div>
