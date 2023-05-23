@@ -18,7 +18,7 @@
         </ul>
       </div>
       <div class="w-full md:w-1/3 lg:w-1/4 px-3 mb-6">
-        <h4 class="text-lg font-bold mb-3">Contactez-nous</h4>
+        <h4 class="text-lg font-bold mb-3">Cabinet de Diététique</h4>
         <ul class="list-reset">
         <li>
           <i class="fas fa-map-marker-alt mr-2"></i>
