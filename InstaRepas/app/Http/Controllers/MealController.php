@@ -50,6 +50,9 @@ class MealController extends Controller
             });
         }
 
+        // Ajout de la vérification des aliments validés
+        $foods->where('is_valid', true);
+
         $foods = $foods->get();
 
         // Préparation des repas pour le nombre spécifié de jours
