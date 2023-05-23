@@ -1,8 +1,10 @@
 <x-app-layout>
     <div class="py-12">
+
     <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 flex justify-center">
             <div class="w-full md:w-2/3 lg:w-1/2 p-6 rounded-lg flex items-center justify-center text-center bg-gradient-to-r from-blue-900 to-blue-400">
                 <h5 class="mb-2 text-2xl font-semibold tracking-normal text-white mx-4">Savourez l'expérience</h5>
+
             </div>
         </div>
 
