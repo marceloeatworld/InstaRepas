@@ -14,14 +14,14 @@
 </div>
 
 <!-- 2ème partie : -->
-<div class='flex flex-col md:flex-row items-center justify-center py-16 bg-gray-100 mx-auto'>
+<div class='flex flex-col md:flex-row items-center justify-center py-12 bg-gray-100 mx-auto px-4 sm:px-0'>
   <div class='md:w-1/2 p-4'>
-    <img id='logo' src='/imgs/logo_for_foodequlibre.png' alt='Logo Food Équilibre' class='max-w-xs mx-auto'>
+    <img id='logo' src='/imgs/logo_for_foodequlibre.png' alt='Logo Food Équilibre' class='max-w-xs md:max-w-sm mx-auto'>
   </div>
   <div class='md:w-1/2 p-4 text-center md:text-left'>
-    <h2 class='text-5xl font-bold mb-4'>Food Équilibre</h2>
-    <h3 class='text-3xl font-bold mb-4'>Réinventez votre alimentation</h3>
-    <p class='text-gray-700 leading-relaxed mb-8 text-lg font-medium'>
+    <h2 class='text-4xl md:text-5xl font-bold mb-2 md:mb-4'>Food Équilibre</h2>
+    <h3 class='text-2xl md:text-3xl font-bold mb-2 md:mb-4'>Réinventez votre alimentation</h3>
+    <p class='text-gray-700 leading-relaxed mb-6 text-md md:text-lg font-medium max-w-lg mx-auto md:mx-0'>
       Avec <strong>Food Équilibre</strong>, la nutrition n'a jamais été aussi simple et délicieuse. Notre plateforme innovante vous offre la possibilité de créer des <strong>repas personnalisés</strong> adaptés à vos besoins et préférences. Enrichissez votre menu avec de nouveaux aliments saisonniers, et profitez d'une <strong>alimentation variée et riche en nutriments</strong> tout au long de l'année.
     </p>
     <div class='flex justify-center md:justify-start'>
@@ -31,6 +31,7 @@
     </div>
   </div>
 </div>
+
 
 
 <!-- 3ème partie : -->
@@ -67,21 +68,22 @@
 
 
 
-<!-- 4ème partie : -->
-<div class='h-auto flex flex-col justify-center items-center py-12'>
-  <h2 class='text-5xl font-bold mb-8'>Food Équilibre : Un choix adapté à vos préférences</h2>
-  <p class='text-gray-700 text-xl mb-4 text-center'>
-    Que vous soyez végétalien, sans gluten, ou que vous aimiez tout simplement la viande, Food Équilibre crée des repas parfaitement adaptés à votre style de vie. En vous inscrivant, vous pouvez sauvegarder vos préférences et les retrouver à chaque connexion. Fini le temps perdu à refaire constamment vos choix, avec Food Équilibre, votre sélection reste à portée de main. Découvrez l'expérience de la personnalisation alimentaire poussée à son paroxysme. Allez-y, inscrivez-vous et commencez à découvrir votre nouvel allié nutritionnel.
+<div class='h-auto flex flex-col justify-center items-center py-12 text-center px-4 sm:px-0'>
+  <h2 class='text-4xl sm:text-5xl font-bold mb-4 sm:mb-8  max-w-2xl mx-auto leading-snug'>Food Équilibre : Un choix adapté à vos préférences</h2>
+  <p class='text-gray-700 text-lg sm:text-xl mb-4 max-w-xl mx-auto leading-relaxed'>
+    Que vous soyez végétalien, sans gluten, ou que vous aimiez tout simplement la viande, Food Équilibre crée des repas parfaitement adaptés à votre style de vie. <br>En vous inscrivant, vous pouvez sauvegarder vos préférences et les retrouver à chaque connexion. <br>Fini le temps perdu à refaire constamment vos choix, avec Food Équilibre, votre sélection reste à portée de main.<br> Découvrez l'expérience de la personnalisation alimentaire poussée à son paroxysme. Allez-y, inscrivez-vous et commencez à découvrir votre nouvel allié nutritionnel.
   </p>
   <a href='/register' class='bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-full'>Inscrivez-vous maintenant</a>
 </div>
+
+
 
 <!-- 5ème partie : -->
 <div class='bg-gray-100 py-16'>
     <div class='container mx-auto px-4 sm:px-6 lg:px-8'>
         <h2 class='text-3xl font-bold mb-8 text-center'>Notre Histoire</h2>
         <div class='flex justify-center'>
-            <div class='bg-white rounded-lg shadow-md p-8 md:p-16 max-w-2xl'>
+            <div class='bg-white rounded-lg shadow-md p-8 md:p-16 max-w-4xl' style="font-family: 'Roboto', sans-serif;">
                 <p class='text-gray-700 leading-relaxed mb-6'>
                     Trois étudiants passionnés par la technologie et l'innovation ont décidé d'apporter une solution à une problématique sociale : améliorer l'alimentation quotidienne. S'associant avec une organisation caritative, ils ont utilisé leurs compétences en programmation pour concevoir Food Équilibre, une plateforme facilitant la création de repas équilibrés et personnalisés.
                 </p>
@@ -100,50 +102,7 @@
 
 
 
-
 <script>
-// Créer une fonction pour appliquer notre animation à un lien
-function applyAnimation(link) {
-    link.addEventListener('mouseover', function() {
-        anime({
-            targets: link,
-            scale: 1.1,
-            color: '#6495ED',
-            duration: 200,
-            easing: 'easeInOutQuad'
-        });
-    });
-
-    link.addEventListener('mouseout', function() {
-        anime({
-            targets: link,
-            scale: 1.0,
-            color: '#000000',
-            duration: 200,
-            easing: 'easeInOutQuad'
-        });
-    });
-}
-
-// Créer un MutationObserver pour écouter les modifications du DOM
-let observer = new MutationObserver(function(mutations) {
-    mutations.forEach(function(mutation) {
-        if (mutation.addedNodes) {
-            mutation.addedNodes.forEach(function(node) {
-                if (node.nodeType === 1 && node.matches('nav a')) {
-                    applyAnimation(node);
-                }
-            });
-        }
-    });
-});
-
-// Commencer à observer le document avec la configuration appropriée
-observer.observe(document, { childList: true, subtree: true });
-
-// Appliquer l'animation à tous les liens existants au chargement initial de la page
-document.querySelectorAll('nav a').forEach(applyAnimation);
-
 
 
 let originalFoodsArray = [
@@ -183,6 +142,8 @@ let originalFoodsArray = [
 ];
 
 // On fait une copie de originalFoodsArray pour garder l'original intact
+//Cette ligne de code crée une copie du tableau originalFoodsArray, 
+//permettant des opérations de filtrage et de manipulation sur la copie, sans modifier le tableau original, assurant ainsi la conservation des données initiales.
 let seasonalFoods = [...originalFoodsArray];
 
 // Cette fonction détermine la saison en fonction du mois donné

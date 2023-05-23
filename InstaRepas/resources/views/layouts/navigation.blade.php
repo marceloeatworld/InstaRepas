@@ -44,6 +44,10 @@
                          {{ __('Guide Nutrition') }}
                     </x-nav-link>
 
+                    <x-nav-link :href="'/contact'">
+                         {{ __('Contact') }}
+                    </x-nav-link>
+
                     <x-nav-link :href="'/a-propos'">
                          {{ __('À propos') }}
                     </x-nav-link>
