@@ -56,7 +56,7 @@
         </div>
     </div>
 
-    <div class="seasons-switch flex justify-center mt-6">
+  <div class="seasons-switch flex justify-center mt-6">
   <button id="Automne" class="season-button bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-l mr-2">Automne</button>
   <button id="Hiver" class="season-button bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 mr-2">Hiver</button>
   <button id="Printemps" class="season-button bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-2 px-4 mr-2">Printemps</button>
