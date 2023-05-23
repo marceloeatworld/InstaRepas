@@ -1,3 +1,10 @@
+/* Couleurs personnalisées */
+:root {
+  --color-primary: #B5F0EE;
+  --color-secondary: #FFDB58;
+  --color-accent: #E8A48D;
+}
+
 .bg-cover-meal {
     background-image: url('../imgs/test1.png');
   }
@@ -29,4 +36,34 @@
 .shadow-text {
   text-shadow: 5px 5px 10px rgba(0, 0, 0, 2);
 }
+
+@import 'tailwindcss/utilities';
+
+/* Styles personnalisés */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideInLeft {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+.container {
+  animation: fadeIn 1s ease-in-out;
+}
+
+section {
+  animation: slideInLeft 1s ease-in-out;
+}
+
 
