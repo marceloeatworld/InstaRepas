@@ -24,3 +24,4 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 //route pour rechercher un aliment
 Route::get('foods', [RecipeController::class, 'searchFoods']);
+
