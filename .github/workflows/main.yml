@@ -15,8 +15,8 @@ jobs:
       uses: easingthemes/ssh-deploy@v4.1.8
       with:
         SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
-        SOURCE: "InstaRepas/InstaRepas/"
-        ARGS: "cd /var/www/html/instarepas && composer install --no-dev && npm install --production && npm run production && php artisan migrate --force && sudo systemctl restart apache2"
+        SOURCE: "InstaRepas/"
+        ARGS: "cd /var/www/html/instarepas/ && composer install --no-dev && npm install --production && npm run production && php artisan migrate --force && sudo systemctl restart apache2"
         REMOTE_HOST: ${{ secrets.REMOTE_HOST }}
         REMOTE_USER: ${{ secrets.REMOTE_USER }}
         REMOTE_PORT: ${{ secrets.REMOTE_PORT }}
