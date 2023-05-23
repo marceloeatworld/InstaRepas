@@ -20,8 +20,15 @@
       <div class="w-full md:w-1/3 lg:w-1/4 px-3 mb-6">
         <h4 class="text-lg font-bold mb-3">Contactez-nous</h4>
         <ul class="list-reset">
-          <li><i class="fas fa-map-marker-alt mr-2"></i>6 rue de plaisance 94130 Nogent sur Marne</li>
-          <li><i class="fas fa-phone mr-2"></i>01.48.72.35.95</li>
+        <li>
+          <i class="fas fa-map-marker-alt mr-2"></i>
+          <a href="https://www.google.com/maps/search/?api=1&query=6+rue+de+plaisance+94130+Nogent+sur+Marne" target="_blank">6 rue de plaisance 94130 Nogent sur Marne</a>
+         </li>
+         <li>
+          <i class="fas fa-phone mr-2"></i>
+          <a href="tel:+33148723595">01.48.72.35.95</a>
+          </li>
+
         </ul>
       </div>
     </div>
