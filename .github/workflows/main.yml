@@ -22,7 +22,12 @@ jobs:
           cd /var/www/html/instarepas
           git pull
           composer install --no-dev
+          php artisan key:generate
           npm install --production
           npm run production
           php artisan migrate --force
+          php artisan config:cache
+          php artisan route:cache
+          sudo chown -R www-data:www-data storage bootstrap/cache
+          sudo chmod -R 775 storage bootstrap/cache
           sudo systemctl restart apache2
