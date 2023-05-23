@@ -67,6 +67,8 @@ class Food extends Model
                 'Betterave' => ['before' => ['Salade de']],
                 'Artichaut' => ['after' => ['vapeur']],
                 'Radis' => ['before' => ['Salade de']],
+                'Tomate' => ['before' => ['Salade de']],
+                'Concombre' => ['before' => ['Salade de']],
             ],
             'Legumes' => [
                 'after' => ['sauté', 'vapeur']

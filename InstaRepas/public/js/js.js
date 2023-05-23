@@ -8,6 +8,8 @@ function applyAnimation(link) {
             duration: 200,
             easing: 'easeInOutQuad'
         });
+        link.classList.add('rounded'); // ajouter l'arrondissement
+       
     });
 
     link.addEventListener('mouseout', function() {
@@ -18,8 +20,10 @@ function applyAnimation(link) {
             duration: 200,
             easing: 'easeInOutQuad'
         });
+        link.classList.add('rounded'); // ajouter l'arrondissement
     });
 }
+
 
 // Créer un MutationObserver pour écouter les modifications du DOM
 let observer = new MutationObserver(function(mutations) {
