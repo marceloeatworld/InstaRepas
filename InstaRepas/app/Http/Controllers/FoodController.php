@@ -13,6 +13,7 @@ use App\Models\MealCombination;
 use App\Models\Season;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Validator;
 
 // Définition du contrôleur de la nourriture
 class FoodController extends Controller
@@ -63,6 +64,15 @@ class FoodController extends Controller
     // Méthode pour enregistrer un nouvel aliment
     public function store(Request $request)
     {
+        //verifie si aliment existe deja
+        $validator = Validator::make($request->all(), [
+            'name' => 'unique:foods',
+        ]);
+    
+        if ($validator->fails()) {
+            Session::flash('error', 'Cet aliment existe déjà!');
+            return back()->withInput();
+        }
         // Création du nouvel aliment
         $food = Food::create($request->all());
         $food->user_id = auth()->id();

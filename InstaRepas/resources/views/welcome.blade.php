@@ -83,7 +83,7 @@
     <div class='container mx-auto px-4 sm:px-6 lg:px-8'>
         <h2 class='text-3xl font-bold mb-8 text-center'>Notre Histoire</h2>
         <div class='flex justify-center'>
-            <div class='bg-white rounded-lg shadow-md p-8 md:p-16 max-w-4xl' style="font-family: 'Roboto', sans-serif;">
+            <div class='bg-white rounded-lg shadow-md p-8 md:p-16 max-w-4xl'>
                 <p class='text-gray-700 leading-relaxed mb-6'>
                     Trois étudiants passionnés par la technologie et l'innovation ont décidé d'apporter une solution à une problématique sociale : améliorer l'alimentation quotidienne. S'associant avec une organisation caritative, ils ont utilisé leurs compétences en programmation pour concevoir Food Équilibre, une plateforme facilitant la création de repas équilibrés et personnalisés.
                 </p>
