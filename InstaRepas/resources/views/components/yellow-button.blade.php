@@ -1,4 +1,4 @@
-    <button {{ $attributes->merge(['style' => '   
+<a {{ $attributes->merge(['class' => '...']) }} style="
     text-decoration: none;
     display: flex;
     justify-content: center;
@@ -12,10 +12,6 @@
     border-radius: 5px;
     font-size : 16px;
     font-weight: bold;
-
-    ']) 
-
-}}>
-        {{ $slot }}
-    </button>
-</div>
+">
+    {{ $slot }}
+</a>
