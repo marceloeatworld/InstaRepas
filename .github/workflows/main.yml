@@ -9,15 +9,25 @@ jobs:
 
     steps:
     - name: Checkout code
-      uses: actions/checkout@v3
+      uses: actions/checkout@v2
 
     - name: Deploy to Server
-      uses: easingthemes/ssh-deploy@v4.1.8
+      uses: appleboy/ssh-action@v0.1.4
       with:
-        SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
-        SOURCE: "InstaRepas/InstaRepas/"
-        ARGS: "cd /var/www/html/instarepas && composer install --no-dev && npm install --production && npm run production && php artisan migrate --force && sudo systemctl restart apache2"
-        REMOTE_HOST: ${{ secrets.REMOTE_HOST }}
-        REMOTE_USER: ${{ secrets.REMOTE_USER }}
-        REMOTE_PORT: ${{ secrets.REMOTE_PORT }}
-        TARGET: /var/www/html/instarepas
+        host: ${{ secrets.REMOTE_HOST }}
+        username: ${{ secrets.REMOTE_USER }}
+        key: ${{ secrets.SSH_PRIVATE_KEY }}
+        port: ${{ secrets.REMOTE_PORT }}
+        script: |
+          cd /var/www/html/instarepas
+          git pull
+          composer install --no-dev
+          php artisan key:generate
+          npm install --production
+          npm run production
+          php artisan migrate --force
+          php artisan config:cache
+          php artisan route:cache
+          sudo chown -R www-data:www-data storage bootstrap/cache
+          sudo chmod -R 775 storage bootstrap/cache
+          sudo systemctl restart apache2
