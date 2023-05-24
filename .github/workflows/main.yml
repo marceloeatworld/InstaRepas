@@ -1,9 +1,7 @@
 name: Laravel CI/CD
 
 on:
-  push:
-    branches:
-      - main # Remplacer 'main' par le nom de la branche sur laquelle vous voulez déclencher le déploiement
+  workflow_dispatch:
 
 jobs:
   deploy:
@@ -14,7 +12,7 @@ jobs:
       uses: actions/checkout@v3.5.2
       
     - name: Set up PHP
-      uses: shivammathur/setup-php@v2.25.1
+      uses: shivammathur/setup-php@2.25.1
       with:
         php-version: '8.2' # Remplacer par la version de PHP que vous utilisez
         extensions: mbstring, mysqli, pdo_sqlite, ctype, json, iconv # Ajouter / Supprimer des extensions PHP au besoin
