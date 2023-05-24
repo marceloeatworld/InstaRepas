@@ -37,7 +37,7 @@ jobs:
 
     - name: Build Project
       run: |
-        npm run production
+        npm run build
       working-directory: ./InstaRepas
         
     - name: Setup SSH and rsync
