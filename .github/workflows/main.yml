@@ -1,4 +1,4 @@
-name: Laravel CI/CD
+name: 😊 Deploiment - Laravel CI/CD
 
 on:
   workflow_dispatch:
@@ -28,10 +28,12 @@ jobs:
         cd InstaRepas
         composer install --no-progress --prefer-dist --optimize-autoloader
         npm install
+      working-directory: ./InstaRepas
 
     - name: Build Project
       run: |
         npm run production
+      working-directory: ./InstaRepas
         
     - name: Setup SSH and rsync
       uses: webfactory/ssh-agent@v0.8.0
