@@ -15,17 +15,22 @@ jobs:
       uses: shivammathur/setup-php@2.25.1
       with:
         php-version: '8.2' # Remplacer par la version de PHP que vous utilisez
-        extensions: mbstring, mysqli, pdo_sqlite, ctype, json, iconv # Ajouter / Supprimer des extensions PHP au besoin
+        extensions: bcmath, bz2, calendar, Core, ctype, curl, date, dom, exif, FFI, fileinfo, filter, ftp, gd, gettext, hash, iconv, igbinary, imagick, imap, intl, json, libxml, mbstring, mcrypt, mysqli, mysqlnd, openssl, pcntl, pcre, PDO, pdo_mysql, Phar, posix, readline, redis, Reflection, session, shmop, SimpleXML, soap, sockets, sodium, SPL, standard, sysvmsg, sysvsem, sysvshm, tokenizer, xml, xmlreader, xmlrpc, xmlwriter, xsl, zip, zlib, Zend OPcache
         tools: composer:v2
 
     - name: Install NPM
       run: |
         sudo apt-get install -y npm
         npm --version
+        
+    - name: Change to Laravel directory and print
+      run: |
+        cd InstaRepas
+        pwd
+        ls -la
 
     - name: Install Project Dependencies
       run: |
-        cd InstaRepas
         composer install --no-progress --prefer-dist --optimize-autoloader
         npm install
       working-directory: ./InstaRepas
