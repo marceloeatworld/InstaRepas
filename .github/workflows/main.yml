@@ -44,7 +44,11 @@ jobs:
       uses: webfactory/ssh-agent@v0.8.0
       with:
         ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
-          
+
+    - name: Add Server to Known Hosts
+      run: |
+        echo '${{ secrets.REMOTE_HOST }} ${{ secrets.REMOTE_HOST_PUBLIC_KEY }}' >> ~/.ssh/known_hosts
+      
     - name: Deploy to Server
       run: |
-        rsync -r --delete-after --quiet -e 'ssh -p 2266' $GITHUB_WORKSPACE/InstaRepas/ ubuntu@151.80.47.41:/var/www/html/InstaRepas
+        rsync -r --delete-after --quiet -e 'ssh -p ${{ secrets.REMOTE_PORT }}' $GITHUB_WORKSPACE/InstaRepas/ ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }}:/var/www/html/InstaRepas
