@@ -17,7 +17,7 @@ jobs:
         php-version: '8.2'
     - uses: actions/checkout@v3
     - name: Change to Laravel directory
-      run: cd /InstaRepas/InstaRepas
+      run: cd /InstaRepas
     - name: Copy .env
       run: php -r "file_exists('.env') || copy('.env.example', '.env');"
     - name: Install Dependencies
