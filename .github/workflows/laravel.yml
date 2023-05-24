@@ -17,33 +17,36 @@ jobs:
         php-version: '8.2'
     - uses: actions/checkout@v3
 
-    - name: Change to Laravel directory
-      run: cd InstaRepas
-
-    - name: Print working directory
-      run: pwd
-
-    - name: List directory contents
-      run: ls -la
+    - name: Change to Laravel directory and print
+      run: |
+        cd InstaRepas
+        pwd
+        ls -la
 
     - name: Copy .env
+      working-directory: InstaRepas
       run: php -r "file_exists('.env') || copy('.env.example', '.env');"
 
     - name: Install Dependencies
+      working-directory: InstaRepas
       run: composer install --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
 
     - name: Generate key
+      working-directory: InstaRepas
       run: php artisan key:generate
 
     - name: Directory Permissions
+      working-directory: InstaRepas
       run: chmod -R 777 storage bootstrap/cache
 
     - name: Create Database
+      working-directory: InstaRepas
       run: |
         mkdir -p database
         touch database/database.sqlite
 
     - name: Execute tests (Unit and Feature tests) via PHPUnit
+      working-directory: InstaRepas
       env:
         DB_CONNECTION: sqlite
         DB_DATABASE: database/database.sqlite
