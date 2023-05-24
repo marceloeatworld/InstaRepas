@@ -1,33 +1,45 @@
-name: Deploy
+name: Laravel CI/CD
 
 on:
-  workflow_dispatch:
+  push:
+    branches:
+      - main # Remplacer 'main' par le nom de la branche sur laquelle vous voulez déclencher le déploiement
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout code
+    - name: Checkout Code
       uses: actions/checkout@v3.5.2
-
-    - name: Deploy to Server
-      uses: appleboy/ssh-action@v0.1.10
+      
+    - name: Set up PHP
+      uses: shivammathur/setup-php@v2.25.1
       with:
-        host: ${{ secrets.REMOTE_HOST }}
-        username: ${{ secrets.REMOTE_USER }}
-        key: ${{ secrets.SSH_PRIVATE_KEY }}
-        port: ${{ secrets.REMOTE_PORT }}
-        script: |
-          cd /var/www/html/InstaRepas
-          git pull
-          composer install --no-dev
-          php artisan key:generate
-          npm install --production
-          npm run production
-          php artisan migrate --force
-          php artisan config:cache
-          php artisan route:cache
-          sudo chown -R www-data:www-data storage bootstrap/cache
-          sudo chmod -R 775 storage bootstrap/cache
-          sudo systemctl restart apache2
+        php-version: '8.2' # Remplacer par la version de PHP que vous utilisez
+        extensions: mbstring, mysqli, pdo_sqlite, ctype, json, iconv # Ajouter / Supprimer des extensions PHP au besoin
+        tools: composer:v2
+
+    - name: Install NPM
+      run: |
+        sudo apt-get install -y npm
+        npm --version
+
+    - name: Install Project Dependencies
+      run: |
+        cd InstaRepas
+        composer install --no-progress --prefer-dist --optimize-autoloader
+        npm install
+
+    - name: Build Project
+      run: |
+        npm run production
+        
+    - name: Setup SSH and rsync
+      uses: webfactory/ssh-agent@v0.8.0
+      with:
+        ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+          
+    - name: Deploy to Server
+      run: |
+        rsync -r --delete-after --quiet -e 'ssh -p 2266' $GITHUB_WORKSPACE/InstaRepas/ ubuntu@151.80.47.41:/var/www/html/InstaRepas
