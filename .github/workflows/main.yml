@@ -52,4 +52,4 @@ jobs:
 
     - name: Deploy to Server
       run: |
-        rsync -r --delete-after --quiet -e 'ssh -p ${{ secrets.REMOTE_PORT }}' $GITHUB_WORKSPACE/InstaRepas/ ***@***:/var/www/html/InstaRepas
+        rsync -r --delete-after --quiet -e 'ssh -p ${{ secrets.REMOTE_PORT }}' $GITHUB_WORKSPACE/InstaRepas/ ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }}:/var/www/html/InstaRepas
