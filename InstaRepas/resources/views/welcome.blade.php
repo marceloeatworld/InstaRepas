@@ -17,7 +17,7 @@
 <!-- 2ème partie : -->
 <div class='flex flex-col md:flex-row items-center justify-center py-12 bg-gray-100 mx-auto px-4 sm:px-0'>
   <div class='md:w-1/2 p-4'>
-    <img id='logo' src='/imgs/logo_for_foodequlibre.png' alt='Logo Food Équilibre' class='max-w-xs md:max-w-sm mx-auto'>
+    <img id='logo' src='/imgs/logo_for_foodequlibre.webp' alt='Logo Food Équilibre' class='max-w-xs md:max-w-sm mx-auto'>
   </div>
   <div class='md:w-1/2 p-4 text-center md:text-left'>
     <h2 class='text-4xl md:text-5xl font-bold mb-2 md:mb-4'>Food Équilibre</h2>

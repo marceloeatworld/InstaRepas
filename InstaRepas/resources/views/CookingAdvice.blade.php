@@ -24,7 +24,7 @@
       </ol>
     </div>
     <div class="flex justify-center items-center">
-      <img src="imgs/recettes/Chicken_Scallop.png" alt="Chicken_Scallop" class="w-full h-auto rounded-lg shadow-lg">
+      <img src="imgs/recettes/Chicken_Scallop.webp" alt="Chicken_Scallop" class="w-full h-auto rounded-lg shadow-lg">
     </div>
   </div>
 
@@ -64,7 +64,7 @@
       </ol>
     </div>
     <div class="flex justify-center items-center">
-      <img src="imgs/recettes/Fillet_of_whiting_with_tomato.jpg" alt="Chicken_Scallop" class="w-full h-auto rounded-lg shadow-lg">
+      <img src="imgs/recettes/Fillet_of_whiting_with_tomato.webp" alt="Chicken_Scallop" class="w-full h-auto rounded-lg shadow-lg">
     </div>
   </div>
 
@@ -92,7 +92,7 @@
       </ol>
     </div>
     <div class="flex justify-center items-center">
-      <img src="imgs/recettes/Veal_Scallopini.png" alt="Chicken_Scallop" class="w-full h-auto rounded-lg shadow-lg">
+      <img src="imgs/recettes/Veal_Scallopini.webp" alt="Chicken_Scallop" class="w-full h-auto rounded-lg shadow-lg">
     </div>
   </div>
 
@@ -129,7 +129,7 @@
       </ol>
     </div>
     <div class="flex justify-center items-center">
-      <img src="imgs/recettes/Bakers_potatoes.jpg" alt="Chicken_Scallop" class="w-full h-auto rounded-lg shadow-lg">
+      <img src="imgs/recettes/Bakers_potatoes.webp" alt="Chicken_Scallop" class="w-full h-auto rounded-lg shadow-lg">
     </div>
   </div>
 
@@ -155,7 +155,7 @@
       </ol>
     </div>
     <div class="flex justify-center items-center">
-      <img src="imgs/recettes/Gratin_Poireau.png" alt="Chicken_Scallop" class="w-full h-auto rounded-lg shadow-lg">
+      <img src="imgs/recettes/Gratin_Poireau.webp" alt="Chicken_Scallop" class="w-full h-auto rounded-lg shadow-lg">
     </div>
   </div>
 
@@ -197,7 +197,7 @@
       </ol>
     </div>
     <div class="flex justify-center items-center">
-      <img src="imgs/recettes/Pot-au-feu_traditional.png" alt="Chicken_Scallop" class="w-full h-auto rounded-lg shadow-lg">
+      <img src="imgs/recettes/Pot-au-feu_traditional.webp" alt="Chicken_Scallop" class="w-full h-auto rounded-lg shadow-lg">
     </div>
   </div>
 
@@ -236,7 +236,7 @@
       </ol>
     </div>
     <div class="flex justify-center items-center">
-      <img src="imgs/recettes/Chicken_Scallop.png" alt="Filet de flétan à l'aneth" class="w-full h-auto rounded-lg shadow-lg">
+      <img src="imgs/recettes/Chicken_Scallop.webp" alt="Filet de flétan à l'aneth" class="w-full h-auto rounded-lg shadow-lg">
     </div>
   </div>
 
@@ -261,7 +261,7 @@
       </ol>
     </div>
     <div class="flex justify-center items-center">
-      <img src="imgs/recettes/Persian_rice.jpg" alt="Riz à la persane" class="w-full h-auto rounded-lg shadow-lg">
+      <img src="imgs/recettes/Persian_rice.webp" alt="Riz à la persane" class="w-full h-auto rounded-lg shadow-lg">
     </div>
   </div>
 
@@ -300,7 +300,7 @@
       </ol>
     </div>
     <div class="flex justify-center items-center">
-      <img src="imgs/recettes/Lamb_Curry_spicy.png" alt="Curry d'agneau" class="w-full h-auto rounded-lg shadow-lg">
+      <img src="imgs/recettes/Lamb_Curry_spicy.webp" alt="Curry d'agneau" class="w-full h-auto rounded-lg shadow-lg">
     </div>
   </div>
 
@@ -325,7 +325,7 @@
       </ol>
     </div>
     <div class="flex justify-center items-center">
-      <img src="imgs/recettes/Sauté_of_pork.jpg" alt="Sauté de porc au cidre" class="w-full h-auto rounded-lg shadow-lg">
+      <img src="imgs/recettes/Sauté_of_pork.webp" alt="Sauté de porc au cidre" class="w-full h-auto rounded-lg shadow-lg">
     </div>
   </div>
 
@@ -362,7 +362,7 @@
       </ol>
     </div>
     <div class="flex justify-center items-center">
-      <img src="imgs/recettes/garlic-chive_tomato.jpg" alt="Tomate ail-ciboulette" class="w-full h-auto rounded-lg shadow-lg">
+      <img src="imgs/recettes/garlic-chive_tomato.webp" alt="Tomate ail-ciboulette" class="w-full h-auto rounded-lg shadow-lg">
     </div>
   </div>
 
@@ -402,7 +402,7 @@
     </div>
     
     <div class="flex justify-center items-center">
-      <img src="imgs/recettes/Quiche_light.png" alt="Quiche Sans Fond" class="w-full h-auto rounded-lg shadow-lg">
+      <img src="imgs/recettes/Quiche_light.webp" alt="Quiche Sans Fond" class="w-full h-auto rounded-lg shadow-lg">
     </div>
   </div>
   
@@ -428,7 +428,7 @@
     </div>
     
     <div class="flex justify-center items-center">
-      <img src="imgs/recettes/Pizza.png" alt="Pizza" class="w-full h-auto rounded-lg shadow-lg">
+      <img src="imgs/recettes/Pizza.webp" alt="Pizza" class="w-full h-auto rounded-lg shadow-lg">
     </div>
   </div>
   
@@ -450,7 +450,7 @@
   <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-8">
     <div>
       <h3 class="text-2xl font-semibold">Sauce Vinaigrette Allégée</h3>
-      <img src="imgs/recettes/Vinaigrette_Sauce_.png" alt="Sauce Vinaigrette Allégée" class="w-full h-auto rounded-lg shadow-lg">
+      <img src="imgs/recettes/Vinaigrette_Sauce_.webp" alt="Sauce Vinaigrette Allégée" class="w-full h-auto rounded-lg shadow-lg">
       <ul class="list-disc pl-8">
         <li>1 c à soupe d'huile</li>
         <li>1 c à soupe de vinaigre</li>
@@ -464,7 +464,7 @@
     
     <div>
       <h3 class="text-2xl font-semibold">Sauce au Yaourt</h3>
-      <img src="imgs/recettes/Sauce_Yaourt.png" alt="Sauce au Yaourt" class="w-full h-auto rounded-lg shadow-lg">
+      <img src="imgs/recettes/Sauce_Yaourt.webp" alt="Sauce au Yaourt" class="w-full h-auto rounded-lg shadow-lg">
       <ul class="list-disc pl-8">
         <li>1 c à café de moutarde</li>
         <li>1 c à soupe de vinaigre</li>
@@ -480,7 +480,7 @@
   <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-8">
     <div>
       <h3 class="text-2xl font-semibold">Sauce Moutarde</h3>
-      <img src="imgs/recettes/Mustard Sauce.jpg" alt="Sauce Moutarde" class="w-full h-auto rounded-lg shadow-lg">
+      <img src="imgs/recettes/Mustard Sauce.webp" alt="Sauce Moutarde" class="w-full h-auto rounded-lg shadow-lg">
       <ul class="list-disc pl-8">
         <li>200 g fromage blanc</li>
         <li>2 cuillères à soupe de moutarde</li>
@@ -493,7 +493,7 @@
     
     <div>
       <h3 class="text-2xl font-semibold">Sauce Béchamel Allégée</h3>
-      <img src="imgs/recettes/bechamel_sauce.jpg" alt="Sauce Béchamel Allégée" class="w-full h-auto rounded-lg shadow-lg">
+      <img src="imgs/recettes/bechamel_sauce.webp" alt="Sauce Béchamel Allégée" class="w-full h-auto rounded-lg shadow-lg">
       <ul class="list-disc pl-8">
         <li>400 ml de lait ½ écrémé</li>
         <li>20 g de Maïzena ou fécule de pomme de terre</li>
