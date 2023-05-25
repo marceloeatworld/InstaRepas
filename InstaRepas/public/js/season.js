@@ -1,3 +1,9 @@
+// Fonction principale
+function main() {
+    // Si l'écran a moins de 800 pixels de large, ne pas exécuter le script
+    if (window.innerWidth <= 800) {
+        return;
+    }
 let originalFoodsArray = [
     { name: '🍏 Pomme', season: 'Automne', benefits: 'Riches en fibres et vitamine C, les pommes peuvent améliorer la santé cardiaque.' },
     { name: '🍄 Champignon', season: 'Automne', benefits: 'Les champignons sont une excellente source de vitamines B et de sélénium, qui soutiennent le système immunitaire.' },
@@ -241,3 +247,6 @@ anime.timeline({loop: false})
     duration: 1250,
     delay: (el, i) => 50 * (i+1)
   });
+}
+// Exécuter la fonction principale
+main();
