@@ -6,11 +6,11 @@
 }
 
 .bg-cover-meal {
-  background-image: url('../imgs/test1.png');
+  background-image: url('../imgs/test1.webp');
 }
 
 .bg-cover-season {
-  background-image: url('../imgs/banner-foods.png');
+  background-image: url('../imgs/banner-foods.webp');
   margin: 0;
   background-size: cover;
   background-position: center;
