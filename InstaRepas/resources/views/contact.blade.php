@@ -1,6 +1,7 @@
 <x-app-layout>
     <div class="flex justify-center py-6 px-4 sm:px-6 lg:px-8">
         <div class="w-full sm:w-4/5 md:w-3/5 lg:w-2/5 xl:w-1/3">
+            
             <h1 class="text-2xl sm:text-3xl text-center font-bold mb-6">Contactez-nous</h1>
 
             @if (session('success'))
