@@ -6,38 +6,33 @@
 }
 
 .bg-cover-meal {
-    background-image: url('../imgs/test1.png');
-  }
-
-.bg-cover-season{
-    background-image: url('../imgs/banner-foods.png');
+  background-image: url('../imgs/test1.png');
 }
 
-
-
 .bg-cover-season {
+  background-image: url('../imgs/banner-foods.png');
   margin: 0;
   background-size: cover;
   background-position: center;
   height: 800px;
 }
 
-
 .grid {
   margin: 0 auto;
-  max-width: 1200px; /* adjust the value to your needs /
-  width: 90%; / adjust the value to your needs */
+  max-width: 1200px; /* adjust the value to your needs */
+  width: 90%; /* adjust the value to your needs */
 }
 
 .big-emoji {
   font-size: 50px; /* Définissez ici la taille souhaitée */
 }
+
 /* ombre texte page home */
 .shadow-text {
-  text-shadow: 5px 5px 10px rgba(0, 0, 0, 2);
+  text-shadow: 5px 5px 10px rgba(0, 0, 0, 1);
 }
 
- 
+
 /* Admin Menu Styles */
 .admin-menu {
   list-style: none;
@@ -61,8 +56,6 @@
 .admin-menu li a:hover {
   background-color: #ddd;
 }
-
-@import 'tailwindcss/utilities';
 
 /* Styles personnalisés */
 @keyframes fadeIn {
