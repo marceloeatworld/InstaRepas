@@ -31,10 +31,15 @@ class ContactController extends Controller
         ];
     
         // send email
-        Mail::to(['firstEmail@example.com', 'secondEmail@example.com'])->send(new ContactMail($details));
-            
+        if ($request->subject == 'technical_problem') {
+            Mail::to('technicalSupportEmail@example.com')->send(new ContactMail($details));
+        } else {
+            Mail::to(['firstEmail@example.com', 'secondEmail@example.com'])->send(new ContactMail($details));
+        }
+    
         // redirect with success message
         return redirect()->back()->with('success', 'Votre message a été envoyé avec succès.');
-
+    
     }
+    
 }

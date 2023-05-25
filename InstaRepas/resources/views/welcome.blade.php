@@ -73,7 +73,7 @@
   <p class='text-gray-700 text-lg sm:text-xl mb-4 max-w-xl mx-auto leading-relaxed'>
     Que vous soyez végétalien, sans gluten, ou que vous aimiez tout simplement la viande, Food Équilibre crée des repas parfaitement adaptés à votre style de vie. <br>En vous inscrivant, vous pouvez sauvegarder vos préférences et les retrouver à chaque connexion. <br>Fini le temps perdu à refaire constamment vos choix, avec Food Équilibre, votre sélection reste à portée de main.<br> Découvrez l'expérience de la personnalisation alimentaire poussée à son paroxysme. Allez-y, inscrivez-vous et commencez à découvrir votre nouvel allié nutritionnel.
   </p>
-  <x-yellow-button :href="route('register')" class="">Inscrivez-vous maintenant</x-yellow-button>
+  <x-yellow-button href="{{ route('register') }}" class="">Inscrivez-vous maintenant</x-yellow-button>
 </div>
 
 
