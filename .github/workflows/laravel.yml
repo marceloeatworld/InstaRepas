@@ -1,4 +1,4 @@
-name: 🧪 Laravel - Tests unitaires et fonctionnels
+name: 🧪 Laravel CI - Tests unitaires et fonctionnels
 
 on:
   workflow_dispatch:

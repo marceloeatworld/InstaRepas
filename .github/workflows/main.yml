@@ -1,4 +1,4 @@
-name: 😊 Deploiment - Laravel CI/CD
+name: 😊 Deploiment - Laravel CD
 
 on:
   workflow_dispatch:
@@ -52,4 +52,17 @@ jobs:
 
     - name: 🚀 Déployer sur le serveur
       run: |
-        rsync -r -avz -O --delete-after --quiet -e 'ssh -p ${{ secrets.REMOTE_PORT }}' $GITHUB_WORKSPACE/InstaRepas/ ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }}:${{ secrets.REMOTE_DIR }}
+        rsync -r -avz -O --delete-after --exclude=.git --exclude=.github --exclude=dist --exclude=node_modules --exclude=.env --quiet -e 'ssh -p ${{ secrets.REMOTE_PORT }}' $GITHUB_WORKSPACE/InstaRepas/ ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }}:${{ secrets.REMOTE_DIR }}
+
+    - name: 🔄 Changer les permissions de /storage et bootstrap/cache
+      run: |
+        ssh -p ${{ secrets.REMOTE_PORT }} ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }} "chmod -R 775 ${{ secrets.REMOTE_DIR }}/storage"
+        ssh -p ${{ secrets.REMOTE_PORT }} ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }} "chmod -R 775 ${{ secrets.REMOTE_DIR }}/bootstrap/cache"
+
+    - name: 🔑 Copie du fichier .env si absent
+      run: |
+        ssh -p ${{ secrets.REMOTE_PORT }} ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }} "if [ ! -f ${{ secrets.REMOTE_DIR }}/.env ]; then cp ${{ secrets.REMOTE_DIR }}/.env.example ${{ secrets.REMOTE_DIR }}/.env; fi"
+
+    - name: 🔄 Générer la clé Laravel si nécessaire
+      run: |
+        ssh -p ${{ secrets.REMOTE_PORT }} ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }} "if grep -q 'APP_KEY=' ${{ secrets.REMOTE_DIR }}/.env && grep -q '^APP_KEY=$' ${{ secrets.REMOTE_DIR }}/.env; then cd ${{ secrets.REMOTE_DIR }} && php artisan key:generate; fi"
