@@ -1,0 +1,50 @@
+name: 🧪 Laravel CI - Tests unitaires et fonctionnels
+
+on:
+  workflow_dispatch:
+
+jobs:
+  laravel-tests:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: shivammathur/setup-php@2.25.1
+      with:
+        php-version: '8.2'
+    - uses: actions/checkout@v3
+
+    - name: 🚀 Aller au répertoire Laravel et afficher
+      run: |
+        cd InstaRepas
+        pwd
+        ls -la
+
+    - name: 📄 Copier .env
+      working-directory: InstaRepas
+      run: php -r "file_exists('.env') || copy('.env.example', '.env');"
+
+    - name: 🛠️ Installer les dépendances
+      working-directory: InstaRepas
+      run: composer install --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
+
+    - name: 🗝️ Générer la clé
+      working-directory: InstaRepas
+      run: php artisan key:generate
+
+    - name: 📁 Permissions du répertoire
+      working-directory: InstaRepas
+      run: chmod -R 777 storage bootstrap/cache
+
+    - name: 🗄️ Créer la base de données
+      working-directory: InstaRepas
+      run: |
+        mkdir -p database
+        touch database/database.sqlite
+
+    - name: 🧪 Exécuter les tests (Unitaires et Fonctionnels) via Pest
+      working-directory: InstaRepas
+      env:
+        DB_CONNECTION: sqlite
+        DB_DATABASE: database/database.sqlite
+      run: vendor/bin/pest
