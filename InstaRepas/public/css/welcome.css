@@ -6,40 +6,33 @@
 }
 
 .bg-cover-meal {
-    background-image: url('../imgs/test1.png');
-  }
-
-.bg-cover-season{
-    background-image: url('../imgs/banner-foods.png');
+  background-image: url('../imgs/test1.webp');
 }
 
-
-
 .bg-cover-season {
+  background-image: url('../imgs/banner-foods.webp');
   margin: 0;
   background-size: cover;
   background-position: center;
   height: 800px;
 }
 
-
 .grid {
   margin: 0 auto;
-  max-width: 1200px; /* adjust the value to your needs /
-  width: 90%; / adjust the value to your needs */
+  max-width: 1200px; /* adjust the value to your needs */
+  width: 90%; /* adjust the value to your needs */
 }
 
 .big-emoji {
   font-size: 50px; /* Définissez ici la taille souhaitée */
 }
+
 /* ombre texte page home */
 .shadow-text {
-  text-shadow: 5px 5px 10px rgba(0, 0, 0, 2);
+  text-shadow: 5px 5px 10px rgba(0, 0, 0, 1);
 }
 
 
-
- 
 /* Admin Menu Styles */
 .admin-menu {
   list-style: none;
@@ -63,8 +56,6 @@
 .admin-menu li a:hover {
   background-color: #ddd;
 }
-
-@import 'tailwindcss/utilities';
 
 /* Styles personnalisés */
 @keyframes fadeIn {
@@ -93,4 +84,25 @@ section {
   animation: slideInLeft 1s ease-in-out;
 }
 
+#buttonY {
+text-decoration: none;
+display: flex;
+justify-content: center;
+align-items: center;
+padding: 4px 24px;
+width: auto;
+height: 40px;
+background: #FFDB58;
+border: 3px solid #253E5C; /* Couleur de la bordure et épaisseur */
+box-shadow: 4px 4px 0px #253E5C;
+border-radius: 5px;
+font-size : 16px;
+font-weight: bold;
+}
 
+#buttonY {
+  transition: box-shadow 0.2s ease-in-out;
+}
+#buttonY:hover {
+  box-shadow: none;
+}

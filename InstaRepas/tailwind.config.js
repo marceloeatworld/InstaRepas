@@ -16,6 +16,11 @@ module.exports = {
             },
         },
     },
-
+    variants: {
+        extend: {
+            backgroundColor: ['dark'], // Ajouter plus de propriétés ici si nécessaire
+            borderColor: ['dark'],
+        },
+    },
     plugins: [require('@tailwindcss/forms')],
 };

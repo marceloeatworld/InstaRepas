@@ -32,10 +32,11 @@ class ContactController extends Controller
     
         // send email
         if ($request->subject == 'technical_problem') {
-            Mail::to('technicalSupportEmail@example.com')->send(new ContactMail($details));
+            Mail::to(env('TECH_SUPPORT_EMAIL', 'fallback-email@example.com'))->send(new ContactMail($details));
         } else {
-            Mail::to(['firstEmail@example.com', 'secondEmail@example.com'])->send(new ContactMail($details));
+            Mail::to([env('FIRST_EMAIL', 'fallback-email1@example.com'), env('SECOND_EMAIL', 'fallback-email2@example.com')])->send(new ContactMail($details));
         }
+
     
         // redirect with success message
         return redirect()->back()->with('success', 'Votre message a été envoyé avec succès.');

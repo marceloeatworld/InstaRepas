@@ -19,7 +19,7 @@
     </div>
     <div class="p-6 max-w-3xl mx-auto mt-8 bg-white rounded-xl shadow-md flex items-start space-x-4">
        <div class="flex-shrink-0">
-            <img src="imgs/test.png" alt="Food" style="width: 350px;" class="h-auto object-cover rounded">
+            <img src="imgs/test.webp" alt="Food" style="width: 350px;" class="h-auto object-cover rounded">
         </div>
 
 
