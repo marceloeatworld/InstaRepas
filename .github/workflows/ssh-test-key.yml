@@ -1,0 +1,26 @@
+name: Test SSH Key Installation and Known Hosts
+
+on:
+  workflow_dispatch:
+
+jobs:
+  setup-ssh:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Code
+      uses: actions/checkout@v3.5.2
+
+    - name: Create .ssh directory
+      run: mkdir -p ~/.ssh
+
+    - name: Adding Known Hosts
+      run: ssh-keyscan -p ${{ secrets.REMOTE_PORT }} -H ${{ secrets.REMOTE_HOST }} >> ~/.ssh/known_hosts
+
+    - name: Install SSH key
+      uses: shimataro/ssh-key-action@v2.5.1
+      with:
+        key: ${{ secrets.SSH_PRIVATE_KEY }}
+
+    - name: Test SSH Connection
+      run: ssh -p ${{ secrets.REMOTE_PORT }} -T ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }}
