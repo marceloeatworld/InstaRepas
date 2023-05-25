@@ -52,4 +52,4 @@ jobs:
 
     - name: 🚀 Déployer sur le serveur
       run: |
-        rsync -r -avz -O --delete-after --quiet -e 'ssh -p ${{ secrets.REMOTE_PORT }}' $GITHUB_WORKSPACE/InstaRepas/ ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }}:/var/www/html/InstaRepas
+        rsync -r -avz -O --delete-after --quiet -e 'ssh -p ${{ secrets.REMOTE_PORT }}' $GITHUB_WORKSPACE/InstaRepas/ ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }}:${{ secrets.REMOTE_DIR }}
