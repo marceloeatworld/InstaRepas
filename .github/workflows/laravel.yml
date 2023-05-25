@@ -14,35 +14,35 @@ jobs:
         php-version: '8.2'
     - uses: actions/checkout@v3
 
-    - name: Change to Laravel directory and print
+    - name: 🚀 Aller au répertoire Laravel et afficher
       run: |
         cd InstaRepas
         pwd
         ls -la
 
-    - name: Copy .env
+    - name: 📄 Copier .env
       working-directory: InstaRepas
       run: php -r "file_exists('.env') || copy('.env.example', '.env');"
 
-    - name: Install Dependencies
+    - name: 🛠️ Installer les dépendances
       working-directory: InstaRepas
       run: composer install --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
 
-    - name: Generate key
+    - name: 🗝️ Générer la clé
       working-directory: InstaRepas
       run: php artisan key:generate
 
-    - name: Directory Permissions
+    - name: 📁 Permissions du répertoire
       working-directory: InstaRepas
       run: chmod -R 777 storage bootstrap/cache
 
-    - name: Create Database
+    - name: 🗄️ Créer la base de données
       working-directory: InstaRepas
       run: |
         mkdir -p database
         touch database/database.sqlite
 
-    - name: Execute tests (Unit and Feature tests) via Pest
+    - name: 🧪 Exécuter les tests (Unitaires et Fonctionnels) via Pest
       working-directory: InstaRepas
       env:
         DB_CONNECTION: sqlite

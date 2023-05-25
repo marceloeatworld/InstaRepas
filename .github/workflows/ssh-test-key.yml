@@ -1,4 +1,4 @@
-name: Test SSH Key Installation and Known Hosts
+name: 🧪 Test d'installation de la clé SSH et des hôtes connus
 
 on:
   workflow_dispatch:
@@ -8,14 +8,14 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout Code
+    - name: 📦 Récupération du Code
       uses: actions/checkout@v3.5.2
 
-    - name: Install SSH key
+    - name: 🗝️ Installer la clé SSH
       uses: shimataro/ssh-key-action@v2.5.1
       with:
         key: ${{ secrets.SSH_PRIVATE_KEY }}
         known_hosts: ${{ secrets.SSH_KNOWN_HOSTS }}
 
-    - name: Test SSH Connection
+    - name: 🖥️ Tester la connexion SSH
       run: ssh -p ${{ secrets.REMOTE_PORT }} -T ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }}
