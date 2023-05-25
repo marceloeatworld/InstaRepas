@@ -60,6 +60,7 @@ jobs:
         ssh -p ${{ secrets.REMOTE_PORT }} ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }} "${{ secrets.REMOTE_OWN }} ${{ secrets.REMOTE_DIR }}/bootstrap/cache"
         ssh -p ${{ secrets.REMOTE_PORT }} ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }} "${{ secrets.REMOTE_MOD }} ${{ secrets.REMOTE_DIR }}/storage"
         ssh -p ${{ secrets.REMOTE_PORT }} ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }} "${{ secrets.REMOTE_MOD }} ${{ secrets.REMOTE_DIR }}/bootstrap/cache"
+        ssh -p ${{ secrets.REMOTE_PORT }} ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }} "${{ secrets.REMOTE_WWW }} ${{ secrets.REMOTE_DIR }}/public"
   
     - name: 🔑 Copie du fichier .env si absent
       run: |
