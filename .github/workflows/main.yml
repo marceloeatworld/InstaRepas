@@ -56,9 +56,11 @@ jobs:
 
     - name: 🔄 Changer les permissions de /storage et bootstrap/cache
       run: |
-        ssh -p ${{ secrets.REMOTE_PORT }} ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }} "chmod -R 775 ${{ secrets.REMOTE_DIR }}/storage"
-        ssh -p ${{ secrets.REMOTE_PORT }} ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }} "chmod -R 775 ${{ secrets.REMOTE_DIR }}/bootstrap/cache"
-
+        ssh -p ${{ secrets.REMOTE_PORT }} ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }} "sudo chown -R www-data:www-data ${{ secrets.REMOTE_DIR }}/storage"
+        ssh -p ${{ secrets.REMOTE_PORT }} ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }} "sudo chown -R www-data:www-data ${{ secrets.REMOTE_DIR }}/bootstrap/cache"
+        ssh -p ${{ secrets.REMOTE_PORT }} ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }} "sudo chmod -R 775 ${{ secrets.REMOTE_DIR }}/storage"
+        ssh -p ${{ secrets.REMOTE_PORT }} ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }} "sudo chmod -R 775 ${{ secrets.REMOTE_DIR }}/bootstrap/cache"
+  
     - name: 🔑 Copie du fichier .env si absent
       run: |
         ssh -p ${{ secrets.REMOTE_PORT }} ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }} "if [ ! -f ${{ secrets.REMOTE_DIR }}/.env ]; then cp ${{ secrets.REMOTE_DIR }}/.env.example ${{ secrets.REMOTE_DIR }}/.env; fi"
