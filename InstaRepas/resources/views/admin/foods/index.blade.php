@@ -1,7 +1,5 @@
 <x-app-layout>
-
     <div class="py-12 max-w-7xl mx-auto sm:px-6 lg:px-8">
-
         <div class="w-full p-6 border border-gray-200 rounded-lg shadow flex items-center justify-center text-center mb-6" style="background-color: #6495ED;">
             <a href="{{ route('admin.foods.index') }}">
                 <h5 class="mb-2 text-2xl font-bold tracking-tight text-white mx-4 tracking-wider">Les aliments</h5>
@@ -14,7 +12,7 @@
             </x-yellow-button>
         @endif
 
-        <div class="grid grid-cols-2 gap-4 mb-6">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
             <!-- Colonne de recherche -->
             <div class="col-span-1">
             <form action="{{ route('admin.foods.index') }}" method="GET" class="mb-2">
@@ -74,7 +72,7 @@
             </div>
 
             <!-- Colonne de filtre pour aliments non validés -->
-            <div class="col-span-1 text-left">
+            <div class="col-span-1 md:col-span-2 text-left md:text-right">
                 <a href="{{ route('admin.foods.index', ['not_validated' => 1]) }}" class="inline-block px-6 py-2 text-xs font-medium text-white transition-colors duration-150 bg-red-600 rounded-lg focus:shadow-outline hover:bg-red-700">Afficher les aliments non validés</a>
             </div>
         </div>
@@ -82,17 +80,17 @@
     <div class="py-12">
 
 
-<table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-    <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-        <tr>
-            <th scope="col" class="px-6 py-3">ID</th>
-            <th scope="col" class="px-6 py-3">Nom</th>
-            <th scope="col" class="px-6 py-3">Categorie</th>
-            <th scope="col" class="px-6 py-3">Ajouté par</th>
-            <th scope="col" class="px-6 py-3">Actions</th>
-        </tr>
-    </thead>
-    <tbody>
+    <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400 overflow-x-scroll md:overflow-x-auto">
+            <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                <tr>
+                    <th scope="col" class="px-6 py-3">ID</th>
+                    <th scope="col" class="px-6 py-3">Nom</th>
+                    <th scope="col" class="px-6 py-3">Categorie</th>
+                    <th scope="col" class="px-6 py-3">Ajouté par</th>
+                    <th scope="col" class="px-6 py-3">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
         @foreach($foods as $food)
             <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                 <td class="px-6 py-4">{{ $food->id }}</td>
