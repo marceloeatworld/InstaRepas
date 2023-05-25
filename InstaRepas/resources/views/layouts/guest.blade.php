@@ -27,7 +27,7 @@
                     {{ $slot }}
                 </div>
                 <div class="bg-cover bg-center w-0 sm:w-1/2 sm:max-w-md mt-6 overflow-hidden sm:rounded-lg">
-                    <img src="{{ asset('images/image.png') }}" alt="Your Image Description" class="h-full object-cover">
+                    <img src="{{ asset('images/image.webp') }}" alt="Your Image Description" class="h-full object-cover">
                 </div>
             </div>
         </div>
