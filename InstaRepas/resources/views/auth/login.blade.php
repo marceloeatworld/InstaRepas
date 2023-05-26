@@ -37,7 +37,7 @@
                     {{ __('Forgot your password?') }}
                 </a>
             @endif
-            <button id="buttonY" type="submit" class="ml-4 px-6 py-2 text-lg cursor-pointer">{{ __('Log in') }}</button>
+            <button id="buttonY" type="submit" class="">{{ __('Log in') }}</button>
         </div>
     </form>
 
@@ -58,7 +58,7 @@
 
     <!-- Register Button -->
     <div class="signup-container mt-4">
-        <a id="buttonY" href="{{ route('register') }}" class="w-full px-6 py-2 text-lg cursor-pointer block text-center">
+        <a id="buttonY" href="{{ route('register') }}" class="">
             Créer un compte
         </a>
     </div>
