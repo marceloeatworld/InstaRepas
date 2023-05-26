@@ -4,11 +4,15 @@
             <div class="bg-white p-6 rounded-lg text-center border-b-2 border-blue-600 shadow-md transition-all duration-500 hover:shadow-lg">
                 <h5 class="mb-2 text-2xl font-semibold tracking-tighter text-blue-600 transform transition-transform duration-500 hover:scale-105">Savourez l'expérience</h5>
                 <p class="mb-2 text-lg font-semibold tracking-tight text-blue-900 tracking-wider">Date: {{ \Carbon\Carbon::parse($current_date)->locale('fr')->isoFormat('LL') }}</p>
-        <p class="mb-6 text-lg font-semibold tracking-tight text-blue-900 tracking-wider">Saison: {{ __('messages.seasons.' . $current_season) }}</p>
-        <button onclick="window.print()" class="bg-blue-600 hover:bg-blue-500 text-white font-bold py-2 px-4 rounded inline-flex items-center">
-            <i class="fas fa-print mr-2"></i>
-            Imprimer la page
-        </button>
+               <p class="mb-6 text-lg font-semibold tracking-tight text-blue-900 tracking-wider">Saison: {{ __('messages.seasons.' . $current_season) }}</p>
+               <div class="flex justify-center">
+                    <button id="buttonF" onclick="window.print()" class="bg-blue-600 hover:bg-blue-500 font-bold py-2 px-4 rounded inline-flex items-center">
+                        <i class="fas fa-print mr-2"></i>
+                        Imprimer la page
+                    </button>
+                </div>
+
+
             </div>
         </div>
 
@@ -60,22 +64,44 @@
             </div>
         @endfor
     </div>
-<!-- a corriger  -->
     <style>
-        @media print {
-            body * {
-                visibility: hidden;
-            }
-
-            .p-6, .p-6 * {
-                visibility: visible;
-            }
-
-            .p-6 {
-                position: absolute;
-                left: 0;
-                top: 0;
-            }
+    @media print {
+        /* Supprimer les ombres */
+        .shadow-md, .hover\:shadow-lg, .shadow-xl {
+            box-shadow: none !important;
         }
-    </style>
+        
+        /* Supprimer les couleurs de fond */
+        .bg-white, .bg-blue-600, .hover\:bg-blue-500 {
+            background-color: transparent !important;
+        }
+
+        /* Supprimer les bordures */
+        .border-b-2, .border-blue-600 {
+            border: none !important;
+        }
+
+        /* Réduire les marges et les remplissages */
+        .mb-2, .mb-6, .mb-4, .p-6, .py-2, .px-4, .p-4 {
+            margin: 0 !important;
+            padding: 0 !important;
+        }
+
+        /* Réduire l'espacement entre les lignes */
+        p, h3, h4, h5 {
+            line-height: 1.2 !important;
+        }
+
+        /* Réduire l'espacement entre les éléments de grille */
+        .grid-cols-1, .md\:grid-cols-2, .xl\:grid-cols-3 {
+            grid-gap: 0 !important;
+        }
+
+        .gap-6 {
+            gap: 0 !important;
+        }
+    }
+</style>
+
+
 </x-app-layout>

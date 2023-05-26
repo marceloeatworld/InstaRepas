@@ -171,39 +171,49 @@
 
 
 
-    <!-- Responsive Settings Options -->
-    <div class="pt-4 pb-1 border-t border-gray-200">
-        <div class="px-4">
+   <!-- Responsive Settings Options -->
+<div class="pt-4 pb-1 border-t border-gray-200">
+    <div class="px-4">
+        <!-- User Info -->
         @if (Auth::user())
-            <div class="font-medium text-base text-gray-800">{{ Auth::user()->name }}</div>
-            <div class="font-medium text-sm text-gray-500">{{ Auth::user()->email }}</div>
+        <div class="font-medium text-base text-gray-800">{{ Auth::user()->name }}</div>
+        <div class="font-medium text-sm text-gray-500">{{ Auth::user()->email }}</div>
         @endif
-        </div>
-
-        <div class="mt-3 space-y-1">
-            <x-responsive-nav-link :href="route('profile.edit')">
-                <i class="fas fa-user-circle"></i> {{ __('Profile') }}
-            </x-responsive-nav-link>
-            
-            <x-dropdown-link :href="route('profile.preferences')">
-                <i class="fas fa-utensils"></i> {{ __('Préférences alimentaires') }}
-            </x-dropdown-link>
-            
-            @if (Auth::check()) <!-- Vérifie si un utilisateur est connecté -->
-            <!-- Authentication -->
-                <form method="POST" action="{{ route('logout') }}">
-                    @csrf
-
-                    <x-responsive-nav-link :href="route('logout')"
-                        onclick="event.preventDefault();
-                                    this.closest('form').submit();">
-                        <i class="fas fa-sign-out-alt"></i> {{ __('Log Out') }}
-                    </x-responsive-nav-link>
-                </form>
-            @endif
-        </div>
-
     </div>
+
+    <div class="mt-3 space-y-1">
+        <!-- Profile and Preferences -->
+        @if (Auth::user())
+        <x-responsive-nav-link :href="route('profile.edit')">
+            <i class="fas fa-user-circle"></i> {{ __('Profile') }}
+        </x-responsive-nav-link>
+        <x-dropdown-link :href="route('profile.preferences')">
+            <i class="fas fa-utensils"></i> {{ __('Préférences alimentaires') }}
+        </x-dropdown-link>
+        @endif
+
+        <!-- Guest User -->
+        @guest
+        <x-nav-link :href="route('login')" :active="request()->routeIs('login')">
+            <i class="fas fa-user"></i> <span>{{ __('Login') }}</span>
+        </x-nav-link>
+        <x-nav-link :href="route('register')" :active="request()->routeIs('register')">
+            <i class="fas fa-user-plus"></i> <span>{{ __('Register') }}</span>
+        </x-nav-link>
+        @endguest
+
+        <!-- Logout -->
+        @if (Auth::check())
+        <form method="POST" action="{{ route('logout') }}">
+            @csrf
+            <x-responsive-nav-link :href="route('logout')" onclick="event.preventDefault(); this.closest('form').submit();">
+                <i class="fas fa-sign-out-alt"></i> {{ __('Log Out') }}
+            </x-responsive-nav-link>
+        </form>
+        @endif
+    </div>
+</div>
+
 </div>
 
 </nav>
