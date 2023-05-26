@@ -23,7 +23,7 @@
         {{-- TAILWIND SCRIPT --}}
         <script src="{{ asset('js/flowbite.min.js') }}"></script>
         
-        <script src="{{ asset('js/js.js') }}"></script>
+        <!-- <script src="{{ asset('js/js.js') }}"></script> -->
 
        <link href="{{ asset('css/welcome.css') }}" rel="stylesheet">
         <!-- Scripts -->

@@ -29,7 +29,7 @@
 
 /* ombre texte page home */
 .shadow-text {
-  text-shadow: 5px 5px 10px rgba(0, 0, 0, 1);
+  text-shadow: 5px 5px 10px rgba(0, 0, 0, 0.8);
 }
 
 
@@ -104,5 +104,26 @@ font-weight: bold;
   transition: box-shadow 0.2s ease-in-out;
 }
 #buttonY:hover {
+  box-shadow: none;
+}
+
+#buttonF {
+  text-decoration: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 4px 24px;
+  width: auto;
+  height: 40px;
+  background: #B5F0EE; /* Couleur de fond */
+  border: 3px solid #127681; /* Couleur de la bordure et épaisseur */
+  box-shadow: 4px 4px 0px #127681; /* Couleur de l'ombre */
+  border-radius: 5px;
+  font-size : 16px;
+  font-weight: bold;
+  transition: box-shadow 0.2s ease-in-out; /* Transition */
+}
+
+#buttonF:hover {
   box-shadow: none;
 }
