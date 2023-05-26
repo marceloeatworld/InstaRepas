@@ -1,19 +1,25 @@
 <x-app-layout>
+    <div class="py-6">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="bg-white p-6 rounded-lg text-center border-b-2 border-blue-600 shadow-md transition-all duration-500 hover:shadow-lg">
+                <h5 class="mb-2 text-2xl font-semibold tracking-tighter text-blue-600 transform transition-transform duration-500 hover:scale-105">Savourez l'expérience</h5>
+                <p class="mb-2 text-lg font-semibold tracking-tight text-blue-900 tracking-wider">Date: {{ \Carbon\Carbon::parse($current_date)->locale('fr')->isoFormat('LL') }}</p>
+        <p class="mb-6 text-lg font-semibold tracking-tight text-blue-900 tracking-wider">Saison: {{ __('messages.seasons.' . $current_season) }}</p>
+        <button onclick="window.print()" class="bg-blue-600 hover:bg-blue-500 text-white font-bold py-2 px-4 rounded inline-flex items-center">
+            <i class="fas fa-print mr-2"></i>
+            Imprimer la page
+        </button>
+            </div>
+        </div>
 
-    <div class="w-full p-3 border border-gray-200 rounded-lg shadow flex flex-col items-center justify-center text-center overflow-y-hidden  bg-gradient-to-r from-blue-900 to-blue-400">
-        <h2 class="mb-1 text-3xl font-bold tracking-tight text-white mx-2 tracking-wider">Votre Menu Personnalisé</h2>
-        <p class="mb-1 text-lg font-semibold tracking-tight text-white mx-2 tracking-wider">Date: {{ \Carbon\Carbon::parse($current_date)->locale('fr')->isoFormat('LL') }}</p>
-        <p class="mb-1 text-lg font-semibold tracking-tight text-white mx-2 tracking-wider">Saison: {{ __('messages.seasons.' . $current_season) }}</p>
-    </div>
-
-    <div class="flex flex-wrap h-screen w-full overflow-auto p-6">
+    <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 p-6 overflow-auto">
         @for($day = 0; $day < count($breakfasts); $day++)
-            <div class="w-full md:w-1/2 lg:w-1/3 xl:w-1/4 p-4">
-                <div class="bg-white shadow-lg rounded-lg overflow-hidden p-6 flex flex-col space-y-4">
+            <div class="p-4 w-full">
+                <div class="bg-white shadow-xl rounded-xl p-6 flex flex-col space-y-6">
                     <h3 class="text-2xl mb-4 font-semibold text-blue-600">Jour {{ $day + 1 }}</h3>
                     
                     <div>
-                        <h4 class="text-xl mb-2 font-semibold text-blue-600">Petit-déjeuner</h4>
+                        <h4 class="text-lg mb-2 font-semibold text-blue-600">Petit-déjeuner</h4>
                         <p class="text-gray-700">
                             {{ sprintf("%s, accompagné de %s et d'un fruit frais : %s.", 
                                 $breakfasts[$day]['protein']->name,
@@ -23,7 +29,7 @@
                     </div>
 
                     <div>
-                        <h4 class="text-xl mb-2 font-semibold text-blue-600">Déjeuner</h4>
+                        <h4 class="text-lg mb-2 font-semibold text-blue-600">Déjeuner</h4>
                         <p class="text-gray-700">
                             {{ sprintf("%s et %s, servi avec %s.", 
                                 isset($lunches[$day]['protein']) ? $lunches[$day]['protein']->preparation_style : 'Aucune protéine',
@@ -34,7 +40,7 @@
 
                     @if($include_snacks)
                         <div>
-                            <h4 class="text-xl mb-2 font-semibold text-blue-600">Snack</h4>
+                            <h4 class="text-lg mb-2 font-semibold text-blue-600">Snack</h4>
                             <p class="text-gray-700">
                                 Snack: {{ $snacks[$day]['other_snack'] ? $snacks[$day]['other_snack']->name : 'Pas de snack disponible' }}
                             </p>
@@ -42,7 +48,7 @@
                     @endif
                     
                     <div>
-                        <h4 class="text-xl mb-2 font-semibold text-blue-600">Dîner</h4>
+                        <h4 class="text-lg mb-2 font-semibold text-blue-600">Dîner</h4>
                         <p class="text-gray-700">
                             {{ sprintf("%s et %s, servi avec %s.", 
                                 isset($dinners[$day]['protein']) ? $dinners[$day]['protein']->preparation_style : 'Aucune protéine',
@@ -54,5 +60,22 @@
             </div>
         @endfor
     </div>
-    
+<!-- a corriger  -->
+    <style>
+        @media print {
+            body * {
+                visibility: hidden;
+            }
+
+            .p-6, .p-6 * {
+                visibility: visible;
+            }
+
+            .p-6 {
+                position: absolute;
+                left: 0;
+                top: 0;
+            }
+        }
+    </style>
 </x-app-layout>
