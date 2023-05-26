@@ -8,16 +8,18 @@
 
         <form action="{{ route('generate_meals') }}" method="post" class="mt-8 bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg px-4 py-4 mx-auto max-w-7xl transition-all duration-500 hover:shadow-md">
             @csrf
-            <fieldset>
+            <fieldset class="flex flex-col items-center">
                 <legend class="text-xl font-semibold text-blue-600 mb-2 text-center transition-colors duration-500 hover:text-blue-700">Restrictions alimentaires</legend>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                <div class="flex flex-col md:flex-row flex-wrap justify-center md:space-x-4 mb-4">
                     @foreach ($availableDietaryRestrictions as $restriction)
                         <label class="inline-flex items-center mt-3">
-                            <input type="checkbox" class="form-checkbox h-5 w-5 text-blue-600" name="restrictions[]" value="{{ $restriction->name }}" {{ in_array($restriction->id, $userPreferences) ? 'checked' : '' }}><span class="ml-2 text-gray-700 dark:text-gray-200 transition-colors duration-500 hover:text-blue-700">{{ $displayNames[$restriction->name] }}</span>
+                            <input type="checkbox" class="form-checkbox h-5 w-5 text-blue-600" name="restrictions[]" value="{{ $restriction->name }}" {{ in_array($restriction->id, $userPreferences) ? 'checked' : '' }}>
+                            <span class="ml-2 text-gray-700 dark:text-gray-200 transition-colors duration-500 hover:text-blue-700">{{ $displayNames[$restriction->name] }}</span>
                         </label>
                     @endforeach
                 </div>
             </fieldset>
+
 
             <fieldset>
                 <legend class="text-xl font-semibold text-blue-600 mb-2 text-center transition-colors duration-500 hover:text-blue-700">Nombre de jours</legend>
@@ -27,7 +29,7 @@
             </fieldset>
 
             <div class="flex items-center justify-center mt-6">
-            <button id="buttonY" type="submit" class="">Génerer</button>
+            <button id="buttonF" type="submit" class="">Génerer</button>
 
             </div>
         </form>
