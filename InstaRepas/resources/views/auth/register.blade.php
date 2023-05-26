@@ -43,7 +43,7 @@
     <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 cursor-pointer" href="{{ route('login') }}">
         {{ __('Already registered?') }}
     </a>
-    <button id="buttonY" type="submit" class="">{{ __('Register') }}</button>
+    <button id="buttonY" type="submit" class="w-full px-6 py-2 text-lg cursor-pointer ml-2">{{ __('Register') }}</button>
 </div>
 
 
