@@ -6,7 +6,8 @@
       <p class='text-white text-base sm:text-lg md:text-xl mb-2 shadow-text text-center'>Planifiez à l'avance et simplifiez votre routine de préparation de repas.</p>
       <p class='text-white text-base sm:text-lg md:text-xl mb-4 shadow-text text-center'>Commencez votre voyage vers une alimentation plus saine et équilibrée aujourd'hui.</p>
     </div>
-    <a href='/generate' class='bg-blue-500 hover:bg-[#B5F0EE] hover:text-black text-white font-bold py-2 px-4 drop-shadow-md rounded-md'>Explorez maintenant</a>
+    <a id="buttonF" href='/generate' class=''>Explorez maintenant</a>
+
   </div>
 
 
@@ -36,7 +37,7 @@
 
 <!-- 3ème partie : -->
 <div class='bg-cover bg-center flex flex-col justify-center items-center bg-cover-season' role='contentinfo' aria-label='Seasonal Foods'>
-  <h2 class='text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-8 shadow-text' tabindex="0">Aliments de saison : le choix santé</h2>
+<h2 class='text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-8 shadow-sm' tabindex="0">Aliments de saison : le choix santé</h2>
 
   <div class='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 px-5 md:px-0' role='list'>
     <div class='food-card bg-white rounded-lg shadow-md p-4 transition-all ease-in-out duration-500 transform translate-x-0 delay-75' role='listitem'>
@@ -58,10 +59,12 @@
     </div>
 
     <div class="seasons-switch hidden md:flex flex-wrap justify-center mt-6">
-  <button id="Automne" class="season-button bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-l mr-2">Automne</button>
-  <button id="Hiver" class="season-button bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 mr-2">Hiver</button>
-  <button id="Printemps" class="season-button bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-2 px-4 mr-2">Printemps</button>
-  <button id="Été" class="season-button bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-r">Été</button>
+    <button id="Automne" class="season-button bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-l mr-2 hover:shadow-lg">Automne</button>
+    <button id="Hiver" class="season-button bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 mr-2 hover:shadow-lg">Hiver</button>
+    <button id="Printemps" class="season-button bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-2 px-4 mr-2 hover:shadow-lg">Printemps</button>
+    <button id="Été" class="season-button bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-r hover:shadow-lg">Été</button>
+</div>
+
 </div>
 
 

@@ -41,4 +41,6 @@ return [
         'contains_animal_products' => 'Contient des produits d\'origine animale',
         'contains_pork' => 'Contient du porc',
     ],
+
+    
 ];
