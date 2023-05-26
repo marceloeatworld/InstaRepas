@@ -47,7 +47,7 @@
           <p class="text-lg leading-relaxed">Les fruits et légumes sont riches en vitamines, en antioxydants et en fibres. Il est recommandé d'en consommer 2 à 3 portions de chaque par jour, en variant entre les aliments crus et cuits.</p>
         </div>
         <!-- Div : Féculents -->
-        <div class="bg-white rounded-lg p-6 shadow-md">>
+        <div class="bg-white rounded-lg p-6 shadow-md">
           <h3 class="text-xl font-bold mb-4">
             <span class="text-4xl mr-2">🍞</span>
             Féculents
