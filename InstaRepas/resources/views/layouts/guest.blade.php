@@ -11,7 +11,7 @@
         <link rel="preconnect" href="https://fonts.bunny.net">
         <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
         <link rel="stylesheet" href="/css/custom-login.css">
-
+        <script src="{{ asset('js/7fdee4801e.js') }}" ></script>
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
@@ -27,7 +27,7 @@
                     {{ $slot }}
                 </div>
                 <div class="bg-cover bg-center w-0 sm:w-1/2 sm:max-w-md mt-6 overflow-hidden sm:rounded-lg">
-                    <img src="{{ asset('images/image.png') }}" alt="Your Image Description" class="h-full object-cover">
+                    <img src="{{ asset('images/image.webp') }}" alt="Good food!" class="h-full object-cover">
                 </div>
             </div>
         </div>

@@ -2,71 +2,79 @@
     <!-- Primary Navigation Menu -->
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between h-16">
-            <div class="flex">
-                <!-- Logo -->
-                <div class="shrink-0 flex items-center">
-                    <a href="/">
-                        <x-application-logo class="block h-9 w-auto fill-current text-gray-800" />
-                    </a>
-                </div>
-
-                <!-- Navigation Links -->
-                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-
-                    @if (Auth::check()) <!-- Vérifie si un utilisateur est co -->
-                    @if(Auth::user()->isAdmin()) <!-- Vérifie si c un admin -->
-                        <x-nav-link :href="route('admin.index')" :active="request()->routeIs('admin.index')">
-                            {{ __('Dashboard Admin') }}
-                        </x-nav-link>
-                    @else
-                        <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                            {{ __('Dashboard') }}
-                        </x-nav-link>
-                    @endif
-                @endif
-
-
-                    <x-nav-link :href="route('generate')" :active="request()->routeIs('generate')">
-                        {{ __('Menu Équilibre') }}
-                    </x-nav-link>
-
-
-
-                    <!--<x-nav-link :href="route('recipes.create')" :active="request()->routeIs('recipes.create')">
-                        {{ __('Créer une recette') }}
-                    </x-nav-link> -->
-
-                    <x-nav-link :href="'/conseil-de-cuisine'">
-                         {{ __('Astuces Culinaire') }}
-                    </x-nav-link>
-
-                    <x-nav-link :href="'/information-nutrition'">
-                         {{ __('Guide Nutrition') }}
-                    </x-nav-link>
-
-                    <x-nav-link :href="'/contact'">
-                         {{ __('Contact') }}
-                    </x-nav-link>
-
-                    <x-nav-link :href="'/a-propos'">
-                         {{ __('À propos') }}
-                    </x-nav-link>
-
-
-                </div>
+        <div class="flex">
+            <!-- Logo -->
+            <div class="shrink-0 flex items-center">
+                <a href="/">
+                    <x-application-logo class="block h-9 w-auto fill-current text-gray-800" />
+                </a>
             </div>
 
-      <!-- Login /Register  -->
-                @if (Route::has('login'))
-                @auth
-                @else
-                    @if (Route::has('register'))
-                        <x-nav-link :href="route('login')" :active="request()->routeIs('login')">
-                            {{ __('Connexion/Inscription') }}
+            <!-- Navigation Links -->
+            <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                <!-- Si l'utilisateur est connecté -->
+                    @if (Auth::check())
+                       <!-- Si l'utilisateur est un administrateur -->
+                       @if(Auth::user()->isAdmin())
+                        <x-nav-link :href="route('admin.index')" :active="request()->routeIs('admin.index')">
+                            <i class="fas fa-tachometer-alt"></i> {{ __('Dashboard Admin') }}
                         </x-nav-link>
+                    @else
+                        <!-- L'utilisateur est connecté mais n'est pas un administrateur -->
+                        <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
+                                <i class="fas fa-tachometer-alt"></i> {{ __('Dashboard') }}
+                            </x-nav-link>
+                        @endif
                     @endif
-                @endauth
-            @endif
+       
+
+
+
+
+                <x-nav-link :href="route('generate')" :active="request()->routeIs('generate')">
+                    {{ __('Menu Équilibre') }}
+                </x-nav-link>
+
+                <!--<x-nav-link :href="route('recipes.create')" :active="request()->routeIs('recipes.create')">
+                    <i class="fas fa-utensils"></i> {{ __('Créer une recette') }}
+                </x-nav-link> -->
+
+                <x-nav-link :href="'/conseil-de-cuisine'">
+                  {{ __('Astuces Culinaire') }}
+                </x-nav-link>
+
+                <x-nav-link :href="'/information-nutrition'">
+                   {{ __('Guide Nutrition') }}
+                </x-nav-link>
+
+                <div class="flex justify-end space-x-4">
+                <!-- L'utilisateur n'est pas connecté -->
+                @guest
+                    <x-nav-link :href="route('login')" :active="request()->routeIs('login')">
+                        <i class="fas fa-user"></i>
+                        <span>{{ __('Login') }}</span>
+                    </x-nav-link>
+
+                    <x-nav-link :href="route('register')" :active="request()->routeIs('register')">
+                        <i class="fas fa-user-plus"></i>
+                        <span>{{ __('Register') }}</span>
+                    </x-nav-link>
+                @endguest
+
+                <x-nav-link :href="'/contact'">
+                    <i class="fas fa-envelope"></i>
+                </x-nav-link>
+
+                <x-nav-link :href="'/a-propos'">
+                    <i class="fas fa-info-circle"></i> 
+                </x-nav-link>
+            </div>
+
+
+    </div>
+</div>
+
+
 
 
 
@@ -126,42 +134,86 @@
         </div>
     </div>
 
-    <!-- Responsive Navigation Menu -->
-    <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
-        <div class="pt-2 pb-3 space-y-1">
-            <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                {{ __('Dashboard') }}
+<!-- Responsive Navigation Menu -->
+<div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
+    <div class="pt-2 pb-3 space-y-1">
+        @if (Auth::check()) <!-- Vérifie si un utilisateur est connecté -->
+        @if(Auth::user()->isAdmin()) <!-- Vérifie si c'est un admin -->
+            <x-responsive-nav-link :href="route('admin.index')" :active="request()->routeIs('admin.index')">
+                <i class="fas fa-tachometer-alt"></i> {{ __('Dashboard Admin') }}
             </x-responsive-nav-link>
-        </div>
+        @else
+            <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
+            <i class="fas fa-tachometer-alt"></i>  {{ __('Dashboard') }}
+            </x-responsive-nav-link>
+        @endif
+        @endif
 
-        <!-- Responsive Settings Options -->
-        <div class="pt-4 pb-1 border-t border-gray-200">
-            <div class="px-4">
-            @if (Auth::user())
-    <div class="font-medium text-base text-gray-800">{{ Auth::user()->name }}</div>
-    <div class="font-medium text-sm text-gray-500">{{ Auth::user()->email }}</div>
-@endif
+        <x-responsive-nav-link :href="route('generate')" :active="request()->routeIs('generate')">
+            {{ __('Menu Équilibre') }}
+        </x-responsive-nav-link>
 
-            </div>
+        <x-responsive-nav-link :href="'/conseil-de-cuisine'">
+            {{ __('Astuces Culinaire') }}
+        </x-responsive-nav-link>
 
-            <div class="mt-3 space-y-1">
-                <x-responsive-nav-link :href="route('profile.edit')">
-                    {{ __('Profile') }}
-                </x-responsive-nav-link>
+        <x-responsive-nav-link :href="'/information-nutrition'">
+            {{ __('Guide Nutrition') }}
+        </x-responsive-nav-link>
 
-                <!-- Authentication -->
-                <form method="POST" action="{{ route('logout') }}">
-                    @csrf
+        <x-responsive-nav-link :href="'/contact'">
+            {{ __('Contact') }}
+        </x-responsive-nav-link>
 
-                    <x-responsive-nav-link :href="route('logout')"
-                            onclick="event.preventDefault();
-                                        this.closest('form').submit();">
-                        {{ __('Log Out') }}
-                    </x-responsive-nav-link>
-                </form>
+        <x-responsive-nav-link :href="'/a-propos'">
+            {{ __('À propos') }}
+        </x-responsive-nav-link>
 
-            </div>
 
-        </div>
+
+   <!-- Responsive Settings Options -->
+<div class="pt-4 pb-1 border-t border-gray-200">
+    <div class="px-4">
+        <!-- User Info -->
+        @if (Auth::user())
+        <div class="font-medium text-base text-gray-800">{{ Auth::user()->name }}</div>
+        <div class="font-medium text-sm text-gray-500">{{ Auth::user()->email }}</div>
+        @endif
     </div>
+
+    <div class="mt-3 space-y-1">
+        <!-- Profile and Preferences -->
+        @if (Auth::user())
+        <x-responsive-nav-link :href="route('profile.edit')">
+            <i class="fas fa-user-circle"></i> {{ __('Profile') }}
+        </x-responsive-nav-link>
+        <x-dropdown-link :href="route('profile.preferences')">
+            <i class="fas fa-utensils"></i> {{ __('Préférences alimentaires') }}
+        </x-dropdown-link>
+        @endif
+
+        <!-- Guest User -->
+        @guest
+        <x-nav-link :href="route('login')" :active="request()->routeIs('login')">
+            <i class="fas fa-user"></i> <span>{{ __('Login') }}</span>
+        </x-nav-link>
+        <x-nav-link :href="route('register')" :active="request()->routeIs('register')">
+            <i class="fas fa-user-plus"></i> <span>{{ __('Register') }}</span>
+        </x-nav-link>
+        @endguest
+
+        <!-- Logout -->
+        @if (Auth::check())
+        <form method="POST" action="{{ route('logout') }}">
+            @csrf
+            <x-responsive-nav-link :href="route('logout')" onclick="event.preventDefault(); this.closest('form').submit();">
+                <i class="fas fa-sign-out-alt"></i> {{ __('Log Out') }}
+            </x-responsive-nav-link>
+        </form>
+        @endif
+    </div>
+</div>
+
+</div>
+
 </nav>
