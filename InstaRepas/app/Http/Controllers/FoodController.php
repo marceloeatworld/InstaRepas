@@ -14,7 +14,8 @@ use App\Models\Season;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
-
+use Illuminate\Validation\Rule;
+use Illuminate\Support\Str;
 // Définition du contrôleur de la nourriture
 class FoodController extends Controller
 {
@@ -64,19 +65,37 @@ class FoodController extends Controller
     // Méthode pour enregistrer un nouvel aliment
     public function store(Request $request)
     {
-        //verifie si aliment existe deja
-        $validator = Validator::make($request->all(), [
-            'name' => 'unique:foods',
-        ]);
-    
-        if ($validator->fails()) {
-            Session::flash('error', 'Cet aliment existe déjà!');
-            return back()->withInput();
-        }
-        // Création du nouvel aliment
-        $food = Food::create($request->all());
-        $food->user_id = auth()->id();
-        $food->save();
+            // Convertit la première lettre du nom en majuscule
+            $request->merge(['name' => ucfirst($request->name)]);
+
+            // Met le nom en minuscules pour une vérification insensible à la casse
+            $lowercaseName = Str::lower($request->name);
+
+            // Règles de validation
+            $rules = [
+                'name' => [
+                    'required',
+                    Rule::unique('foods')->where(function ($query) use ($lowercaseName) {
+                        return $query->whereRaw('LOWER(name) = ?', $lowercaseName);
+                    }),
+                ],
+                // autres règles...
+            ];
+
+            // Crée un validateur avec les règles
+            $validator = Validator::make($request->all(), $rules);
+
+            // Si la validation échoue, retourne en arrière avec le message d'erreur
+            if ($validator->fails()) {
+                Session::flash('error', 'Cet aliment existe déjà!');
+                return back()->withInput();
+            }
+
+            // Création du nouvel aliment
+            $food = Food::create($request->all());
+            $food->user_id = auth()->id();
+            $food->save();
+
 
         // Attribution de plusieurs MealCombination, Season et DietaryRestriction
         $food->mealCombinations()->sync($request->input('meal_combinations', []));
