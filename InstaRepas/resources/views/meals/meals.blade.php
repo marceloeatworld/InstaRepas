@@ -1,20 +1,22 @@
 <x-app-layout>
     <div class="py-6">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="bg-white p-6 rounded-lg text-center border-b-2 border-blue-600 shadow-md transition-all duration-500 hover:shadow-lg">
-                <h5 class="mb-2 text-2xl font-semibold tracking-tighter text-blue-600 transform transition-transform duration-500 hover:scale-105">Savourez l'expérience</h5>
-                <p class="mb-2 text-lg font-semibold tracking-tight text-blue-900 tracking-wider">Date: {{ \Carbon\Carbon::parse($current_date)->locale('fr')->isoFormat('LL') }}</p>
-               <p class="mb-6 text-lg font-semibold tracking-tight text-blue-900 tracking-wider">Saison: {{ __('messages.seasons.' . $current_season) }}</p>
-               <div class="flex justify-center">
-                    <button id="buttonF" onclick="window.print()" class="bg-blue-600 hover:bg-blue-500 font-bold py-2 px-4 rounded inline-flex items-center">
-                        <i class="fas fa-print mr-2"></i>
-                        Imprimer la page
-                    </button>
-                </div>
+    <div class="max-w-md mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="bg-white p-6 rounded-lg text-center border-b-2 border-blue-600 shadow-md transition-all duration-500 hover:shadow-lg">
+        <p class="mb-1 text-sm font-semibold tracking-tight text-blue-700 tracking-wider">Date: {{ \Carbon\Carbon::parse($current_date)->locale('fr')->isoFormat('LL') }}</p>
+        <p class="mb-1 text-sm font-semibold tracking-tight text-blue-700 tracking-wider">Saison: {{ __('messages.seasons.' . $current_season) }}</p>
+        <div class="mt-2 flex justify-center">
+        <button id="buttonF" onclick="window.print()" class="hide-on-mobile md:block bg-blue-600 hover:bg-blue-500 font-bold py-2 px-4 rounded inline-flex items-center">
+    <i class="fas fa-print mr-2"></i>
+    Imprimer la page
+</button>
 
 
-            </div>
         </div>
+    </div>
+</div>
+
+
+
 
     <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 p-6 overflow-auto">
         @for($day = 0; $day < count($breakfasts); $day++)
