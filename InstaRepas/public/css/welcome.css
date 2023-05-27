@@ -123,6 +123,13 @@ font-weight: bold;
   font-weight: bold;
   transition: box-shadow 0.2s ease-in-out; /* Transition */
 }
+@media (max-width: 767px) {
+  .hide-on-mobile {
+    display: none !important;
+  }
+}
+
+
 
 #buttonF:hover {
   box-shadow: none;
