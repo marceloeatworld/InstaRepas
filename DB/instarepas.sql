@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: May 03, 2023 at 05:45 PM
+-- Generation Time: May 25, 2023 at 07:48 AM
 -- Server version: 10.3.38-MariaDB-0ubuntu0.20.04.1
--- PHP Version: 8.2.5
+-- PHP Version: 8.2.6
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -54,12 +54,10 @@ INSERT INTO `combinations_foods` (`id`, `combination_id`, `food_id`) VALUES
 (13, 2, 13),
 (14, 2, 14),
 (15, 2, 15),
-(16, 2, 16),
 (17, 2, 17),
 (18, 2, 18),
 (19, 2, 19),
 (20, 2, 20),
-(21, 2, 21),
 (22, 2, 22),
 (23, 2, 23),
 (24, 2, 24),
@@ -162,23 +160,16 @@ INSERT INTO `combinations_foods` (`id`, `combination_id`, `food_id`) VALUES
 (122, 2, 122),
 (123, 2, 123),
 (124, 2, 124),
-(125, 2, 125),
-(142, 1, 142),
 (143, 1, 143),
-(144, 1, 144),
 (145, 1, 145),
 (146, 1, 146),
 (147, 1, 147),
 (148, 1, 148),
 (149, 1, 149),
-(150, 1, 150),
 (151, 1, 151),
 (152, 1, 152),
-(153, 1, 153),
 (154, 1, 154),
 (155, 1, 155),
-(156, 1, 156),
-(157, 1, 157),
 (158, 2, 158),
 (159, 2, 159),
 (160, 2, 160),
@@ -237,7 +228,6 @@ INSERT INTO `combinations_foods` (`id`, `combination_id`, `food_id`) VALUES
 (216, 3, 216),
 (217, 3, 217),
 (218, 3, 218),
-(219, 1, 219),
 (220, 1, 220),
 (221, 1, 221),
 (222, 1, 222),
@@ -256,7 +246,6 @@ INSERT INTO `combinations_foods` (`id`, `combination_id`, `food_id`) VALUES
 (242, 1, 242),
 (243, 1, 243),
 (244, 1, 244),
-(245, 1, 245),
 (246, 1, 246),
 (247, 1, 247),
 (248, 2, 248),
@@ -269,7 +258,24 @@ INSERT INTO `combinations_foods` (`id`, `combination_id`, `food_id`) VALUES
 (255, 2, 255),
 (256, 1, 102),
 (257, 1, 126),
-(258, 2, 126);
+(258, 2, 126),
+(261, 2, 258),
+(264, 2, 260),
+(267, 2, 263),
+(268, 2, 264),
+(269, 2, 265),
+(270, 2, 266),
+(271, 2, 267),
+(272, 2, 270),
+(273, 2, 257),
+(275, 2, 273),
+(276, 2, 274),
+(277, 2, 275),
+(278, 2, 276),
+(279, 2, 277),
+(280, 2, 278),
+(281, 2, 279),
+(282, 2, 280);
 
 -- --------------------------------------------------------
 
@@ -345,18 +351,16 @@ INSERT INTO `foods` (`id`, `name`, `category_id`, `user_id`, `is_valid`, `nutrit
 (13, 'Salsifi', 3, 1, 1, 'fibers'),
 (14, 'Épinard', 3, 1, 1, 'fibers'),
 (15, 'Chou-fleur', 3, 1, 1, 'fibers'),
-(16, 'Ail', 3, 1, 1, 'fibers'),
 (17, 'Blette', 3, 1, 1, 'fibers'),
 (18, 'Crosne', 3, 1, 1, 'fibers'),
 (19, 'Radis', 3, 1, 1, 'fibers'),
 (20, 'Carotte', 3, 1, 1, 'fibers'),
-(21, 'Oignon', 3, 1, 1, 'fibers'),
 (22, 'Topinambour', 3, 1, 1, 'fibers'),
-(23, 'Pomme de terre', 3, 1, 1, 'carbohydrates'),
+(23, 'Pomme de terre', 5, 1, 1, 'carbohydrates'),
 (24, 'Concombre', 3, 1, 1, 'fibers'),
 (25, 'Tomate', 3, 1, 1, 'fibers'),
 (26, 'Artichaut', 3, 1, 1, 'fibers'),
-(27, 'Pomme de terre primeur', 3, 1, 1, 'carbohydrates'),
+(27, 'Pomme de terre primeur', 5, 1, 1, 'carbohydrates'),
 (28, 'Brocoli', 3, 1, 1, 'fibers'),
 (29, 'Haricot vert', 3, 1, 1, 'fibers'),
 (30, 'Aubergine', 3, 1, 1, 'fibers'),
@@ -396,7 +400,7 @@ INSERT INTO `foods` (`id`, `name`, `category_id`, `user_id`, `is_valid`, `nutrit
 (64, 'Mirabelle', 4, 1, 1, 'fruits'),
 (65, 'Figue', 4, 1, 1, 'fruits'),
 (66, 'Myrtille', 4, 1, 1, 'fruits'),
-(67, 'Noisette', 4, 1, 1, 'fruits'),
+(67, 'Noisette', 4, 1, 1, 'lipids'),
 (68, 'Féveroet fèves', 4, 1, 1, 'fruits'),
 (69, 'Coing', 4, 1, 1, 'fruits'),
 (70, 'Pruneau', 4, 1, 1, 'fruits'),
@@ -454,25 +458,18 @@ INSERT INTO `foods` (`id`, `name`, `category_id`, `user_id`, `is_valid`, `nutrit
 (122, 'Riz brun', 5, 1, 1, 'carbohydrates'),
 (123, 'Fusilli de blé complet', 5, 1, 1, 'carbohydrates'),
 (124, 'Pâtes d\'épeautre', 5, 1, 1, 'carbohydrates'),
-(125, 'Pommes de terre', 3, 1, 1, 'carbohydrates'),
 (126, 'Oeufs brouillés', 9, 1, 1, 'proteins'),
 (127, 'Oeufs durs', 9, 1, 1, 'proteins'),
-(142, 'Pain de mie', 10, 1, 1, 'carbohydrates'),
 (143, 'Pain au levain', 10, 1, 1, 'carbohydrates'),
-(144, 'Pain de mie complet', 10, 1, 1, 'carbohydrates'),
 (145, 'Pain de maïs', 10, 1, 1, 'carbohydrates'),
 (146, 'Pain aux olives', 10, 1, 1, 'carbohydrates'),
 (147, 'Pain de sarrasin', 10, 1, 1, 'carbohydrates'),
 (148, 'Pain complet', 10, 1, 1, 'carbohydrates'),
 (149, 'Pain aux noix', 10, 1, 1, 'carbohydrates'),
-(150, 'Pain viennois', 10, 1, 1, 'carbohydrates'),
 (151, 'Pain aux céréales', 10, 1, 1, 'carbohydrates'),
 (152, 'Pain de seigle', 10, 1, 1, 'carbohydrates'),
-(153, 'Pain brioché', 10, 1, 1, 'carbohydrates'),
-(154, 'Baguette', 10, 1, 1, 'carbohydrates'),
+(154, 'Baguette Tradition', 10, 1, 1, 'carbohydrates'),
 (155, 'Pain de campagne', 10, 1, 1, 'carbohydrates'),
-(156, 'Pain au lait', 10, 1, 1, 'carbohydrates'),
-(157, 'Pain de mie aux céréales', 10, 1, 1, 'carbohydrates'),
 (158, 'Langue de porc', 1, 1, 1, 'proteins'),
 (159, 'Pied de porc', 1, 1, 1, 'proteins'),
 (160, 'Foie de porc', 1, 1, 1, 'proteins'),
@@ -531,7 +528,6 @@ INSERT INTO `foods` (`id`, `name`, `category_id`, `user_id`, `is_valid`, `nutrit
 (216, 'Graines de citrouille', 7, 1, 1, 'lipids'),
 (217, 'Noisettes grillées', 7, 1, 1, 'lipids'),
 (218, 'Noix de cajou', 7, 1, 1, 'lipids'),
-(219, 'Pain de pomme de terre', 10, 1, 1, 'carbohydrates'),
 (220, 'Pain de noix de coco', 10, 1, 1, 'carbohydrates'),
 (221, 'Pain de pois chiches', 10, 1, 1, 'carbohydrates'),
 (222, 'Pain de quinoa', 10, 1, 1, 'carbohydrates'),
@@ -550,7 +546,6 @@ INSERT INTO `foods` (`id`, `name`, `category_id`, `user_id`, `is_valid`, `nutrit
 (242, 'Lait écrémé ou demi-écrémé', 6, 1, 1, 'proteins'),
 (243, 'Yaourt aux fruits', 6, 1, 1, 'proteins'),
 (244, 'Fromage frais', 6, 1, 1, 'proteins'),
-(245, 'Crème fraîche légère', 6, 1, 1, 'proteins'),
 (246, 'Fromage à tartiner', 6, 1, 1, 'proteins'),
 (247, 'Cottage cheese', 6, 1, 1, 'proteins'),
 (248, 'Huile d\'olive', 8, 1, 1, 'lipids'),
@@ -560,7 +555,24 @@ INSERT INTO `foods` (`id`, `name`, `category_id`, `user_id`, `is_valid`, `nutrit
 (252, 'Huile de sésame', 8, 1, 1, 'lipids'),
 (253, 'Huile de noix', 8, 1, 1, 'lipids'),
 (254, 'Huile de coco', 8, 1, 1, 'lipids'),
-(255, 'Huile de pépins de raisin', 8, 1, 1, 'lipids');
+(255, 'Huile de pépins de raisin', 8, 1, 1, 'lipids'),
+(257, 'test', 9, 4, 0, 'carbohydrates'),
+(258, 'Pois chiches', 12, 1, 1, 'proteins'),
+(260, 'Lentilles', 12, 1, 1, 'proteins'),
+(263, 'Haricots', 12, 1, 1, 'proteins'),
+(264, 'Pois', 12, 1, 1, 'proteins'),
+(265, 'Fèves', 12, 1, 1, 'proteins'),
+(266, 'Soja', 12, 1, 1, 'proteins'),
+(267, 'Pois cassés', 12, 1, 1, 'proteins'),
+(270, 'Lupin', 12, 1, 1, 'proteins'),
+(273, 'Haricots mungo', 12, 1, 1, 'proteins'),
+(274, 'Haricots noirs', 12, 1, 1, 'proteins'),
+(275, 'Haricots adzuki', 12, 1, 1, 'proteins'),
+(276, 'Lentilles beluga', 12, 1, 1, 'proteins'),
+(277, 'Lentilles rouges', 12, 1, 1, 'proteins'),
+(278, 'Lentilles vertes', 12, 1, 1, 'proteins'),
+(279, 'Lentilles corail', 12, 1, 1, 'proteins'),
+(280, 'Haricots blancs', 12, 1, 1, 'proteins');
 
 -- --------------------------------------------------------
 
@@ -608,22 +620,16 @@ INSERT INTO `foods_restrictions` (`id`, `food_id`, `restriction_id`) VALUES
 (27, 99, 1),
 (28, 100, 1),
 (29, 101, 1),
-(30, 142, 3),
 (31, 143, 3),
-(32, 144, 3),
 (33, 145, 3),
 (34, 146, 3),
 (35, 147, 3),
 (36, 148, 3),
 (37, 149, 3),
-(38, 150, 3),
 (39, 151, 3),
 (40, 152, 3),
-(41, 153, 3),
 (42, 154, 3),
 (43, 155, 3),
-(44, 156, 3),
-(45, 157, 3),
 (46, 123, 3),
 (47, 124, 3),
 (48, 112, 3),
@@ -683,12 +689,13 @@ INSERT INTO `foods_restrictions` (`id`, `food_id`, `restriction_id`) VALUES
 (105, 242, 5),
 (106, 243, 5),
 (107, 244, 5),
-(108, 245, 5),
 (109, 246, 5),
 (110, 247, 5),
 (111, 102, 4),
 (112, 126, 4),
-(113, 127, 4);
+(113, 127, 4),
+(115, 257, 5),
+(116, 257, 3);
 
 -- --------------------------------------------------------
 
@@ -722,12 +729,10 @@ INSERT INTO `foods_seasons` (`id`, `food_id`, `season_id`) VALUES
 (13, 13, 1),
 (14, 14, 1),
 (15, 15, 1),
-(16, 16, 1),
 (17, 17, 1),
 (18, 18, 1),
 (19, 19, 1),
 (20, 20, 1),
-(21, 21, 1),
 (22, 22, 1),
 (23, 23, 1),
 (24, 2, 2),
@@ -735,13 +740,11 @@ INSERT INTO `foods_seasons` (`id`, `food_id`, `season_id`) VALUES
 (26, 12, 2),
 (27, 25, 2),
 (28, 26, 2),
-(29, 21, 2),
 (30, 27, 2),
 (31, 9, 2),
 (32, 28, 2),
 (33, 29, 2),
 (34, 23, 2),
-(35, 16, 2),
 (36, 20, 2),
 (37, 15, 2),
 (38, 1, 2),
@@ -763,12 +766,10 @@ INSERT INTO `foods_seasons` (`id`, `food_id`, `season_id`) VALUES
 (54, 32, 3),
 (55, 7, 3),
 (56, 17, 3),
-(57, 21, 3),
 (58, 9, 3),
 (59, 28, 3),
 (60, 20, 3),
 (61, 2, 3),
-(62, 16, 3),
 (63, 8, 3),
 (64, 25, 3),
 (65, 19, 3),
@@ -809,8 +810,6 @@ INSERT INTO `foods_seasons` (`id`, `food_id`, `season_id`) VALUES
 (100, 39, 4),
 (101, 3, 4),
 (102, 12, 4),
-(103, 21, 4),
-(104, 16, 4),
 (105, 1, 4),
 (106, 33, 4),
 (107, 37, 4),
@@ -979,7 +978,72 @@ INSERT INTO `foods_seasons` (`id`, `food_id`, `season_id`) VALUES
 (270, 81, 1),
 (271, 90, 1),
 (272, 74, 1),
-(273, 91, 1);
+(273, 91, 1),
+(275, 257, 4),
+(276, 258, 3),
+(278, 260, 4),
+(279, 260, 3),
+(284, 263, 4),
+(285, 263, 3),
+(286, 264, 4),
+(287, 264, 3),
+(288, 265, 3),
+(289, 266, 4),
+(290, 267, 4),
+(291, 270, 4),
+(292, 270, 3),
+(294, 273, 3),
+(295, 274, 4),
+(296, 274, 3),
+(297, 275, 4),
+(298, 276, 4),
+(299, 276, 3),
+(300, 277, 4),
+(301, 277, 3),
+(302, 278, 4),
+(303, 278, 3),
+(304, 279, 4),
+(305, 279, 3),
+(306, 280, 4),
+(307, 280, 3),
+(308, 258, 4),
+(309, 258, 2),
+(310, 258, 1),
+(311, 260, 2),
+(312, 260, 1),
+(313, 263, 2),
+(314, 263, 1),
+(315, 264, 2),
+(316, 264, 1),
+(317, 265, 4),
+(318, 265, 2),
+(319, 265, 1),
+(320, 266, 2),
+(321, 266, 3),
+(322, 266, 1),
+(323, 267, 2),
+(324, 267, 3),
+(325, 267, 1),
+(326, 270, 2),
+(327, 270, 1),
+(328, 273, 4),
+(329, 273, 2),
+(330, 273, 1),
+(331, 274, 2),
+(332, 274, 1),
+(333, 275, 2),
+(334, 275, 3),
+(335, 275, 1),
+(336, 276, 2),
+(337, 276, 1),
+(338, 277, 2),
+(339, 277, 1),
+(340, 278, 2),
+(341, 278, 1),
+(342, 279, 2),
+(343, 279, 1),
+(344, 280, 2),
+(345, 280, 1);
 
 -- --------------------------------------------------------
 
@@ -1003,6 +1067,7 @@ INSERT INTO `food_categories` (`id`, `name`) VALUES
 (2, 'Fish'),
 (4, 'Fruits'),
 (5, 'Grains'),
+(12, 'Legumes'),
 (1, 'Meat'),
 (7, 'Nuts'),
 (8, 'Oils'),
@@ -1027,6 +1092,33 @@ INSERT INTO `meal_combinations` (`id`, `meal_type`) VALUES
 (1, 'breakfast'),
 (2, 'other_meals'),
 (3, 'snack');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `media`
+--
+
+CREATE TABLE `media` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `model_type` varchar(255) NOT NULL,
+  `model_id` bigint(20) UNSIGNED NOT NULL,
+  `uuid` char(36) DEFAULT NULL,
+  `collection_name` varchar(255) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `file_name` varchar(255) NOT NULL,
+  `mime_type` varchar(255) DEFAULT NULL,
+  `disk` varchar(255) NOT NULL,
+  `conversions_disk` varchar(255) DEFAULT NULL,
+  `size` bigint(20) UNSIGNED NOT NULL,
+  `manipulations` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
+  `custom_properties` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
+  `generated_conversions` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
+  `responsive_images` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
+  `order_column` int(10) UNSIGNED DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -1062,7 +1154,8 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (15, '2023_05_03_092535_recipes_restrictions', 1),
 (17, '2023_05_03_092621_foods_seasons', 1),
 (18, '2023_05_03_164155_units_of_measure', 2),
-(19, '2023_05_03_092554_recipes_foods', 3);
+(19, '2023_05_03_092554_recipes_foods', 3),
+(20, '2023_05_05_112634_create_media_table', 4);
 
 -- --------------------------------------------------------
 
@@ -1236,7 +1329,6 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `username`, `email`, `email_verified_at`, `password`, `is_admin`, `registration_date`, `points`, `provider`, `provider_id`, `provider_token`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 'admin', 'admin@admin.fr', '2023-05-03 10:28:45', '$2y$10$teWEqeGmbDbNSpeowjExauVQVZfqBuB1fL7c9TtEHdEiUQ2M0kSZa', 1, '2023-05-03 12:28:29', 0, NULL, NULL, NULL, 'pUAFdIoZoetVeAkIyBQQM7hfAL8s0eGz1HGlDiMdPyCG2SfqLbnUSg2Fykoq', '2023-05-03 10:28:29', '2023-05-03 10:28:45');
 
 -- --------------------------------------------------------
 
@@ -1249,13 +1341,6 @@ CREATE TABLE `user_preferences` (
   `user_id` int(10) UNSIGNED NOT NULL,
   `preference_id` int(10) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `user_preferences`
---
-
-INSERT INTO `user_preferences` (`id`, `user_id`, `preference_id`) VALUES
-(1, 1, 4);
 
 --
 -- Indexes for dumped tables
@@ -1319,6 +1404,15 @@ ALTER TABLE `food_categories`
 --
 ALTER TABLE `meal_combinations`
   ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `media`
+--
+ALTER TABLE `media`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `media_uuid_unique` (`uuid`),
+  ADD KEY `media_model_type_model_id_index` (`model_type`,`model_id`),
+  ADD KEY `media_order_column_index` (`order_column`);
 
 --
 -- Indexes for table `migrations`
@@ -1410,7 +1504,7 @@ ALTER TABLE `user_preferences`
 -- AUTO_INCREMENT for table `combinations_foods`
 --
 ALTER TABLE `combinations_foods`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=259;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=283;
 
 --
 -- AUTO_INCREMENT for table `dietary_restrictions`
@@ -1428,25 +1522,25 @@ ALTER TABLE `failed_jobs`
 -- AUTO_INCREMENT for table `foods`
 --
 ALTER TABLE `foods`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=256;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=281;
 
 --
 -- AUTO_INCREMENT for table `foods_restrictions`
 --
 ALTER TABLE `foods_restrictions`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=114;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=119;
 
 --
 -- AUTO_INCREMENT for table `foods_seasons`
 --
 ALTER TABLE `foods_seasons`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=274;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=346;
 
 --
 -- AUTO_INCREMENT for table `food_categories`
 --
 ALTER TABLE `food_categories`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `meal_combinations`
@@ -1455,10 +1549,16 @@ ALTER TABLE `meal_combinations`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
+-- AUTO_INCREMENT for table `media`
+--
+ALTER TABLE `media`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT for table `personal_access_tokens`
@@ -1506,13 +1606,13 @@ ALTER TABLE `units_of_measure`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `user_preferences`
 --
 ALTER TABLE `user_preferences`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- Constraints for dumped tables
