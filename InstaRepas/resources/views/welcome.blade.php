@@ -94,10 +94,10 @@
         <div class='flex justify-center'>
             <div class='bg-white rounded-lg shadow-md p-8 md:p-16 max-w-4xl'>
                 <p class='text-gray-700 leading-relaxed mb-6'>
-                    Trois étudiants passionnés par la technologie et l'innovation ont décidé d'apporter une solution à une problématique sociale : améliorer l'alimentation quotidienne. S'associant avec une organisation caritative, ils ont utilisé leurs compétences en programmation pour concevoir Food Équilibre, une plateforme facilitant la création de repas équilibrés et personnalisés.
+                Chez FoodEquilibre, nous avons une mission : vous aider à mener une vie plus saine grâce à une alimentation équilibrée. Enracinés à Nogent-sur-Marne, nous sommes plus qu'un simple cabinet de diététique, nous sommes une communauté engagée pour le bien-être.
                 </p>
                 <p class='text-gray-700 leading-relaxed mb-6'>
-                    Ce projet est un exemple vibrant de "social coding", où la technologie est utilisée pour résoudre des problèmes concrets et apporter des bénéfices tangibles à la société. Nous sommes ravis de partager cette solution avec vous et nous sommes impatients de recevoir vos commentaires.
+                Nous sommes ravis de vous présenter notre nouvelle initiative : la création de menus diététiques grâce à la technologie moderne. Combinant notre expertise en diététique avec des outils technologiques de pointe, nous sommes en mesure de vous fournir des solutions alimentaires personnalisées qui correspondent à vos besoins spécifiques.
                 </p>
                 <div class='flex justify-start'>
                     <x-yellow-button href="{{ route('contact') }}" class="">Contactez-nous</x-yellow-button>
