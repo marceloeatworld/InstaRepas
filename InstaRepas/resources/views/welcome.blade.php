@@ -16,14 +16,14 @@
   <!-- 2ème partie : -->
   <div class='flex flex-col md:flex-row items-center justify-center py-12 bg-gray-100 mx-auto px-4 sm:px-0'>
     <div class='md:w-1/2 p-4'>
-      <img id='logo' src='/imgs/logo_for_foodequlibre.webp' alt='Logo Food Équilibre' class='max-w-xs md:max-w-sm mx-auto'>
+      <img id='logo' src='/imgs/logo_for_foodequlibre.webp' alt='Logo InstaRepas' class='max-w-xs md:max-w-sm mx-auto'>
     </div>
     <div class='md:w-1/2 p-4 text-center md:text-left'>
      
-    <h2 class='text-4xl md:text-5xl font-bold mb-2 md:mb-4'>Food Équilibre</h2>
+    <h2 class='text-4xl md:text-5xl font-bold mb-2 md:mb-4'>InstaRepas</h2>
     <h3 class='text-2xl md:text-3xl font-bold mb-2 md:mb-4'>Réinventez votre alimentation</h3>
     <p class='text-gray-700 leading-relaxed mb-6 text-md md:text-lg font-medium max-w-lg mx-auto md:mx-0'>
-      Avec <strong>Food Équilibre</strong>, la nutrition n'a jamais été aussi simple et délicieuse. Notre plateforme innovante vous offre la possibilité de créer des <strong>repas personnalisés</strong> adaptés à vos besoins et préférences. Enrichissez votre menu avec de nouveaux aliments saisonniers, et profitez d'une <strong>alimentation variée et riche en nutriments</strong> tout au long de l'année.
+      Avec <strong>InstaRepas</strong>, la nutrition n'a jamais été aussi simple et délicieuse. Notre plateforme innovante vous offre la possibilité de créer des <strong>repas personnalisés</strong> adaptés à vos besoins et préférences. Enrichissez votre menu avec de nouveaux aliments saisonniers, et profitez d'une <strong>alimentation variée et riche en nutriments</strong> tout au long de l'année.
     </p>
     <div class='flex justify-center md:justify-start'>
 
@@ -75,11 +75,11 @@
 <!-- 4ème partie : -->
 <div class='py-12 px-4 sm:px-0'>
   <div class='text-center max-w-2xl mx-auto'>
-    <h2 class='text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-4 sm:mb-8 leading-snug'>Food Équilibre : Un choix adapté à vos préférences</h2>
+    <h2 class='text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-4 sm:mb-8 leading-snug'>InstaRepas : Un choix adapté à vos préférences</h2>
    
     <p class='text-gray-700 text-sm sm:text-base md:text-lg sm:text-xl mb-4 leading-relaxed'>
      
-    Que vous soyez végétalien, sans gluten, ou que vous aimiez tout simplement la viande, Food Équilibre crée des repas parfaitement adaptés à votre style de vie. <br>En vous inscrivant, vous pouvez sauvegarder vos préférences et les retrouver à chaque connexion. <br>Fini le temps perdu à refaire constamment vos choix, avec Food Équilibre, votre sélection reste à portée de main.<br> Découvrez l'expérience de la personnalisation alimentaire poussée à son paroxysme. Allez-y, inscrivez-vous et commencez à découvrir votre nouvel allié nutritionnel.
+    Que vous soyez végétalien, sans gluten, ou que vous aimiez tout simplement la viande, InstaRepas crée des repas parfaitement adaptés à votre style de vie. <br>En vous inscrivant, vous pouvez sauvegarder vos préférences et les retrouver à chaque connexion. <br>Fini le temps perdu à refaire constamment vos choix, avec InstaRepas, votre sélection reste à portée de main.<br> Découvrez l'expérience de la personnalisation alimentaire poussée à son paroxysme. Allez-y, inscrivez-vous et commencez à découvrir votre nouvel allié nutritionnel.
     </p>
     <x-yellow-button href="{{ route('register') }}" class="">Inscrivez-vous maintenant</x-yellow-button>
   </div>
