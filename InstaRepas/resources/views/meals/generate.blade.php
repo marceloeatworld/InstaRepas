@@ -1,10 +1,16 @@
 <x-app-layout>
     <div class="py-12">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="bg-white p-6 rounded-lg text-center border-b-2 border-blue-600 shadow-md transition-all duration-500 hover:shadow-lg">
-                <h5 class="mb-2 text-3xl font-bold tracking-tighter text-blue-600 transform transition-transform duration-500 hover:scale-105">Savourez l'expérience</h5>
-            </div>
-        </div>
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="bg-white rounded-lg text-center p-5 shadow-md transition-all duration-500 hover:shadow-lg">
+        <h5 class="mb-4 text-2xl md:text-3xl font-extrabold text-blue-600 transform transition-transform duration-500 hover:scale-105">InstaRepas : Un choix adapté à vos préférences</h5>
+        <div class="border-b-2 border-blue-600 w-24 mx-auto mb-4"></div>
+        <p class="text-base sm:text-m text-gray-700 leading-relaxed">
+            Peu importe vos préférences alimentaires, InstaRepas s’adapte à vos choix et crée des repas parfaitement adaptés à votre style de vie. En vous inscrivant, vous pouvez sauvegarder vos préférences et les retrouver à chaque connexion. Fini le temps perdu à refaire constamment vos choix, avec InstaRepas, votre sélection reste à portée de main.
+        </p>
+    </div>
+</div>
+
+
 
         <form action="{{ route('generate_meals') }}" method="post" class="mt-8 bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg px-4 py-4 mx-auto max-w-7xl transition-all duration-500 hover:shadow-md">
             @csrf

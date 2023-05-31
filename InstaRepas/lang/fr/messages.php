@@ -14,6 +14,7 @@ return [
         'Legumes' => 'Legumineuse',
         'Oils' => 'Huile',
         'Eggs' => 'Oeuf',
+        'crustacean' => 'Crustacé',
     ],
     'seasons' => [
         'Spring' => 'Printemps',
