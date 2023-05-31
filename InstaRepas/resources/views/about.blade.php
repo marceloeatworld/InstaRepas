@@ -22,7 +22,7 @@
     </div>
   </section>
   <section class="mb-8">
-    <h2 class="text-2xl font-bold mb-4">Cabinet de diététicienne de FoodEquilibre</h2>
+    <h2 class="text-2xl font-bold mb-4">Cabinet de diététicienne</h2>
     <div class="flex flex-wrap -mx-4">
       <div class="w-full md:w-1/3 px-4 mb-8 order-1 md:order-2">
         <a href="https://www.dieteticienne-nogent.com/" target="_blank">
@@ -35,7 +35,7 @@
         </a>
       </div>
       <div class="w-full md:w-2/3 px-4 order-2 md:order-1">
-        <p class="text-gray-700 leading-loose">FoodEquilibre est également un cabinet de diététicienne à Nogent-sur-Marne. Nous vous accompagnons dans votre démarche de rééquilibrage alimentaire pour une meilleure santé.</p>
+        <p class="text-gray-700 leading-loose">Aurélie Marino cabinet de diététicienne à Nogent-sur-Marne. Nous vous accompagnons dans votre démarche de rééquilibrage alimentaire pour une meilleure santé.</p>
       </div>
     </div>
   </section>
