@@ -31,7 +31,7 @@
 
                 <p class="text-lg text-gray-800 font-semibold mt-4 text-center">
                     Préparé avec 💚 par <br>
-                    <span class="text-green-500">Food Équilibre 🥗</span>
+                    <span class="text-green-500">InstaRepas 🥗</span>
                 </p>
             </div>
         </div>

@@ -33,7 +33,7 @@
     </div>
     <div class="mt-4 border-t border-gray-200 pt-4 md:flex md:items-center md:justify-center">
         <p class="text-xs text-gray-800 font-normal text-center">
-            Préparé avec 💚 par <span class="text-green-500">Food Équilibre 🥗</span>
+            Préparé avec 💚 par <span class="text-green-500">InstaRepas 🥗</span>
         </p>
     </div>
   </div>
