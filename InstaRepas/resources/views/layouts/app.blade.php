@@ -11,19 +11,19 @@
         <link rel="preconnect" href="https://fonts.bunny.net">
         <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
 
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
-        <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.13.2/jquery-ui.min.js"></script>
+        <script src="{{ asset('js/jquery-3.7.0.min.js') }}"></script>
+        <script src="{{ asset('js/jquery-ui.min.js') }}"></script>
 
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha512-z4OUqw38qNLpn1libAN9BsoDx6nbNFio5lA6CuTp9NlK83b89hgyCVq+N5FdBJptINztxn1Z3SaKSKUS5UP60Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        <script src="{{ asset('js/anime.min.js') }}" ></script>
 
         
         
-        <script src="https://kit.fontawesome.com/7fdee4801e.js" crossorigin="anonymous"></script>
+        <script src="{{ asset('js/7fdee4801e.js') }}" ></script>
 
         {{-- TAILWIND SCRIPT --}}
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.5/flowbite.min.js"></script>
+        <script src="{{ asset('js/flowbite.min.js') }}"></script>
         
-        <script src="{{ asset('js/js.js') }}"></script>
+        <!-- <script src="{{ asset('js/js.js') }}"></script> -->
 
        <link href="{{ asset('css/welcome.css') }}" rel="stylesheet">
         <!-- Scripts -->

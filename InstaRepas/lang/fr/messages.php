@@ -14,6 +14,7 @@ return [
         'Legumes' => 'Legumineuse',
         'Oils' => 'Huile',
         'Eggs' => 'Oeuf',
+        'crustacean' => 'Crustacé',
     ],
     'seasons' => [
         'Spring' => 'Printemps',
@@ -41,4 +42,6 @@ return [
         'contains_animal_products' => 'Contient des produits d\'origine animale',
         'contains_pork' => 'Contient du porc',
     ],
+
+    
 ];
