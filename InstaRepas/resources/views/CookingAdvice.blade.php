@@ -480,7 +480,7 @@
   <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-8">
     <div>
       <h3 class="text-2xl font-semibold">Sauce Moutarde</h3>
-      <img src="imgs/recettes/Mustard Sauce.webp" alt="Sauce Moutarde" class="w-full h-auto rounded-lg shadow-lg">
+      <img src="imgs/recettes/Mustard_Sauce.webp" alt="Sauce Moutarde" class="w-full h-auto rounded-lg shadow-lg">
       <ul class="list-disc pl-8">
         <li>200 g fromage blanc</li>
         <li>2 cuillères à soupe de moutarde</li>
