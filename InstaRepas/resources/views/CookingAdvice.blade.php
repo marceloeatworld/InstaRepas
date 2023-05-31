@@ -1,16 +1,54 @@
 <x-app-layout>
-  
-
-
 <h1 class="text-3xl font-bold text-center my-4">Les Modes de Cuisson et Recettes</h1>
-
 <!-- Les Grillades -->
-<div class="max-w-5xl mx-auto p-8 bg-white">
+
+<div class="max-w-5xl mx-auto p-8">
   <h2 class="text-3xl font-bold text-center text-purple-600">Les Grillades</h2>
+
+  <div class="my-4">
+  <div class="flex items-center">
+    <div class="flex-shrink-0">
+      <svg class="text-purple-600 h-6 w-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path>
+      </svg>
+    </div>
+    <p class="ml-2 text-purple-600 font-bold">Matériel :</p>
+  </div>
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-2">
+    <div class=" shadow-md rounded-md p-4">
+      <div class="flex items-center">
+        <svg class="text-purple-600 h-6 w-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="10"></circle>
+          <line x1="12" y1="8" x2="12" y2="16"></line>
+          <line x1="8" y1="12" x2="16" y2="12"></line>
+        </svg>
+        <p class="ml-2 text-gray-800">Grill en aluminium</p>
+      </div>
+    </div>
+    <div class=" shadow-md rounded-md p-4">
+      <div class="flex items-center">
+        <svg class="text-purple-600 h-6 w-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M7 20H5V10H7M19 20H17V10H19M19 20C19 21.1 18.1 22 17 22H7C5.9 22 5 21.1 5 20M19 20H5"></path>
+          <path d="M17 4L12 9 7 4"></path>
+          <path d="M12 9L12 21"></path>
+        </svg>
+        <p class="ml-2 text-gray-800">Grill en fonte noire</p>
+      </div>
+    </div>
+    <div class=" shadow-md rounded-md p-4">
+      <div class="flex items-center">
+        <svg class="text-purple-600 h-6 w-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M19 8h2l-3-8H6L3 8h2M3 8h8v12H3V8zM13 8h8l-3-8h-6l-3 8h2"></path>
+        </svg>
+        <p class="ml-2 text-gray-800">Grill électrique</p>
+      </div>
+    </div>
+  </div>
+</div>
+
   <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-8">
     <div>
       <h3 class="text-2xl font-semibold">Recette : Escalope de volaille au citron</h3>
-      <p class="my-4">Matériel : Grill en aluminium, en fonte noire ou électrique.</p>
       <p>Ingrédients :</p>
       <ul class="list-disc pl-8">
         <li>4 escalopes de volaille peu épaisses de 150 g environ</li>
@@ -27,7 +65,6 @@
       <img src="imgs/recettes/Chicken_Scallop.webp" alt="Chicken_Scallop" class="w-full h-auto rounded-lg shadow-lg">
     </div>
   </div>
-
   <h2 class="text-3xl font-bold text-center mt-16 text-purple-600">Autres suggestions</h2>
   <ul class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-8">
     <li class="border border-gray-300 rounded-md p-4 text-center">Bavette grillée au basilic</li>
@@ -41,10 +78,42 @@
 
 <div class="max-w-5xl mx-auto p-8">
   <h2 class="text-3xl font-bold text-center text-purple-600">LES CUISSONS A LA POELE</h2>
+
+  <div class="my-4">
+  <div class="flex items-center">
+    <div class="flex-shrink-0">
+      <svg class="text-purple-600 h-6 w-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="10"></circle>
+        <line x1="12" y1="8" x2="12" y2="16"></line>
+        <line x1="8" y1="12" x2="16" y2="12"></line>
+      </svg>
+    </div>
+    <p class="ml-2 text-purple-600 font-bold">Matériel :</p>
+  </div>
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-2">
+    <div class=" shadow-md rounded-md p-4">
+      <div class="flex items-center">
+        <svg class="text-purple-600 h-6 w-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M19 8h2l-3-8H6L3 8h2M3 8h8v12H3V8zM13 8h8l-3-8h-6l-3 8h2"></path>
+        </svg>
+        <p class="ml-2 text-gray-800">Poêle</p>
+      </div>
+    </div>
+    <div class=" shadow-md rounded-md p-4">
+      <div class="flex items-center">
+        <svg class="text-purple-600 h-6 w-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M19 8h2l-3-8H6L3 8h2M3 8h8v12H3V8zM13 8h8l-3-8h-6l-3 8h2"></path>
+        </svg>
+        <p class="ml-2 text-gray-800">Sauteuse anti-adhésive</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+
   <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-8">
     <div>
       <h3 class="text-2xl font-semibold">Recette : Filet de merlan à la tomate</h3>
-      <p class="my-4">Matériel : Poêle ou sauteuse anti-adhésives</p>
       <p>Ingrédients :</p>
       <ul class="list-disc pl-8">
         <li>4 filets de merlan de 200 g chacun</li>
@@ -71,7 +140,6 @@
   <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-8">
     <div>
       <h3 class="text-2xl font-semibold">Recette : Escalope de veau aux carottes</h3>
-      <p class="my-4">Matériel : Poêle ou sauteuse anti-adhésives</p>
       <p>Ingrédients :</p>
       <ul class="list-disc pl-8">
         <li>4 escalopes de veau de 150 g</li>
@@ -106,12 +174,104 @@
 
 <!-- LES CUISSONS AU FOUR -->
 
-<div class="max-w-5xl mx-auto p-8 bg-white">
+<div class="max-w-5xl mx-auto p-8">
   <h2 class="text-3xl font-bold text-center text-purple-600">LES CUISSONS AU FOUR</h2>
+  
+  <div class="my-4">
+  <div class="flex items-center">
+    <div class="flex-shrink-0">
+      <svg class="text-purple-600 h-6 w-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="10"></circle>
+        <line x1="12" y1="8" x2="12" y2="16"></line>
+        <line x1="8" y1="12" x2="16" y2="12"></line>
+      </svg>
+    </div>
+    <p class="ml-2 text-purple-600 font-bold">Matériel :</p>
+  </div>
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-2">
+    <div class=" shadow-md rounded-md p-4">
+      <div class="flex items-center">
+        <svg class="text-purple-600 h-6 w-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <!-- Icône pour la poêle en terre cuite -->
+          <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path>
+        </svg>
+        <p class="ml-2 text-gray-800">Plats en terre cuite</p>
+      </div>
+    </div>
+    <div class=" shadow-md rounded-md p-4">
+      <div class="flex items-center">
+        <svg class="text-purple-600 h-6 w-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <!-- Icône pour les plats en Pyrex -->
+          <path d="M7 20H5V10H7M19 20H17V10H19M19 20C19 21.1 18.1 22 17 22H7C5.9 22 5 21.1 5 20M19 20H5"></path>
+          <path d="M17 4L12 9 7 4"></path>
+          <path d="M12 9L12 21"></path>
+        </svg>
+        <p class="ml-2 text-gray-800">Plats en Pyrex</p>
+      </div>
+    </div>
+    <div class=" shadow-md rounded-md p-4">
+      <div class="flex items-center">
+        <svg class="text-purple-600 h-6 w-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <!-- Icône pour les plats anti-adhésifs -->
+          <circle cx="12" cy="12" r="10"></circle>
+          <line x1="12" y1="8" x2="12" y2="16"></line>
+          <line x1="8" y1="12" x2="16" y2="12"></line>
+        </svg>
+        <p class="ml-2 text-gray-800">Plats anti-adhésifs</p>
+      </div>
+    </div>
+    <div class=" shadow-md rounded-md p-4">
+      <div class="flex items-center">
+        <svg class="text-purple-600 h-6 w-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <!-- Icône pour la lèchefrite -->
+          <path d="M19 8h2l-3-8H6L3 8h2M3 8h8v12H3V8zM13 8h8l-3-8h-6l-3 8h2"></path>
+        </svg>
+        <p class="ml-2 text-gray-800">Lèchefrite</p>
+      </div>
+    </div>
+    <div class=" shadow-md rounded-md p-4">
+      <div class="flex items-center">
+        <svg class="text-purple-600 h-6 w-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <!-- Icône pour le Romertöpf -->
+          <path d="M19 8h2l-3-8H6L3 8h2M3 8h8v12H3V8zM13 8h8l-3-8h-6l-3 8h2"></path>
+        </svg>
+        <p class="ml-2 text-gray-800">Romertöpf</p>
+      </div>
+    </div>
+    <div class=" shadow-md rounded-md p-4">
+      <div class="flex items-center">
+        <svg class="text-purple-600 h-6 w-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <!-- Icône pour la broche -->
+          <path d="M19 8h2l-3-8H6L3 8h2M3 8h8v12H3V8zM13 8h8l-3-8h-6l-3 8h2"></path>
+        </svg>
+        <p class="ml-2 text-gray-800">Broche</p>
+      </div>
+    </div>
+    <div class=" shadow-md rounded-md p-4">
+      <div class="flex items-center">
+        <svg class="text-purple-600 h-6 w-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <!-- Icône pour les brochettes -->
+          <path d="M19 8h2l-3-8H6L3 8h2M3 8h8v12H3V8zM13 8h8l-3-8h-6l-3 8h2"></path>
+        </svg>
+        <p class="ml-2 text-gray-800">Brochettes</p>
+      </div>
+    </div>
+    <div class=" shadow-md rounded-md p-4">
+      <div class="flex items-center">
+        <svg class="text-purple-600 h-6 w-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <!-- Icône pour le papier d'aluminium -->
+          <path d="M19 8h2l-3-8H6L3 8h2M3 8h8v12H3V8zM13 8h8l-3-8h-6l-3 8h2"></path>
+        </svg>
+        <p class="ml-2 text-gray-800">Papier d'aluminium</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+
   <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-8">
     <div>
       <h3 class="text-2xl font-semibold">Recette : Pommes de terre boulangères</h3>
-      <p class="my-4">Matériel : Plats en terre cuite, en Pyrex, anti-adhésifs, lèchefrite, Romertöpf, broche, brochettes et papier d'aluminium.</p>
       <p>Ingrédients :</p>
       <ul class="list-disc pl-8">
         <li>800 g de pommes de terre épluchées</li>
@@ -136,7 +296,6 @@
   <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-8">
     <div>
       <h3 class="text-2xl font-semibold">Recette : Gratin de poireaux</h3>
-      <p class="my-4">Matériel : Plats en terre cuite, en Pyrex, anti-adhésifs, lèchefrite, Romertöpf, broche, brochettes et papier d'aluminium.</p>
       <p>Ingrédients :</p>
       <ul class="list-disc pl-8">
         <li>800 g de poireaux cuits à la vapeur</li>
@@ -172,10 +331,57 @@
 
 <div class="max-w-5xl mx-auto p-8">
   <h2 class="text-3xl font-bold text-center text-purple-600">LES CUISSONS AU COURT-BOUILLON (EAU, BOUILLON, VIN)</h2>
+
+  <div class="my-4">
+  <div class="flex items-center">
+    <div class="flex-shrink-0">
+      <svg class="text-purple-600 h-6 w-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="10"></circle>
+        <line x1="12" y1="8" x2="12" y2="16"></line>
+        <line x1="8" y1="12" x2="16" y2="12"></line>
+      </svg>
+    </div>
+    <p class="ml-2 text-purple-600 font-bold">Matériel :</p>
+  </div>
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-2">
+    <div class=" shadow-md rounded-md p-4">
+      <div class="flex items-center">
+        <svg class="text-purple-600 h-6 w-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M19 8h2l-3-8H6L3 8h2M3 8h8v12H3V8zM13 8h8l-3-8h-6l-3 8h2"></path>
+        </svg>
+        <p class="ml-2 text-gray-800">Autocuiseur</p>
+      </div>
+    </div>
+    <div class=" shadow-md rounded-md p-4">
+      <div class="flex items-center">
+        <svg class="text-purple-600 h-6 w-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M19 8h2l-3-8H6L3 8h2M3 8h8v12H3V8zM13 8h8l-3-8h-6l-3 8h2"></path>
+        </svg>
+        <p class="ml-2 text-gray-800">Couscoussier</p>
+      </div>
+    </div>
+    <div class=" shadow-md rounded-md p-4">
+      <div class="flex items-center">
+        <svg class="text-purple-600 h-6 w-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M19 8h2l-3-8H6L3 8h2M3 8h8v12H3V8zM13 8h8l-3-8h-6l-3 8h2"></path>
+        </svg>
+        <p class="ml-2 text-gray-800">Mijoteur</p>
+      </div>
+    </div>
+    <div class=" shadow-md rounded-md p-4">
+      <div class="flex items-center">
+        <svg class="text-purple-600 h-6 w-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M19 8h2l-3-8H6L3 8h2M3 8h8v12H3V8zM13 8h8l-3-8h-6l-3 8h2"></path>
+        </svg>
+        <p class="ml-2 text-gray-800">Faitout</p>
+      </div>
+    </div>
+  </div>
+</div>
+
   <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-8">
     <div>
       <h3 class="text-2xl font-semibold">Recette : Pot au feu</h3>
-      <p class="my-4">Matériel : Autocuiseur, couscoussier, mijoteur, faitout.</p>
       <p>Ingrédients :</p>
       <ul class="list-disc pl-8">
         <li>800 g de gîte ou jarret bien dégraissé</li>
@@ -215,10 +421,57 @@
 
 <div class="max-w-5xl mx-auto p-8">
   <h2 class="text-3xl font-bold text-center text-purple-600">LES CUISSONS À LA VAPEUR</h2>
+
+  <div class="my-4">
+  <div class="flex items-center">
+    <div class="flex-shrink-0">
+      <svg class="text-purple-600 h-6 w-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="10"></circle>
+        <line x1="12" y1="8" x2="12" y2="16"></line>
+        <line x1="8" y1="12" x2="16" y2="12"></line>
+      </svg>
+    </div>
+    <p class="ml-2 text-purple-600 font-bold">Matériel :</p>
+  </div>
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-2">
+    <div class=" shadow-md rounded-md p-4">
+      <div class="flex items-center">
+        <svg class="text-purple-600 h-6 w-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M19 8h2l-3-8H6L3 8h2M3 8h8v12H3V8zM13 8h8l-3-8h-6l-3 8h2"></path>
+        </svg>
+        <p class="ml-2 text-gray-800">Autocuiseur</p>
+      </div>
+    </div>
+    <div class=" shadow-md rounded-md p-4">
+      <div class="flex items-center">
+        <svg class="text-purple-600 h-6 w-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M19 8h2l-3-8H6L3 8h2M3 8h8v12H3V8zM13 8h8l-3-8h-6l-3 8h2"></path>
+        </svg>
+        <p class="ml-2 text-gray-800">Couscoussier</p>
+      </div>
+    </div>
+    <div class=" shadow-md rounded-md p-4">
+      <div class="flex items-center">
+        <svg class="text-purple-600 h-6 w-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M19 8h2l-3-8H6L3 8h2M3 8h8v12H3V8zM13 8h8l-3-8h-6l-3 8h2"></path>
+        </svg>
+        <p class="ml-2 text-gray-800">Cuit-vapeur</p>
+      </div>
+    </div>
+    <div class=" shadow-md rounded-md p-4">
+      <div class="flex items-center">
+        <svg class="text-purple-600 h-6 w-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M19 8h2l-3-8H6L3 8h2M3 8h8v12H3V8zM13 8h8l-3-8h-6l-3 8h2"></path>
+        </svg>
+        <p class="ml-2 text-gray-800">Paniers en bambou</p>
+      </div>
+    </div>
+  </div>
+</div>
+
   <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-8">
     <div>
       <h3 class="text-2xl font-semibold">Recette : Filet de flétan à l'aneth</h3>
-      <p class="my-4">Matériel : Autocuiseur, couscoussier, cuit-vapeur, paniers en bambou.</p>
       <p>Ingrédients :</p>
       <ul class="list-disc pl-8">
         <li>4 filets de flétan de 200 g chacun</li>
@@ -243,7 +496,6 @@
   <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-8">
     <div>
       <h3 class="text-2xl font-semibold">Recette : Riz à la persane</h3>
-      <p class="my-4">Matériel : Autocuiseur, couscoussier, cuit-vapeur, paniers en bambou.</p>
       <p>Ingrédients :</p>
       <ul class="list-disc pl-8">
         <li>200 g de riz basmati ou parfumé cru</li>
@@ -276,12 +528,67 @@
 
 <!-- LES BRAISES ET LES MIJOTÉS -->
 
-<div class="max-w-5xl mx-auto p-8 bg-white">
+<div class="max-w-5xl mx-auto p-8 ">
   <h2 class="text-3xl font-bold text-center text-purple-600">LES BRAISES ET LES MIJOTÉS</h2>
+
+  <div class="my-4">
+  <div class="flex items-center">
+    <div class="flex-shrink-0">
+      <svg class="text-purple-600 h-6 w-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="10"></circle>
+        <line x1="12" y1="8" x2="12" y2="16"></line>
+        <line x1="8" y1="12" x2="16" y2="12"></line>
+      </svg>
+    </div>
+    <p class="ml-2 text-purple-600 font-bold">Matériel :</p>
+  </div>
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-2">
+    <div class=" shadow-md rounded-md p-4">
+      <div class="flex items-center">
+        <svg class="text-purple-600 h-6 w-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M19 8h2l-3-8H6L3 8h2M3 8h8v12H3V8zM13 8h8l-3-8h-6l-3 8h2"></path>
+        </svg>
+        <p class="ml-2 text-gray-800">Cocottes classiques</p>
+      </div>
+    </div>
+    <div class=" shadow-md rounded-md p-4">
+      <div class="flex items-center">
+        <svg class="text-purple-600 h-6 w-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M19 8h2l-3-8H6L3 8h2M3 8h8v12H3V8zM13 8h8l-3-8h-6l-3 8h2"></path>
+        </svg>
+        <p class="ml-2 text-gray-800">Autocuiseur</p>
+      </div>
+    </div>
+    <div class=" shadow-md rounded-md p-4">
+      <div class="flex items-center">
+        <svg class="text-purple-600 h-6 w-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M19 8h2l-3-8H6L3 8h2M3 8h8v12H3V8zM13 8h8l-3-8h-6l-3 8h2"></path>
+        </svg>
+        <p class="ml-2 text-gray-800">Cocottes en fonte noire</p>
+      </div>
+    </div>
+    <div class=" shadow-md rounded-md p-4">
+      <div class="flex items-center">
+        <svg class="text-purple-600 h-6 w-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M19 8h2l-3-8H6L3 8h2M3 8h8v12H3V8zM13 8h8l-3-8h-6l-3 8h2"></path>
+        </svg>
+        <p class="ml-2 text-gray-800">Cocottes en fonte émaillée</p>
+      </div>
+    </div>
+    <div class=" shadow-md rounded-md p-4">
+      <div class="flex items-center">
+        <svg class="text-purple-600 h-6 w-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M19 8h2l-3-8H6L3 8h2M3 8h8v12H3V8zM13 8h8l-3-8h-6l-3 8h2"></path>
+        </svg>
+        <p class="ml-2 text-gray-800">Sauteuses ou cocottes à revêtement anti-adhésif</p>
+      </div>
+    </div>
+  </div>
+</div>
+
   <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-8">
     <div>
       <h3 class="text-2xl font-semibold">Recette : Curry d'agneau</h3>
-      <p class="my-4">Matériel : Cocottes classiques, autocuiseur, en fonte noire, en fonte émaillée, sauteuses ou cocottes à revêtement anti-adhésif.</p>
       <p>Ingrédients :</p>
       <ul class="list-disc pl-8">
         <li>800 g d'épaule d'agneau dégraissée</li>
@@ -342,10 +649,49 @@
 
 <div class="max-w-5xl mx-auto p-8">
   <h2 class="text-3xl font-bold text-center text-purple-600">LES CUISSONS AU MICRO-ONDES</h2>
+
+  <div class="my-4">
+  <div class="flex items-center">
+    <div class="flex-shrink-0">
+      <svg class="text-purple-600 h-6 w-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="10"></circle>
+        <line x1="12" y1="8" x2="12" y2="16"></line>
+        <line x1="8" y1="12" x2="16" y2="12"></line>
+      </svg>
+    </div>
+    <p class="ml-2 text-purple-600 font-bold">Matériel :</p>
+  </div>
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-2">
+    <div class=" shadow-md rounded-md p-4">
+      <div class="flex items-center">
+        <svg class="text-purple-600 h-6 w-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M19 8h2l-3-8H6L3 8h2M3 8h8v12H3V8zM13 8h8l-3-8h-6l-3 8h2"></path>
+        </svg>
+        <p class="ml-2 text-gray-800">Plats en verre</p>
+      </div>
+    </div>
+    <div class=" shadow-md rounded-md p-4">
+      <div class="flex items-center">
+        <svg class="text-purple-600 h-6 w-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M19 8h2l-3-8H6L3 8h2M3 8h8v12H3V8zM13 8h8l-3-8h-6l-3 8h2"></path>
+        </svg>
+        <p class="ml-2 text-gray-800">Plats en Pyrex</p>
+      </div>
+    </div>
+    <div class=" shadow-md rounded-md p-4">
+      <div class="flex items-center">
+        <svg class="text-purple-600 h-6 w-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M19 8h2l-3-8H6L3 8h2M3 8h8v12H3V8zM13 8h8l-3-8h-6l-3 8h2"></path>
+        </svg>
+        <p class="ml-2 text-gray-800">Plats en plastique munis d'un couvercle et/ou du plastique thermostable</p>
+      </div>
+    </div>
+  </div>
+</div>
+
   <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-8">
     <div>
       <h3 class="text-2xl font-semibold">Recette : Tomate ail-ciboulette</h3>
-      <p class="my-4">Matériel : Plats en verre, en Pyrex, en plastique munis d'un couvercle et/ou du plastique thermostable.</p>
       <p>Ingrédients :</p>
       <ul class="list-disc pl-8">
         <li>2 tomates bien fermes</li>
@@ -376,7 +722,7 @@
 
 <!-- LES PLATS COMPLETS -->
 
-<div class="max-w-5xl mx-auto p-8 bg-white">
+<div class="max-w-5xl mx-auto p-8 ">
   <h2 class="text-3xl font-bold text-center text-purple-600">LES PLATS COMPLETS</h2>
   
   <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-8">
@@ -505,7 +851,5 @@
     </div>
   </div>
 </div>
-
-
 
 </x-app-layout>
