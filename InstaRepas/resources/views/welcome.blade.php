@@ -3,7 +3,7 @@
   <div class='bg-cover bg-center h-screen flex flex-col justify-center items-center bg-cover-meal'>
     <h1 class='text-white font-bold text-3xl sm:text-4xl md:text-5xl mb-8 shadow-text'>Créez vos repas personnalisés pour la semaine</h1>
     <div class='flex flex-col items-center justify-center mb-4'>
-      <p class='text-white text-base sm:text-lg md:text-xl mb-2 shadow-text text-center'>Planifiez à l'avance et simplifiez votre routine de préparation de repas.</p>
+      <p class='text-white text-base sm:text-lg md:text-xl mb-2 shadow-text text-center'>Planifiez à l'avance vos menus pour votre quotidien, et simplifiez votre routine de préparation de repas.</p>
       <p class='text-white text-base sm:text-lg md:text-xl mb-4 shadow-text text-center'>Commencez votre voyage vers une alimentation plus saine et équilibrée aujourd'hui.</p>
     </div>
     <a id="buttonF" href='/generate' class=''>Explorez maintenant</a>
@@ -21,9 +21,10 @@
     <div class='md:w-1/2 p-4 text-center md:text-left'>
      
     <h2 class='text-4xl md:text-5xl font-bold mb-2 md:mb-4'>InstaRepas</h2>
-    <h3 class='text-2xl md:text-3xl font-bold mb-2 md:mb-4'>Réinventez votre alimentation</h3>
+    <h3 class='text-2xl md:text-3xl font-bold mb-2 md:mb-4'>Des idées de menus du quotidien</h3>
     <p class='text-gray-700 leading-relaxed mb-6 text-md md:text-lg font-medium max-w-lg mx-auto md:mx-0'>
-      Avec <strong>InstaRepas</strong>, la nutrition n'a jamais été aussi simple et délicieuse. Notre plateforme innovante vous offre la possibilité de créer des <strong>repas personnalisés</strong> adaptés à vos besoins et préférences. Enrichissez votre menu avec de nouveaux aliments saisonniers, et profitez d'une <strong>alimentation variée et riche en nutriments</strong> tout au long de l'année.
+    Avec <strong>InstaRepas</strong>, la nutrition n'a jamais été aussi simple et délicieuse. Cette plateforme innovante vous offre la possibilité de créer des <strong>repas personnalisés</strong> adaptés à vos besoins et préférences. Profitez d'une <strong>alimentation variée et riche en nutriments</strong> tout au long de l'année.
+
     </p>
     <div class='flex justify-center md:justify-start'>
 
@@ -94,10 +95,10 @@
         <div class='flex justify-center'>
             <div class='bg-white rounded-lg shadow-md p-8 md:p-16 max-w-4xl'>
                 <p class='text-gray-700 leading-relaxed mb-6'>
-                Chez FoodEquilibre, nous avons une mission : vous aider à mener une vie plus saine grâce à une alimentation équilibrée. Enracinés à Nogent-sur-Marne, nous sommes plus qu'un simple cabinet de diététique, nous sommes une communauté engagée pour le bien-être.
+                Insta Repas est l'innovation de 3 étudiants en informatique et de la diététicienne Aurélie Marino. Nous avons constaté que le problème majeur de nos patients était le manque d'idées pour leurs repas quotidiens. De là, l'idée d'Insta Repas était née, avec l'objectif de proposer des menus pour le quotidien, grâce à la technologie moderne.
                 </p>
                 <p class='text-gray-700 leading-relaxed mb-6'>
-                Nous sommes ravis de vous présenter notre nouvelle initiative : la création de menus diététiques grâce à la technologie moderne. Combinant notre expertise en diététique avec des outils technologiques de pointe, nous sommes en mesure de vous fournir des solutions alimentaires personnalisées qui correspondent à vos besoins spécifiques.
+                Insta Repas offre une nouvelle approche pour diversifier vos habitudes alimentaires et alléger votre charge mentale au quotidien. Nous combinons notre expertise en diététique avec des outils technologiques de pointe pour vous fournir des solutions alimentaires personnalisées qui correspondent à vos besoins spécifiques.
                 </p>
                 <div class='flex justify-start'>
                     <x-yellow-button href="{{ route('contact') }}" class="">Contactez-nous</x-yellow-button>
