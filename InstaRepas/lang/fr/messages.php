@@ -41,6 +41,7 @@ return [
         'contains_lactose' => 'Contient du lactose',
         'contains_animal_products' => 'Contient des produits d\'origine animale',
         'contains_pork' => 'Contient du porc',
+        'contains_crustacean' => 'Contient Crustacé',
     ],
 
     

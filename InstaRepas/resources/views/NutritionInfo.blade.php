@@ -78,6 +78,27 @@
           </h3>
           <p class="text-lg leading-relaxed">L'eau est la seule boisson indispensable à notre organisme. Les autres boissons peuvent être consommées pour le plaisir, toujours avec modération. Veillez à boire au moins un litre d'eau par jour.</p>
         </div>
+
+        <!-- Div : Portion -->
+        <div class="bg-white rounded-lg p-6 shadow-md">
+          <h3 class="text-xl font-bold mb-4">
+            <span class="text-4xl mr-2">🍉</span>
+            Qu’est-ce qu’une portion de fruits ? 
+          </h3>
+          <p class="text-lg leading-relaxed">
+          1 portion de fruits, représente : <br><br>
+          <p> La moitié d’un Kiwi :  🥝  <br></p><br>
+
+          <p>Une pomme, ou une poire, ou une pêche : 🍏, 🍐, 🍑<br></p>
+
+          <p>2 petits abricots, ou 2 kiwis, ou 2 mandarines : 🍑🍑, 🥝🥝, 🍊🍊 <br></p>
+
+          <p>Une petite barquette de Fraise, ou de groseilles : 🍓, 🫐<br></p>
+          </p>
+        </div>
+
+
+
       </div>
     </section>
 
