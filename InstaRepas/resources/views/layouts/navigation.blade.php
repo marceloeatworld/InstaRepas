@@ -55,10 +55,7 @@
                         <span>{{ __('Login') }}</span>
                     </x-nav-link>
 
-                    <x-nav-link :href="route('register')" :active="request()->routeIs('register')">
-                        <i class="fas fa-user-plus"></i>
-                        <span>{{ __('Register') }}</span>
-                    </x-nav-link>
+                 
                 @endguest
 
                 <x-nav-link :href="'/contact'">
@@ -197,9 +194,7 @@
         <x-nav-link :href="route('login')" :active="request()->routeIs('login')">
             <i class="fas fa-user"></i> <span>{{ __('Login') }}</span>
         </x-nav-link>
-        <x-nav-link :href="route('register')" :active="request()->routeIs('register')">
-            <i class="fas fa-user-plus"></i> <span>{{ __('Register') }}</span>
-        </x-nav-link>
+
         @endguest
 
         <!-- Logout -->

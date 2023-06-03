@@ -17,24 +17,23 @@
           <p class="text-gray-700 leading-relaxed">FoodEquilibre est un compte Instagram dédié à la promotion de l'alimentation équilibrée. Suivez-nous pour découvrir une multitude d'idées de recettes à la fois saines et savoureuses !</p>
         </div>
       </div>
-    </section>
-    
-    <section class="mb-8">
-      <h2 class="text-2xl font-bold mb-4 text-center">Cabinet de Diététique de FoodEquilibre</h2>
-      <div class="flex flex-wrap -mx-4">
-        <div class="w-full md:w-1/3 px-4 mb-8 order-1 md:order-2">
-          <a href="https://www.dieteticienne-nogent.com/" target="_blank">
-            <div class="relative">
-              <img src="https://image.jimcdn.com/app/cms/image/transf/dimension=205x1024:format=jpg/path/s9a157b55c9b06dff/image/i055dd318db0ca89a/version/1653432195/image.webp" alt="Photo du cabinet de diététique" class="rounded-lg shadow-md w-500">
-              <div class="absolute bottom-0 left-0 bg-white bg-opacity-75 p-2">
-                <span class="text-gray-800 font-bold">Visitez notre site internet</span>
-              </div>
+    </div>
+  </section>
+  <section class="mb-8">
+    <h2 class="text-2xl font-bold mb-4">Cabinet de diététicienne de FoodEquilibre</h2>
+    <div class="flex flex-wrap -mx-4">
+      <div class="w-full md:w-1/3 px-4 mb-8 order-1 md:order-2">
+        <a href="https://www.dieteticienne-nogent.com/" target="_blank">
+        <div class="relative">
+          <img src="https://image.jimcdn.com/app/cms/image/transf/dimension=205x1024:format=jpg/path/s9a157b55c9b06dff/image/i055dd318db0ca89a/version/1653432195/image.jpg" alt="Photo de cabinet de diététicienne" class="rounded-lg shadow-md w-500">
+          <div class="absolute bottom-0 left-0 bg-white bg-opacity-75 p-2">
+              <span class="text-gray-800 font-bold">rendez-vous sur le site internet.</span>
             </div>
-          </a>
-        </div>
-        <div class="w-full md:w-2/3 px-4 order-2 md:order-1">
-          <p class="text-gray-700 leading-relaxed">FoodEquilibre est aussi un cabinet de diététique situé à Nogent-sur-Marne. Nous sommes là pour vous accompagner dans votre démarche de rééquilibrage alimentaire, pour vous aider à vivre une vie plus saine.</p>
-        </div>
+            </div>
+        </a>
+      </div>
+      <div class="w-full md:w-2/3 px-4 order-2 md:order-1">
+        <p class="text-gray-700 leading-loose">FoodEquilibre est également un cabinet de diététicienne à Nogent-sur-Marne. Nous vous accompagnons dans votre démarche de rééquilibrage alimentaire pour une meilleure santé.</p>
       </div>
     </section>
     
