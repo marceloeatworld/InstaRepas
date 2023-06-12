@@ -79,6 +79,7 @@ class ProfileController extends Controller
             'contains_lactose' => 'Sans lactose',
             'contains_animal_products' => 'Sans produit animal',
             'contains_pork' => 'Sans porc',
+            'contains_crustacean' => 'Sans crustacé',
         ];
         $dietaryRestrictions = DietaryRestriction::all();
 
