@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('units_of_measure', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('unit_name', 50)->unique();
+            $table->string('unit_name', 50)->unique()->nullable(false);
         });
     }
 

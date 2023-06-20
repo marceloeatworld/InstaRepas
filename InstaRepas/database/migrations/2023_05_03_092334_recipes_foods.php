@@ -13,10 +13,10 @@ return new class extends Migration
     {
         Schema::create('recipes_foods', function (Blueprint $table) {
             $table->increments('id');
-            $table->unsignedBigInteger('recipe_id');
-            $table->unsignedBigInteger('food_id');
+            $table->unsignedInteger('recipe_id'); // Change this line
+            $table->unsignedInteger('food_id'); // Assuming that `foods.id` is also an unsigned integer
             $table->decimal('quantity', 10, 2)->nullable();
-            $table->unsignedBigInteger('unit_of_measure_id')->nullable();
+            $table->unsignedInteger('unit_of_measure_id')->nullable(); // Assuming that `units_of_measure.id` is also an unsigned integer
 
             $table->foreign('recipe_id')->references('id')->on('recipes')->onDelete('cascade');
             $table->foreign('food_id')->references('id')->on('foods')->onDelete('cascade');
