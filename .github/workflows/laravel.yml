@@ -47,4 +47,9 @@ jobs:
       env:
         DB_CONNECTION: sqlite
         DB_DATABASE: database/database.sqlite
-      run: vendor/bin/pest
+      run: |
+        php artisan cache:clear
+        php artisan config:clear
+        php artisan session:clear
+        php artisan migrate --force
+        vendor/bin/pest
