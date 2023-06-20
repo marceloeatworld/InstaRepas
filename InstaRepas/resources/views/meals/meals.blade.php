@@ -27,10 +27,11 @@
                     <div>
                         <h4 class="text-lg mb-2 font-semibold text-blue-600">Petit-déjeuner</h4>
                         <p class="text-gray-700">
-                            {{ sprintf("%s, accompagné de %s et d'un fruit frais : %s.", 
-                                $breakfasts[$day]['protein']->name,
-                                $breakfasts[$day]['carbohydrate']->preparation_style,
-                                $breakfasts[$day]['fruit']->preparation_style) }}
+                        {{ sprintf("%s, accompagné de %s et d'un fruit frais : %s.", 
+                        isset($breakfasts[$day]['protein']) ? $breakfasts[$day]['protein']->name : 'Aucune protéine',
+                        isset($breakfasts[$day]['carbohydrate']) ? $breakfasts[$day]['carbohydrate']->preparation_style : 'Aucun glucide',
+                        isset($breakfasts[$day]['fruit']) ? $breakfasts[$day]['fruit']->preparation_style : 'Aucun fruit') }}
+
                         </p>
                     </div>
 
