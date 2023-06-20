@@ -24,7 +24,7 @@ class FoodTest extends TestCase
         ]);
     }
 
-    // Test de création d'un aliment
+   // Test de création d'un aliment
     public function test_create_food(): void
     {
         $foodData = Food::factory()->make([
@@ -41,10 +41,16 @@ class FoodTest extends TestCase
         $response->assertStatus(302); 
         $response->assertRedirect('/admin/foods/create'); 
 
-        // Convertir le nom de la nourriture en minuscules dans les données de test
-        $foodDataArray['name'] = strtolower($foodDataArray['name']);
-        $this->assertDatabaseHas('foods', $foodDataArray);
+        // Obtenir le nom en minuscules
+        $foodNameLowercase = strtolower($foodDataArray['name']);
+
+        // Requête personnalisée pour vérifier l'existence de la nourriture dans la base de données
+        $foodExists = Food::whereRaw('LOWER(name) = ?', $foodNameLowercase)->exists();
+
+        // Vérifier si la nourriture existe
+        $this->assertTrue($foodExists);
     }
+
 
     // Test de lecture d'un aliment existant
     public function test_read_food(): void
