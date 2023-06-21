@@ -2,19 +2,93 @@
 
 namespace Tests\Feature;
 
+use App\Models\User;
+use App\Models\Food;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
 class FoodTest extends TestCase
 {
-    /**
-     * A basic feature test example.
-     */
-    public function test_example(): void
+    use RefreshDatabase;
+
+    protected $admin;
+
+    protected function setUp(): void
     {
-        $response = $this->get('/');
+        parent::setUp();
+
+        // Création d'un utilisateur administrateur
+        $this->admin = User::factory()->create([
+            'id' => 17,
+            'is_admin' => true,
+        ]);
+    }
+
+   // Test de création d'un aliment
+    public function test_create_food(): void
+    {
+        $foodData = Food::factory()->make([
+            'user_id' => $this->admin->id,
+        ]); 
+
+        // Convertir le nom de la nourriture en minuscules pour le rendre insensible à la casse
+        $foodData->name = strtolower($foodData->name);
+
+        $foodDataArray = $foodData->toArray();
+
+        $response = $this->actingAs($this->admin)->post('/admin/foods', $foodDataArray);
+
+        $response->assertStatus(302); 
+        $response->assertRedirect('/admin/foods/create'); 
+
+        // Obtenir le nom en minuscules
+        $foodNameLowercase = strtolower($foodDataArray['name']);
+
+        // Requête personnalisée pour vérifier l'existence de la nourriture dans la base de données
+        $foodExists = Food::whereRaw('LOWER(name) = ?', $foodNameLowercase)->exists();
+
+        // Vérifier si la nourriture existe
+        $this->assertTrue($foodExists);
+    }
+
+
+    // Test de lecture d'un aliment existant
+    public function test_read_food(): void
+    {
+        $food = Food::factory()->create();
+
+        $response = $this->actingAs($this->admin)->get("/admin/foods/{$food->id}/edit");
 
         $response->assertStatus(200);
+        $response->assertViewIs('admin.foods.edit');
+        $response->assertViewHas('food', $food);
+    }
+
+    // Test de mise à jour d'un aliment existant
+    public function test_update_food(): void
+    {
+        $food = Food::factory()->create();
+        $updatedFoodData = Food::factory()->make()->toArray();
+
+        // Convertir le nom de la nourriture en minuscules pour le rendre insensible à la casse
+        $updatedFoodData['name'] = strtolower($updatedFoodData['name']);
+
+        $response = $this->actingAs($this->admin)->put("/admin/foods/{$food->id}", $updatedFoodData);
+
+        $response->assertStatus(302);
+        $response->assertRedirect('/admin/foods');
+        $this->assertDatabaseHas('foods', $updatedFoodData);
+    }
+
+    // Test de suppression d'un aliment existant
+    public function test_delete_food(): void
+    {
+        $food = Food::factory()->create();
+
+        $response = $this->actingAs($this->admin)->delete("/admin/foods/{$food->id}");
+
+        $response->assertStatus(302);
+        $response->assertRedirect('/admin/foods');
+        $this->assertDatabaseMissing('foods', $food->toArray());
     }
 }

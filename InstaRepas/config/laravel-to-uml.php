@@ -27,7 +27,9 @@ return [
     'observers'     => false,
     'policies'      => false,
     'providers'     => false,
-    'requests'      => true,
+
+    'requests'      => false,
+
     'resources'     => false,
     'rules'         => false,
 
@@ -81,6 +83,32 @@ return [
         'Providers/BroadcastServiceProvider.php',
         'Providers/EventServiceProvider.php',
         'Providers/RouteServiceProvider.php',
+
+  //      'Models/CombinationFood.php',
+   //     'Models/Food.php',
+   //     'Models/MealCombination.php',
+        'Models/RecipeCategory.php',
+        'Models/RecipeRestriction.php',
+        'Models/UnitOfMeasure.php',
+        'Models/UserPreference.php',
+    //    'Models/DietaryRestriction.php',
+    //    'Models/FoodCategory.php',
+     //   'Models/FoodSeason.php',
+        'Models/Recipe.php',
+        'Models/RecipeFood.php',
+    //    'Models/Season.php',
+        'Models/User.php',
+        'Controllers/Controller.php', 
+        'Controllers/Auth/',
+        'Controllers/DashboardController.php', 
+        'Controllers/NutritionInfoController.php', 
+        'Controllers/RecipeController.php', 
+        'Controllers/ProfileController.php', 
+        'Controllers/ContactController.php', 
+        'Controllers/CookingAdviceController.php', 
+        'Controllers/FoodController.php', 
+        'Controllers/FoodCategoryController.php', 
+
     ],
 
     /**

@@ -14,6 +14,7 @@
     "Dashboard": "Tableau de bord",
     "Delete Account": "Supprimer le compte",
     "Email": "E-mail",
+    "Email or Username": "E-mail ou nom d'utilisateur",
     "Email Password Reset Link": "Lien de réinitialisation du mot de passe",
     "Ensure your account is using a long, random password to stay secure.": "Assurez-vous d'utiliser un mot de passe long et aléatoire pour sécuriser votre compte.",
     "Forbidden": "Interdit",
@@ -53,6 +54,7 @@
     "Server Error": "Erreur serveur",
     "Service Unavailable": "Service indisponible",
     "Showing": "Montrant",
+    "Sign in with Google": "Se connecter avec Google",
     "Thanks for signing up! Before getting started, could you verify your email address by clicking on the link we just emailed to you? If you didn't receive the email, we will gladly send you another.": "Merci de vous être inscrit(e) ! Avant de commencer, veuillez vérifier votre adresse e-mail en cliquant sur le lien que nous venons de vous envoyer. Si vous n'avez pas reçu cet e-mail, nous vous en enverrons un nouveau avec plaisir.",
     "The given data was invalid.": "La donnée renseignée est incorrecte.",
     "This is a secure area of the application. Please confirm your password before continuing.": "Ceci est une zone sécurisée de l'application. Veuillez confirmer votre mot de passe avant de continuer.",
@@ -63,12 +65,10 @@
     "Unauthorized": "Non autorisé",
     "Update Password": "Mettre à jour le mot de passe",
     "Update your account's profile information and email address.": "Modifier le profil associé à votre compte ainsi que votre adresse e-mail.",
+    "Username": "Nom d'utilisateur",
     "Verify Email Address": "Vérifier l'adresse e-mail",
     "Whoops!": "Oups !",
     "You are receiving this email because we received a password reset request for your account.": "Vous recevez cet e-mail car nous avons reçu une demande de réinitialisation de mot de passe pour votre compte.",
     "You're logged in!": "Vous êtes connecté·e !",
-    "Your email address is unverified.": "Votre adresse e-mail n'est pas vérifiée.",
-    "Sign in with Google": "Se connecter avec Google",
-    "Email or Username": "E-mail ou nom d'utilisateur",
-    "Username": "Nom d'utilisateur"
+    "Your email address is unverified.": "Votre adresse e-mail n'est pas vérifiée."
 }

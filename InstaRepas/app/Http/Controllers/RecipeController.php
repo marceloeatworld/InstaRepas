@@ -86,4 +86,12 @@ class RecipeController extends Controller
 
         return response()->json(['success' => 'Food added successfully.']);
     }
+
+    public function storeFood(Request $request)
+{
+    $food = Food::create($request->all());
+
+    return response()->json($food, 201);
+}
+
 }

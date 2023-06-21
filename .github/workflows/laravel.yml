@@ -5,46 +5,68 @@ on:
 
 jobs:
   laravel-tests:
-
     runs-on: ubuntu-latest
 
     steps:
-    - uses: shivammathur/setup-php@2.25.1
-      with:
-        php-version: '8.2'
-    - uses: actions/checkout@v3
+      - name: 📦 Récupération du Code
+        uses: actions/checkout@v3.5.3
 
-    - name: 🚀 Aller au répertoire Laravel et afficher
-      run: |
-        cd InstaRepas
-        pwd
-        ls -la
+      - name: ⚙️ Configuration de PHP
+        uses: shivammathur/setup-php@2.25.4
+        with:
+          php-version: '8.2'
+          extensions: bcmath, bz2, calendar, Core, ctype, curl, date, dom, exif, FFI, fileinfo, filter, ftp, gd, gettext, hash, iconv, igbinary, imagick, imap, intl, json, libxml, mbstring, mcrypt, mysqli, mysqlnd, openssl, pcntl, pcre, PDO, pdo_mysql, Phar, posix, readline, redis, Reflection, session, shmop, SimpleXML, soap, sockets, sodium, SPL, standard, sysvmsg, sysvsem, sysvshm, tokenizer, xml, xmlreader, xmlrpc, xmlwriter, xsl, zip, zlib, Zend OPcache
+          tools: composer:v2
 
-    - name: 📄 Copier .env
-      working-directory: InstaRepas
-      run: php -r "file_exists('.env') || copy('.env.example', '.env');"
+      - name: 📚 Installation de NPM
+        run: |
+          sudo apt-get install -y npm
+          npm --version
 
-    - name: 🛠️ Installer les dépendances
-      working-directory: InstaRepas
-      run: composer install --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
+      - name: 🚀 Aller au répertoire Laravel et afficher
+        run: |
+          cd InstaRepas
+          pwd
+          ls -la
 
-    - name: 🗝️ Générer la clé
-      working-directory: InstaRepas
-      run: php artisan key:generate
+      - name: 🛠️ Installation des dépendances du projet
+        run: |
+          composer install --no-progress --prefer-dist --optimize-autoloader
+          npm install
+        working-directory: ./InstaRepas
 
-    - name: 📁 Permissions du répertoire
-      working-directory: InstaRepas
-      run: chmod -R 777 storage bootstrap/cache
+      - name: 🏗️ Construction du Projet
+        run: npm run build
+        working-directory: ./InstaRepas
 
-    - name: 🗄️ Créer la base de données
-      working-directory: InstaRepas
-      run: |
-        mkdir -p database
-        touch database/database.sqlite
+      - name: 📄 Copier .env
+        run: php -r "file_exists('.env') || copy('.env.example', '.env');"
+        working-directory: InstaRepas
 
-    - name: 🧪 Exécuter les tests (Unitaires et Fonctionnels) via Pest
-      working-directory: InstaRepas
-      env:
-        DB_CONNECTION: sqlite
-        DB_DATABASE: database/database.sqlite
-      run: vendor/bin/pest
+      - name: 🗝️ Générer la clé
+        run: php artisan key:generate
+        working-directory: InstaRepas
+
+      - name: 📁 Permissions du répertoire
+        run: |
+          sudo chmod -R 777 storage
+          sudo chmod -R 777 bootstrap/cache
+          sudo chmod -R 777 public
+        working-directory: ./InstaRepas
+      
+      - name: 🗄️ Créer la base de données
+        run: |
+          mkdir -p database
+          touch database/database.sqlite
+        working-directory: InstaRepas
+
+      - name: 🧪 Exécuter les tests (Unitaires et Fonctionnels) via Pest
+        env:
+          DB_CONNECTION: sqlite
+          DB_DATABASE: database/database.sqlite
+        run: |
+          php artisan cache:clear
+          php artisan config:clear
+          php artisan migrate --force
+          vendor/bin/pest
+        working-directory: InstaRepas
