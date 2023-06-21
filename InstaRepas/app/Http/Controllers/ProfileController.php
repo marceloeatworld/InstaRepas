@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
 use App\Models\DietaryRestriction;
+use Illuminate\Support\Facades\Session;
 
 
 class ProfileController extends Controller
@@ -68,8 +69,8 @@ class ProfileController extends Controller
         $dietaryRestrictions = DietaryRestriction::all();
         return view('dashboard', compact('dietaryRestrictions'));
     }
-    
-    
+
+
     public function showPreferences()
     {
         $displayNames = [
@@ -86,8 +87,8 @@ class ProfileController extends Controller
         return view('profile.preferences', ['dietaryRestrictions' => $dietaryRestrictions, 'displayNames' => $displayNames]);
 
     }
-    
-    
+
+
     public function updateProfile(Request $request)
     {
         $user = Auth::user();
@@ -110,12 +111,14 @@ class ProfileController extends Controller
     public function updatePreferences(Request $request)
     {
         $user = Auth::user();
-    
+
         $preferences = $request->input('restrictions', []);
         $user->preferences()->sync($preferences);
-    
-        return redirect()->route('profile.preferences')->with('status', 'Vos préférences ont été mises à jour avec succès !');
 
+        // Message de succès et redirection vers la page des préférences
+        Session::flash('success', 'Vos préférences ont été modifiées avec succès!');
+        return redirect()->route('profile.preferences');
     }
-    
+
+
 }

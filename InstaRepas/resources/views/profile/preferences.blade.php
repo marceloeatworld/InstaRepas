@@ -3,6 +3,11 @@
 
     <div class="py-12 transition-all duration-500 ease-in-out">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
+            @if(Session::has('success'))
+            <x-yellow-button >
+                {{ Session::get('success') }}
+            </x-yellow-button>
+        @endif
             <form action="{{ route('profile.updatePreferences') }}" method="post" class="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 transition-all duration-500 hover:shadow-lg">
 
                 @csrf
