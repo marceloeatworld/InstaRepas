@@ -1,5 +1,5 @@
 <?php
-
+namespace Tests\Feature;
 use App\Models\User;
 
 // Test pour vérifier que la page de profil est affichée
