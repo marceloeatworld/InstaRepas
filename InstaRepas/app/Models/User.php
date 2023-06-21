@@ -63,7 +63,6 @@ class User extends Authenticatable implements MustVerifyEmail
             $newUsername = $username.Str::lower(Str::random(3));
             $username = self::generateUserName($newUsername);
         }
-
         return $username;
     }
 

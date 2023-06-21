@@ -11,7 +11,7 @@
 </button>
 
 
-        </div>
+        </div> 
     </div>
 </div>
 
@@ -23,11 +23,11 @@
             <div class="p-4 w-full">
                 <div class="bg-white shadow-xl rounded-xl p-6 flex flex-col space-y-6">
                     <h3 class="text-2xl mb-4 font-semibold text-blue-600">Jour {{ $day + 1 }}</h3>
-                    
+
                     <div>
                         <h4 class="text-lg mb-2 font-semibold text-blue-600">Petit-déjeuner</h4>
                         <p class="text-gray-700">
-                            {{ sprintf("%s, accompagné de %s et d'un fruit frais : %s.", 
+                            {{ sprintf("%s, accompagné de %s et d'un fruit frais : %s.",
                                 $breakfasts[$day]['protein']->name,
                                 $breakfasts[$day]['carbohydrate']->preparation_style,
                                 $breakfasts[$day]['fruit']->preparation_style) }}
@@ -37,7 +37,7 @@
                     <div>
                         <h4 class="text-lg mb-2 font-semibold text-blue-600">Déjeuner</h4>
                         <p class="text-gray-700">
-                            {{ sprintf("%s et %s, servi avec %s.", 
+                            {{ sprintf("%s et %s, servi avec %s.",
                                 isset($lunches[$day]['protein']) ? $lunches[$day]['protein']->preparation_style : 'Aucune protéine',
                                 isset($lunches[$day]['carbohydrate']) ? $lunches[$day]['carbohydrate']->preparation_style : 'Aucun glucide',
                                 isset($lunches[$day]['vegetable']) ? $lunches[$day]['vegetable']->preparation_style : 'Aucun légume') }}
@@ -52,11 +52,11 @@
                             </p>
                         </div>
                     @endif
-                    
+
                     <div>
                         <h4 class="text-lg mb-2 font-semibold text-blue-600">Dîner</h4>
                         <p class="text-gray-700">
-                            {{ sprintf("%s et %s, servi avec %s.", 
+                            {{ sprintf("%s et %s, servi avec %s.",
                                 isset($dinners[$day]['protein']) ? $dinners[$day]['protein']->preparation_style : 'Aucune protéine',
                                 isset($dinners[$day]['carbohydrate']) ? $dinners[$day]['carbohydrate']->preparation_style : 'Aucun glucide',
                                 isset($dinners[$day]['vegetable']) ? $dinners[$day]['vegetable']->preparation_style : 'Aucun légume') }}
@@ -72,7 +72,7 @@
         .shadow-md, .hover\:shadow-lg, .shadow-xl {
             box-shadow: none !important;
         }
-        
+
         /* Supprimer les couleurs de fond */
         .bg-white, .bg-blue-600, .hover\:bg-blue-500 {
             background-color: transparent !important;

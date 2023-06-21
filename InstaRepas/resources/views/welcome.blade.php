@@ -6,7 +6,7 @@
       <p class='text-white text-base sm:text-lg md:text-xl mb-2 shadow-text text-center'>Planifiez à l'avance vos menus pour votre quotidien, et simplifiez votre routine de préparation de repas.</p>
       <p class='text-white text-base sm:text-lg md:text-xl mb-4 shadow-text text-center'>Commencez votre voyage vers une alimentation plus saine et équilibrée aujourd'hui.</p>
     </div>
-    <a id="buttonF" href='/generate' class=''>Explorez maintenant</a>
+    <a id="buttonF" href='/generate' class=''>Génerer vos repas maintenant</a>
 
   </div>
 
@@ -19,7 +19,7 @@
       <img id='logo' src='/imgs/logo_for_foodequlibre.webp' alt='Logo InstaRepas' class='max-w-xs md:max-w-sm mx-auto'>
     </div>
     <div class='md:w-1/2 p-4 text-center md:text-left'>
-     
+
     <h2 class='text-4xl md:text-5xl font-bold mb-2 md:mb-4'>InstaRepas</h2>
     <h3 class='text-2xl md:text-3xl font-bold mb-2 md:mb-4'>Des idées de menus du quotidien</h3>
     <p class='text-gray-700 leading-relaxed mb-6 text-md md:text-lg font-medium max-w-lg mx-auto md:mx-0'>
@@ -77,9 +77,9 @@
 <div class='py-12 px-4 sm:px-0'>
   <div class='text-center max-w-2xl mx-auto'>
     <h2 class='text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-4 sm:mb-8 leading-snug'>InstaRepas : Un choix adapté à vos préférences</h2>
-   
+
     <p class='text-gray-700 text-sm sm:text-base md:text-lg sm:text-xl mb-4 leading-relaxed'>
-     
+
     Que vous soyez végétalien, sans gluten, ou que vous aimiez tout simplement la viande, InstaRepas crée des repas parfaitement adaptés à votre style de vie. <br>En vous inscrivant, vous pouvez sauvegarder vos préférences et les retrouver à chaque connexion. <br>Fini le temps perdu à refaire constamment vos choix, avec InstaRepas, votre sélection reste à portée de main.<br> Découvrez l'expérience de la personnalisation alimentaire poussée à son paroxysme. Allez-y, inscrivez-vous et commencez à découvrir votre nouvel allié nutritionnel.
     </p>
     <x-yellow-button href="{{ route('register') }}" class="">Inscrivez-vous maintenant</x-yellow-button>

@@ -31,13 +31,20 @@ Route::get('/', function () {
 });
 
 
+//Test
+Route::get('/hello', function () {
+    return 'Hello, World!';
+});
+
+
+
 // Route for the meals generator
 Route::get('/generate', [MealController::class, 'generateForm'])->name('generate');
 Route::post('/generate-meals', [MealController::class, 'generate'])->name('generate_meals');
 
 //admin
 Route::prefix('admin')->middleware(['auth', 'admin'])->group(function () {
-    Route::get('/', [DashboardController::class, 'index'])->name('admin.index');
+Route::get('/', [DashboardController::class, 'index'])->name('admin.index');
 
     //gerer les aliments
     Route::get('/foods', [FoodController::class, 'index'])->name('admin.foods.index');
@@ -111,7 +118,7 @@ Route::post('/foods', [RecipeController::class, 'storeFood'])->name('foods.store
     Route::get('/profile/recipes/create', [RecipeController::class, 'create'])->name('recipes.create');
     Route::post('/recipes', [RecipeController::class, 'store'])->name('recipes.store');
     Route::post('/recipes/add-food', [RecipeController::class, 'addFood'])->name('recipes.add-food');
-    
+
 
 Route::get('/a-propos', function () {
     return view('about');
