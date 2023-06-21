@@ -27,7 +27,9 @@ return [
     'observers'     => false,
     'policies'      => false,
     'providers'     => false,
+
     'requests'      => false,
+
     'resources'     => false,
     'rules'         => false,
 
@@ -81,6 +83,7 @@ return [
         'Providers/BroadcastServiceProvider.php',
         'Providers/EventServiceProvider.php',
         'Providers/RouteServiceProvider.php',
+
   //      'Models/CombinationFood.php',
    //     'Models/Food.php',
    //     'Models/MealCombination.php',
@@ -105,6 +108,7 @@ return [
         'Controllers/CookingAdviceController.php', 
         'Controllers/FoodController.php', 
         'Controllers/FoodCategoryController.php', 
+
     ],
 
     /**

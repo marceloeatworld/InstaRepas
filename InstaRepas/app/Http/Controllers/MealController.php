@@ -6,7 +6,7 @@ namespace App\Http\Controllers;
 use App\Models\Food;
 use App\Models\MealCombination;
 use App\Models\CombinationFood;
-use App\Models\Season;
+    use App\Models\Season;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
@@ -22,7 +22,7 @@ class MealController extends Controller
     // Méthode pour générer des repas
     public function generate(Request $request)
     {
-        // Récupération des restrictions à partir de la requête
+        // Récupération des restrictions àN partir de la requête
         $this->restrictions = $request->input('restrictions', []);
         $include_snacks = $request->input('include_snacks', false);
         $days = max(1, min($request->input('days', 1), 60));
@@ -96,7 +96,7 @@ class MealController extends Controller
             'contains_pork' => 'Sans porc',
             'contains_crustacean' => 'Sans crustacé',
         ];
-        
+
         // Récupération des préférences de l'utilisateur
         $userPreferences = [];
         if (Auth::check()) {
@@ -114,7 +114,7 @@ class MealController extends Controller
         {
             // Récupère une combinaison de repas au hasard pour le type de repas spécifié.
             $mealCombination = MealCombination::where('meal_type', $mealType)->inRandomOrder()->first();
-            
+
             // S'il n'y a pas de combinaison de repas disponible, renvoie un message d'erreur.
             if (!$mealCombination) {
                 return [
@@ -156,14 +156,14 @@ class MealController extends Controller
         // Cette fonction génère un déjeuner ou un dîner en fonction des aliments disponibles.
         private function generateLunchOrDinner($foods)
         {
-            // Récupère un aliment contenant des protéines. 
+            // Récupère un aliment contenant des protéines.
             // Si l'utilisateur a une restriction alimentaire qui interdit les produits animaux, sélectionne une protéine végétale.
             $proteinCategory = in_array('contains_animal_products', $this->restrictions) ? 'Legumes' : ['Meat', 'Fish', 'Eggs', 'Pork'];
             $proteinFood = $foods->whereIn('category.name', $proteinCategory)->count() > 0 ? $foods->whereIn('category.name', $proteinCategory)->random() : null;
-            
+
             $carbohydrateFood = null;
             $fiberFood = null;
-            
+
             // Si l'utilisateur a une restriction alimentaire qui interdit les produits animaux, sélectionne des aliments riches en glucides et en fibres.
             if (in_array('contains_animal_products', $this->restrictions)) {
                 $carbohydrateFood = $foods->where('category.name', 'Grains')->where('nutritional_type', 'carbohydrates')->count() > 0 ? $foods->where('category.name', 'Grains')->where('nutritional_type', 'carbohydrates')->random() : null;
@@ -178,7 +178,7 @@ class MealController extends Controller
                 'vegetable' => $foods->where('category.name', 'Vegetables')->count() > 0 ? $foods->where('category.name', 'Vegetables')->random() : null,
                 'lipid' => $foods->where('category.name', 'Oils')->count() > 0 ? $foods->where('category.name', 'Oils')->random() : null,
             ];
-            
+
         }
 
         // Cette fonction génère un snack en fonction des aliments disponibles.
