@@ -10,6 +10,7 @@
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net">
         <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
+        <link rel="icon" href="{{ asset('imgs/logo_for_foodequlibre.webp') }}" type="image/x-icon"/>
 
         <script src="{{ asset('js/jquery-3.7.0.min.js') }}"></script>
         <script src="{{ asset('js/jquery-ui.min.js') }}"></script>
