@@ -11,10 +11,14 @@ jobs:
     - name: 📦 Récupération du Code
       uses: actions/checkout@v4.2.1
 
+    # Créer le répertoire .ssh avant d'y ajouter known_hosts
+    - name: 🛠️ Créer le répertoire .ssh
+      run: mkdir -p ~/.ssh
+
     # Générer dynamiquement l'entrée known_hosts en récupérant la clé publique du serveur
     - name: 🔑 Récupérer la clé publique de l'hôte distant
       run: |
-        ssh-keyscan -t rsa 188.165.70.59 >> ~/.ssh/known_hosts
+        ssh-keyscan -t rsa ${{ secrets.REMOTE_HOST }} >> ~/.ssh/known_hosts
 
     - name: 🗝️ Installer la clé SSH
       uses: shimataro/ssh-key-action@v2.7.0
