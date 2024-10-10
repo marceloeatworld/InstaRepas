@@ -1,24 +1,25 @@
-name: 😊 Deploiment - InstaRepas
+name: 🔄 Rollback Deployment
 
 on:
   workflow_dispatch:
     inputs:
-      version:
-        description: 'Numéro de version pour le déploiement (format: X.Y.Z)'
-        required: false
+      tag_to_deploy:
+        description: 'Tag Git à déployer'
+        required: true
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
     permissions:
-        contents: write
+      contents: write
 
     steps:
-    - name: 📦 Récupération du Code
+    - name: Récupération du code source
       uses: actions/checkout@v4.1.4
       with:
-        fetch-depth: '0'
-      
+        ref: ${{ github.event.inputs.tag_to_deploy }}
+        fetch-depth: 0
+
     - name: ⚙️ Configuration de PHP
       uses: shivammathur/setup-php@2.30.4
       with:
@@ -28,10 +29,9 @@ jobs:
 
     - name: 📚 Installation de NPM
       run: |
-        sudo apt-get update
         sudo apt-get install -y npm
         npm --version
-        
+
     - name: 🚀 Aller au répertoire Laravel et afficher
       run: |
         pwd
@@ -41,6 +41,7 @@ jobs:
       run: |
         composer install --no-dev --no-progress --prefer-dist --optimize-autoloader
         npm install
+
 
     - name: 🏗️ Construction du Projet
       run: |
@@ -56,17 +57,10 @@ jobs:
       with:
         ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
 
-    - name: 🏷️ Création du tag de version
-      uses: anothrNick/github-tag-action@v1
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        CUSTOM_TAG: ${{ github.event.inputs.version }}
-        WITH_V: true
-
     - name: 🗑️ Supprimer les répertoires bootstrap/cache, public et storage
       run: |
         ssh -p ${{ secrets.REMOTE_PORT }} ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }} "sudo rm -rf ${{ secrets.PROD_DIR }}/bootstrap/ ${{ secrets.PROD_DIR }}/public ${{ secrets.PROD_DIR }}/storage"
-   
+     
     - name: 🚀 Déploiement sur le serveur de production
       run: |
         echo "Répertoire de travail local :" 
@@ -74,13 +68,13 @@ jobs:
         echo "Contenu du répertoire de travail local :"
         ls -la
         echo "Déploiement des fichiers vers le serveur de production..."
-        rsync -r -avz -O --delete-after --exclude=kubernetes --exclude=database --exclude=install.sh --exclude=conf --exclude=.github --exclude=.editorconfig --exclude=dist --exclude=node_modules --exclude=.env --exclude=Dockerfile --exclude=_ide_helper.php --exclude=_ide_helper_models.php --exclude=shell-php.nix --exclude=shell-stripe.nix --exclude=php.nix --exclude=deploy.yaml --exclude=README.md --exclude=tests --exclude=.phpstorm.meta.php --exclude=.env.example --exclude=phpunit.xml --exclude=.gitattributes --exclude=.git --exclude=.gitignore --quiet -e 'ssh -p ${{ secrets.REMOTE_PORT }}' . ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }}:${{ secrets.PROD_DIR }}
-      
+        rsync -r -avz -O --delete-after --exclude=kubernetes --exclude=install.sh --exclude=database --exclude=conf --exclude=.github --exclude=.editorconfig --exclude=dist --exclude=node_modules --exclude=.env --exclude=Dockerfile --exclude=_ide_helper.php --exclude=_ide_helper_models.php --exclude=shell-php.nix --exclude=shell-stripe.nix --exclude=php.nix --exclude=deploy.yaml --exclude=README.md --exclude=tests --exclude=.phpstorm.meta.php --exclude=.env.example --exclude=phpunit.xml --exclude=.gitattributes --exclude=.git --exclude=.gitignore --quiet -e 'ssh -p ${{ secrets.REMOTE_PORT }}' . ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }}:${{ secrets.PROD_DIR }}
+        
     - name: 🔄 Changer le propriétaire et les permissions des répertoires
       run: |
         ssh -p ${{ secrets.REMOTE_PORT }} ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }} "sudo chown -R www-data:www-data ${{ secrets.PROD_DIR }}/bootstrap/cache ${{ secrets.PROD_DIR }}/public ${{ secrets.PROD_DIR }}/storage"
         ssh -p ${{ secrets.REMOTE_PORT }} ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }} "sudo chmod -R 775 ${{ secrets.PROD_DIR }}/bootstrap/cache ${{ secrets.PROD_DIR }}/storage"
-      
+        
     - name: 🎨 Exécuter les commandes de maintenance Laravel
       run: |
         ssh -p ${{ secrets.REMOTE_PORT }} ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }} "cd ${{ secrets.PROD_DIR }} && sudo php artisan cache:clear && sudo php artisan route:clear && sudo php artisan view:clear"
