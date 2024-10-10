@@ -77,7 +77,7 @@ jobs:
         echo "Contenu du répertoire de travail local :"
         ls -la
         echo "Déploiement des fichiers vers le serveur de production..."
-        rsync -r -avz -O --delete-after --exclude=DB --exclude=GIT --exclude=scripts --exclude=conf --exclude=.github --exclude=.editorconfig --exclude=dist --exclude=node_modules --exclude=.env --exclude=Dockerfile --exclude=_ide_helper.php --exclude=_ide_helper_models.php --exclude=shell-php.nix --exclude=shell-stripe.nix --exclude=php.nix --exclude=deploy.yaml --exclude=README.md --exclude=tests --exclude=.phpstorm.meta.php --exclude=.env.example --exclude=phpunit.xml --exclude=.gitattributes --exclude=.git --exclude=.gitignore --quiet -e 'ssh -p ${{ secrets.REMOTE_PORT }}' . ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }}:${{ secrets.PROD_DIR }}
+          rsync -r -avz -O --delete-after --exclude=DB --exclude=GIT --exclude=scripts --exclude=logo_for_foodequlibre.png --exclude=.github --exclude=.editorconfig --exclude=dist --exclude=node_modules --exclude=.env --exclude=Dockerfile --exclude=_ide_helper.php --exclude=_ide_helper_models.php --exclude=shell-php.nix --exclude=shell-stripe.nix --exclude=php.nix --exclude=deploy.yaml --exclude=README.md --exclude=tests --exclude=.phpstorm.meta.php --exclude=.env.example --exclude=phpunit.xml --exclude=.gitattributes --exclude=.git --exclude=.gitignore --quiet -e 'ssh -p ${{ secrets.REMOTE_PORT }}' InstaRepas/ ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }}:${{ secrets.PROD_DIR }}/
       
     - name: 🔄 Changer le propriétaire et les permissions des répertoires
       run: |
