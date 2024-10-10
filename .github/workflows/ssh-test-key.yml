@@ -9,7 +9,7 @@ jobs:
 
     steps:
     - name: 📦 Récupération du Code
-      uses: actions/checkout@v4.1.4
+      uses: actions/checkout@v4.2.1
 
     - name: 🗝️ Installer la clé SSH
       uses: shimataro/ssh-key-action@v2.7.0
