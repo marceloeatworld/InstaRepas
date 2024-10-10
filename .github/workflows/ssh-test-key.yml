@@ -17,5 +17,10 @@ jobs:
         key: ${{ secrets.SSH_PRIVATE_KEY }}
         known_hosts: ${{ secrets.SSH_KNOWN_HOSTS }}
 
-    - name: 🖥️ Tester la connexion SSH
-      run: ssh -p ${{ secrets.REMOTE_PORT }} -T ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }}
+    - name: 🔍 Vérifier le contenu du répertoire SSH
+      run: |
+        mkdir -p ~/.ssh
+        ls -la ~/.ssh
+
+    - name: 🖥️ Tester la connexion SSH avec détails
+      run: ssh -vvv -p ${{ secrets.REMOTE_PORT }} -T ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }}
