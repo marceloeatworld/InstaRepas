@@ -34,6 +34,7 @@ jobs:
         
     - name: 🚀 Aller au répertoire Laravel et afficher
       run: |
+        cd InstaRepas
         pwd
         ls -la
 
