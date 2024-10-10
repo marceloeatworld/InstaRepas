@@ -6,6 +6,8 @@ on:
 jobs:
   setup-ssh:
     runs-on: ubuntu-latest
+    permissions:
+        contents: write
 
     steps:
     - name: 📦 Récupération du Code
