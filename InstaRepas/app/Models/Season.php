@@ -24,19 +24,18 @@ class Season extends Model
   
     public static function getSeasonByMonth($month)
     {
-        
         $season = null;
         if ($month >= 3 && $month <= 5) {
             $season = 'Spring';
         } elseif ($month >= 6 && $month <= 8) {
             $season = 'Summer';
         } elseif ($month >= 9 && $month <= 11) {
-            $season = 'Fall';
+            $season = 'Autumn'; 
         } else {
             $season = 'Winter';
         }
-
-        
+    
         return self::where('season_name', $season)->first();
     }
+    
 }

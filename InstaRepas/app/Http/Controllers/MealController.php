@@ -25,7 +25,7 @@ class MealController extends Controller
         // Récupération des restrictions àN partir de la requête
         $this->restrictions = $request->input('restrictions', []);
         $include_snacks = $request->input('include_snacks', false);
-        $days = max(1, min($request->input('days', 1), 60));
+        $days = max(1, min($request->input('days', 1), 15));
         $currentMonth = Carbon::now()->month;
         $currentSeason = null;
         $availableDietaryRestrictions = DietaryRestriction::all();
