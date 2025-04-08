@@ -6,37 +6,32 @@ cmds = [
     "mkdir -p /etc/supervisor/conf.d/",
     "cp /assets/worker-*.conf /etc/supervisor/conf.d/",
     "cp /assets/supervisord.conf /etc/supervisord.conf",
-    "chmod +x /assets/extra.sh",
-    "/assets/extra.sh"
+    "chmod +x /assets/start.sh",
+    "composer install --no-dev",
+    "php artisan optimize:clear",
+    "php artisan config:cache",
+    "php artisan route:cache",
+    "php artisan view:cache",
+    "npm ci && npm run build",
+    "mkdir -p storage/framework/sessions storage/framework/views storage/framework/cache",
+    "chmod -R 775 storage bootstrap/cache"
 ]
-
-[phases.postbuild]
-cmds = [
-    "php /app/artisan optimize:clear",
-    "php /app/artisan config:cache",
-    "php /app/artisan route:cache",
-    "php /app/artisan view:cache"
-]
-dependsOn = ["build"]
 
 [start]
-cmd = 'supervisord -c /etc/supervisord.conf -n'
+cmd = '/assets/start.sh'
 
 [staticAssets]
-"extra.sh" = '''
+"start.sh" = '''
 #!/bin/bash
-# Enable OPcache
-PHP_INI_PATH=$(php -i | grep '/php.ini' | awk '{print $6}')
-echo 'php path found: ' $PHP_INI_PATH
-# Enable opcache by adding to the bottom of the php.ini
-echo opcache.memory_consumption=256 >> "$PHP_INI_PATH"
-echo opcache.interned_strings_buffer=64 >> "$PHP_INI_PATH"
-echo opcache.max_accelerated_files=32531 >> "$PHP_INI_PATH"
-echo opcache.validate_timestamps=0 >> "$PHP_INI_PATH"
-echo opcache.enable_cli=1 >> "$PHP_INI_PATH"
 
-# Create a symlink to storage
-php /app/artisan storage:link
+# Transform the nginx configuration
+node /assets/scripts/prestart.mjs /assets/nginx.template.conf /etc/nginx.conf
+
+# Create storage link if needed
+php artisan storage:link
+
+# Start supervisor
+supervisord -c /etc/supervisord.conf -n
 '''
 
 "supervisord.conf" = '''
@@ -64,6 +59,26 @@ serverurl=unix:///assets/supervisor.sock
 files = /etc/supervisor/conf.d/*.conf
 '''
 
+"worker-nginx.conf" = '''
+[program:worker-nginx]
+process_name=%(program_name)s_%(process_num)02d
+command=nginx -c /etc/nginx.conf
+autostart=true
+autorestart=true
+stdout_logfile=/var/log/worker-nginx.log
+stderr_logfile=/var/log/worker-nginx.log
+'''
+
+"worker-phpfpm.conf" = '''
+[program:worker-phpfpm]
+process_name=%(program_name)s_%(process_num)02d
+command=php-fpm -y /assets/php-fpm.conf -F
+autostart=true
+autorestart=true
+stdout_logfile=/var/log/worker-phpfpm.log
+stderr_logfile=/var/log/worker-phpfpm.log
+'''
+
 "worker-laravel.conf" = '''
 [program:worker-laravel]
 process_name=%(program_name)s_%(process_num)02d
@@ -72,9 +87,111 @@ autostart=true
 autorestart=true
 stopasgroup=true
 killasgroup=true
-numprocs=2
+numprocs=4
 startsecs=0
 stopwaitsecs=3600
-stdout_logfile=/app/storage/logs/worker-laravel.log
-stderr_logfile=/app/storage/logs/worker-laravel.log
+stdout_logfile=/var/log/worker-laravel.log
+stderr_logfile=/var/log/worker-laravel.log
+'''
+
+"php-fpm.conf" = '''
+[www]
+listen = 127.0.0.1:9000
+user = www-data
+group = www-data
+listen.owner = www-data
+listen.group = www-data
+pm = dynamic
+pm.max_children = 50
+pm.min_spare_servers = 4
+pm.max_spare_servers = 32
+pm.start_servers = 18
+clear_env = no
+'''
+
+"nginx.template.conf" = '''
+user www-data www-data;
+worker_processes 5;
+daemon off;
+
+worker_rlimit_nofile 8192;
+
+events {
+  worker_connections  4096;  # Default: 1024
+}
+
+http {
+    include    $!{nginx}/conf/mime.types;
+    index    index.html index.htm index.php;
+
+    default_type application/octet-stream;
+    log_format   main '$remote_addr - $remote_user [$time_local]  $status '
+        '"$request" $body_bytes_sent "$http_referer" '
+        '"$http_user_agent" "$http_x_forwarded_for"';
+    access_log /var/log/nginx-access.log;
+    error_log /var/log/nginx-error.log;
+    sendfile     on;
+    tcp_nopush   on;
+    server_names_hash_bucket_size 128; # this seems to be required for some vhosts
+
+    server {
+        listen ${PORT};
+        listen [::]:${PORT};
+        server_name localhost;
+
+        # Utilisation de la variable d'environnement NIXPACKS_PHP_ROOT_DIR ou répertoire par défaut
+        $if(NIXPACKS_PHP_ROOT_DIR) (
+            root ${NIXPACKS_PHP_ROOT_DIR};
+        ) else (
+            root /app/public;
+        )
+
+        add_header X-Content-Type-Options "nosniff";
+
+        # Pour traiter les en-têtes de proxy correctement
+        set_real_ip_from 0.0.0.0/0;
+        real_ip_header X-Forwarded-For;
+        real_ip_recursive on;
+
+        # Headers pour aider avec les redirections SSL
+        proxy_set_header X-Forwarded-Proto $http_x_forwarded_proto;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header Host $host;
+
+        client_max_body_size 35M;
+        
+        index index.php;
+        
+        charset utf-8;
+        
+        # Utilisation de la correction spécifique mentionnée
+        $if(NIXPACKS_PHP_FALLBACK_PATH) (
+            location / {
+                try_files $uri $uri/ ${NIXPACKS_PHP_FALLBACK_PATH}?$query_string;
+            }
+        ) else (
+            location / {
+                try_files $uri $uri/ /index.php?$query_string;
+            }
+        )
+        
+        location = /favicon.ico { access_log off; log_not_found off; }
+        location = /robots.txt  { access_log off; log_not_found off; }
+        
+        error_page 404 /index.php;
+        
+        location ~ \.php$ {
+            fastcgi_pass 127.0.0.1:9000;
+            fastcgi_param SCRIPT_FILENAME $realpath_root$fastcgi_script_name;
+            include $!{nginx}/conf/fastcgi_params;
+            include $!{nginx}/conf/fastcgi.conf;
+
+            fastcgi_param PHP_VALUE "upload_max_filesize=30M \n post_max_size=35M";
+        }
+        
+        location ~ /\.(?!well-known).* {
+            deny all;
+        }
+    }
+}
 '''
