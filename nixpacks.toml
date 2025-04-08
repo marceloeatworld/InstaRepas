@@ -30,25 +30,13 @@ http {
         server_name localhost;
 
         root /app/public;
-
-        add_header X-Content-Type-Options "nosniff";
-
-        client_max_body_size 35M;
-        
         index index.php;
-        
         charset utf-8;
-        
-        # VOICI LA CORRECTION IMPORTANTE
-        $if(NIXPACKS_PHP_FALLBACK_PATH) ( 
-            location / { 
-                try_files $uri $uri/ ${NIXPACKS_PHP_FALLBACK_PATH}?$query_string; 
-            } 
-        ) else ( 
-            location / { 
-                try_files $uri $uri/ /index.php?$query_string; 
-            } 
-        )
+
+        # Une SEULE directive location / sans aucune condition
+        location / {
+            try_files $uri $uri/ /index.php?$query_string;
+        }
         
         location = /favicon.ico { access_log off; log_not_found off; }
         location = /robots.txt  { access_log off; log_not_found off; }
