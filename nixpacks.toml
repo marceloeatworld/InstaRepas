@@ -1,5 +1,5 @@
 [phases.setup]
-nixPkgs = ["...", "python311Packages.supervisor"]
+nixPkgs = ["python311Packages.supervisor"]
 
 [phases.build]
 cmds = [
@@ -7,12 +7,15 @@ cmds = [
     "cp /assets/worker-*.conf /etc/supervisor/conf.d/",
     "cp /assets/supervisord.conf /etc/supervisord.conf",
     "chmod +x /assets/start.sh",
-    "composer install --no-dev",
-    "php artisan optimize:clear",
-    "php artisan config:cache",
-    "php artisan route:cache",
-    "php artisan view:cache",
-    "npm ci && npm run build"
+    "composer install --no-dev --no-progress --prefer-dist --optimize-autoloader",
+    "npm ci", 
+    "npm run build",
+    "php artisan cache:clear",
+    "php artisan route:clear", 
+    "php artisan view:clear",
+    "php artisan config:clear",
+    "mkdir -p storage/framework/sessions storage/framework/views storage/framework/cache",
+    "chmod -R 775 storage bootstrap/cache"
 ]
 
 [start]
@@ -25,9 +28,10 @@ cmd = '/assets/start.sh'
 # Transform the nginx configuration
 node /assets/scripts/prestart.mjs /assets/nginx.template.conf /etc/nginx.conf
 
-# Laravel specific setup
-php artisan migrate --force
-php artisan storage:link
+# Créer les liens symboliques pour le stockage si nécessaire
+if [ ! -L /app/public/storage ]; then
+  php artisan storage:link
+fi
 
 # Start supervisor
 supervisord -c /etc/supervisord.conf -n
@@ -86,25 +90,11 @@ autostart=true
 autorestart=true
 stopasgroup=true
 killasgroup=true
-numprocs=4
+numprocs=2
 startsecs=0
 stopwaitsecs=3600
 stdout_logfile=/var/log/worker-laravel.log
 stderr_logfile=/var/log/worker-laravel.log
-'''
-
-"worker-scheduler.conf" = '''
-[program:worker-scheduler]
-process_name=%(program_name)s_%(process_num)02d
-command=bash -c 'while [ true ]; do php /app/artisan schedule:run --verbose --no-interaction & sleep 60; done'
-autostart=true
-autorestart=true
-stopasgroup=true
-killasgroup=true
-numprocs=1
-startsecs=0
-stdout_logfile=/var/log/worker-scheduler.log
-stderr_logfile=/var/log/worker-scheduler.log
 '''
 
 "php-fpm.conf" = '''
@@ -152,11 +142,8 @@ http {
         listen [::]:${PORT};
         server_name localhost;
 
-        $if(NIXPACKS_PHP_ROOT_DIR) (
-            root ${NIXPACKS_PHP_ROOT_DIR};
-        ) else (
-            root /app/public;
-        )
+        # Utilise toujours /app/public comme racine
+        root /app/public;
 
         add_header X-Content-Type-Options "nosniff";
 
