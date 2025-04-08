@@ -7,13 +7,12 @@ cmds = [
     "cp /assets/worker-*.conf /etc/supervisor/conf.d/",
     "cp /assets/supervisord.conf /etc/supervisord.conf",
     "chmod +x /assets/start.sh",
-    "composer install --no-dev --no-progress --prefer-dist --optimize-autoloader",
-    "npm ci", 
-    "npm run build",
-    "php artisan cache:clear",
-    "php artisan route:clear", 
-    "php artisan view:clear",
-    "php artisan config:clear",
+    "composer install --no-dev",
+    "php artisan optimize:clear",
+    "php artisan config:cache",
+    "php artisan route:cache",
+    "php artisan view:cache",
+    "npm ci && npm run build",
     "mkdir -p storage/framework/sessions storage/framework/views storage/framework/cache",
     "chmod -R 775 storage bootstrap/cache"
 ]
@@ -28,10 +27,8 @@ cmd = '/assets/start.sh'
 # Transform the nginx configuration
 node /assets/scripts/prestart.mjs /assets/nginx.template.conf /etc/nginx.conf
 
-# Créer les liens symboliques pour le stockage si nécessaire
-if [ ! -L /app/public/storage ]; then
-  php artisan storage:link
-fi
+# Create storage link if needed
+php artisan storage:link
 
 # Start supervisor
 supervisord -c /etc/supervisord.conf -n
@@ -90,7 +87,7 @@ autostart=true
 autorestart=true
 stopasgroup=true
 killasgroup=true
-numprocs=2
+numprocs=4
 startsecs=0
 stopwaitsecs=3600
 stdout_logfile=/var/log/worker-laravel.log
@@ -142,26 +139,37 @@ http {
         listen [::]:${PORT};
         server_name localhost;
 
-        # Utilise toujours /app/public comme racine
+        # Définir le répertoire racine sans conditions
         root /app/public;
 
         add_header X-Content-Type-Options "nosniff";
 
+        # Pour traiter les en-têtes de proxy correctement
+        set_real_ip_from 0.0.0.0/0;
+        real_ip_header X-Forwarded-For;
+        real_ip_recursive on;
+
+        # Headers pour aider avec les redirections SSL
+        proxy_set_header X-Forwarded-Proto $http_x_forwarded_proto;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header Host $host;
+
         client_max_body_size 35M;
-     
+        
         index index.php;
-     
+        
         charset utf-8;
-     
+        
+        # Simplification de la location / (pas de conditions)
         location / {
             try_files $uri $uri/ /index.php?$query_string;
         }
-     
+        
         location = /favicon.ico { access_log off; log_not_found off; }
         location = /robots.txt  { access_log off; log_not_found off; }
-     
+        
         error_page 404 /index.php;
-     
+        
         location ~ \.php$ {
             fastcgi_pass 127.0.0.1:9000;
             fastcgi_param SCRIPT_FILENAME $realpath_root$fastcgi_script_name;
@@ -170,7 +178,7 @@ http {
 
             fastcgi_param PHP_VALUE "upload_max_filesize=30M \n post_max_size=35M";
         }
-     
+        
         location ~ /\.(?!well-known).* {
             deny all;
         }
