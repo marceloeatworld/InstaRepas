@@ -16,6 +16,7 @@
         <script src="{{ asset('js/jquery-ui.min.js') }}"></script>
 
         <script src="{{ asset('js/anime.min.js') }}" ></script>
+        <script defer src="https://analytics.aitek.tech/script.js" data-website-id="1bdf5ef9-5cb0-48bd-be70-dfe773863aca"></script>
 
         
         
