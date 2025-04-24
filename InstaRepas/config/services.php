@@ -26,7 +26,7 @@ return [
     ],
 
     'plunk' => [
-    'api_key' => env('PLUNK_API_KEY'),
+        'api_key' => env('PLUNK_API_KEY'),
     ],
 
     'ses' => [

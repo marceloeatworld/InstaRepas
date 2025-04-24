@@ -19,14 +19,12 @@ class PlunkService
     public function sendEmail($to, $subject, $body, $options = [])
     {
         try {
-            // Construction du payload de base
             $payload = [
                 'to' => $to,
                 'subject' => $subject,
                 'body' => $body,
             ];
             
-            // Ajout des options supplémentaires si présentes
             if (isset($options['from'])) {
                 $payload['from'] = $options['from'];
             }
@@ -47,13 +45,11 @@ class PlunkService
                 $payload['headers'] = $options['headers'];
             }
             
-            // Envoi de la requête à l'API Plunk
             $response = Http::withHeaders([
                 'Authorization' => 'Bearer ' . $this->apiKey,
                 'Content-Type' => 'application/json',
             ])->post($this->baseUrl . '/send', $payload);
             
-            // Traitement de la réponse
             if ($response->successful()) {
                 return $response->json();
             } else {
