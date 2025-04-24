@@ -13,7 +13,7 @@ class PlunkService
     public function __construct()
     {
         $this->apiKey = config('services.plunk.api_key');
-        $this->baseUrl = 'https://api.useplunk.com/v1';
+        $this->baseUrl = 'https://mail.aitek.tech/v1';
     }
 
     public function sendEmail($to, $subject, $body, $options = [])
