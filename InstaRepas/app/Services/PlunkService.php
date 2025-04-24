@@ -13,7 +13,7 @@ class PlunkService
     public function __construct()
     {
         $this->apiKey = config('services.plunk.api_key');
-        $this->baseUrl = 'https://mail.aitek.tech/v1';
+        $this->baseUrl = config('services.plunk.url', 'https://mail.aitek.tech');
     }
 
     public function sendEmail($to, $subject, $body, $options = [])
@@ -48,7 +48,7 @@ class PlunkService
             $response = Http::withHeaders([
                 'Authorization' => 'Bearer ' . $this->apiKey,
                 'Content-Type' => 'application/json',
-            ])->post($this->baseUrl . '/send', $payload);
+            ])->post($this->baseUrl . '/api/v1/send', $payload);
             
             if ($response->successful()) {
                 return $response->json();

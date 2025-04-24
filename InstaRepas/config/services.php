@@ -27,8 +27,9 @@ return [
 
     'plunk' => [
         'api_key' => env('PLUNK_API_KEY'),
+        'url' => env('PLUNK_API_URL', 'https://mail.aitek.tech'),
     ],
-
+    
     'ses' => [
         'key' => env('AWS_ACCESS_KEY_ID'),
         'secret' => env('AWS_SECRET_ACCESS_KEY'),
