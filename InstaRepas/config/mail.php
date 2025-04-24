@@ -34,6 +34,7 @@ return [
     */
 
     'mailers' => [
+
         'smtp' => [
             'transport' => 'smtp',
             'host' => env('MAIL_HOST', 'smtp.mailgun.org'),
@@ -43,6 +44,10 @@ return [
             'password' => env('MAIL_PASSWORD'),
             'timeout' => null,
             'local_domain' => env('MAIL_EHLO_DOMAIN'),
+        ],
+
+        'plunk' => [
+            'transport' => 'plunk',
         ],
 
         'ses' => [
