@@ -11,6 +11,7 @@
             <li class="mb-1"><a href="{{ route('legal') }}" class="hover:text-gray-500" title="Mentions légales et conditions d'utilisation" aria-label="Mentions légales d'InstaRepas">Mentions légales</a></li>
           </ul>
         </nav>
+
       </div>
       <div class="mb-4 md:mb-0 px-2">
         <h4 class="text-base md:text-lg font-bold mb-2">Suivez-nous</h4>
