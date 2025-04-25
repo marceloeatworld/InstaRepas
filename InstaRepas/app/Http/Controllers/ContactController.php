@@ -26,28 +26,28 @@ class ContactController extends Controller
         $details = [
             'name' => $request->name,
             'email' => $request->email,
-            'subject' => $request->subject,
+            'subject' => $this->getSubjectText($request->subject),
             'message' => $request->message,
         ];
 
-        // send email
-        if ($request->subject == 'technical_problem') {
-            Mail::to([
-                env('TECH_SUPPORT_EMAIL_1', 'fallback-email1@example.com'),
-                env('TECH_SUPPORT_EMAIL_2', 'fallback-email2@example.com')
-            ])->send(new ContactMail($details));
-        } else {
-            Mail::to([
-                env('FIRST_EMAIL', 'fallback-email3@example.com'),
-                env('SECOND_EMAIL', 'fallback-email4@example.com')
-            ])->send(new ContactMail($details));
-        }
+        // Envoi de l'email à hello@instarepas.fr pour tous les cas
+        Mail::to('hello@instarepas.fr')->send(new ContactMail($details));
 
-
-
-        // redirect with success message
+        // Redirection avec message de succès
         return redirect()->back()->with('success', 'Votre message a été envoyé avec succès.');
-
     }
 
+    /**
+     * Convertit le code du sujet en texte lisible
+     */
+    private function getSubjectText($subject)
+    {
+        $subjects = [
+            'technical_problem' => 'Problème technique',
+            'information' => 'Demande d\'information',
+            'suggestion' => 'Suggestion',
+        ];
+
+        return $subjects[$subject] ?? $subject;
+    }
 }

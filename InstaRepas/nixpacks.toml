@@ -20,6 +20,12 @@ cmd = '/assets/start.sh'
 # Transform the nginx configuration
 node /assets/scripts/prestart.mjs /assets/nginx.template.conf /etc/nginx.conf
 
+# Fix permissions for Laravel storage
+mkdir -p /app/storage/logs
+mkdir -p /app/storage/framework/{cache,sessions,views}
+chown -R www-data:www-data /app/storage
+chmod -R 775 /app/storage
+
 # Start supervisor
 supervisord -c /etc/supervisord.conf -n
 '''
@@ -72,12 +78,12 @@ stderr_logfile=/var/log/worker-phpfpm.log
 "worker-laravel.conf" = '''
 [program:worker-laravel]
 process_name=%(program_name)s_%(process_num)02d
-command=bash -c 'exec php /app/artisan queue:work --sleep=3 --tries=3 --max-time=3600'
+command=bash -c 'cd /app && php artisan queue:work --sleep=3 --tries=3 --max-time=3600'
 autostart=true
 autorestart=true
 stopasgroup=true
 killasgroup=true
-numprocs=12
+numprocs=2
 startsecs=0
 stopwaitsecs=3600
 stdout_logfile=/var/log/worker-laravel.log

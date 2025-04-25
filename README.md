@@ -1,5 +1,5 @@
 <p align="center">
-<img src=" logo_for_foodequlibre.png" width=30% height=30% >
+<img src="logo_for_foodequlibre.webp" width=30% height=30% >
 
 <p><br/>
 
