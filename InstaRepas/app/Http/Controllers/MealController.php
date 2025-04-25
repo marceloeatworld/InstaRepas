@@ -18,10 +18,18 @@ use Illuminate\Http\Request;
 class MealController extends Controller
 {
     private $restrictions = [];
+    private $meatCount = 0;
+    private $lastReset = 0;
+    private $dayCount = 0;
+    private $lastMeatDay = -1;
+    private $usedMeats = [];
 
     // Méthode pour générer des repas
     public function generate(Request $request)
     {
+        $this->meatCount = 0;
+        $this->lastReset = 0;
+        $this->dayCount = 0;
         // Récupération des restrictions àN partir de la requête
         $this->restrictions = $request->input('restrictions', []);
         $include_snacks = $request->input('include_snacks', false);
@@ -31,7 +39,9 @@ class MealController extends Controller
         $availableDietaryRestrictions = DietaryRestriction::all();
 
         // Création de la requête pour récupérer les aliments
-        $foods = Food::query();
+        // $foods = Food::query();
+        $foods = Food::with('category')->where('is_valid', true);
+
 
         // Filtrage des aliments en fonction des restrictions
         foreach ($this->restrictions as $restriction) {
@@ -51,7 +61,7 @@ class MealController extends Controller
         }
 
         // Ajout de la vérification des aliments validés
-        $foods->where('is_valid', true);
+        // $foods->where('is_valid', operator: true);
 
         $foods = $foods->get();
 
@@ -156,30 +166,77 @@ class MealController extends Controller
         // Cette fonction génère un déjeuner ou un dîner en fonction des aliments disponibles.
         private function generateLunchOrDinner($foods)
         {
-            // Récupère un aliment contenant des protéines.
-            // Si l'utilisateur a une restriction alimentaire qui interdit les produits animaux, sélectionne une protéine végétale.
-            $proteinCategory = in_array('contains_animal_products', $this->restrictions) ? 'Legumes' : ['Meat', 'Fish', 'Eggs', 'Pork'];
-            $proteinFood = $foods->whereIn('category.name', $proteinCategory)->count() > 0 ? $foods->whereIn('category.name', $proteinCategory)->random() : null;
+            // Variables pour le suivi des jours et de la viande
+            $currentDay = floor($this->dayCount / 2); // On divise par 2 pour gérer déjeuner/dîner
 
+            // Réinitialisation hebdomadaire
+            if (floor($currentDay / 7) > $this->lastReset) {
+                $this->meatCount = 0;
+                $this->usedMeats = [];
+                $this->lastReset = floor($currentDay / 7);
+            }
+
+            // Détection des limites de viande
+            $isMaxMeatWeek = $this->meatCount >= 3; // Max 3 repas avec viande par semaine
+            $isSameDayMeat = $currentDay === $this->lastMeatDay; // Pas deux repas viande le même jour
+            $isMaxMeat = $isMaxMeatWeek || $isSameDayMeat;
+
+            // Détermination des catégories de protéines
+            $proteinCategory = $isMaxMeat ?
+                ['Fish', 'Eggs', 'Legumes'] : // Alternatives si viande non autorisée
+                (in_array('contains_animal_products', $this->restrictions) ?
+                    'Legumes' : // Protéines végétales si produit animal interdit
+                    ['Meat', 'Fish', 'Eggs', 'Pork'] // Protéines classiques
+                );
+
+            // Sélection de la protéine
+            $proteinFood = $foods->whereIn('category.name', $proteinCategory)
+                ->whereNotIn('id', $this->usedMeats) // Évite les doublons
+                ->count() > 0 ? $foods->whereIn('category.name', $proteinCategory)
+                ->whereNotIn('id', $this->usedMeats)
+                ->random() : null;
+
+            // Mise à jour des compteurs si un aliment de viande est utilisé
+            if ($proteinFood && $proteinFood->category && in_array($proteinFood->category->name, ['Meat', 'Pork'])) {
+                $this->meatCount++;
+                $this->lastMeatDay = $currentDay;
+                $this->usedMeats[] = $proteinFood->id;
+            }
+
+            // Gestion des glucides et fibres en fonction des restrictions
             $carbohydrateFood = null;
             $fiberFood = null;
 
-            // Si l'utilisateur a une restriction alimentaire qui interdit les produits animaux, sélectionne des aliments riches en glucides et en fibres.
+            // Si l'utilisateur a une restriction alimentaire qui interdit les produits animaux
             if (in_array('contains_animal_products', $this->restrictions)) {
-                $carbohydrateFood = $foods->where('category.name', 'Grains')->where('nutritional_type', 'carbohydrates')->count() > 0 ? $foods->where('category.name', 'Grains')->where('nutritional_type', 'carbohydrates')->random() : null;
-                $fiberFood = $foods->where('category.name', 'Vegetables')->where('nutritional_type', 'fibers')->count() > 0 ? $foods->where('category.name', 'Vegetables')->where('nutritional_type', 'fibers')->random() : null;
+                $carbohydrateFood = $foods->where('category.name', 'Grains')->where('nutritional_type', 'carbohydrates')->count() > 0
+                    ? $foods->where('category.name', 'Grains')->where('nutritional_type', 'carbohydrates')->random()
+                    : null;
+                $fiberFood = $foods->where('category.name', 'Vegetables')->where('nutritional_type', 'fibers')->count() > 0
+                    ? $foods->where('category.name', 'Vegetables')->where('nutritional_type', 'fibers')->random()
+                    : null;
             }
+
+            // Incrémentation du compteur global de jours
+            $this->dayCount++;
 
             return [
                 'protein' => $proteinFood,
-
-                'carbohydrate' => in_array('contains_animal_products', $this->restrictions) ? $carbohydrateFood : ($foods->where('category.name', 'Grains')->where('nutritional_type', 'carbohydrates')->count() > 0 ? $foods->where('category.name', 'Grains')->where('nutritional_type', 'carbohydrates')->random() : null),
+                'carbohydrate' => in_array('contains_animal_products', $this->restrictions)
+                    ? $carbohydrateFood
+                    : ($foods->where('category.name', 'Grains')->where('nutritional_type', 'carbohydrates')->count() > 0
+                        ? $foods->where('category.name', 'Grains')->where('nutritional_type', 'carbohydrates')->random()
+                        : null),
                 'fiber' => in_array('contains_animal_products', $this->restrictions) ? $fiberFood : null,
-                'vegetable' => $foods->where('category.name', 'Vegetables')->count() > 0 ? $foods->where('category.name', 'Vegetables')->random() : null,
-                'lipid' => $foods->where('category.name', 'Oils')->count() > 0 ? $foods->where('category.name', 'Oils')->random() : null,
+                'vegetable' => $foods->where('category.name', 'Vegetables')->count() > 0
+                    ? $foods->where('category.name', 'Vegetables')->random()
+                    : null,
+                'lipid' => $foods->where('category.name', 'Oils')->count() > 0
+                    ? $foods->where('category.name', 'Oils')->random()
+                    : null,
             ];
-
         }
+
 
         // Cette fonction génère un snack en fonction des aliments disponibles.
         private function generateSnack($foods)
