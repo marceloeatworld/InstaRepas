@@ -35,18 +35,29 @@ class RegisteredUserController extends Controller
             'email' => ['required', 'string', 'max:255', 'unique:'.User::class],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
-
+    
+        // Vérifier si le nom d'utilisateur existe déjà
+        $baseUsername = $request->username;
+        $username = $baseUsername;
+        $counter = 1;
+    
+        // Ajouter un suffixe numérique si le nom d'utilisateur existe déjà
+        while (User::where('username', $username)->exists()) {
+            $username = $baseUsername . $counter;
+            $counter++;
+        }
+    
         $user = User::create([
-            'username' => $request->username,
+            'username' => $username, // Utiliser le nom d'utilisateur potentiellement modifié
             'email' => $request->email,
             'password' => Hash::make($request->password),
             'registration_date' => now(),
         ]);
-
+    
         event(new Registered($user));
-
+    
         Auth::login($user);
-
+    
         return redirect(RouteServiceProvider::HOME);
     }
 }
