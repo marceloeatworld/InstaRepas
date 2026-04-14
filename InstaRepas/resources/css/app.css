@@ -326,8 +326,64 @@
             url("/imgs/test1.webp") center/cover no-repeat;
     }
 
+    .home-hero-layout {
+        @apply grid items-center gap-8 px-6 py-8 sm:p-10 lg:grid-cols-[minmax(0,0.92fr)_minmax(320px,0.72fr)] lg:gap-10 lg:p-14;
+    }
+
+    .home-hero-content {
+        @apply max-w-2xl space-y-7 lg:pr-6;
+    }
+
+    .home-hero-title {
+        @apply max-w-xl text-4xl font-semibold text-white sm:text-5xl lg:text-[4.25rem] lg:leading-[0.98];
+    }
+
     .home-hero-copy {
         color: rgba(255, 255, 255, 0.86);
+    }
+
+    .home-hero-lead {
+        @apply max-w-xl text-lg leading-8 sm:text-xl;
+    }
+
+    .home-hero-actions {
+        @apply flex flex-col gap-3 sm:flex-row;
+    }
+
+    .home-hero-benefits {
+        @apply grid gap-3 sm:grid-cols-3;
+    }
+
+    .home-hero-benefit {
+        @apply rounded-[1.35rem] border p-4 backdrop-blur-sm;
+        border-color: rgba(255, 255, 255, 0.1);
+        background: rgba(255, 255, 255, 0.08);
+    }
+
+    .home-hero-benefit__label {
+        @apply text-xs font-semibold uppercase tracking-[0.22em];
+        color: rgba(255, 255, 255, 0.58);
+    }
+
+    .home-hero-benefit__title {
+        @apply mt-2 text-xl font-semibold text-white;
+    }
+
+    .home-hero-benefit__copy {
+        @apply mt-2 text-sm leading-6;
+        color: rgba(255, 255, 255, 0.74);
+    }
+
+    .home-preview-shell {
+        @apply flex w-full justify-center lg:justify-end;
+    }
+
+    .home-preview-frame {
+        @apply w-full max-w-[27rem] rounded-[2rem] border border-white/15 bg-white/10 p-4 backdrop-blur-xl;
+    }
+
+    .home-preview-card {
+        @apply rounded-[1.75rem] bg-white/92 p-5 shadow-[0_20px_55px_rgba(14,41,40,0.2)] sm:p-6;
     }
 
     .season-showcase {
