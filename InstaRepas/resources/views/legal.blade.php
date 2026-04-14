@@ -2,7 +2,6 @@
     title="Mentions légales InstaRepas"
     description="Consultez les mentions légales, les crédits, les ressources et les informations de contact d’InstaRepas."
     :canonical="route('legal')"
-    robots="index, follow"
 >
     <section class="section-shell">
         <div class="mx-auto max-w-4xl">

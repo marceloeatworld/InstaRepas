@@ -158,16 +158,4 @@ Route::get('/sitemap.xml', function () {
         ->header('Content-Type', 'application/xml');
 })->name('sitemap');
 
-Route::get('/robots.txt', function () {
-    $content = implode("\n", [
-        'User-agent: *',
-        'Allow: /',
-        '',
-        'Sitemap: ' . route('sitemap'),
-        '',
-    ]);
-
-    return response($content, 200)->header('Content-Type', 'text/plain');
-});
-
 require __DIR__.'/auth.php';

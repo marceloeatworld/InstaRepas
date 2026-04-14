@@ -2,7 +2,6 @@
     'title' => config('app.name', 'InstaRepas') . ' | Connexion & inscription',
     'description' => 'Connectez-vous à InstaRepas pour retrouver vos préférences alimentaires, vos menus et vos outils de planification.',
     'canonical' => url()->current(),
-    'robots' => 'noindex, nofollow',
     'ogImage' => asset('imgs/logo_for_foodequlibre.webp'),
 ])
 
@@ -19,8 +18,6 @@
             name="description"
             content="{{ $description }}"
         >
-        <meta name="robots" content="{{ $robots }}">
-        <meta name="googlebot" content="{{ $robots }}">
         <meta property="og:type" content="website">
         <meta property="og:url" content="{{ $canonical }}">
         <meta property="og:title" content="{{ $title }}">

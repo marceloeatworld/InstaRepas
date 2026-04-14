@@ -2,7 +2,6 @@
     'title' => config('app.name', 'InstaRepas'),
     'description' => 'InstaRepas vous aide à composer des menus équilibrés, à gérer vos préférences alimentaires et à retrouver des idées utiles pour le quotidien.',
     'canonical' => url()->current(),
-    'robots' => 'noindex, nofollow',
     'ogImage' => asset('imgs/logo_for_foodequlibre.webp'),
     'ogType' => 'website',
 ])
@@ -21,8 +20,6 @@
             content="{{ $description }}"
         >
         <meta name="author" content="InstaRepas">
-        <meta name="robots" content="{{ $robots }}">
-        <meta name="googlebot" content="{{ $robots }}">
         <meta name="theme-color" content="#fff9f0">
 
         <meta property="og:type" content="{{ $ogType }}">
@@ -52,17 +49,15 @@
         @vite(['resources/css/app.css', 'resources/js/app.js'])
         @stack('head')
 
-        @unless (str_contains($robots, 'noindex'))
-            <script type="application/ld+json">
-            {
-                "@context": "https://schema.org",
-                "@type": "WebSite",
-                "name": "{{ config('app.name', 'InstaRepas') }}",
-                "url": "{{ url('/') }}",
-                "description": "InstaRepas aide à créer des menus personnalisés, équilibrés et adaptés au quotidien."
-            }
-            </script>
-        @endunless
+        <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "WebSite",
+            "name": "{{ config('app.name', 'InstaRepas') }}",
+            "url": "{{ url('/') }}",
+            "description": "InstaRepas aide à créer des menus personnalisés, équilibrés et adaptés au quotidien."
+        }
+        </script>
     </head>
     <body class="font-sans antialiased">
         <a href="#main-content" class="skip-link">Aller au contenu</a>

@@ -2,7 +2,6 @@
     title="Contact InstaRepas | Questions, aide et suggestions"
     description="Contactez InstaRepas pour poser une question, signaler un problème ou partager une suggestion d’amélioration."
     :canonical="route('contact')"
-    robots="index, follow"
 >
     <section class="section-shell">
         <div class="grid gap-6 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)]">

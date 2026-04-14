@@ -2,7 +2,6 @@
     title="InstaRepas | Menus simples et idées repas personnalisées"
     description="InstaRepas vous aide à générer des idées repas simples, adaptées à vos préférences alimentaires et à votre semaine."
     :canonical="route('home')"
-    robots="index, follow, max-image-preview:large"
 >
     <section class="section-shell pt-8 sm:pt-10 lg:pt-14">
         <div class="home-hero overflow-hidden rounded-[1.75rem] border border-white/15 shadow-[0_20px_60px_rgba(18,52,49,0.18)]">
