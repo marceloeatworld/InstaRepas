@@ -5,7 +5,7 @@ NIXPACKS_PHP_FALLBACK_PATH = "/index.php"
 
 [phases.setup]
 nixPkgs = [
-    "(php81.withExtensions (pe: pe.enabled ++ [pe.pdo_mysql pe.gd pe.exif pe.intl pe.opcache pe.pcntl pe.posix]))",
+    "(php81.withExtensions ({ enabled, all }: enabled ++ (with all; [ exif fileinfo gd intl mysqlnd opcache pcntl posix ])))",
     "nginx",
     "libmysqlclient",
     "php81Packages.composer",
