@@ -28,7 +28,7 @@ use App\Http\Controllers\ContactController;
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('home');
 
 
 //Test
@@ -122,7 +122,7 @@ Route::post('/foods', [RecipeController::class, 'storeFood'])->name('foods.store
 
 Route::get('/a-propos', function () {
     return view('about');
-});
+})->name('about');
 
 // informations alimentaires
 Route::get('/conseil-de-cuisine', [CookingAdviceController::class, 'index'])->name('CookingAdvice.index');
@@ -139,5 +139,35 @@ Route::get('/legal', function () {
 // contact
 Route::post('/contact/submit', [ContactController::class, 'submit'])->name('contact.submit');
 Route::get('/contact', [ContactController::class, 'index'])->name('contact');
+
+Route::get('/sitemap.xml', function () {
+    $now = now()->toAtomString();
+
+    $pages = [
+        ['loc' => route('home'), 'lastmod' => $now, 'priority' => '1.0'],
+        ['loc' => route('generate'), 'lastmod' => $now, 'priority' => '0.9'],
+        ['loc' => route('about'), 'lastmod' => $now, 'priority' => '0.7'],
+        ['loc' => route('CookingAdvice.index'), 'lastmod' => $now, 'priority' => '0.7'],
+        ['loc' => route('NutritionInfo.index'), 'lastmod' => $now, 'priority' => '0.7'],
+        ['loc' => route('contact'), 'lastmod' => $now, 'priority' => '0.6'],
+        ['loc' => route('legal'), 'lastmod' => $now, 'priority' => '0.3'],
+    ];
+
+    return response()
+        ->view('sitemap', ['pages' => $pages])
+        ->header('Content-Type', 'application/xml');
+})->name('sitemap');
+
+Route::get('/robots.txt', function () {
+    $content = implode("\n", [
+        'User-agent: *',
+        'Allow: /',
+        '',
+        'Sitemap: ' . route('sitemap'),
+        '',
+    ]);
+
+    return response($content, 200)->header('Content-Type', 'text/plain');
+});
 
 require __DIR__.'/auth.php';

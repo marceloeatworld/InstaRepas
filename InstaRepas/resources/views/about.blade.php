@@ -1,4 +1,9 @@
-<x-app-layout>
+<x-app-layout
+    title="À propos d’InstaRepas | Nutrition simple et accompagnement"
+    description="Découvrez l’approche InstaRepas, ses partenaires et les initiatives qui soutiennent une alimentation plus simple au quotidien."
+    :canonical="route('about')"
+    robots="index, follow, max-image-preview:large"
+>
     <section class="section-shell">
         <div class="page-hero">
             <span class="eyebrow">À propos</span>

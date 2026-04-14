@@ -1,4 +1,9 @@
-<x-app-layout>
+<x-app-layout
+    title="Informations nutritionnelles | InstaRepas"
+    description="Explorez des repères simples sur la nutrition, les familles d’aliments et les portions utiles au quotidien."
+    :canonical="route('NutritionInfo.index')"
+    robots="index, follow, max-image-preview:large"
+>
 
   <main class="container mx-auto my-8">
     <section>

@@ -355,20 +355,20 @@
 
     .home-hero {
         background:
-            linear-gradient(115deg, rgba(8, 51, 41, 0.92) 0%, rgba(18, 96, 77, 0.82) 48%, rgba(255, 255, 255, 0.08) 100%),
+            linear-gradient(115deg, rgba(8, 51, 41, 0.95) 0%, rgba(18, 96, 77, 0.84) 54%, rgba(255, 255, 255, 0.05) 100%),
             url("/imgs/test1.webp") center/cover no-repeat;
     }
 
     .home-hero-layout {
-        @apply flex flex-col gap-8 px-6 py-8 sm:p-10 lg:gap-10 lg:p-14;
+        @apply px-6 py-7 sm:px-8 sm:py-9 lg:px-10 lg:py-10;
     }
 
     .home-hero-content {
-        @apply max-w-3xl space-y-7;
+        @apply max-w-2xl space-y-6;
     }
 
     .home-hero-title {
-        @apply max-w-3xl text-4xl font-semibold text-white sm:text-5xl lg:max-w-[12ch] lg:text-[3.9rem] lg:leading-[1];
+        @apply max-w-[12ch] text-4xl font-semibold text-white sm:text-[3.4rem] sm:leading-[1.02];
     }
 
     .home-hero-copy {
@@ -376,47 +376,29 @@
     }
 
     .home-hero-lead {
-        @apply max-w-xl text-lg leading-8 sm:text-xl;
+        @apply max-w-xl text-base leading-7 sm:text-lg;
     }
 
     .home-hero-actions {
         @apply flex flex-col gap-3 sm:flex-row;
     }
 
-    .home-hero-benefits {
+    .home-hero-points {
         @apply grid gap-3 sm:grid-cols-3;
     }
 
-    .home-hero-benefit {
-        @apply rounded-[1.1rem] px-4 py-3;
-        background: rgba(255, 255, 255, 0.06);
-        border: 1px solid rgba(255, 255, 255, 0.08);
+    .home-hero-point {
+        @apply flex flex-col gap-1 rounded-[1rem] px-4 py-3 text-sm;
+        background: rgba(255, 255, 255, 0.08);
+        border: 1px solid rgba(255, 255, 255, 0.1);
     }
 
-    .home-hero-benefit__label {
-        @apply text-xs font-semibold uppercase tracking-[0.22em];
-        color: rgba(255, 255, 255, 0.58);
+    .home-hero-point strong {
+        @apply font-semibold text-white;
     }
 
-    .home-hero-benefit__title {
-        @apply mt-2 text-xl font-semibold text-white;
-    }
-
-    .home-hero-benefit__copy {
-        @apply mt-2 text-sm leading-6;
-        color: rgba(255, 255, 255, 0.74);
-    }
-
-    .home-preview-shell {
-        @apply flex w-full justify-center lg:justify-end lg:self-end;
-    }
-
-    .home-preview-frame {
-        @apply w-full max-w-[25rem] rounded-[2rem] border border-white/10 bg-white/8 p-4 backdrop-blur-xl;
-    }
-
-    .home-preview-card {
-        @apply rounded-[1.75rem] bg-white/95 p-5 shadow-[0_16px_40px_rgba(14,41,40,0.14)] sm:p-6;
+    .home-hero-point span {
+        color: rgba(255, 255, 255, 0.72);
     }
 
     .season-showcase {

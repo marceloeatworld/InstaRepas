@@ -1,16 +1,21 @@
-<x-app-layout>
+<x-app-layout
+    title="InstaRepas | Menus simples et idées repas personnalisées"
+    description="InstaRepas vous aide à générer des idées repas simples, adaptées à vos préférences alimentaires et à votre semaine."
+    :canonical="route('home')"
+    robots="index, follow, max-image-preview:large"
+>
     <section class="section-shell pt-8 sm:pt-10 lg:pt-14">
-        <div class="home-hero overflow-hidden rounded-[2rem] border border-white/15 shadow-[0_30px_90px_rgba(18,52,49,0.24)]">
+        <div class="home-hero overflow-hidden rounded-[1.75rem] border border-white/15 shadow-[0_20px_60px_rgba(18,52,49,0.18)]">
             <div class="home-hero-layout">
                 <div class="home-hero-content">
-                    <span class="eyebrow bg-white/10 text-white ring-1 ring-white/15">Menus plus simples au quotidien</span>
+                    <span class="eyebrow bg-white/10 text-white ring-1 ring-white/15">Planification repas simple</span>
 
-                    <div class="space-y-4">
+                    <div class="space-y-3">
                         <h1 id="hero-title" class="home-hero-title">
-                            Des menus simples, adaptés à votre rythme.
+                            Des idées repas simples pour la semaine.
                         </h1>
                         <p class="home-hero-copy home-hero-lead">
-                            Générez des idées de repas cohérentes avec vos préférences, gardez vos repères en mémoire et avancez avec une base claire pour la semaine.
+                            Choisissez vos préférences, lancez la génération et partez d’une base claire sans surcharge.
                         </p>
                     </div>
 
@@ -19,61 +24,20 @@
                         <a href="#about-instarepas" class="insta-button border-white/20 bg-white/10 text-white hover:bg-white/15">Découvrir le concept</a>
                     </div>
 
-                    <ul class="home-hero-benefits" aria-label="Bénéfices principaux">
-                        <li class="home-hero-benefit">
-                            <p class="home-hero-benefit__title">Préférences mémorisées</p>
-                            <p class="home-hero-benefit__copy">Retrouvez vos réglages plus vite.</p>
+                    <ul class="home-hero-points" aria-label="Repères principaux">
+                        <li class="home-hero-point">
+                            <strong>Préférences gardées</strong>
+                            <span>Retrouvez vos réglages plus vite.</span>
                         </li>
-                        <li class="home-hero-benefit">
-                            <p class="home-hero-benefit__title">Menus cohérents</p>
-                            <p class="home-hero-benefit__copy">Un vrai point de départ pour la semaine.</p>
+                        <li class="home-hero-point">
+                            <strong>1 à 14 jours</strong>
+                            <span>Choisissez seulement la durée utile.</span>
                         </li>
-                        <li class="home-hero-benefit">
-                            <p class="home-hero-benefit__title">Repères clairs</p>
-                            <p class="home-hero-benefit__copy">Moins d’hésitation au quotidien.</p>
+                        <li class="home-hero-point">
+                            <strong>Résultat direct</strong>
+                            <span>Un point de départ clair pour vos repas.</span>
                         </li>
                     </ul>
-                </div>
-
-                <div class="home-preview-shell">
-                    <div class="home-preview-frame">
-                        <div class="home-preview-card">
-                            <div class="flex items-center justify-between gap-4">
-                                <div>
-                                    <p class="text-sm font-semibold uppercase tracking-[0.18em] text-emerald-700">Semaine apaisée</p>
-                                    <h2 class="mt-2 text-3xl font-semibold text-slate-900">Un cadre simple pour mieux manger</h2>
-                                </div>
-                                <div class="rounded-[1.4rem] bg-emerald-50 p-3">
-                                    <x-application-logo class="h-16 w-16" alt="Logo InstaRepas" />
-                                </div>
-                            </div>
-
-                            <div class="mt-6 space-y-4">
-                                <div class="rounded-[1.25rem] bg-slate-50 p-4">
-                                    <p class="text-sm font-semibold uppercase tracking-[0.18em] text-slate-500">Ce que vous gagnez</p>
-                                    <ul class="mt-3 space-y-2 text-sm text-slate-600">
-                                        <li class="flex items-start gap-2">
-                                            <i class="fas fa-check-circle mt-1 text-emerald-600" aria-hidden="true"></i>
-                                            <span>Moins d’hésitation quand vient l’heure du repas.</span>
-                                        </li>
-                                        <li class="flex items-start gap-2">
-                                            <i class="fas fa-check-circle mt-1 text-emerald-600" aria-hidden="true"></i>
-                                            <span>Des choix plus cohérents avec vos restrictions.</span>
-                                        </li>
-                                        <li class="flex items-start gap-2">
-                                            <i class="fas fa-check-circle mt-1 text-emerald-600" aria-hidden="true"></i>
-                                            <span>Une base claire pour varier sans repartir de zéro.</span>
-                                        </li>
-                                    </ul>
-                                </div>
-
-                                <div class="rounded-[1.25rem] border border-slate-200 bg-white p-4">
-                                    <p class="text-sm text-slate-500">Parcours conseillé</p>
-                                    <p class="mt-2 font-semibold text-slate-900">Préférences, génération, ajustement</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>

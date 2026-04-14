@@ -1,4 +1,9 @@
-<x-app-layout>
+<x-app-layout
+    title="Conseils de cuisine | InstaRepas"
+    description="Retrouvez des conseils de cuisson et des idées de recettes pour mieux varier vos repas avec InstaRepas."
+    :canonical="route('CookingAdvice.index')"
+    robots="index, follow, max-image-preview:large"
+>
 <h1 class="text-3xl font-bold text-center my-4">Les Modes de Cuisson et Recettes</h1>
 <!-- Les Grillades -->
 

@@ -1,3 +1,11 @@
+@props([
+    'title' => config('app.name', 'InstaRepas') . ' | Connexion & inscription',
+    'description' => 'Connectez-vous à InstaRepas pour retrouver vos préférences alimentaires, vos menus et vos outils de planification.',
+    'canonical' => url()->current(),
+    'robots' => 'noindex, nofollow',
+    'ogImage' => asset('imgs/logo_for_foodequlibre.webp'),
+])
+
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
@@ -5,15 +13,26 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
-        <title>{{ config('app.name', 'InstaRepas') }} | Connexion & inscription</title>
+        <title>{{ $title }}</title>
 
         <meta
             name="description"
-            content="Connectez-vous à InstaRepas pour retrouver vos préférences alimentaires, vos menus et vos outils de planification."
+            content="{{ $description }}"
         >
-        <meta property="og:image" content="{{ asset('imgs/logo_for_foodequlibre.webp') }}">
+        <meta name="robots" content="{{ $robots }}">
+        <meta name="googlebot" content="{{ $robots }}">
+        <meta property="og:type" content="website">
+        <meta property="og:url" content="{{ $canonical }}">
+        <meta property="og:title" content="{{ $title }}">
+        <meta property="og:description" content="{{ $description }}">
+        <meta property="og:image" content="{{ $ogImage }}">
+        <meta name="twitter:card" content="summary_large_image">
+        <meta name="twitter:url" content="{{ $canonical }}">
+        <meta name="twitter:title" content="{{ $title }}">
+        <meta name="twitter:description" content="{{ $description }}">
+        <meta name="twitter:image" content="{{ $ogImage }}">
 
-        <link rel="canonical" href="{{ url()->current() }}">
+        <link rel="canonical" href="{{ $canonical }}">
         <link rel="preconnect" href="https://fonts.bunny.net">
         <link href="https://fonts.bunny.net/css?family=outfit:400,500,600,700,800&display=swap" rel="stylesheet" />
         <link href="https://fonts.bunny.net/css?family=source-sans-3:400,500,600,700&display=swap" rel="stylesheet" />

@@ -1,4 +1,9 @@
-<x-app-layout>
+<x-app-layout
+    title="Générateur de menus | InstaRepas"
+    description="Générez un menu simple selon vos préférences et restrictions alimentaires avec l’outil InstaRepas."
+    :canonical="route('generate')"
+    robots="index, follow"
+>
     <section class="section-shell pb-6 sm:pb-8">
         <div class="menu-generator-shell">
             <div class="menu-generator-hero">

@@ -1,4 +1,9 @@
-<x-app-layout>
+<x-app-layout
+    title="Mentions légales InstaRepas"
+    description="Consultez les mentions légales, les crédits, les ressources et les informations de contact d’InstaRepas."
+    :canonical="route('legal')"
+    robots="index, follow"
+>
     <section class="section-shell">
         <div class="mx-auto max-w-4xl">
             <div class="surface-panel rounded-[2rem] p-6 sm:p-8 lg:p-10">
