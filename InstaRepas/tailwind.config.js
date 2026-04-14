@@ -4,6 +4,8 @@ const defaultTheme = require('tailwindcss/defaultTheme');
 module.exports = {
     darkMode: 'class',
     content: [
+        './app/**/*.php',
+        './resources/**/*.js',
         './vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php',
         './storage/framework/views/*.php',
         './resources/views/**/*.blade.php',
@@ -12,15 +14,9 @@ module.exports = {
     theme: {
         extend: {
             fontFamily: {
-                sans: ['Figtree', ...defaultTheme.fontFamily.sans],
+                sans: ['"Source Sans 3"', ...defaultTheme.fontFamily.sans],
+                display: ['Outfit', ...defaultTheme.fontFamily.sans],
             },
         },
     },
-    variants: {
-        extend: {
-            backgroundColor: ['dark'], // Ajouter plus de propriétés ici si nécessaire
-            borderColor: ['dark'],
-        },
-    },
-    plugins: [require('@tailwindcss/forms')],
 };

@@ -1,63 +1,92 @@
 <x-guest-layout>
-    <form method="POST" action="{{ route('register') }}">
-        @csrf
-
-        <!-- Name -->
-        <div>
-            <x-input-label for="username" :value="__('Username')" />
-            <x-text-input id="username" class="block mt-1 w-full" type="text" name="username" :value="old('username')" required autofocus autocomplete="username" />
-            <x-input-error :messages="$errors->get('username')" class="mt-2" />
+    <div class="space-y-8">
+        <div class="space-y-3">
+            <span class="eyebrow">Inscription</span>
+            <h1 class="text-3xl font-semibold text-slate-900 sm:text-4xl">Créez votre espace pour garder vos préférences et accélérer vos prochains menus.</h1>
+            <p class="section-copy">
+                L’inscription vous permet de retrouver vos réglages plus vite et de rendre la génération de repas plus fluide à chaque passage.
+            </p>
         </div>
 
-        <!-- Email Address -->
-        <div class="mt-4">
-            <x-input-label for="email" :value="__('Email')" />
-            <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autocomplete="username" />
-            <x-input-error :messages="$errors->get('email')" class="mt-2" />
+        <form method="POST" action="{{ route('register') }}" class="space-y-5">
+            @csrf
+
+            <div>
+                <x-input-label for="username" :value="__('Nom d’utilisateur')" />
+                <x-text-input
+                    id="username"
+                    class="mt-1"
+                    type="text"
+                    name="username"
+                    :value="old('username')"
+                    required
+                    autofocus
+                    autocomplete="username"
+                    spellcheck="false"
+                />
+                <x-input-error :messages="$errors->get('username')" class="mt-2 text-sm text-red-600" />
+            </div>
+
+            <div>
+                <x-input-label for="email" :value="__('Email')" />
+                <x-text-input
+                    id="email"
+                    class="mt-1"
+                    type="email"
+                    name="email"
+                    :value="old('email')"
+                    required
+                    autocomplete="username"
+                    spellcheck="false"
+                />
+                <x-input-error :messages="$errors->get('email')" class="mt-2 text-sm text-red-600" />
+            </div>
+
+            <div>
+                <x-input-label for="password" :value="__('Mot de passe')" />
+                <x-text-input
+                    id="password"
+                    class="mt-1"
+                    type="password"
+                    name="password"
+                    required
+                    autocomplete="new-password"
+                />
+                <x-input-error :messages="$errors->get('password')" class="mt-2 text-sm text-red-600" />
+            </div>
+
+            <div>
+                <x-input-label for="password_confirmation" :value="__('Confirmer le mot de passe')" />
+                <x-text-input
+                    id="password_confirmation"
+                    class="mt-1"
+                    type="password"
+                    name="password_confirmation"
+                    required
+                    autocomplete="new-password"
+                />
+                <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2 text-sm text-red-600" />
+            </div>
+
+            <div class="flex flex-col gap-3 pt-2 sm:flex-row sm:items-center sm:justify-between">
+                <a class="text-sm font-semibold text-emerald-700 hover:text-emerald-800" href="{{ route('login') }}">
+                    J’ai déjà un compte
+                </a>
+
+                <button type="submit" class="insta-button insta-button--primary w-full sm:w-auto">
+                    Créer mon compte
+                </button>
+            </div>
+        </form>
+
+        <div class="rounded-[1.5rem] border border-slate-200 bg-slate-50/90 p-4">
+            <a
+                href="/auth/google/redirect"
+                class="flex w-full items-center justify-center gap-3 rounded-full bg-white px-5 py-3 text-sm font-semibold text-slate-700 shadow-[0_12px_28px_rgba(24,59,58,0.08)] hover:text-slate-900"
+            >
+                <i class="fab fa-google text-[#4285F4]" aria-hidden="true"></i>
+                <span>Continuer avec Google</span>
+            </a>
         </div>
-
-        <!-- Password -->
-        <div class="mt-4">
-            <x-input-label for="password" :value="__('Password')" />
-
-            <x-text-input id="password" class="block mt-1 w-full"
-                            type="password"
-                            name="password"
-                            required autocomplete="new-password" />
-
-            <x-input-error :messages="$errors->get('password')" class="mt-2" />
-        </div>
-
-        <!-- Confirm Password -->
-        <div class="mt-4">
-            <x-input-label for="password_confirmation" :value="__('Confirm Password')" />
-
-            <x-text-input id="password_confirmation" class="block mt-1 w-full"
-                            type="password"
-                            name="password_confirmation" required autocomplete="new-password" />
-
-            <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
-        </div>
-
-        <div class="flex items-center justify-end mt-4">
-    <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 cursor-pointer" href="{{ route('login') }}">
-        {{ __('Already registered?') }}
-    </a>
-    <button id="buttonY" type="submit" class="w-full px-6 py-2 text-lg cursor-pointer ml-2">{{ __('Register') }}</button>
-</div>
-
-
-    </form>
-
-    <br>
-    <div class="w-full flex justify-center mx-2">
-    <a href="/auth/google/redirect" class="text-white bg-[#4285F4] hover:bg-[#4285F4]/90 focus:ring-4 focus:outline-none focus:ring-[#4285F4]/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-[#4285F4]/55 mr-2 mb-2 cursor-pointer">
-        <i class="fab fa-google mr-2"></i> <!-- Google Icon -->
-        {{ __('Sign in with Google') }} <!-- Multilingual Text -->
-    </a>
-</div>
-
-
-
-
+    </div>
 </x-guest-layout>

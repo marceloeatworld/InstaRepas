@@ -4,61 +4,58 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="csrf-token" content="{{ csrf_token() }}">
-        
-        <title>{{ config('app.name', 'Laravel') }} - Équilibrez votre alimentation</title>
-        
-        <!-- Meta tags SEO -->
-        <meta name="description" content="FoodEquilibre - Découvrez des conseils personnalisés pour une alimentation équilibrée et saine. Planifiez vos repas selon vos besoins nutritionnels.">
-        <meta name="keywords" content="alimentation équilibrée, nutrition, repas sains, diététique, plan alimentaire, foodequilibre">
-        <meta name="author" content="FoodEquilibre">
+
+        <title>{{ config('app.name', 'InstaRepas') }} | Menus équilibrés & organisation plus simple</title>
+
+        <meta
+            name="description"
+            content="InstaRepas vous aide à composer des menus équilibrés, à gérer vos préférences alimentaires et à retrouver des idées utiles pour le quotidien."
+        >
+        <meta
+            name="keywords"
+            content="InstaRepas, menus équilibrés, nutrition, planification repas, alimentation saine, préférences alimentaires"
+        >
+        <meta name="author" content="InstaRepas">
         <meta name="robots" content="index, follow">
-        
-        <!-- Open Graph / Facebook -->
+        <meta name="theme-color" content="#fff9f0">
+
         <meta property="og:type" content="website">
         <meta property="og:url" content="{{ url()->current() }}">
-        <meta property="og:title" content="{{ config('app.name', 'Laravel') }} - Équilibrez votre alimentation">
-        <meta property="og:description" content="FoodEquilibre - Découvrez des conseils personnalisés pour une alimentation équilibrée et saine.">
+        <meta property="og:title" content="{{ config('app.name', 'InstaRepas') }} | Menus équilibrés & organisation plus simple">
+        <meta
+            property="og:description"
+            content="Découvrez une façon plus simple de générer des menus adaptés à votre quotidien et à vos préférences."
+        >
         <meta property="og:image" content="{{ asset('imgs/logo_for_foodequlibre.webp') }}">
-        
-        <!-- Twitter -->
+
         <meta property="twitter:card" content="summary_large_image">
         <meta property="twitter:url" content="{{ url()->current() }}">
-        <meta property="twitter:title" content="{{ config('app.name', 'Laravel') }} - Équilibrez votre alimentation">
-        <meta property="twitter:description" content="FoodEquilibre - Découvrez des conseils personnalisés pour une alimentation équilibrée et saine.">
+        <meta property="twitter:title" content="{{ config('app.name', 'InstaRepas') }} | Menus équilibrés & organisation plus simple">
+        <meta
+            property="twitter:description"
+            content="Planifiez plus sereinement vos repas avec InstaRepas et ses outils d’organisation alimentaire."
+        >
         <meta property="twitter:image" content="{{ asset('imgs/logo_for_foodequlibre.webp') }}">
-        
-        <!-- Canonical URL -->
-        <link rel="canonical" href="{{ url()->current() }}">
 
-        <!-- Fonts -->
+        <link rel="canonical" href="{{ url()->current() }}">
         <link rel="preconnect" href="https://fonts.bunny.net">
-        <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
-        <link rel="icon" href="{{ asset('imgs/logo_for_foodequlibre.webp') }}" type="image/x-icon"/>
-        
-        <script src="{{ asset('js/jquery-3.7.0.min.js') }}"></script>
-        <script src="{{ asset('js/jquery-ui.min.js') }}"></script>
-        
-        <script src="{{ asset('js/anime.min.js') }}" ></script>
+        <link href="https://fonts.bunny.net/css?family=outfit:400,500,600,700,800&display=swap" rel="stylesheet" />
+        <link href="https://fonts.bunny.net/css?family=source-sans-3:400,500,600,700&display=swap" rel="stylesheet" />
+        <link rel="icon" href="{{ asset('imgs/logo_for_foodequlibre.webp') }}" type="image/x-icon" />
+
         <script defer src="https://analytics.aitek.tech/script.js" data-website-id="1bdf5ef9-5cb0-48bd-be70-dfe773863aca"></script>
-                       
-        <script src="{{ asset('js/7fdee4801e.js') }}" ></script>
-        
-        {{-- TAILWIND SCRIPT --}}
-        <script src="{{ asset('js/flowbite.min.js') }}"></script>
-                
-        <!-- <script src="{{ asset('js/js.js') }}"></script> -->
-        <link href="{{ asset('css/welcome.css') }}" rel="stylesheet">
-        <!-- Scripts -->
+        <script defer src="{{ asset('js/7fdee4801e.js') }}"></script>
+
         @vite(['resources/css/app.css', 'resources/js/app.js'])
-        
-        <!-- Structured Data / Schema.org -->
+        @stack('head')
+
         <script type="application/ld+json">
         {
             "@context": "https://schema.org",
             "@type": "WebSite",
-            "name": "{{ config('app.name', 'Laravel') }}",
+            "name": "{{ config('app.name', 'InstaRepas') }}",
             "url": "{{ url('/') }}",
-            "description": "FoodEquilibre - Découvrez des conseils personnalisés pour une alimentation équilibrée et saine.",
+            "description": "InstaRepas aide à créer des menus personnalisés, équilibrés et adaptés au quotidien.",
             "potentialAction": {
                 "@type": "SearchAction",
                 "target": "{{ url('/search?q={search_term_string}') }}",
@@ -68,25 +65,17 @@
         </script>
     </head>
     <body class="font-sans antialiased">
-        
-        <div class="min-h-screen bg-gray-100">
+        <a href="#main-content" class="skip-link">Aller au contenu</a>
+
+        <div class="min-h-screen">
             @include('layouts.navigation')
-            
-            <!-- Page Heading Jai enlever le header
-            @if (isset($header))
-                <header class="bg-white shadow">
-                    <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-                        {{ $header }}
-                    </div>
-                </header>
-            @endif-->
-            
-            <!-- Page Content -->
-            <main>
+
+            <main id="main-content" class="relative">
                 {{ $slot }}
             </main>
         </div>
+
         @include('layouts.footer')
-        
+        @stack('scripts')
     </body>
 </html>

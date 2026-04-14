@@ -1,93 +1,76 @@
-<footer class="bg-[#FFDB58] text-black-300 py-2 md:py-6" itemscope itemtype="https://schema.org/WPFooter">
-  <div class="container mx-auto px-4">
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-2 md:gap-4">
-      <div class="mb-4 md:mb-0 px-2">
-        <h4 class="text-base md:text-lg font-bold mb-2">Liens rapides</h4>
-        <nav aria-label="Liens de pied de page" role="navigation">
-          <ul class="list-reset leading-tight text-black-600">
-            <li class="mb-1"><a href="/" class="hover:text-gray-500" title="Page d'accueil InstaRepas" aria-label="Accueil du site InstaRepas">Accueil</a></li>
-            <li class="mb-1"><a href="/contact" class="hover:text-gray-500" title="Contactez l'équipe InstaRepas" aria-label="Formulaire de contact InstaRepas">Nous-contacter</a></li>
-            <li class="mb-1"><a href="/a-propos" class="hover:text-gray-500" title="En savoir plus sur InstaRepas" aria-label="À propos d'InstaRepas">À propos</a></li>
-            <li class="mb-1"><a href="{{ route('legal') }}" class="hover:text-gray-500" title="Mentions légales et conditions d'utilisation" aria-label="Mentions légales d'InstaRepas">Mentions légales</a></li>
-          </ul>
-        </nav>
+<footer class="mt-16 border-t border-emerald-950/10 bg-[#123a38] text-white" itemscope itemtype="https://schema.org/WPFooter">
+    <div class="shell py-10 sm:py-12">
+        <div class="grid gap-8 lg:grid-cols-[minmax(0,1.2fr)_repeat(3,minmax(0,0.8fr))]">
+            <section class="space-y-5">
+                <a href="{{ url('/') }}" class="inline-flex items-center gap-3">
+                    <x-application-logo class="h-14 w-auto" alt="Logo InstaRepas" />
+                    <div>
+                        <p class="font-display text-2xl font-semibold" translate="no">InstaRepas</p>
+                        <p class="text-sm text-white/70">Repas équilibrés & organisation plus sereine</p>
+                    </div>
+                </a>
 
-      </div>
-      <div class="mb-4 md:mb-0 px-2">
-        <h4 class="text-base md:text-lg font-bold mb-2">Suivez-nous</h4>
-        <ul class="list-reset leading-tight text-black-600" itemscope itemtype="https://schema.org/Organization">
-          <link itemprop="url" href="{{ url('/') }}">
-          <li class="mb-1">
-            <a href="https://www.instagram.com/foodequilibre/" class="flex items-center hover:text-gray-500" target="_blank" rel="noopener" itemprop="sameAs" title="Suivez InstaRepas sur Instagram" aria-label="Instagram foodequilibre">
-              <i class="fab fa-instagram mr-2" aria-hidden="true"></i> Instagram foodequilibre
-            </a>
-          </li>
-          <li class="mb-1">
-            <a href="https://www.instagram.com/painetchocolat_asso/" class="flex items-center hover:text-gray-500" target="_blank" rel="noopener" itemprop="sameAs" title="Suivez Pain et Chocolat sur Instagram" aria-label="Instagram pain et chocolat">
-              <i class="fab fa-instagram mr-2" aria-hidden="true"></i> Instagram pain et chocolat
-            </a>
-          </li>
-        </ul>
-      </div>
-      <div class="px-2" itemscope itemtype="https://schema.org/LocalBusiness">
-        <meta itemprop="name" content="Cabinet de Diététique - InstaRepas">
-        <meta itemprop="image" content="{{ asset('imgs/logo_for_foodequlibre.webp') }}">
-        <h4 class="text-base md:text-lg font-bold mb-2">Cabinet de Diététique</h4>
-        <ul class="list-reset leading-tight text-black-600">
-          <li class="mb-1" itemprop="address" itemscope itemtype="https://schema.org/PostalAddress">
-            <i class="fas fa-map-marker-alt mr-2" aria-hidden="true"></i>
-            <a href="https://www.google.com/maps/search/?api=1&query=6+rue+de+plaisance+94130+Nogent+sur+Marne" target="_blank" rel="noopener" title="Voir l'adresse sur Google Maps">
-              <span itemprop="streetAddress">6 rue de plaisance</span> 
-              <span itemprop="postalCode">94130</span> 
-              <span itemprop="addressLocality">Nogent sur Marne</span>
-            </a>
-          </li>
-          <li class="mb-1">
-            <i class="fas fa-phone mr-2" aria-hidden="true"></i>
-            <a href="tel:+33148723595" itemprop="telephone" title="Appelez le cabinet de diététique" aria-label="Téléphone du cabinet">01.48.72.35.95</a>
-          </li>
-        </ul>
-      </div>
+                <p class="max-w-md text-base leading-7 text-white/75">
+                    Une base simple pour choisir vos repas, gérer vos préférences alimentaires et retrouver des repères utiles au quotidien.
+                </p>
+
+                <div class="flex flex-wrap gap-3">
+                    <a href="{{ route('generate') }}" class="insta-button insta-button--accent">Créer un menu</a>
+                    <a href="{{ route('contact') }}" class="insta-button insta-button--ghost border-white/10 bg-white/10 text-white hover:bg-white/15">Nous contacter</a>
+                </div>
+            </section>
+
+            <section>
+                <h2 class="font-display text-lg font-semibold text-white">Navigation</h2>
+                <ul class="mt-4 space-y-3 text-white/75">
+                    <li><a href="{{ url('/') }}" class="hover:text-white">Accueil</a></li>
+                    <li><a href="{{ route('generate') }}" class="hover:text-white">Menus équilibrés</a></li>
+                    <li><a href="{{ route('CookingAdvice.index') }}" class="hover:text-white">Conseils de cuisine</a></li>
+                    <li><a href="{{ route('NutritionInfo.index') }}" class="hover:text-white">Guide nutrition</a></li>
+                </ul>
+            </section>
+
+            <section>
+                <h2 class="font-display text-lg font-semibold text-white">Ressources</h2>
+                <ul class="mt-4 space-y-3 text-white/75">
+                    <li><a href="{{ url('/a-propos') }}" class="hover:text-white">À propos</a></li>
+                    <li><a href="{{ route('contact') }}" class="hover:text-white">Contact</a></li>
+                    <li><a href="{{ route('legal') }}" class="hover:text-white">Mentions légales</a></li>
+                    <li><a href="https://github.com/marceloeatworld/InstaRepas" target="_blank" rel="noopener noreferrer" class="hover:text-white">Code source</a></li>
+                </ul>
+            </section>
+
+            <section itemscope itemtype="https://schema.org/LocalBusiness">
+                <meta itemprop="name" content="Cabinet de Diététique - InstaRepas">
+                <meta itemprop="image" content="{{ asset('imgs/logo_for_foodequlibre.webp') }}">
+
+                <h2 class="font-display text-lg font-semibold text-white">Cabinet de diététique</h2>
+                <div class="mt-4 space-y-3 text-white/75">
+                    <p itemprop="address" itemscope itemtype="https://schema.org/PostalAddress">
+                        <span itemprop="streetAddress">6 rue de plaisance</span><br>
+                        <span itemprop="postalCode">94130</span>
+                        <span itemprop="addressLocality">Nogent-sur-Marne</span>
+                    </p>
+                    <p>
+                        <a href="tel:+33148723595" itemprop="telephone" class="hover:text-white">01 48 72 35 95</a>
+                    </p>
+                    <div class="flex flex-wrap gap-4 pt-2">
+                        <a href="https://www.instagram.com/foodequilibre/" target="_blank" rel="noopener" itemprop="sameAs" class="inline-flex items-center gap-2 hover:text-white">
+                            <i class="fab fa-instagram" aria-hidden="true"></i>
+                            <span>FoodEquilibre</span>
+                        </a>
+                        <a href="https://www.instagram.com/painetchocolat_asso/" target="_blank" rel="noopener" itemprop="sameAs" class="inline-flex items-center gap-2 hover:text-white">
+                            <i class="fab fa-instagram" aria-hidden="true"></i>
+                            <span>Pain et Chocolat</span>
+                        </a>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <div class="mt-10 flex flex-col gap-3 border-t border-white/10 pt-6 text-sm text-white/60 sm:flex-row sm:items-center sm:justify-between">
+            <p>© {{ date('Y') }} InstaRepas. Tous droits réservés.</p>
+            <p>Conçu pour aider à mieux planifier ses repas, sans complexifier le quotidien.</p>
+        </div>
     </div>
-    <div class="mt-4 border-t border-gray-200 pt-4 md:flex md:items-center md:justify-center">
-      <p class="text-xs text-gray-800 font-normal text-center">
-        Préparé avec <span aria-label="amour" role="img">💚</span> par <span class="text-green-500">InstaRepas <span aria-label="salade" role="img">🥗</span></span>
-        <span class="hidden">© {{ date('Y') }} InstaRepas - Tous droits réservés</span>
-      </p>
-    </div>
-  </div>
-  
-  <!-- Microdata pour le Sitemap -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "ItemList",
-    "itemListElement": [
-      {
-        "@type": "ListItem",
-        "position": 1,
-        "name": "Accueil",
-        "item": "{{ url('/') }}"
-      },
-      {
-        "@type": "ListItem",
-        "position": 2,
-        "name": "Contact",
-        "item": "{{ url('/contact') }}"
-      },
-      {
-        "@type": "ListItem",
-        "position": 3,
-        "name": "À propos",
-        "item": "{{ url('/a-propos') }}"
-      },
-      {
-        "@type": "ListItem",
-        "position": 4,
-        "name": "Mentions légales",
-        "item": "{{ url(route('legal')) }}"
-      }
-    ]
-  }
-  </script>
 </footer>

@@ -1,252 +1,135 @@
-// Fonction principale
-function main() {
-    // Si l'écran a moins de 800 pixels de large, ne pas exécuter le script
-    if (window.innerWidth <= 800) {
+document.addEventListener('DOMContentLoaded', () => {
+    const seasonGrid = document.querySelector('.season-grid');
+    const seasonButtons = document.querySelectorAll('.season-button');
+    const heroTitle = document.querySelector('#hero-title');
+    const logo = document.querySelector('#logo');
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    if (!seasonGrid || !seasonButtons.length) {
         return;
     }
-let originalFoodsArray = [
-    { name: '🍏 Pomme', season: 'Automne', benefits: 'Riches en fibres et vitamine C, les pommes peuvent améliorer la santé cardiaque.' },
-    { name: '🍄 Champignon', season: 'Automne', benefits: 'Les champignons sont une excellente source de vitamines B et de sélénium, qui soutiennent le système immunitaire.' },
-    { name: '🌰 Châtaigne', season: 'Automne', benefits: 'Les châtaignes sont une bonne source de vitamines B, de minéraux et de fibres.' },
-    { name: '🍇 Raisin', season: 'Automne', benefits: 'Les raisins sont riches en antioxydants, qui peuvent réduire l\'inflammation et protéger contre le cancer et les maladies cardiaques.' },
-    { name: '🎃 Citrouille', season: 'Automne', benefits: 'La citrouille est pleine de vitamines et de minéraux, tout en étant faible en calories. Elle est également riche en bêta-carotène.' },
-    { name: '🍐 Poire', season: 'Automne', benefits: 'Les poires sont une excellente source de fibres et de vitamine C.' },
-    { name: '🥦 Chou de Bruxelles', season: 'Automne', benefits: 'Les choux de Bruxelles sont riches en fibres, vitamines C et K, et contiennent de nombreux antioxydants.' },
-    { name: '🍠 Patate douce', season: 'Automne', benefits: 'Les patates douces sont une excellente source de vitamines A et C, et sont également riches en fibres.' },
-    { name: '🍊 Orange', season: 'Hiver', benefits: 'Les oranges sont connues pour leur teneur élevée en vitamine C, qui peut stimuler l\'immunité.' },
-    { name: '🥕 Carotte', season: 'Hiver', benefits: 'Les carottes sont une excellente source de vitamine A et de fibres.' },
-    { name: '🥔 Pomme de terre', season: 'Hiver', benefits: 'Les pommes de terre sont une bonne source de vitamines C et B6, de potassium et de fibres.' },
-    { name: '🥦 Brocoli', season: 'Hiver', benefits: 'Le brocoli est riche en fibres, vitamine C et K, et il est une bonne source de folate.' },
-    { name: '🍋 Citron', season: 'Hiver', benefits: 'Les citrons sont très riches en vitamine C et peuvent aider à améliorer la santé cardiaque.' },
-    { name: '🥬 Chou frisé', season: 'Hiver', benefits: 'Le chou frisé est l\'un des légumes les plus nutritifs, riche en vitamines A, K et C.' },
-    { name: '🎃 Potiron', season: 'Hiver', benefits: 'Le potiron est une excellente source de vitamine A et de fibres alimentaires. Il est également faible en calories et riche en antioxydants.' },
-    { name: '🍊 Clémentines', season: 'Hiver', benefits: 'Les clémentines sont une excellente source de vitamine C et d\'antioxydants.' },
-    { name: '🍓 Fraise', season: 'Printemps', benefits: 'Les fraises sont riches en vitamines, fibres et antioxydants.' },
-    { name: '🍒 Cerise', season: 'Printemps', benefits: 'Les cerises sont pleines d\'antioxydants et d\'anti-inflammatoires.' },
-    { name: '🥬 Laitue', season: 'Printemps', benefits: 'La laitue est faible en calories et riche en fibres, vitamines A et C.' },
-    { name: '🍆 Aubergine', season: 'Printemps', benefits: 'Les aubergines sont faibles en calories et riches en fibres. Elles contiennent également des antioxydants qui peuvent aider à protéger les cellules contre les dommages.' },
-    { name: '🥦 Brocoli', season: 'Printemps', benefits: 'Le brocoli est riche en fibres, vitamine C et K, et il est une bonne source de folate.' },
-    { name: '🍍 Ananas', season: 'Printemps', benefits: 'L\'ananas est riche en vitamine C et contient une enzyme appelée bromélaïne, qui peut combattre l\'inflammation et aider à la digestion.' },
-    { name: '🥕 Carotte', season: 'Printemps', benefits: 'Les carottes sont une excellente source de bêta-carotène, de fibres, de vitamine K1, de potassium et d\'antioxydants.' },
-    { name: '🥒 Concombre', season: 'Printemps', benefits: 'Les concombres sont hydratants et faibles en calories. Ils contiennent des antioxydants importants et peuvent aider à la digestion.' },
-    { name: '🍅 Tomate', season: 'Été', benefits: 'Les tomates sont une excellente source de vitamine C, de potassium, de folate et de vitamine K.' },
-    { name: '🍉 Pastèque', season: 'Été', benefits: 'La pastèque est hydratante et riche en vitamines A et C.' },
-    { name: '🍑 Pêche', season: 'Été', benefits: 'Les pêches sont riches en fibres, vitamines A, C, E et K et contiennent de nombreux minéraux essentiels.' },
-    { name: '🌶️ Poivron', season: 'Été', benefits: 'Les poivrons sont très riches en antioxydants et en vitamine C.' },
-    { name: '🍒 Cerise', season: 'Été', benefits: 'Les cerises sont pleines d\'antioxydants et d\'anti-inflammatoires.' },
-    { name: '🍈 Melon', season: 'Été', benefits: 'Le melon est riche en vitamines A et C et est également une bonne source d\'hydratation.' },
-    { name: '🫐 Myrtilles', season: 'Été', benefits: 'Les myrtilles sont l\'un des aliments les plus riches en antioxydants. Elles sont également riches en vitamines C et K.' },
-    { name: '🍇 Raisins', season: 'Été', benefits: 'Les raisins sont une excellente source de vitamines C et K, et contiennent également de nombreux antioxydants bénéfiques.' }
 
-];
+    const foods = [
+        { name: '🍏 Pomme', season: 'Automne', benefits: 'Riche en fibres et facile à intégrer dans un petit-déjeuner, une collation ou un dessert léger.' },
+        { name: '🍄 Champignon', season: 'Automne', benefits: 'Pratique pour enrichir les plats chauds, varier les textures et soutenir une cuisine plus végétale.' },
+        { name: '🌰 Châtaigne', season: 'Automne', benefits: 'Apporte une sensation de satiété agréable et une vraie touche saisonnière dans les repas.' },
+        { name: '🍐 Poire', season: 'Automne', benefits: 'Un fruit simple et polyvalent, utile pour équilibrer facilement les pauses et les desserts.' },
+        { name: '🍊 Orange', season: 'Hiver', benefits: 'Un repère classique pour ajouter fraîcheur et vitamine C pendant les périodes plus froides.' },
+        { name: '🥕 Carotte', season: 'Hiver', benefits: 'Facile à cuisiner, elle fonctionne aussi bien en soupe, en poêlée qu’en crudités.' },
+        { name: '🥦 Brocoli', season: 'Hiver', benefits: 'Aide à varier les légumes verts et s’intègre rapidement dans des repas simples et rassasiants.' },
+        { name: '🍋 Citron', season: 'Hiver', benefits: 'Très utile pour relever les plats et donner un peu de tension aux préparations du quotidien.' },
+        { name: '🍓 Fraise', season: 'Printemps', benefits: 'Apporte une touche plus vive et légère aux petits-déjeuners, collations et desserts.' },
+        { name: '🥬 Laitue', season: 'Printemps', benefits: 'Une base fraîche et facile à mobiliser pour remettre de la légèreté dans les assiettes.' },
+        { name: '🥒 Concombre', season: 'Printemps', benefits: 'Très simple à utiliser quand on veut des repas plus frais sans alourdir la préparation.' },
+        { name: '🍍 Ananas', season: 'Printemps', benefits: 'Permet d’apporter une note fruitée plus tonique dans les assiettes et les encas.' },
+        { name: '🍅 Tomate', season: 'Été', benefits: 'Un indispensable pour composer rapidement des repas frais, colorés et plus variés.' },
+        { name: '🍉 Pastèque', season: 'Été', benefits: 'Aide à garder une sensation de fraîcheur pendant les périodes de chaleur.' },
+        { name: '🍑 Pêche', season: 'Été', benefits: 'S’intègre facilement aux pauses sucrées ou aux desserts simples et plus saisonniers.' },
+        { name: '🫐 Myrtille', season: 'Été', benefits: 'Pratique pour ajouter couleur, douceur et variété aux petits-déjeuners ou aux collations.' },
+    ];
 
-// On fait une copie de originalFoodsArray pour garder l'original intact
-//Cette ligne de code crée une copie du tableau originalFoodsArray, 
-//permettant des opérations de filtrage et de manipulation sur la copie, sans modifier le tableau original, assurant ainsi la conservation des données initiales.
-let seasonalFoods = [...originalFoodsArray];
-
-// Cette fonction détermine la saison en fonction du mois donné
-function getSeasonFromMonth(month) {
-    // Le mois est basé sur un index de 0 (Janvier = 0, Février = 1, etc.)
-    if (month < 2 || month === 11) {
-        return 'Hiver';
-    } else if (month < 5) {
-        return 'Printemps';
-    } else if (month < 8) {
-        return 'Été';
-    } else {
-        return 'Automne';
-    }
-}
-
-
-// Cette fonction met à jour les cartes d'aliments en fonction de la saison
-function updateFoodCards(season) {
-    // Filtrer les aliments en fonction de la saison
-    seasonalFoods = originalFoodsArray.filter(food => food.season === season);
-    // Recréer les cartes d'aliments
-    createFoodCards(season);
-}
-
-// Cette fonction crée les cartes d'aliments
-function createFoodCards(season) {
-    // Obtenir le conteneur de nourriture
-    const foodContainer = document.querySelector('.grid');
-
-    // Supprimer toutes les cartes d'aliments existantes
-    while (foodContainer.firstChild) {
-        foodContainer.firstChild.remove();
-    }
-
-    // Créer une nouvelle carte pour chaque aliment
-    for (const food of seasonalFoods) {
-        const foodCard = document.createElement('div');
-        foodCard.className = 'food-card bg-white rounded-lg shadow-md p-4 transition-all ease-in-out duration-500 transform translate-x-32';
-
-
-        const foodName = document.createElement('h3');
-        foodName.className = 'text-lg font-bold mb-2';
-        const [emoji, text] = food.name.split(' ');
-        foodName.innerHTML = `<span class="big-emoji">${emoji}</span> ${text}`;
-
-        const foodSeason = document.createElement('p');
-        foodSeason.className = 'text-gray-700 leading-relaxed';
-        foodSeason.textContent = `Saison: ${food.season}`;
-
-        const foodBenefits = document.createElement('p');
-        foodBenefits.className = 'text-gray-900 font-medium mb-6';
-        foodBenefits.textContent = `Bienfaits: ${food.benefits}`;
-
-        foodCard.appendChild(foodName);
-        foodCard.appendChild(foodSeason);
-        foodCard.appendChild(foodBenefits);
-        // Ajouter la carte à la grille
-        foodContainer.appendChild(foodCard);
-    }
-
-    // Animer les cartes
-    animateCards(season);
-}
-
-// Fonction pour animer les cartes en fonction de la saison
-function animateCards(season) {
-    const cards = document.querySelectorAll('.food-card');
-    let animation;
-    switch (season) {
-        case 'Hiver':
-            animation = { translateX: [-100, 0], opacity: [0, 1] };
-            break;
-        case 'Printemps':
-            animation = { translateY: [-100, 0], opacity: [0, 1] };
-            break;
-        case 'Été':
-            animation = { scale: [0.5, 1], opacity: [0, 1] };
-            break;
-        case 'Automne':
-            animation = { rotate: ['90deg', '0deg'], opacity: [0, 1] };
-            break;
-    }
-    anime({
-        targets: cards,
-        ...animation,
-        duration: 500,
-        easing: 'easeInOutQuad',
-        delay: anime.stagger(100),
-    });
-}
-
-// Obtenir le mois actuel
-const currentMonth = new Date().getMonth();
-// Obtenir la saison actuelle à partir du mois
-const currentSeason = getSeasonFromMonth(currentMonth);
-// Mettre à jour les cartes d'aliments pour la saison actuelle
-updateFoodCards(currentSeason);
-
-// Ajouter un écouteur d'événements à chaque bouton de saison
-document.querySelectorAll('.season-button').forEach(button => {
-    button.addEventListener('click', function(event) {
-        // Mettre à jour les cartes d'aliments lorsque le bouton est cliqué
-        updateFoodCards(event.target.id);
-    });
-});
-
-// Quand la page est complètement chargée
-window.onload = function() {
-    const navLinks = document.querySelectorAll('.navbar a');
-    navLinks.forEach(link => {
-        link.addEventListener('mouseover', function() {
-            anime({
-                targets: link,
-                scale: 1.2,
-                duration: 200,
-                easing: 'easeInOutQuad'
+    const animateCards = (cards) => {
+        if (reduceMotion || typeof window.anime !== 'function') {
+            cards.forEach((card) => {
+                card.style.opacity = '1';
+                card.style.transform = 'none';
             });
-        });
-        link.addEventListener('mouseout', function() {
-            anime({
-                targets: link,
-                scale: 1.0,
-                duration: 200,
-                easing: 'easeInOutQuad'
-            });
-        });
-    });
+            return;
+        }
 
-    let observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                animateCard(entry.target);
-                observer.unobserve(entry.target);
-            }
-        });
-    }, { rootMargin: '0px 0px -200px 0px' });
-
-    const cards = document.querySelectorAll('.food-card');
-    cards.forEach(card => {
-        observer.observe(card);
-    });
-
-    function animateCard(card) {
-        anime({
-            targets: card,
-            scale: [0.1, 1],
+        window.anime({
+            targets: cards,
+            translateY: [18, 0],
             opacity: [0, 1],
-            duration: 500,
-            easing: 'easeInOutQuad'
+            duration: 420,
+            easing: 'easeOutQuad',
+            delay: window.anime.stagger(80),
         });
-        card.addEventListener('mouseover', function() {
-            anime({
-                targets: card,
-                scale: 1.05,
-                duration: 200,
-                easing: 'easeInOutQuad'
-            });
+    };
+
+    const buildCards = (season) => {
+        const seasonalFoods = foods.filter((food) => food.season === season);
+
+        seasonGrid.innerHTML = '';
+
+        seasonalFoods.forEach((food) => {
+            const card = document.createElement('article');
+            card.className = 'food-card';
+            card.setAttribute('role', 'listitem');
+
+            const title = document.createElement('h3');
+            title.className = 'text-lg font-semibold text-slate-900';
+            title.textContent = food.name;
+
+            const seasonLabel = document.createElement('p');
+            seasonLabel.className = 'mt-3 text-sm uppercase tracking-[0.18em] text-emerald-700';
+            seasonLabel.textContent = `Saison: ${food.season}`;
+
+            const benefits = document.createElement('p');
+            benefits.className = 'mt-3 leading-7 text-slate-600';
+            benefits.textContent = food.benefits;
+
+            card.appendChild(title);
+            card.appendChild(seasonLabel);
+            card.appendChild(benefits);
+            seasonGrid.appendChild(card);
         });
-        card.addEventListener('mouseout', function() {
-            anime({
-                targets: card,
-                scale: 1.0,
-                duration: 200,
-                easing: 'easeInOutQuad'
-            });
+
+        animateCards(seasonGrid.querySelectorAll('.food-card'));
+    };
+
+    const setActiveSeason = (season) => {
+        seasonButtons.forEach((button) => {
+            button.classList.toggle('is-active', button.dataset.season === season);
         });
-    }
-};
+        buildCards(season);
+    };
 
+    const getSeasonFromMonth = (month) => {
+        if (month < 2 || month === 11) {
+            return 'Hiver';
+        }
+        if (month < 5) {
+            return 'Printemps';
+        }
+        if (month < 8) {
+            return 'Été';
+        }
+        return 'Automne';
+    };
 
-//animer le logo
-var animation = anime.timeline({
-    loop: true,
-    endDelay: 3000 // pause de 3 secondes à la fin de chaque rotation
-  });
-
-  animation
-    .add({
-      targets: '#logo',
-      rotateY:  {value: 360, duration: 2000},
-      easing: 'easeInOutSine'
+    seasonButtons.forEach((button) => {
+        button.addEventListener('click', () => {
+            setActiveSeason(button.dataset.season);
+        });
     });
 
+    if (heroTitle && !reduceMotion && typeof window.anime === 'function') {
+        const text = heroTitle.textContent || '';
+        heroTitle.innerHTML = text
+            .split('')
+            .map((character) => `<span class="hero-letter">${character === ' ' ? '&nbsp;' : character}</span>`)
+            .join('');
 
-  //titre page 
-  function wrapEveryLetter(element) {
-  let text = element.innerHTML;
-  let newText = "";
-  for(let i = 0; i < text.length; i++) {
-    newText += `<span class="letter">${text[i]}</span>`;
-  }
-  element.innerHTML = newText;
-}
-let element = document.querySelector('.text-white');
-wrapEveryLetter(element);
-anime.timeline({loop: false})
-  .add({
-    targets: '.text-white .letter',
-    opacity: [0,1],
-    easing: "easeInOutQuad",
-    duration: 1250,
-    delay: (el, i) => 50 * (i+1)
-  });
-}
-// Exécuter la fonction principale
-main();
+        window.anime({
+            targets: '.hero-letter',
+            opacity: [0, 1],
+            translateY: [18, 0],
+            easing: 'easeOutQuad',
+            duration: 760,
+            delay: window.anime.stagger(18),
+        });
+    }
+
+    if (logo && !reduceMotion && typeof window.anime === 'function') {
+        window.anime({
+            targets: logo,
+            rotate: [0, 6, 0],
+            duration: 3400,
+            easing: 'easeInOutSine',
+            loop: true,
+        });
+    }
+
+    setActiveSeason(getSeasonFromMonth(new Date().getMonth()));
+});

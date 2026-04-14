@@ -1,60 +1,132 @@
 <x-app-layout>
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="bg-white rounded-lg text-center p-5 shadow-md transition-all duration-500 hover:shadow-lg">
-                <h1 class="mb-4 text-2xl md:text-3xl font-extrabold text-blue-600 transform transition-transform duration-500 hover:scale-105">InstaRepas : Un choix adapté à vos préférences alimentaires</h1>
-                <div class="border-b-2 border-blue-600 w-24 mx-auto mb-4"></div>
-                <p class="text-base sm:text-m text-gray-700 leading-relaxed">
-                    Peu importe vos préférences alimentaires, InstaRepas s'adapte à vos choix et crée des repas parfaitement adaptés à votre style de vie. En vous inscrivant, vous pouvez sauvegarder vos préférences et les retrouver à chaque connexion. Fini le temps perdu à refaire constamment vos choix, avec InstaRepas, votre sélection reste à portée de main.
-                </p>
+    <section class="section-shell">
+        <div class="page-hero">
+            <div class="grid gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,0.95fr)] lg:items-center">
+                <div class="space-y-5">
+                    <span class="eyebrow">Générateur de menus</span>
+                    <h1 class="section-title">Créez un menu plus cohérent avec vos habitudes et vos contraintes.</h1>
+                    <p class="section-copy">
+                        Sélectionnez vos restrictions alimentaires, indiquez la durée souhaitée et laissez InstaRepas vous donner une base exploitable pour la semaine.
+                    </p>
+                </div>
+
+                <div class="grid gap-4 sm:grid-cols-2">
+                    <div class="soft-card">
+                        <p class="text-sm uppercase tracking-[0.18em] text-emerald-700">Simple</p>
+                        <p class="mt-3 text-lg font-semibold text-slate-900">Paramètres essentiels seulement</p>
+                    </div>
+                    <div class="soft-card">
+                        <p class="text-sm uppercase tracking-[0.18em] text-amber-600">Utile</p>
+                        <p class="mt-3 text-lg font-semibold text-slate-900">Un point de départ clair, sans surcharge</p>
+                    </div>
+                </div>
             </div>
         </div>
+    </section>
 
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <form action="{{ route('generate_meals') }}" method="post" class="mt-8 bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg px-4 py-4 mx-auto max-w-7xl transition-all duration-500 hover:shadow-md" aria-labelledby="meal-generator-title">
+    <section class="section-shell pt-0">
+        <div class="grid gap-6 lg:grid-cols-[minmax(0,1.15fr)_minmax(0,0.85fr)]">
+            <form action="{{ route('generate_meals') }}" method="post" class="surface-panel rounded-[2rem] p-6 sm:p-8" aria-labelledby="meal-generator-title">
                 @csrf
-                <h2 id="meal-generator-title" class="sr-only">Générateur de repas personnalisés</h2>
-                
-                <fieldset class="flex flex-col items-center">
-                    <legend class="text-xl font-semibold text-blue-600 mb-2 text-center transition-colors duration-500 hover:text-blue-700">Restrictions alimentaires</legend>
-                    <div class="flex flex-col md:flex-row flex-wrap justify-center md:space-x-4 mb-4">
+
+                <div class="space-y-2">
+                    <span class="eyebrow">Configuration</span>
+                    <h2 id="meal-generator-title" class="text-2xl font-semibold text-slate-900">Choisissez votre cadre de génération.</h2>
+                    <p class="text-slate-600">Plus vos préférences sont proches de votre réalité, plus le résultat sera directement exploitable.</p>
+                </div>
+
+                <fieldset class="mt-8">
+                    <legend class="text-lg font-semibold text-slate-900">Restrictions alimentaires</legend>
+                    <div class="mt-4 grid gap-3 sm:grid-cols-2">
                         @foreach ($availableDietaryRestrictions as $restriction)
-                            <label class="inline-flex items-center mt-3">
-                                <input type="checkbox" class="form-checkbox h-5 w-5 text-blue-600" name="restrictions[]" value="{{ $restriction->name }}" {{ in_array($restriction->id, $userPreferences) ? 'checked' : '' }} aria-describedby="restriction-desc-{{ $restriction->id }}">
-                                <span class="ml-2 text-gray-700 dark:text-gray-200 transition-colors duration-500 hover:text-blue-700">{{ $displayNames[$restriction->name] }}</span>
-                                <span id="restriction-desc-{{ $restriction->id }}" class="sr-only">Cochez pour exclure {{ $displayNames[$restriction->name] }} de vos repas</span>
+                            <label class="flex cursor-pointer items-start gap-3 rounded-[1.35rem] border border-slate-200 bg-white/90 px-4 py-4 text-slate-700 hover:border-emerald-200 hover:bg-emerald-50/50">
+                                <input
+                                    type="checkbox"
+                                    class="mt-1 rounded border-slate-300 text-emerald-600 focus:ring-emerald-500"
+                                    name="restrictions[]"
+                                    value="{{ $restriction->name }}"
+                                    {{ in_array($restriction->id, $userPreferences) ? 'checked' : '' }}
+                                    aria-describedby="restriction-desc-{{ $restriction->id }}"
+                                >
+                                <span>
+                                    <span class="block font-semibold text-slate-900">{{ $displayNames[$restriction->name] }}</span>
+                                    <span id="restriction-desc-{{ $restriction->id }}" class="mt-1 block text-sm text-slate-500">
+                                        Exclure cette catégorie de vos propositions de repas.
+                                    </span>
+                                </span>
                             </label>
                         @endforeach
                     </div>
                 </fieldset>
 
-                <fieldset>
-                    <legend class="text-xl font-semibold text-blue-600 mb-2 text-center transition-colors duration-500 hover:text-blue-700">Nombre de jours</legend>
-                    <div class="mb-4 w-full md:w-1/2 lg:w-1/4 mx-auto">
-                        <label for="days-input" class="sr-only">Sélectionnez le nombre de jours</label>
-                        <input type="number" id="days-input" name="days" min="1" max="14" value="1" class="focus:ring-blue-500 focus:border-blue-500 block w-full pl-7 pr-12 sm:text-sm border-gray-300 rounded-md transition-all duration-300 hover:border-blue-600" aria-describedby="days-help">
-                        <div id="days-help" class="sr-only">Choisissez le nombre de jours pour lesquels vous souhaitez générer des repas</div>
+                <fieldset class="mt-8">
+                    <legend class="text-lg font-semibold text-slate-900">Nombre de jours</legend>
+                    <div class="mt-4 max-w-xs">
+                        <label for="days-input" class="field-label">Durée</label>
+                        <input
+                            type="number"
+                            id="days-input"
+                            name="days"
+                            min="1"
+                            max="14"
+                            value="1"
+                            class="field-input"
+                            aria-describedby="days-help"
+                        >
+                        <p id="days-help" class="mt-2 text-sm text-slate-500">Choisissez entre 1 et 14 jours.</p>
                     </div>
                 </fieldset>
 
-                <div class="flex items-center justify-center mt-6">
-                    <button id="buttonF" type="submit" class="" aria-label="Générer des repas selon vos préférences">Génerer vos repas journaliers</button>
+                <div class="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
+                    <button type="submit" class="insta-button insta-button--primary">
+                        Générer mes repas
+                    </button>
+                    <a href="{{ route('contact') }}" class="insta-button insta-button--ghost">
+                        Besoin d’aide ?
+                    </a>
                 </div>
             </form>
 
-            <div class="mt-6 text-center text-sm text-gray-600">
-                Si vous souhaitez enregistrer vos préférences, veuillez vous <a href="/register" class="text-blue-600 hover:text-blue-500 underline transition-colors duration-300 hover:text-blue-700" title="Créer un compte InstaRepas">inscrire</a> ou vous <a href="/login" class="text-blue-600 hover:text-blue-500 underline transition-colors duration-300 hover:text-blue-700" title="Se connecter à votre compte">connecter</a>.
-            </div>
+            <aside class="space-y-6">
+                <div class="soft-card">
+                    <span class="eyebrow">Conseil</span>
+                    <h2 class="mt-5 text-2xl font-semibold text-slate-900">Plus votre profil est précis, plus la base proposée sera utile.</h2>
+                    <p class="mt-4 text-slate-600">
+                        Si vous avez un compte, pensez à enregistrer vos préférences alimentaires pour éviter de tout reparamétrer à chaque génération.
+                    </p>
+                    <div class="mt-6 flex flex-col gap-3">
+                        <a href="{{ route('register') }}" class="insta-button insta-button--accent">Créer un compte</a>
+                        <a href="{{ route('login') }}" class="insta-button insta-button--ghost">Se connecter</a>
+                    </div>
+                </div>
+
+                <div class="soft-card">
+                    <p class="text-sm uppercase tracking-[0.18em] text-slate-500">Ce que le générateur vous apporte</p>
+                    <ul class="mt-5 space-y-3 text-slate-600">
+                        <li class="flex items-start gap-3">
+                            <i class="fas fa-check-circle mt-1 text-emerald-600" aria-hidden="true"></i>
+                            <span>Un cadre repas rapide à parcourir.</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <i class="fas fa-check-circle mt-1 text-emerald-600" aria-hidden="true"></i>
+                            <span>Une meilleure continuité entre préférences et résultats.</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <i class="fas fa-check-circle mt-1 text-emerald-600" aria-hidden="true"></i>
+                            <span>Moins d’effort pour trouver des idées de menus réalistes.</span>
+                        </li>
+                    </ul>
+                </div>
+            </aside>
         </div>
-    </div>
-    
-    <!-- Structured Data -->
+    </section>
+
     <script type="application/ld+json">
     {
         "@context": "https://schema.org",
         "@type": "WebPage",
         "name": "Générateur de repas personnalisés - InstaRepas",
-        "description": "Générez des repas adaptés à vos préférences alimentaires et restrictions diététiques avec InstaRepas. Service de planification de repas équilibrés.",
+        "description": "Générez des repas adaptés à vos préférences alimentaires et restrictions diététiques avec InstaRepas.",
         "mainEntity": {
             "@type": "WebApplication",
             "name": "Générateur de menus InstaRepas",
@@ -65,37 +137,7 @@
                 "price": "0",
                 "priceCurrency": "EUR"
             }
-        },
-        "potentialAction": {
-            "@type": "UseAction",
-            "target": "{{ route('generate_meals') }}"
         }
-    }
-    </script>
-    
-    <script type="application/ld+json">
-    {
-        "@context": "https://schema.org",
-        "@type": "HowTo",
-        "name": "Comment générer un menu personnalisé",
-        "description": "Créez facilement des menus adaptés à vos restrictions alimentaires",
-        "step": [
-            {
-                "@type": "HowToStep",
-                "name": "Sélectionnez vos restrictions alimentaires",
-                "text": "Cochez les options correspondant à vos préférences et restrictions alimentaires"
-            },
-            {
-                "@type": "HowToStep",
-                "name": "Choisissez le nombre de jours",
-                "text": "Indiquez pour combien de jours vous souhaitez générer des repas"
-            },
-            {
-                "@type": "HowToStep",
-                "name": "Générez vos repas",
-                "text": "Cliquez sur le bouton pour obtenir vos menus personnalisés"
-            }
-        ]
     }
     </script>
 </x-app-layout>

@@ -1,148 +1,276 @@
 <x-app-layout>
-  <!-- Hero Section -->
-  <div class='bg-cover bg-center h-screen flex flex-col justify-center items-center bg-cover-meal'>
-    <h1 class='text-white font-bold text-3xl sm:text-4xl md:text-5xl mb-8 shadow-text'>Créez vos repas personnalisés pour la semaine</h1>
-    <div class='flex flex-col items-center justify-center mb-4'>
-      <p class='text-white text-base sm:text-lg md:text-xl mb-2 shadow-text text-center'>Planifiez à l'avance vos menus pour votre quotidien, et simplifiez votre routine de préparation de repas.</p>
-      <p class='text-white text-base sm:text-lg md:text-xl mb-4 shadow-text text-center'>Commencez votre voyage vers une alimentation plus saine et équilibrée aujourd'hui.</p>
-    </div>
-    <a id="buttonF" href='/generate' class='' aria-label="Générer des repas personnalisés">Génerer vos repas maintenant</a>
-  </div>
+    <section class="section-shell pt-8 sm:pt-10 lg:pt-14">
+        <div class="home-hero overflow-hidden rounded-[2rem] border border-white/15 shadow-[0_30px_90px_rgba(18,52,49,0.24)]">
+            <div class="grid gap-10 px-6 py-8 sm:p-10 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)] lg:p-14">
+                <div class="space-y-8">
+                    <span class="eyebrow bg-white/10 text-white ring-1 ring-white/15">Menus plus simples au quotidien</span>
 
-  <!-- Section Présentation -->
-  <div class='flex flex-col md:flex-row items-center justify-center py-12 bg-gray-100 mx-auto px-4 sm:px-0' id="about-instarepas">
-    <div class='md:w-1/2 p-4'>
-      <img id='logo' src='/imgs/logo_for_foodequlibre.webp' alt='Logo InstaRepas - Planification de repas équilibrés' class='max-w-xs md:max-w-sm mx-auto' width="300" height="300">
-    </div>
-    <div class='md:w-1/2 p-4 text-center md:text-left'>
-      <h2 class='text-4xl md:text-5xl font-bold mb-2 md:mb-4'>InstaRepas</h2>
-      <h3 class='text-2xl md:text-3xl font-bold mb-2 md:mb-4'>Des idées de menus du quotidien</h3>
-      <p class='text-gray-700 leading-relaxed mb-6 text-md md:text-lg font-medium max-w-lg mx-auto md:mx-0'>
-        Avec <strong>InstaRepas</strong>, la nutrition n'a jamais été aussi simple et délicieuse. Cette plateforme innovante vous offre la possibilité de créer des <strong>repas personnalisés</strong> adaptés à vos besoins et préférences. Profitez d'une <strong>alimentation variée et riche en nutriments</strong> tout au long de l'année.
-      </p>
-      <div class='flex justify-center md:justify-start'>
-        <x-yellow-button href="/generate" class="">Commencez l'aventure</x-yellow-button>
-      </div>
-    </div>
-  </div>
+                    <div class="space-y-5">
+                        <h1 id="hero-title" class="max-w-3xl text-4xl font-semibold text-white sm:text-5xl lg:text-6xl">
+                            Composez des repas équilibrés sans y passer toute votre énergie.
+                        </h1>
+                        <p class="home-hero-copy max-w-2xl text-lg leading-8 sm:text-xl">
+                            InstaRepas rassemble génération de menus, préférences alimentaires et repères nutritionnels dans une interface plus claire, plus douce et plus facile à utiliser.
+                        </p>
+                    </div>
 
-  <!-- Section Aliments de saison -->
-  <div class='bg-cover bg-center flex flex-col justify-center items-center bg-cover-season' role='contentinfo' aria-label='Aliments de saison' id="seasonal-foods">
-    <h2 class='text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-8 shadow-sm' tabindex="0">Aliments de saison : le choix santé</h2>
+                    <div class="flex flex-col gap-3 sm:flex-row">
+                        <a href="{{ route('generate') }}" class="insta-button insta-button--accent">Créer mon menu</a>
+                        <a href="#about-instarepas" class="insta-button border-white/20 bg-white/10 text-white hover:bg-white/15">Découvrir le concept</a>
+                    </div>
 
-    <div class='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 px-5 md:px-0' role='list'>
-      <div class='food-card bg-white rounded-lg shadow-md p-4 transition-all ease-in-out duration-500 transform translate-x-0 delay-75' role='listitem'>
-        <h3 class='text-lg font-bold mb-2 text-gray-800' tabindex="0">Automne</h3>
-        <p class='text-gray-700 leading-relaxed' tabindex="0">Les pommes croquantes, les courges douces et les noix savoureuses abondent. La nature est généreuse, alors profitons de cette saison de récolte!</p>
-      </div>
-      <div class='food-card bg-white rounded-lg shadow-md p-4 transition-all ease-in-out duration-500 transform translate-x-0 delay-150' role='listitem'>
-        <h3 class='text-lg font-bold mb-2 text-gray-800' tabindex="0">Hiver</h3>
-        <p class='text-gray-700 leading-relaxed' tabindex="0">Les oranges juteuses et les légumes-racines robustes sont les stars. Il fait froid dehors, mais ces aliments nous réchauffent de l'intérieur.</p>
-      </div>
-      <div class='food-card bg-white rounded-lg shadow-md p-4 transition-all ease-in-out duration-500 transform translate-x-0 delay-225' role='listitem'>
-        <h3 class='text-lg font-bold mb-2 text-gray-800' tabindex="0">Printemps</h3>
-        <p class='text-gray-700 leading-relaxed' tabindex="0">Les premières pousses vertes émergent de la terre. Les légumes printaniers frais et croquants nous réveillent après l'hiver.</p>
-      </div>
-      <div class='food-card bg-white rounded-lg shadow-md p-4 transition-all ease-in-out duration-500 transform translate-x-0 delay-300' role='listitem'>
-        <h3 class='text-lg font-bold mb-2 text-gray-800' tabindex="0">Été</h3>
-        <p class='text-gray-700 leading-relaxed' tabindex="0">C'est le moment des tomates juteuses, des baies sucrées et des herbes fraîches. La chaleur du soleil se retrouve dans chaque bouchée.</p>
-      </div>
-    </div>
+                    <div class="grid gap-4 sm:grid-cols-3">
+                        <div class="rounded-[1.5rem] border border-white/10 bg-white/10 p-4">
+                            <p class="text-sm uppercase tracking-[0.2em] text-white/60">Préférences</p>
+                            <p class="mt-3 text-2xl font-semibold text-white">Sauvegardées</p>
+                            <p class="mt-2 text-sm text-white/70">Retrouvez vos choix à chaque connexion.</p>
+                        </div>
+                        <div class="rounded-[1.5rem] border border-white/10 bg-white/10 p-4">
+                            <p class="text-sm uppercase tracking-[0.2em] text-white/60">Menus</p>
+                            <p class="mt-3 text-2xl font-semibold text-white">Personnalisés</p>
+                            <p class="mt-2 text-sm text-white/70">Un point de départ concret pour la semaine.</p>
+                        </div>
+                        <div class="rounded-[1.5rem] border border-white/10 bg-white/10 p-4">
+                            <p class="text-sm uppercase tracking-[0.2em] text-white/60">Repères</p>
+                            <p class="mt-3 text-2xl font-semibold text-white">Pratiques</p>
+                            <p class="mt-2 text-sm text-white/70">Cuisine, nutrition et organisation au même endroit.</p>
+                        </div>
+                    </div>
+                </div>
 
-    <div class="seasons-switch hidden md:flex flex-wrap justify-center mt-6">
-      <button id="Automne" class="season-button bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-l mr-2 hover:shadow-lg">Automne</button>
-      <button id="Hiver" class="season-button bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 mr-2 hover:shadow-lg">Hiver</button>
-      <button id="Printemps" class="season-button bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-2 px-4 mr-2 hover:shadow-lg">Printemps</button>
-      <button id="Été" class="season-button bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-r hover:shadow-lg">Été</button>
-    </div>
-  </div>
+                <div class="flex items-center justify-center">
+                    <div class="w-full max-w-md rounded-[2rem] border border-white/15 bg-white/10 p-5 backdrop-blur-xl">
+                        <div class="rounded-[1.75rem] bg-white/90 p-6 shadow-[0_20px_55px_rgba(14,41,40,0.2)]">
+                            <div class="flex items-center justify-between gap-4">
+                                <div>
+                                    <p class="text-sm font-semibold uppercase tracking-[0.18em] text-emerald-700">Semaine apaisée</p>
+                                    <h2 class="mt-2 text-3xl font-semibold text-slate-900">Un cadre simple pour mieux manger</h2>
+                                </div>
+                                <div class="rounded-[1.5rem] bg-emerald-50 p-3">
+                                    <img
+                                        id="logo"
+                                        src="{{ asset('imgs/logo_for_foodequlibre.webp') }}"
+                                        alt="Logo InstaRepas"
+                                        width="92"
+                                        height="92"
+                                        class="h-20 w-20 object-contain"
+                                    >
+                                </div>
+                            </div>
 
-  <!-- Section Préférences -->
-  <div class='py-12 px-4 sm:px-0' id="personnalisation">
-    <div class='text-center max-w-2xl mx-auto'>
-      <h2 class='text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-4 sm:mb-8 leading-snug'>InstaRepas : Un choix adapté à vos préférences</h2>
+                            <div class="mt-6 space-y-4">
+                                <div class="rounded-[1.25rem] bg-slate-50 p-4">
+                                    <p class="text-sm font-semibold uppercase tracking-[0.18em] text-slate-500">Ce que vous gagnez</p>
+                                    <ul class="mt-3 space-y-2 text-sm text-slate-600">
+                                        <li class="flex items-start gap-2">
+                                            <i class="fas fa-check-circle mt-1 text-emerald-600" aria-hidden="true"></i>
+                                            <span>Moins d’hésitation quand vient l’heure du repas.</span>
+                                        </li>
+                                        <li class="flex items-start gap-2">
+                                            <i class="fas fa-check-circle mt-1 text-emerald-600" aria-hidden="true"></i>
+                                            <span>Des choix plus cohérents avec vos restrictions.</span>
+                                        </li>
+                                        <li class="flex items-start gap-2">
+                                            <i class="fas fa-check-circle mt-1 text-emerald-600" aria-hidden="true"></i>
+                                            <span>Une base claire pour varier sans repartir de zéro.</span>
+                                        </li>
+                                    </ul>
+                                </div>
 
-      <p class='text-gray-700 text-sm sm:text-base md:text-lg sm:text-xl mb-4 leading-relaxed'>
-        Que vous soyez végétalien, sans gluten, ou que vous aimiez tout simplement la viande, InstaRepas crée des repas parfaitement adaptés à votre style de vie. <br>En vous inscrivant, vous pouvez sauvegarder vos préférences et les retrouver à chaque connexion. <br>Fini le temps perdu à refaire constamment vos choix, avec InstaRepas, votre sélection reste à portée de main.<br> Découvrez l'expérience de la personnalisation alimentaire poussée à son paroxysme. Allez-y, inscrivez-vous et commencez à découvrir votre nouvel allié nutritionnel.
-      </p>
-      <x-yellow-button href="{{ route('register') }}" class="">Inscrivez-vous maintenant</x-yellow-button>
-    </div>
-  </div>
-
-  <!-- Section Histoire -->
-  <div class='bg-gray-100 py-16' id="notre-histoire">
-    <div class='container mx-auto px-4 sm:px-6 lg:px-8'>
-      <h2 class='text-3xl font-bold mb-8 text-center'>Notre Histoire</h2>
-      <div class='flex justify-center'>
-        <div class='bg-white rounded-lg shadow-md p-8 md:p-16 max-w-4xl'>
-          <p class='text-gray-700 leading-relaxed mb-6'>
-            Insta Repas est l'innovation de 3 étudiants en informatique et de la diététicienne Aurélie Marino. Nous avons constaté que le problème majeur de nos patients était le manque d'idées pour leurs repas quotidiens. De là, l'idée d'Insta Repas était née, avec l'objectif de proposer des menus pour le quotidien, grâce à la technologie moderne.
-          </p>
-          <p class='text-gray-700 leading-relaxed mb-6'>
-            Insta Repas offre une nouvelle approche pour diversifier vos habitudes alimentaires et alléger votre charge mentale au quotidien. Nous combinons notre expertise en diététique avec des outils technologiques de pointe pour vous fournir des solutions alimentaires personnalisées qui correspondent à vos besoins spécifiques.
-          </p>
-          <div class='flex justify-start'>
-            <x-yellow-button href="{{ route('contact') }}" class="">Contactez-nous</x-yellow-button>
-          </div>
+                                <div class="grid gap-3 sm:grid-cols-2">
+                                    <div class="rounded-[1.25rem] border border-slate-200 bg-white p-4">
+                                        <p class="text-sm text-slate-500">Entrée conseillée</p>
+                                        <p class="mt-2 font-semibold text-slate-900">Menus adaptés & restrictions gérées</p>
+                                    </div>
+                                    <div class="rounded-[1.25rem] border border-slate-200 bg-white p-4">
+                                        <p class="text-sm text-slate-500">Parcours conseillé</p>
+                                        <p class="mt-2 font-semibold text-slate-900">Connexion, préférences, génération</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
-    </div>
-  </div>
+    </section>
 
-  <!-- Script pour les fonctionnalités saisonnières -->
-  <script src="js/season.js"></script>
+    <section id="about-instarepas" class="section-shell">
+        <div class="grid items-center gap-8 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)]">
+            <div class="page-hero">
+                <span class="eyebrow">Pourquoi InstaRepas</span>
+                <h2 class="mt-5 text-3xl font-semibold text-slate-900 sm:text-4xl">Une base concrète pour alléger la charge mentale autour des repas.</h2>
+                <p class="mt-4 text-lg leading-8 text-slate-600">
+                    Au lieu de repartir de zéro chaque semaine, vous avancez avec une structure claire, des préférences déjà connues et une orientation nutritionnelle plus utile.
+                </p>
+                <div class="mt-8 grid gap-4 sm:grid-cols-2">
+                    <div class="soft-card">
+                        <p class="text-sm uppercase tracking-[0.18em] text-emerald-700">Adapté</p>
+                        <p class="mt-3 text-xl font-semibold text-slate-900">À votre rythme & vos restrictions</p>
+                    </div>
+                    <div class="soft-card">
+                        <p class="text-sm uppercase tracking-[0.18em] text-amber-600">Pratique</p>
+                        <p class="mt-3 text-xl font-semibold text-slate-900">Pensé pour le vrai quotidien</p>
+                    </div>
+                </div>
+            </div>
 
-  <!-- Structured Data pour Rich Snippets -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "WebSite",
-    "name": "InstaRepas",
-    "url": "{{ url('/') }}",
-    "description": "Plateforme de création de repas personnalisés et équilibrés pour la semaine",
-    "potentialAction": {
-      "@type": "SearchAction",
-      "target": "{{ url('/search?q={search_term_string}') }}",
-      "query-input": "required name=search_term_string"
+            <div class="space-y-5">
+                <span class="eyebrow">Votre point de départ</span>
+                <h2 class="section-title">Des idées de menus simples, variés et plus faciles à tenir dans le temps.</h2>
+                <p class="section-copy">
+                    Avec <strong>InstaRepas</strong>, vous obtenez des repas personnalisés qui prennent en compte votre quotidien sans transformer la nutrition en contrainte. L’objectif n’est pas d’être parfait, mais d’être régulier et serein.
+                </p>
+                <ul class="grid gap-4 sm:grid-cols-2">
+                    <li class="soft-card">
+                        <p class="text-lg font-semibold text-slate-900">Préférences mémorisées</p>
+                        <p class="mt-2 text-slate-600">Vos choix reviennent automatiquement au lieu d’être ressaisis à chaque visite.</p>
+                    </li>
+                    <li class="soft-card">
+                        <p class="text-lg font-semibold text-slate-900">Parcours guidé</p>
+                        <p class="mt-2 text-slate-600">Le site vous emmène vers l’action la plus utile sans surcharge visuelle.</p>
+                    </li>
+                </ul>
+                <div class="flex flex-wrap gap-3">
+                    <x-yellow-button href="{{ route('generate') }}">Commencer maintenant</x-yellow-button>
+                    <a href="{{ route('register') }}" class="insta-button insta-button--ghost">Créer un compte</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="seasonal-foods" class="section-shell">
+        <div class="season-showcase overflow-hidden rounded-[2rem] border border-white/60 p-6 shadow-[0_30px_90px_rgba(18,52,49,0.12)] sm:p-8 lg:p-10">
+            <div class="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
+                <div class="max-w-3xl space-y-4">
+                    <span class="eyebrow">Saisonnalité</span>
+                    <h2 class="section-title">Choisir selon la saison reste l’un des leviers les plus simples pour mieux varier.</h2>
+                    <p class="section-copy">
+                        Explorez quelques aliments de saison et leurs bienfaits. La sélection s’adapte selon la période pour garder une inspiration utile au moment où vous en avez besoin.
+                    </p>
+                </div>
+
+                <div class="flex flex-wrap gap-3" aria-label="Choisir une saison">
+                    <button type="button" class="season-button is-active" data-season="Automne">Automne</button>
+                    <button type="button" class="season-button" data-season="Hiver">Hiver</button>
+                    <button type="button" class="season-button" data-season="Printemps">Printemps</button>
+                    <button type="button" class="season-button" data-season="Été">Été</button>
+                </div>
+            </div>
+
+            <div class="season-grid mt-8 grid gap-4 md:grid-cols-2 xl:grid-cols-4" role="list" aria-live="polite">
+                <article class="food-card" role="listitem">
+                    <h3 class="text-lg font-semibold text-slate-900">🍏 Pommes d’automne</h3>
+                    <p class="mt-3 text-sm uppercase tracking-[0.18em] text-emerald-700">Automne</p>
+                    <p class="mt-3 leading-7 text-slate-600">Riches en fibres et faciles à intégrer dans un quotidien simple, elles accompagnent aussi bien les petits-déjeuners que les desserts légers.</p>
+                </article>
+                <article class="food-card" role="listitem">
+                    <h3 class="text-lg font-semibold text-slate-900">🍄 Champignons</h3>
+                    <p class="mt-3 text-sm uppercase tracking-[0.18em] text-emerald-700">Automne</p>
+                    <p class="mt-3 leading-7 text-slate-600">Une base intéressante pour varier les textures, enrichir les plats chauds et soutenir un équilibre plus végétal.</p>
+                </article>
+                <article class="food-card" role="listitem">
+                    <h3 class="text-lg font-semibold text-slate-900">🌰 Châtaignes</h3>
+                    <p class="mt-3 text-sm uppercase tracking-[0.18em] text-emerald-700">Automne</p>
+                    <p class="mt-3 leading-7 text-slate-600">Elles apportent une sensation de satiété agréable et une vraie touche saisonnière aux plats comme aux collations.</p>
+                </article>
+                <article class="food-card" role="listitem">
+                    <h3 class="text-lg font-semibold text-slate-900">🍐 Poires</h3>
+                    <p class="mt-3 text-sm uppercase tracking-[0.18em] text-emerald-700">Automne</p>
+                    <p class="mt-3 leading-7 text-slate-600">Un fruit simple et accessible pour équilibrer les repas, les desserts ou les pauses goûter sans complication.</p>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <section id="personnalisation" class="section-shell">
+        <div class="grid gap-6 lg:grid-cols-3">
+            <div class="page-hero lg:col-span-2">
+                <span class="eyebrow">Personnalisation utile</span>
+                <h2 class="mt-5 text-3xl font-semibold text-slate-900 sm:text-4xl">Des repas alignés avec votre mode de vie, pas l’inverse.</h2>
+                <p class="mt-4 text-lg leading-8 text-slate-600">
+                    Que vous soyez végétarien, sans gluten ou simplement en recherche d’un cadre plus stable, InstaRepas conserve vos préférences pour vous faire gagner du temps à chaque retour.
+                </p>
+                <div class="mt-8 grid gap-4 sm:grid-cols-3">
+                    <div class="soft-card">
+                        <p class="text-lg font-semibold text-slate-900">Végétal</p>
+                        <p class="mt-2 text-slate-600">Une base plus simple pour composer sans vous répéter.</p>
+                    </div>
+                    <div class="soft-card">
+                        <p class="text-lg font-semibold text-slate-900">Sans gluten</p>
+                        <p class="mt-2 text-slate-600">Moins d’oubli dans les choix du quotidien.</p>
+                    </div>
+                    <div class="soft-card">
+                        <p class="text-lg font-semibold text-slate-900">Sur mesure</p>
+                        <p class="mt-2 text-slate-600">Des préférences gardées en mémoire pour repartir plus vite.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="soft-card flex flex-col justify-between">
+                <div>
+                    <span class="eyebrow">Prochaine étape</span>
+                    <h2 class="mt-5 text-2xl font-semibold text-slate-900">Créez un compte pour retrouver vos réglages et accélérer vos prochaines générations.</h2>
+                </div>
+                <div class="mt-8 flex flex-col gap-3">
+                    <x-yellow-button href="{{ route('register') }}">Créer mon compte</x-yellow-button>
+                    <a href="{{ route('login') }}" class="insta-button insta-button--ghost">J’ai déjà un compte</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="notre-histoire" class="section-shell pt-2">
+        <div class="page-hero">
+            <div class="grid gap-8 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:items-center">
+                <div class="space-y-4">
+                    <span class="eyebrow">Notre histoire</span>
+                    <h2 class="section-title">Une idée née du terrain, des habitudes réelles et du besoin de mieux guider les choix du quotidien.</h2>
+                </div>
+
+                <div class="space-y-4 text-lg leading-8 text-slate-600">
+                    <p>
+                        InstaRepas est né de l’envie de rapprocher nutrition et usage concret. Avec la diététicienne Aurélie Marino, l’équipe a constaté une difficulté récurrente: beaucoup de personnes manquent surtout d’idées simples et viables pour leurs repas de tous les jours.
+                    </p>
+                    <p>
+                        Le projet propose donc une base plus directe: moins de friction, plus de continuité, et des menus qui soutiennent vraiment une organisation alimentaire plus stable.
+                    </p>
+                    <div class="flex flex-wrap gap-3 pt-2">
+                        <x-yellow-button href="{{ route('contact') }}">Parler avec nous</x-yellow-button>
+                        <a href="{{ url('/a-propos') }}" class="insta-button insta-button--ghost">En savoir plus</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    @push('scripts')
+        <script defer src="{{ asset('js/anime.min.js') }}"></script>
+        <script defer src="{{ asset('js/season.js') }}"></script>
+    @endpush
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "InstaRepas",
+        "url": "{{ url('/') }}",
+        "description": "Plateforme de création de repas personnalisés et équilibrés pour la semaine"
     }
-  }
-  </script>
-  
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "Organization",
-    "name": "InstaRepas",
-    "url": "{{ url('/') }}",
-    "logo": "{{ asset('imgs/logo_for_foodequlibre.webp') }}",
-    "founder": {
-      "@type": "Person",
-      "name": "Aurélie Marino",
-      "jobTitle": "Diététicienne"
-    },
-    "description": "Service de planification de repas équilibrés et personnalisés"
-  }
-  </script>
-  
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": [{
-      "@type": "Question",
-      "name": "Qu'est-ce qu'InstaRepas ?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "InstaRepas est une plateforme innovante qui vous offre la possibilité de créer des repas personnalisés adaptés à vos besoins et préférences alimentaires."
-      }
-    }, {
-      "@type": "Question",
-      "name": "Comment fonctionne InstaRepas ?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "En vous inscrivant, vous pouvez sauvegarder vos préférences alimentaires et générer des menus personnalisés pour toute la semaine."
-      }
-    }]
-  }
-  </script>
+    </script>
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "InstaRepas",
+        "url": "{{ url('/') }}",
+        "logo": "{{ asset('imgs/logo_for_foodequlibre.webp') }}",
+        "founder": {
+            "@type": "Person",
+            "name": "Aurélie Marino",
+            "jobTitle": "Diététicienne"
+        }
+    }
+    </script>
 </x-app-layout>

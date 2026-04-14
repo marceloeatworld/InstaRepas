@@ -1,5 +1,289 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+@config "../../tailwind.config.js";
+@plugin "@tailwindcss/forms";
 
+:root {
+    --insta-bg: #fff9f0;
+    --insta-bg-soft: #f7fbf8;
+    --insta-paper: rgba(255, 255, 255, 0.88);
+    --insta-paper-strong: rgba(255, 255, 255, 0.98);
+    --insta-ink: #183b3a;
+    --insta-muted: #5b7674;
+    --insta-line: rgba(24, 59, 58, 0.12);
+    --insta-brand: #1f8a70;
+    --insta-brand-strong: #156f5b;
+    --insta-accent: #f4b942;
+    --insta-accent-strong: #d99616;
+    --insta-rose: #ef7b5a;
+    --insta-shadow: 0 24px 80px rgba(21, 47, 46, 0.12);
+}
 
+@layer base {
+    [x-cloak] {
+        display: none !important;
+    }
+
+    html {
+        scroll-behavior: smooth;
+    }
+
+    body {
+        min-height: 100vh;
+        color: var(--insta-ink);
+        font-family: "Source Sans 3", ui-sans-serif, system-ui, sans-serif;
+        background:
+            radial-gradient(circle at top left, rgba(244, 185, 66, 0.24), transparent 30%),
+            radial-gradient(circle at top right, rgba(31, 138, 112, 0.18), transparent 24%),
+            linear-gradient(180deg, #fffdf8 0%, var(--insta-bg) 52%, var(--insta-bg-soft) 100%);
+    }
+
+    ::selection {
+        background: rgba(31, 138, 112, 0.18);
+        color: var(--insta-ink);
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        font-family: "Outfit", "Source Sans 3", ui-sans-serif, system-ui, sans-serif;
+        letter-spacing: -0.03em;
+        text-wrap: balance;
+    }
+
+    p {
+        text-wrap: pretty;
+    }
+
+    a,
+    button,
+    input,
+    select,
+    textarea {
+        transition-property: color, background-color, border-color, box-shadow, transform, opacity;
+        transition-duration: 180ms;
+        transition-timing-function: ease;
+    }
+
+    button,
+    [type="button"],
+    [type="submit"],
+    [type="reset"] {
+        touch-action: manipulation;
+    }
+
+    img {
+        display: block;
+        max-width: 100%;
+    }
+
+    :focus-visible {
+        outline: none;
+        box-shadow: 0 0 0 4px rgba(31, 138, 112, 0.22);
+    }
+}
+
+@layer components {
+    .skip-link {
+        position: absolute;
+        left: 1rem;
+        top: -3rem;
+        z-index: 100;
+        border-radius: 9999px;
+        background: var(--insta-ink);
+        color: white;
+        padding: 0.75rem 1.1rem;
+        font-weight: 700;
+    }
+
+    .skip-link:focus {
+        top: 1rem;
+    }
+
+    .shell {
+        @apply mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8;
+    }
+
+    .section-shell {
+        @apply mx-auto w-full max-w-7xl px-4 py-10 sm:px-6 sm:py-12 lg:px-8 lg:py-16;
+    }
+
+    .surface-panel {
+        background: var(--insta-paper);
+        border: 1px solid var(--insta-line);
+        box-shadow: var(--insta-shadow);
+        backdrop-filter: blur(18px);
+    }
+
+    .eyebrow {
+        @apply inline-flex items-center gap-2 rounded-full px-4 py-2 text-sm font-semibold uppercase tracking-[0.24em];
+        color: var(--insta-brand-strong);
+        background: rgba(31, 138, 112, 0.08);
+    }
+
+    .section-title {
+        @apply text-3xl font-semibold sm:text-4xl lg:text-5xl;
+    }
+
+    .section-copy {
+        @apply text-base leading-7 sm:text-lg;
+        color: var(--insta-muted);
+    }
+
+    .insta-button {
+        @apply inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 text-base font-semibold;
+        border: 1px solid transparent;
+        letter-spacing: 0.01em;
+        text-decoration: none;
+    }
+
+    .insta-button:hover {
+        transform: translateY(-1px);
+    }
+
+    .insta-button--primary {
+        color: white;
+        background: linear-gradient(135deg, var(--insta-brand) 0%, #29a37c 100%);
+        box-shadow: 0 16px 40px rgba(31, 138, 112, 0.26);
+    }
+
+    .insta-button--primary:hover {
+        box-shadow: 0 20px 44px rgba(31, 138, 112, 0.3);
+    }
+
+    .insta-button--accent {
+        color: #5e3b00;
+        background: linear-gradient(135deg, #ffd66f 0%, var(--insta-accent) 100%);
+        box-shadow: 0 16px 36px rgba(244, 185, 66, 0.24);
+    }
+
+    .insta-button--accent:hover {
+        box-shadow: 0 20px 44px rgba(244, 185, 66, 0.28);
+    }
+
+    .insta-button--ghost {
+        color: var(--insta-ink);
+        background: rgba(255, 255, 255, 0.8);
+        border-color: rgba(24, 59, 58, 0.12);
+        box-shadow: 0 12px 28px rgba(24, 59, 58, 0.08);
+    }
+
+    .badge-pill {
+        @apply inline-flex items-center gap-2 rounded-full px-3 py-1 text-sm font-semibold;
+        background: rgba(239, 123, 90, 0.12);
+        color: #c85b3c;
+    }
+
+    .field-label {
+        @apply mb-2 block text-sm font-semibold uppercase tracking-[0.18em];
+        color: var(--insta-brand-strong);
+    }
+
+    .field-input {
+        @apply block w-full rounded-3xl border px-4 py-3 text-base shadow-sm placeholder:text-slate-400;
+        border-color: rgba(24, 59, 58, 0.12);
+        background: rgba(255, 255, 255, 0.98);
+    }
+
+    .field-input:focus {
+        border-color: rgba(31, 138, 112, 0.64);
+        box-shadow: 0 0 0 4px rgba(31, 138, 112, 0.12);
+    }
+
+    .auth-shell {
+        @apply grid items-stretch gap-8 lg:grid-cols-[minmax(0,0.95fr)_minmax(0,1.05fr)];
+    }
+
+    .auth-showcase {
+        @apply relative overflow-hidden rounded-[2rem] p-8 text-white sm:p-10 lg:p-12;
+        background:
+            linear-gradient(150deg, rgba(10, 58, 47, 0.96) 0%, rgba(28, 102, 82, 0.92) 48%, rgba(239, 123, 90, 0.86) 100%),
+            url("/images/image.webp") center/cover no-repeat;
+        box-shadow: 0 28px 90px rgba(12, 43, 40, 0.24);
+    }
+
+    .auth-showcase::after {
+        content: "";
+        position: absolute;
+        inset: 1.25rem;
+        border-radius: 1.5rem;
+        border: 1px solid rgba(255, 255, 255, 0.18);
+        pointer-events: none;
+    }
+
+    .auth-card {
+        @apply rounded-[2rem] p-6 sm:p-8;
+        background: var(--insta-paper-strong);
+        border: 1px solid rgba(24, 59, 58, 0.1);
+        box-shadow: var(--insta-shadow);
+    }
+
+    .page-hero {
+        @apply overflow-hidden rounded-[2rem] p-6 sm:p-8 lg:p-10;
+        background:
+            radial-gradient(circle at top right, rgba(244, 185, 66, 0.2), transparent 30%),
+            linear-gradient(135deg, rgba(255, 255, 255, 0.96) 0%, rgba(243, 249, 246, 0.95) 100%);
+        border: 1px solid rgba(24, 59, 58, 0.08);
+        box-shadow: var(--insta-shadow);
+    }
+
+    .soft-card {
+        @apply rounded-[1.75rem] p-6;
+        background: rgba(255, 255, 255, 0.9);
+        border: 1px solid rgba(24, 59, 58, 0.08);
+        box-shadow: 0 18px 46px rgba(20, 48, 46, 0.08);
+    }
+
+    .home-hero {
+        background:
+            linear-gradient(115deg, rgba(8, 51, 41, 0.88) 0%, rgba(18, 96, 77, 0.72) 42%, rgba(255, 255, 255, 0.08) 100%),
+            url("/imgs/test1.webp") center/cover no-repeat;
+    }
+
+    .home-hero-copy {
+        color: rgba(255, 255, 255, 0.86);
+    }
+
+    .season-showcase {
+        background:
+            linear-gradient(135deg, rgba(255, 255, 255, 0.92) 0%, rgba(247, 251, 248, 0.96) 100%),
+            url("/imgs/banner-foods.webp") center/cover no-repeat;
+    }
+
+    .season-button {
+        @apply inline-flex items-center justify-center rounded-full px-4 py-2.5 text-sm font-semibold text-slate-700;
+        background: rgba(255, 255, 255, 0.9);
+        border: 1px solid rgba(24, 59, 58, 0.1);
+        box-shadow: 0 12px 30px rgba(24, 59, 58, 0.08);
+    }
+
+    .season-button.is-active {
+        color: white;
+        background: linear-gradient(135deg, var(--insta-brand) 0%, #29a37c 100%);
+        border-color: transparent;
+    }
+
+    .food-card {
+        @apply rounded-[1.5rem] p-5;
+        background: rgba(255, 255, 255, 0.92);
+        border: 1px solid rgba(24, 59, 58, 0.08);
+        box-shadow: 0 18px 42px rgba(16, 41, 41, 0.08);
+    }
+
+    .food-card:hover {
+        transform: translateY(-4px);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    ::before,
+    ::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        scroll-behavior: auto !important;
+        transition-duration: 0.01ms !important;
+    }
+}
