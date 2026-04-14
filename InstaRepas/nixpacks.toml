@@ -5,10 +5,10 @@ NIXPACKS_PHP_FALLBACK_PATH = "/index.php"
 
 [phases.setup]
 nixPkgs = [
-    "(php81.withExtensions ({ enabled, all }: enabled ++ (with all; [ exif fileinfo gd intl mysqlnd opcache pcntl posix ])))",
+    "(php82.withExtensions ({ enabled, all }: enabled ++ (with all; [ exif fileinfo gd intl mysqlnd opcache pcntl posix ])))",
     "nginx",
     "libmysqlclient",
-    "php81Packages.composer",
+    "php82Packages.composer",
     "nodejs_22",
     "python311Packages.supervisor",
 ]
