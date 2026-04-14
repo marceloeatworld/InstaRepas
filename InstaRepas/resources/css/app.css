@@ -327,15 +327,15 @@
     }
 
     .home-hero-layout {
-        @apply grid items-center gap-8 px-6 py-8 sm:p-10 lg:grid-cols-[minmax(0,0.92fr)_minmax(320px,0.72fr)] lg:gap-10 lg:p-14;
+        @apply flex flex-col gap-8 px-6 py-8 sm:p-10 lg:gap-10 lg:p-14;
     }
 
     .home-hero-content {
-        @apply max-w-2xl space-y-7 lg:pr-6;
+        @apply max-w-3xl space-y-7;
     }
 
     .home-hero-title {
-        @apply max-w-xl text-4xl font-semibold text-white sm:text-5xl lg:text-[4.25rem] lg:leading-[0.98];
+        @apply max-w-3xl text-4xl font-semibold text-white sm:text-5xl lg:max-w-[12ch] lg:text-[3.9rem] lg:leading-[1];
     }
 
     .home-hero-copy {
@@ -375,11 +375,11 @@
     }
 
     .home-preview-shell {
-        @apply flex w-full justify-center lg:justify-end;
+        @apply flex w-full justify-center lg:justify-end lg:self-end;
     }
 
     .home-preview-frame {
-        @apply w-full max-w-[27rem] rounded-[2rem] border border-white/15 bg-white/10 p-4 backdrop-blur-xl;
+        @apply w-full max-w-[25rem] rounded-[2rem] border border-white/15 bg-white/10 p-4 backdrop-blur-xl;
     }
 
     .home-preview-card {
