@@ -3,10 +3,10 @@
 @plugin "@tailwindcss/forms";
 
 :root {
-    --insta-bg: #fff9f0;
-    --insta-bg-soft: #f7fbf8;
-    --insta-paper: rgba(255, 255, 255, 0.88);
-    --insta-paper-strong: rgba(255, 255, 255, 0.98);
+    --insta-bg: #fbf8f2;
+    --insta-bg-soft: #f5f7f4;
+    --insta-paper: rgba(255, 255, 255, 0.94);
+    --insta-paper-strong: rgba(255, 255, 255, 0.99);
     --insta-ink: #183b3a;
     --insta-muted: #5b7674;
     --insta-line: rgba(24, 59, 58, 0.12);
@@ -15,7 +15,7 @@
     --insta-accent: #f4b942;
     --insta-accent-strong: #d99616;
     --insta-rose: #ef7b5a;
-    --insta-shadow: 0 24px 80px rgba(21, 47, 46, 0.12);
+    --insta-shadow: 0 18px 48px rgba(21, 47, 46, 0.08);
 }
 
 @layer base {
@@ -32,9 +32,9 @@
         color: var(--insta-ink);
         font-family: "Source Sans 3", ui-sans-serif, system-ui, sans-serif;
         background:
-            radial-gradient(circle at top left, rgba(244, 185, 66, 0.24), transparent 30%),
-            radial-gradient(circle at top right, rgba(31, 138, 112, 0.18), transparent 24%),
-            linear-gradient(180deg, #fffdf8 0%, var(--insta-bg) 52%, var(--insta-bg-soft) 100%);
+            radial-gradient(circle at top left, rgba(244, 185, 66, 0.14), transparent 28%),
+            linear-gradient(180deg, #fffdf9 0%, var(--insta-bg) 58%, var(--insta-bg-soft) 100%);
+        -webkit-tap-highlight-color: rgba(31, 138, 112, 0.12);
     }
 
     ::selection {
@@ -114,11 +114,11 @@
         background: var(--insta-paper);
         border: 1px solid var(--insta-line);
         box-shadow: var(--insta-shadow);
-        backdrop-filter: blur(18px);
+        backdrop-filter: blur(10px);
     }
 
     .eyebrow {
-        @apply inline-flex items-center gap-2 rounded-full px-4 py-2 text-sm font-semibold uppercase tracking-[0.24em];
+        @apply inline-flex items-center gap-2 rounded-full px-4 py-2 text-xs font-semibold uppercase tracking-[0.22em];
         color: var(--insta-brand-strong);
         background: rgba(31, 138, 112, 0.08);
     }
@@ -133,41 +133,37 @@
     }
 
     .insta-button {
-        @apply inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 text-base font-semibold;
+        @apply inline-flex items-center justify-center gap-2 rounded-full px-5 py-3 text-base font-semibold;
         border: 1px solid transparent;
         letter-spacing: 0.01em;
         text-decoration: none;
     }
 
-    .insta-button:hover {
-        transform: translateY(-1px);
-    }
-
     .insta-button--primary {
         color: white;
         background: linear-gradient(135deg, var(--insta-brand) 0%, #29a37c 100%);
-        box-shadow: 0 16px 40px rgba(31, 138, 112, 0.26);
+        box-shadow: 0 10px 26px rgba(31, 138, 112, 0.18);
     }
 
     .insta-button--primary:hover {
-        box-shadow: 0 20px 44px rgba(31, 138, 112, 0.3);
+        box-shadow: 0 14px 30px rgba(31, 138, 112, 0.2);
     }
 
     .insta-button--accent {
         color: #5e3b00;
         background: linear-gradient(135deg, #ffd66f 0%, var(--insta-accent) 100%);
-        box-shadow: 0 16px 36px rgba(244, 185, 66, 0.24);
+        box-shadow: 0 10px 26px rgba(244, 185, 66, 0.18);
     }
 
     .insta-button--accent:hover {
-        box-shadow: 0 20px 44px rgba(244, 185, 66, 0.28);
+        box-shadow: 0 14px 30px rgba(244, 185, 66, 0.2);
     }
 
     .insta-button--ghost {
         color: var(--insta-ink);
-        background: rgba(255, 255, 255, 0.8);
+        background: rgba(255, 255, 255, 0.92);
         border-color: rgba(24, 59, 58, 0.12);
-        box-shadow: 0 12px 28px rgba(24, 59, 58, 0.08);
+        box-shadow: 0 8px 22px rgba(24, 59, 58, 0.05);
     }
 
     .badge-pill {
@@ -199,9 +195,9 @@
     .auth-showcase {
         @apply relative overflow-hidden rounded-[2rem] p-8 text-white sm:p-10 lg:p-12;
         background:
-            linear-gradient(150deg, rgba(10, 58, 47, 0.96) 0%, rgba(28, 102, 82, 0.92) 48%, rgba(239, 123, 90, 0.86) 100%),
-            url("/images/image.webp") center/cover no-repeat;
-        box-shadow: 0 28px 90px rgba(12, 43, 40, 0.24);
+            radial-gradient(circle at top right, rgba(244, 185, 66, 0.16), transparent 30%),
+            linear-gradient(160deg, rgba(10, 58, 47, 0.98) 0%, rgba(24, 86, 72, 0.94) 100%);
+        box-shadow: 0 22px 60px rgba(12, 43, 40, 0.18);
     }
 
     .auth-showcase::after {
@@ -223,17 +219,54 @@
     .page-hero {
         @apply overflow-hidden rounded-[2rem] p-6 sm:p-8 lg:p-10;
         background:
-            radial-gradient(circle at top right, rgba(244, 185, 66, 0.2), transparent 30%),
-            linear-gradient(135deg, rgba(255, 255, 255, 0.96) 0%, rgba(243, 249, 246, 0.95) 100%);
+            linear-gradient(180deg, rgba(255, 255, 255, 0.98) 0%, rgba(246, 249, 247, 0.96) 100%);
         border: 1px solid rgba(24, 59, 58, 0.08);
         box-shadow: var(--insta-shadow);
     }
 
     .soft-card {
         @apply rounded-[1.75rem] p-6;
-        background: rgba(255, 255, 255, 0.9);
+        background: rgba(255, 255, 255, 0.96);
         border: 1px solid rgba(24, 59, 58, 0.08);
-        box-shadow: 0 18px 46px rgba(20, 48, 46, 0.08);
+        box-shadow: 0 10px 30px rgba(20, 48, 46, 0.05);
+    }
+
+    .site-nav-link {
+        @apply inline-flex items-center rounded-full px-4 py-2.5 text-sm font-semibold;
+        color: #4c6664;
+    }
+
+    .site-nav-link:hover {
+        background: rgba(24, 59, 58, 0.05);
+        color: var(--insta-ink);
+    }
+
+    .site-nav-link--active {
+        background: rgba(31, 138, 112, 0.12);
+        color: var(--insta-brand-strong);
+    }
+
+    .site-secondary-link {
+        @apply rounded-full px-3 py-2 text-sm font-medium;
+        color: #647676;
+    }
+
+    .site-secondary-link:hover {
+        color: var(--insta-ink);
+        background: rgba(24, 59, 58, 0.05);
+    }
+
+    .site-secondary-link--active {
+        color: var(--insta-ink);
+        background: rgba(24, 59, 58, 0.08);
+    }
+
+    .site-footer-link {
+        color: #5b7674;
+    }
+
+    .site-footer-link:hover {
+        color: var(--insta-ink);
     }
 
     .menu-generator-shell {
@@ -322,7 +355,7 @@
 
     .home-hero {
         background:
-            linear-gradient(115deg, rgba(8, 51, 41, 0.88) 0%, rgba(18, 96, 77, 0.72) 42%, rgba(255, 255, 255, 0.08) 100%),
+            linear-gradient(115deg, rgba(8, 51, 41, 0.92) 0%, rgba(18, 96, 77, 0.82) 48%, rgba(255, 255, 255, 0.08) 100%),
             url("/imgs/test1.webp") center/cover no-repeat;
     }
 
@@ -355,9 +388,9 @@
     }
 
     .home-hero-benefit {
-        @apply rounded-[1.35rem] border p-4 backdrop-blur-sm;
-        border-color: rgba(255, 255, 255, 0.1);
-        background: rgba(255, 255, 255, 0.08);
+        @apply rounded-[1.1rem] px-4 py-3;
+        background: rgba(255, 255, 255, 0.06);
+        border: 1px solid rgba(255, 255, 255, 0.08);
     }
 
     .home-hero-benefit__label {
@@ -379,11 +412,11 @@
     }
 
     .home-preview-frame {
-        @apply w-full max-w-[25rem] rounded-[2rem] border border-white/15 bg-white/10 p-4 backdrop-blur-xl;
+        @apply w-full max-w-[25rem] rounded-[2rem] border border-white/10 bg-white/8 p-4 backdrop-blur-xl;
     }
 
     .home-preview-card {
-        @apply rounded-[1.75rem] bg-white/92 p-5 shadow-[0_20px_55px_rgba(14,41,40,0.2)] sm:p-6;
+        @apply rounded-[1.75rem] bg-white/95 p-5 shadow-[0_16px_40px_rgba(14,41,40,0.14)] sm:p-6;
     }
 
     .season-showcase {

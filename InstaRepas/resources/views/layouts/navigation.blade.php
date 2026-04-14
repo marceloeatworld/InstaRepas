@@ -63,7 +63,7 @@
 
 <nav
     x-data="{ open: false, userMenu: false }"
-    class="sticky top-0 z-40 border-b border-white/70 bg-white/80 backdrop-blur-xl"
+    class="sticky top-0 z-40 border-b border-slate-200/80 bg-white/92 backdrop-blur-xl"
     itemscope
     itemtype="https://schema.org/SiteNavigationElement"
     aria-label="Navigation principale"
@@ -71,12 +71,12 @@
     <div class="shell">
         <div class="flex items-center justify-between gap-4 py-4">
             <a href="{{ url('/') }}" class="inline-flex min-w-0 items-center gap-3" aria-label="Retour à l'accueil InstaRepas">
-                <div class="rounded-[1.35rem] bg-white p-2 shadow-[0_14px_30px_rgba(24,59,58,0.08)] ring-1 ring-slate-900/5">
+                <div class="rounded-[1.1rem] bg-white p-2 ring-1 ring-slate-900/5">
                     <x-application-logo class="h-12 w-auto" alt="Logo InstaRepas" />
                 </div>
                 <div class="min-w-0">
                     <p class="font-display text-xl font-semibold leading-none text-slate-900" translate="no">InstaRepas</p>
-                    <p class="truncate text-sm text-slate-500">Menus équilibrés, conseils utiles & rythme plus serein</p>
+                    <p class="truncate text-sm text-slate-500">Menus clairs & préférences gardées</p>
                 </div>
             </a>
 
@@ -84,11 +84,10 @@
                 @foreach ($primaryLinks as $link)
                     <a
                         href="{{ $link['href'] }}"
-                        class="inline-flex items-center gap-2 rounded-full px-4 py-2.5 text-sm font-semibold {{ $link['active'] ? 'bg-emerald-600 text-white shadow-[0_14px_30px_rgba(31,138,112,0.24)]' : 'text-slate-600 hover:bg-white hover:text-slate-900' }}"
+                        class="site-nav-link {{ $link['active'] ? 'site-nav-link--active' : '' }}"
                         @if ($link['active']) aria-current="page" @endif
                         itemprop="url"
                     >
-                        <i class="fas {{ $link['icon'] }} text-sm" aria-hidden="true"></i>
                         <span itemprop="name">{{ $link['label'] }}</span>
                     </a>
                 @endforeach
@@ -98,7 +97,7 @@
                 @foreach ($secondaryLinks as $link)
                     <a
                         href="{{ $link['href'] }}"
-                        class="rounded-full px-4 py-2 text-sm font-medium {{ $link['active'] ? 'bg-slate-900 text-white' : 'text-slate-600 hover:bg-white hover:text-slate-900' }}"
+                        class="site-secondary-link {{ $link['active'] ? 'site-secondary-link--active' : '' }}"
                         @if ($link['active']) aria-current="page" @endif
                     >
                         {{ $link['label'] }}
@@ -115,7 +114,7 @@
                             type="button"
                             @click="userMenu = ! userMenu"
                             :aria-expanded="userMenu.toString()"
-                            class="inline-flex items-center gap-3 rounded-full bg-white px-3 py-2.5 text-left shadow-[0_14px_32px_rgba(24,59,58,0.08)] ring-1 ring-slate-900/5"
+                            class="inline-flex items-center gap-3 rounded-full bg-white px-3 py-2.5 text-left ring-1 ring-slate-900/6"
                             aria-label="Ouvrir le menu utilisateur"
                         >
                             <span class="inline-flex h-11 w-11 items-center justify-center rounded-full bg-emerald-600 text-sm font-bold text-white">
@@ -133,7 +132,7 @@
                             x-show="userMenu"
                             x-transition.origin.top.right
                             @click.outside="userMenu = false"
-                            class="absolute right-0 mt-3 w-72 overflow-hidden rounded-[1.5rem] border border-slate-200 bg-white shadow-[0_20px_60px_rgba(24,59,58,0.14)]"
+                            class="absolute right-0 mt-3 w-72 overflow-hidden rounded-[1.5rem] border border-slate-200 bg-white shadow-[0_12px_36px_rgba(24,59,58,0.1)]"
                         >
                             <div class="border-b border-slate-100 px-5 py-4">
                                 <p class="font-display text-lg font-semibold text-slate-900">{{ $displayName }}</p>
@@ -169,7 +168,7 @@
                 @click="open = ! open"
                 :aria-expanded="open.toString()"
                 aria-controls="mobile-menu"
-                class="inline-flex h-12 w-12 items-center justify-center rounded-full bg-white text-slate-700 shadow-[0_12px_28px_rgba(24,59,58,0.08)] ring-1 ring-slate-900/5 lg:hidden"
+                class="inline-flex h-12 w-12 items-center justify-center rounded-full bg-white text-slate-700 ring-1 ring-slate-900/5 lg:hidden"
                 aria-label="Ouvrir le menu mobile"
             >
                 <svg class="h-5 w-5" stroke="currentColor" fill="none" viewBox="0 0 24 24" aria-hidden="true">
@@ -180,7 +179,7 @@
         </div>
 
         <div x-cloak x-show="open" x-transition id="mobile-menu" class="pb-4 lg:hidden">
-            <div class="surface-panel rounded-[1.75rem] p-4">
+            <div class="surface-panel rounded-[1.5rem] p-4">
                 @auth
                     @php
                         $displayName = Auth::user()->username ?: Auth::user()->name;
@@ -200,7 +199,7 @@
                     @foreach ($primaryLinks as $link)
                         <a
                             href="{{ $link['href'] }}"
-                            class="flex items-center gap-3 rounded-2xl px-4 py-3 {{ $link['active'] ? 'bg-emerald-600 text-white' : 'text-slate-700 hover:bg-white' }}"
+                            class="flex items-center gap-3 rounded-2xl px-4 py-3 {{ $link['active'] ? 'bg-emerald-50 text-emerald-800' : 'text-slate-700 hover:bg-white' }}"
                             @if ($link['active']) aria-current="page" @endif
                         >
                             <i class="fas {{ $link['icon'] }}" aria-hidden="true"></i>
@@ -215,7 +214,7 @@
                     @foreach ($secondaryLinks as $link)
                         <a
                             href="{{ $link['href'] }}"
-                            class="flex items-center gap-3 rounded-2xl px-4 py-3 {{ $link['active'] ? 'bg-slate-900 text-white' : 'text-slate-700 hover:bg-white' }}"
+                            class="flex items-center gap-3 rounded-2xl px-4 py-3 {{ $link['active'] ? 'bg-slate-100 text-slate-900' : 'text-slate-700 hover:bg-white' }}"
                             @if ($link['active']) aria-current="page" @endif
                         >
                             <i class="fas {{ $link['icon'] }}" aria-hidden="true"></i>

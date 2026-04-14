@@ -34,35 +34,35 @@
                             <x-application-logo class="h-14 w-auto" alt="Logo InstaRepas" />
                             <div>
                                 <p class="font-display text-2xl font-semibold" translate="no">InstaRepas</p>
-                                <p class="text-sm uppercase tracking-[0.28em] text-white/70">Organisation culinaire</p>
+                                <p class="text-sm uppercase tracking-[0.22em] text-white/70">Accès rapide</p>
                             </div>
                         </a>
 
                         <div class="max-w-xl space-y-4">
                             <span class="badge-pill bg-white/10 text-white ring-1 ring-white/15">Nutrition plus simple</span>
                             <h1 class="text-4xl font-semibold text-white sm:text-5xl">
-                                Des menus pensés pour le quotidien, pas seulement pour la théorie.
+                                Connectez-vous et retrouvez vos choix sans repartir de zéro.
                             </h1>
                             <p class="text-lg leading-8 text-white/80">
-                                Retrouvez vos préférences, gagnez du temps sur vos choix de repas et gardez une ligne directrice claire chaque semaine.
+                                Préférences, menus et repères restent au même endroit pour avancer plus vite au quotidien.
                             </p>
                         </div>
                     </div>
 
-                    <div class="relative z-10 grid gap-4 sm:grid-cols-3">
-                        <div class="rounded-[1.5rem] border border-white/10 bg-white/10 p-4">
-                            <p class="text-sm uppercase tracking-[0.22em] text-white/60">Menus</p>
-                            <p class="mt-3 text-2xl font-semibold text-white">Plus rapides</p>
-                        </div>
-                        <div class="rounded-[1.5rem] border border-white/10 bg-white/10 p-4">
-                            <p class="text-sm uppercase tracking-[0.22em] text-white/60">Préférences</p>
-                            <p class="mt-3 text-2xl font-semibold text-white">Sauvegardées</p>
-                        </div>
-                        <div class="rounded-[1.5rem] border border-white/10 bg-white/10 p-4">
-                            <p class="text-sm uppercase tracking-[0.22em] text-white/60">Parcours</p>
-                            <p class="mt-3 text-2xl font-semibold text-white">Plus clair</p>
-                        </div>
-                    </div>
+                    <ul class="relative z-10 space-y-3 text-white/78">
+                        <li class="flex items-center gap-3">
+                            <i class="fas fa-check-circle text-emerald-300" aria-hidden="true"></i>
+                            <span>Préférences retrouvées automatiquement.</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <i class="fas fa-check-circle text-emerald-300" aria-hidden="true"></i>
+                            <span>Menus plus rapides à relancer.</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <i class="fas fa-check-circle text-emerald-300" aria-hidden="true"></i>
+                            <span>Parcours plus direct.</span>
+                        </li>
+                    </ul>
                 </section>
 
                 <section class="auth-card mx-auto w-full max-w-2xl">

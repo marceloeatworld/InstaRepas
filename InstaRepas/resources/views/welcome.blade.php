@@ -21,18 +21,15 @@
 
                     <ul class="home-hero-benefits" aria-label="Bénéfices principaux">
                         <li class="home-hero-benefit">
-                            <p class="home-hero-benefit__label">Préférences</p>
-                            <p class="home-hero-benefit__title">Mémorisées</p>
+                            <p class="home-hero-benefit__title">Préférences mémorisées</p>
                             <p class="home-hero-benefit__copy">Retrouvez vos réglages plus vite.</p>
                         </li>
                         <li class="home-hero-benefit">
-                            <p class="home-hero-benefit__label">Menus</p>
-                            <p class="home-hero-benefit__title">Cohérents</p>
+                            <p class="home-hero-benefit__title">Menus cohérents</p>
                             <p class="home-hero-benefit__copy">Un vrai point de départ pour la semaine.</p>
                         </li>
                         <li class="home-hero-benefit">
-                            <p class="home-hero-benefit__label">Repères</p>
-                            <p class="home-hero-benefit__title">Clairs</p>
+                            <p class="home-hero-benefit__title">Repères clairs</p>
                             <p class="home-hero-benefit__copy">Moins d’hésitation au quotidien.</p>
                         </li>
                     </ul>
@@ -70,15 +67,9 @@
                                     </ul>
                                 </div>
 
-                                <div class="grid gap-3 sm:grid-cols-2">
-                                    <div class="rounded-[1.25rem] border border-slate-200 bg-white p-4">
-                                        <p class="text-sm text-slate-500">Usage principal</p>
-                                        <p class="mt-2 font-semibold text-slate-900">Générer une base repas claire</p>
-                                    </div>
-                                    <div class="rounded-[1.25rem] border border-slate-200 bg-white p-4">
-                                        <p class="text-sm text-slate-500">Parcours conseillé</p>
-                                        <p class="mt-2 font-semibold text-slate-900">Préférences, génération, ajustement</p>
-                                    </div>
+                                <div class="rounded-[1.25rem] border border-slate-200 bg-white p-4">
+                                    <p class="text-sm text-slate-500">Parcours conseillé</p>
+                                    <p class="mt-2 font-semibold text-slate-900">Préférences, génération, ajustement</p>
                                 </div>
                             </div>
                         </div>
