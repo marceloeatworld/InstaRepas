@@ -1,45 +1,66 @@
 <x-app-layout>
-    <section class="section-shell">
-        <div class="page-hero">
-            <div class="grid gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,0.95fr)] lg:items-center">
-                <div class="space-y-5">
-                    <span class="eyebrow">Générateur de menus</span>
-                    <h1 class="section-title">Créez un menu plus cohérent avec vos habitudes et vos contraintes.</h1>
-                    <p class="section-copy">
-                        Sélectionnez vos restrictions alimentaires, indiquez la durée souhaitée et laissez InstaRepas vous donner une base exploitable pour la semaine.
-                    </p>
-                </div>
-
-                <div class="grid gap-4 sm:grid-cols-2">
-                    <div class="soft-card">
-                        <p class="text-sm uppercase tracking-[0.18em] text-emerald-700">Simple</p>
-                        <p class="mt-3 text-lg font-semibold text-slate-900">Paramètres essentiels seulement</p>
-                    </div>
-                    <div class="soft-card">
-                        <p class="text-sm uppercase tracking-[0.18em] text-amber-600">Utile</p>
-                        <p class="mt-3 text-lg font-semibold text-slate-900">Un point de départ clair, sans surcharge</p>
-                    </div>
+    <section class="section-shell pb-6 sm:pb-8">
+        <div class="menu-generator-shell">
+            <div class="menu-generator-hero">
+                <span class="eyebrow">Générateur de menus</span>
+                <h1 class="menu-generator-title">Générez un menu simple, centré sur l’essentiel.</h1>
+                <p class="menu-generator-copy">
+                    Choisissez vos restrictions, indiquez le nombre de jours et laissez InstaRepas vous proposer une base claire pour démarrer la semaine.
+                </p>
+                <div class="menu-generator-points" aria-label="Repères rapides">
+                    <span>Restrictions prises en compte</span>
+                    <span>1 à 14 jours</span>
+                    <span>Résultat direct</span>
                 </div>
             </div>
         </div>
     </section>
 
     <section class="section-shell pt-0">
-        <div class="grid gap-6 lg:grid-cols-[minmax(0,1.15fr)_minmax(0,0.85fr)]">
-            <form action="{{ route('generate_meals') }}" method="post" class="surface-panel rounded-[2rem] p-6 sm:p-8" aria-labelledby="meal-generator-title">
+        <div class="menu-generator-shell">
+            <form action="{{ route('generate_meals') }}" method="post" class="surface-panel menu-generator-form" aria-labelledby="meal-generator-title">
                 @csrf
 
-                <div class="space-y-2">
-                    <span class="eyebrow">Configuration</span>
-                    <h2 id="meal-generator-title" class="text-2xl font-semibold text-slate-900">Choisissez votre cadre de génération.</h2>
-                    <p class="text-slate-600">Plus vos préférences sont proches de votre réalité, plus le résultat sera directement exploitable.</p>
+                <div class="menu-generator-form__header">
+                    <div class="space-y-2">
+                        <span class="eyebrow">Configuration</span>
+                        <h2 id="meal-generator-title" class="text-2xl font-semibold text-slate-900 sm:text-3xl">Votre cadre de génération</h2>
+                    </div>
+                    <p class="max-w-xl text-sm leading-6 text-slate-500 sm:text-base">
+                        Le formulaire reste volontairement court: quelques choix suffisent pour obtenir un point de départ cohérent.
+                    </p>
+                </div>
+
+                <div class="menu-generator-steps" aria-label="Étapes du générateur">
+                    <div class="menu-generator-step">
+                        <span class="menu-generator-step__number">1</span>
+                        <div>
+                            <p class="font-semibold text-slate-900">Choisissez vos restrictions</p>
+                            <p class="text-sm text-slate-500">Seulement ce qui influence vraiment le menu.</p>
+                        </div>
+                    </div>
+                    <div class="menu-generator-step">
+                        <span class="menu-generator-step__number">2</span>
+                        <div>
+                            <p class="font-semibold text-slate-900">Indiquez la durée</p>
+                            <p class="text-sm text-slate-500">Entre 1 et 14 jours.</p>
+                        </div>
+                    </div>
+                    <div class="menu-generator-step">
+                        <span class="menu-generator-step__number">3</span>
+                        <div>
+                            <p class="font-semibold text-slate-900">Lancez la génération</p>
+                            <p class="text-sm text-slate-500">Vous obtenez une base simple à exploiter.</p>
+                        </div>
+                    </div>
                 </div>
 
                 <fieldset class="mt-8">
                     <legend class="text-lg font-semibold text-slate-900">Restrictions alimentaires</legend>
-                    <div class="mt-4 grid gap-3 sm:grid-cols-2">
+                    <p class="mt-2 text-sm text-slate-500">Cochez uniquement les exclusions qui doivent être respectées.</p>
+                    <div class="mt-5 grid gap-3 sm:grid-cols-2">
                         @foreach ($availableDietaryRestrictions as $restriction)
-                            <label class="flex cursor-pointer items-start gap-3 rounded-[1.35rem] border border-slate-200 bg-white/90 px-4 py-4 text-slate-700 hover:border-emerald-200 hover:bg-emerald-50/50">
+                            <label class="menu-generator-option">
                                 <input
                                     type="checkbox"
                                     class="mt-1 rounded border-slate-300 text-emerald-600 focus:ring-emerald-500"
@@ -61,63 +82,57 @@
 
                 <fieldset class="mt-8">
                     <legend class="text-lg font-semibold text-slate-900">Nombre de jours</legend>
-                    <div class="mt-4 max-w-xs">
-                        <label for="days-input" class="field-label">Durée</label>
-                        <input
-                            type="number"
-                            id="days-input"
-                            name="days"
-                            min="1"
-                            max="14"
-                            value="1"
-                            class="field-input"
-                            aria-describedby="days-help"
-                        >
-                        <p id="days-help" class="mt-2 text-sm text-slate-500">Choisissez entre 1 et 14 jours.</p>
+                    <div class="menu-duration-card mt-4">
+                        <div class="space-y-1">
+                            <label for="days-input" class="field-label">Durée</label>
+                            <p class="text-sm text-slate-500">Définissez la période que vous voulez couvrir.</p>
+                        </div>
+                        <div class="w-full max-w-[11rem]">
+                            <input
+                                type="number"
+                                id="days-input"
+                                name="days"
+                                min="1"
+                                max="14"
+                                value="1"
+                                inputmode="numeric"
+                                class="field-input text-center text-lg font-semibold"
+                                aria-describedby="days-help"
+                            >
+                        </div>
                     </div>
+                    <p id="days-help" class="mt-3 text-sm text-slate-500">Choisissez entre 1 et 14 jours.</p>
                 </fieldset>
 
-                <div class="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
-                    <button type="submit" class="insta-button insta-button--primary">
+                @guest
+                    <div class="menu-generator-note">
+                        <div>
+                            <p class="font-semibold text-slate-900">Vous voulez garder vos préférences ?</p>
+                            <p class="mt-1 text-sm text-slate-500">Un compte permet de retrouver vos choix sans tout reconfigurer à chaque fois.</p>
+                        </div>
+                        <div class="flex flex-col gap-3 sm:flex-row">
+                            <a href="{{ route('register') }}" class="insta-button insta-button--accent">Créer un compte</a>
+                            <a href="{{ route('login') }}" class="insta-button insta-button--ghost">Se connecter</a>
+                        </div>
+                    </div>
+                @else
+                    <div class="menu-generator-note">
+                        <div>
+                            <p class="font-semibold text-slate-900">Profil connecté</p>
+                            <p class="mt-1 text-sm text-slate-500">Vos préférences enregistrées seront déjà prises en compte si votre profil est à jour.</p>
+                        </div>
+                    </div>
+                @endguest
+
+                <div class="mt-8 flex flex-col gap-3 border-t border-slate-200 pt-6 sm:flex-row sm:items-center sm:justify-center">
+                    <button type="submit" class="insta-button insta-button--primary min-w-[14rem]">
                         Générer mes repas
                     </button>
-                    <a href="{{ route('contact') }}" class="insta-button insta-button--ghost">
+                    <a href="{{ route('contact') }}" class="insta-button insta-button--ghost min-w-[12rem]">
                         Besoin d’aide ?
                     </a>
                 </div>
             </form>
-
-            <aside class="space-y-6">
-                <div class="soft-card">
-                    <span class="eyebrow">Conseil</span>
-                    <h2 class="mt-5 text-2xl font-semibold text-slate-900">Plus votre profil est précis, plus la base proposée sera utile.</h2>
-                    <p class="mt-4 text-slate-600">
-                        Si vous avez un compte, pensez à enregistrer vos préférences alimentaires pour éviter de tout reparamétrer à chaque génération.
-                    </p>
-                    <div class="mt-6 flex flex-col gap-3">
-                        <a href="{{ route('register') }}" class="insta-button insta-button--accent">Créer un compte</a>
-                        <a href="{{ route('login') }}" class="insta-button insta-button--ghost">Se connecter</a>
-                    </div>
-                </div>
-
-                <div class="soft-card">
-                    <p class="text-sm uppercase tracking-[0.18em] text-slate-500">Ce que le générateur vous apporte</p>
-                    <ul class="mt-5 space-y-3 text-slate-600">
-                        <li class="flex items-start gap-3">
-                            <i class="fas fa-check-circle mt-1 text-emerald-600" aria-hidden="true"></i>
-                            <span>Un cadre repas rapide à parcourir.</span>
-                        </li>
-                        <li class="flex items-start gap-3">
-                            <i class="fas fa-check-circle mt-1 text-emerald-600" aria-hidden="true"></i>
-                            <span>Une meilleure continuité entre préférences et résultats.</span>
-                        </li>
-                        <li class="flex items-start gap-3">
-                            <i class="fas fa-check-circle mt-1 text-emerald-600" aria-hidden="true"></i>
-                            <span>Moins d’effort pour trouver des idées de menus réalistes.</span>
-                        </li>
-                    </ul>
-                </div>
-            </aside>
         </div>
     </section>
 

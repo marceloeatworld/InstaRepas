@@ -1,6 +1,6 @@
 <x-app-layout>
     <div class="w-full p-6 border border-gray-200 rounded-lg shadow flex items-center justify-center text-center" style="background-color: #6495ED;">
-        <img class="w-16 h-16 rounded-full object-cover" src="{{ asset('imgs\logo_for_foodequlibre.webp') }}" alt="FoodEquilibre">
+        <x-application-logo class="h-16 w-16" alt="Logo InstaRepas" />
         <a href="#">
             <h5 class="mb-2 text-2xl font-bold tracking-tight text-white mx-4 tracking-wider">Bienvenue, Admin!</h5>
         </a>

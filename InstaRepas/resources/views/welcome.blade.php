@@ -47,14 +47,7 @@
                                     <h2 class="mt-2 text-3xl font-semibold text-slate-900">Un cadre simple pour mieux manger</h2>
                                 </div>
                                 <div class="rounded-[1.5rem] bg-emerald-50 p-3">
-                                    <img
-                                        id="logo"
-                                        src="{{ asset('imgs/logo_for_foodequlibre.webp') }}"
-                                        alt="Logo InstaRepas"
-                                        width="92"
-                                        height="92"
-                                        class="h-20 w-20 object-contain"
-                                    >
+                                    <x-application-logo class="h-20 w-20" alt="Logo InstaRepas" />
                                 </div>
                             </div>
 

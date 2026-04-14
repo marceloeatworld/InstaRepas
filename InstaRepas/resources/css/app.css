@@ -236,6 +236,90 @@
         box-shadow: 0 18px 46px rgba(20, 48, 46, 0.08);
     }
 
+    .menu-generator-shell {
+        @apply mx-auto w-full max-w-5xl;
+    }
+
+    .menu-generator-hero {
+        @apply relative overflow-hidden rounded-[2rem] px-6 py-10 text-center sm:px-10 sm:py-12;
+        background:
+            radial-gradient(circle at top center, rgba(31, 138, 112, 0.12), transparent 34%),
+            radial-gradient(circle at right center, rgba(244, 185, 66, 0.14), transparent 28%),
+            linear-gradient(180deg, rgba(255, 255, 255, 0.97) 0%, rgba(247, 251, 248, 0.94) 100%);
+        border: 1px solid rgba(24, 59, 58, 0.08);
+        box-shadow: var(--insta-shadow);
+    }
+
+    .menu-generator-title {
+        @apply mx-auto mt-5 max-w-3xl text-4xl font-semibold sm:text-5xl;
+    }
+
+    .menu-generator-copy {
+        @apply mx-auto mt-4 max-w-2xl text-base leading-7 sm:text-lg;
+        color: var(--insta-muted);
+    }
+
+    .menu-generator-points {
+        @apply mt-6 flex flex-wrap justify-center gap-3;
+    }
+
+    .menu-generator-points span {
+        @apply rounded-full px-4 py-2 text-sm font-semibold;
+        background: rgba(255, 255, 255, 0.88);
+        border: 1px solid rgba(24, 59, 58, 0.08);
+        color: var(--insta-ink);
+        box-shadow: 0 12px 28px rgba(24, 59, 58, 0.06);
+    }
+
+    .menu-generator-form {
+        @apply rounded-[2rem] p-6 sm:p-8 lg:p-10;
+    }
+
+    .menu-generator-form__header {
+        @apply flex flex-col gap-4 border-b border-slate-200 pb-6 md:flex-row md:items-end md:justify-between;
+    }
+
+    .menu-generator-steps {
+        @apply mt-6 grid gap-3 md:grid-cols-3;
+    }
+
+    .menu-generator-step {
+        @apply flex items-start gap-3 rounded-[1.5rem] px-4 py-4;
+        background: rgba(255, 255, 255, 0.72);
+        border: 1px solid rgba(24, 59, 58, 0.08);
+    }
+
+    .menu-generator-step__number {
+        @apply inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-full text-sm font-bold;
+        color: white;
+        background: linear-gradient(135deg, var(--insta-brand) 0%, #29a37c 100%);
+        box-shadow: 0 12px 26px rgba(31, 138, 112, 0.22);
+    }
+
+    .menu-generator-option {
+        @apply flex cursor-pointer items-start gap-3 rounded-[1.35rem] border px-4 py-4 text-slate-700;
+        border-color: rgba(24, 59, 58, 0.1);
+        background: rgba(255, 255, 255, 0.92);
+        box-shadow: 0 12px 30px rgba(24, 59, 58, 0.05);
+    }
+
+    .menu-generator-option:hover {
+        border-color: rgba(31, 138, 112, 0.24);
+        background: rgba(242, 250, 247, 0.95);
+    }
+
+    .menu-duration-card {
+        @apply flex flex-col gap-4 rounded-[1.5rem] border px-5 py-5 sm:flex-row sm:items-center sm:justify-between;
+        border-color: rgba(24, 59, 58, 0.1);
+        background: rgba(255, 255, 255, 0.92);
+    }
+
+    .menu-generator-note {
+        @apply mt-8 flex flex-col gap-4 rounded-[1.75rem] border px-5 py-5 lg:flex-row lg:items-center lg:justify-between;
+        border-color: rgba(24, 59, 58, 0.08);
+        background: linear-gradient(135deg, rgba(255, 255, 255, 0.94) 0%, rgba(248, 252, 249, 0.96) 100%);
+    }
+
     .home-hero {
         background:
             linear-gradient(115deg, rgba(8, 51, 41, 0.88) 0%, rgba(18, 96, 77, 0.72) 42%, rgba(255, 255, 255, 0.08) 100%),
