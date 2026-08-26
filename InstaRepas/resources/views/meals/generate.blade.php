@@ -24,7 +24,9 @@
                                     class="peer sr-only"
                                     name="restrictions[]"
                                     value="{{ $restriction->name }}"
-                                    {{ in_array($restriction->id, $userPreferences) ? 'checked' : '' }}
+                                    {{ old('days') !== null
+                                        ? (in_array($restriction->name, old('restrictions', [])) ? 'checked' : '')
+                                        : (in_array($restriction->id, $userPreferences) ? 'checked' : '') }}
                                 >
                                 <span class="inline-flex items-center rounded-full border border-slate-200 bg-white px-4 py-2.5 text-sm font-semibold text-slate-700 transition hover:border-emerald-600/40 peer-checked:border-transparent peer-checked:bg-emerald-700 peer-checked:text-white peer-focus-visible:ring-2 peer-focus-visible:ring-emerald-600 peer-focus-visible:ring-offset-2">
                                     {{ ucfirst(str_replace('Sans ', '', $displayNames[$restriction->name])) }}
@@ -44,7 +46,7 @@
                                     class="peer sr-only"
                                     name="days"
                                     value="{{ $value }}"
-                                    {{ $value === 3 ? 'checked' : '' }}
+                                    {{ (int) old('days', 3) === $value ? 'checked' : '' }}
                                 >
                                 <span class="inline-flex items-center rounded-full border border-slate-200 bg-white px-4 py-2.5 text-sm font-semibold text-slate-700 transition hover:border-emerald-600/40 peer-checked:border-transparent peer-checked:bg-emerald-700 peer-checked:text-white peer-focus-visible:ring-2 peer-focus-visible:ring-emerald-600 peer-focus-visible:ring-offset-2">
                                     {{ $label }}
@@ -57,7 +59,7 @@
                 <fieldset class="mt-8">
                     <legend class="field-label">Option</legend>
                     <label class="mt-3 inline-flex cursor-pointer">
-                        <input type="checkbox" class="peer sr-only" name="include_snacks" value="1">
+                        <input type="checkbox" class="peer sr-only" name="include_snacks" value="1" {{ old('include_snacks') ? 'checked' : '' }}>
                         <span class="inline-flex items-center rounded-full border border-slate-200 bg-white px-4 py-2.5 text-sm font-semibold text-slate-700 transition hover:border-emerald-600/40 peer-checked:border-transparent peer-checked:bg-emerald-700 peer-checked:text-white peer-focus-visible:ring-2 peer-focus-visible:ring-emerald-600 peer-focus-visible:ring-offset-2">
                             Ajouter une collation
                         </span>

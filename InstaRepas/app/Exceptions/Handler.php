@@ -3,6 +3,8 @@
 namespace App\Exceptions;
 
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Illuminate\Http\Request;
+use Illuminate\Session\TokenMismatchException;
 use Throwable;
 
 class Handler extends ExceptionHandler
@@ -25,6 +27,15 @@ class Handler extends ExceptionHandler
     {
         $this->reportable(function (Throwable $e) {
             //
+        });
+
+        // An expired session (CSRF 419) sends visitors back to the form with a
+        // clear message instead of the bare "Page expirée" error screen.
+        $this->renderable(function (TokenMismatchException $e, Request $request) {
+            return redirect()
+                ->back()
+                ->withInput($request->except('_token', 'password', 'password_confirmation'))
+                ->with('session_expired', 'Votre session a expiré. Vos choix ont été conservés, cliquez à nouveau sur le bouton.');
         });
     }
 }

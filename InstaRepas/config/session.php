@@ -18,7 +18,9 @@ return [
     |
     */
 
-    'driver' => env('SESSION_DRIVER', 'file'),
+    // Cookie sessions survive container redeploys (file sessions are wiped
+    // with the container, which caused 419 errors on forms open during a deploy)
+    'driver' => env('SESSION_DRIVER', 'cookie'),
 
     /*
     |--------------------------------------------------------------------------

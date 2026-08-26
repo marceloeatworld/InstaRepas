@@ -68,6 +68,13 @@
             @include('layouts.navigation')
 
             <main id="main-content" class="relative">
+                @if (session('session_expired'))
+                    <div class="shell mt-6">
+                        <div role="status" class="rounded-[1.25rem] border border-amber-300 bg-amber-50 px-5 py-4 font-semibold text-amber-800">
+                            {{ session('session_expired') }}
+                        </div>
+                    </div>
+                @endif
                 {{ $slot }}
             </main>
         </div>

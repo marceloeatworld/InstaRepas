@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
@@ -12,6 +13,12 @@ return new class extends Migration
      */
     public function up(): void
     {
+        if (in_array(DB::connection()->getDriverName(), ['mysql', 'mariadb'])) {
+            DB::statement("ALTER TABLE dietary_restrictions MODIFY COLUMN name ENUM('contains_meat','contains_pork','contains_gluten','contains_animal_products','contains_lactose','contains_fish','contains_crustacean') NOT NULL");
+
+            return;
+        }
+
         Schema::table('dietary_restrictions', function (Blueprint $table) {
             $table->enum('name', [
                 'contains_meat',
@@ -27,15 +34,6 @@ return new class extends Migration
 
     public function down(): void
     {
-        Schema::table('dietary_restrictions', function (Blueprint $table) {
-            $table->enum('name', [
-                'contains_meat',
-                'contains_pork',
-                'contains_gluten',
-                'contains_animal_products',
-                'contains_lactose',
-                'contains_fish',
-            ])->change();
-        });
+        // Enum widening only; no destructive rollback
     }
 };
