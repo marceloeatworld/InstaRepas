@@ -3,81 +3,31 @@
     description="Créez votre menu de la semaine en quelques clics : repas équilibrés, restrictions alimentaires prises en compte, de 1 à 14 jours. Gratuit et sans inscription."
     :canonical="route('generate')"
 >
-    <section class="section-shell pb-6 sm:pb-8">
-        <div class="menu-generator-shell">
-            <div class="menu-generator-hero">
-                <span class="eyebrow">Générateur de menus</span>
-                <h1 class="menu-generator-title">Générez un menu simple, centré sur l’essentiel.</h1>
-                <p class="menu-generator-copy">
-                    Choisissez vos restrictions, indiquez le nombre de jours et laissez InstaRepas vous proposer une base claire pour démarrer la semaine.
-                </p>
-                <div class="menu-generator-points" aria-label="Repères rapides">
-                    <span>Restrictions prises en compte</span>
-                    <span>1 à 14 jours</span>
-                    <span>Résultat direct</span>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="section-shell pt-0">
-        <div class="menu-generator-shell">
-            <form action="{{ route('generate_meals') }}" method="post" class="surface-panel menu-generator-form" aria-labelledby="meal-generator-title">
+    <section class="section-shell">
+        <div class="mx-auto w-full max-w-3xl">
+            <form action="{{ route('generate_meals') }}" method="post" class="surface-panel rounded-[2rem] p-6 sm:p-10" aria-labelledby="meal-generator-title">
                 @csrf
 
-                <div class="menu-generator-form__header">
-                    <div class="space-y-2">
-                        <span class="eyebrow">Configuration</span>
-                        <h2 id="meal-generator-title" class="text-2xl font-semibold text-slate-900 sm:text-3xl">Votre cadre de génération</h2>
-                    </div>
-                    <p class="max-w-xl text-sm leading-6 text-slate-500 sm:text-base">
-                        Le formulaire reste volontairement court: quelques choix suffisent pour obtenir un point de départ cohérent.
-                    </p>
-                </div>
-
-                <div class="menu-generator-steps" aria-label="Étapes du générateur">
-                    <div class="menu-generator-step">
-                        <span class="menu-generator-step__number">1</span>
-                        <div>
-                            <p class="font-semibold text-slate-900">Choisissez vos restrictions</p>
-                            <p class="text-sm text-slate-500">Seulement ce qui influence vraiment le menu.</p>
-                        </div>
-                    </div>
-                    <div class="menu-generator-step">
-                        <span class="menu-generator-step__number">2</span>
-                        <div>
-                            <p class="font-semibold text-slate-900">Indiquez la durée</p>
-                            <p class="text-sm text-slate-500">Entre 1 et 14 jours.</p>
-                        </div>
-                    </div>
-                    <div class="menu-generator-step">
-                        <span class="menu-generator-step__number">3</span>
-                        <div>
-                            <p class="font-semibold text-slate-900">Lancez la génération</p>
-                            <p class="text-sm text-slate-500">Vous obtenez une base simple à exploiter.</p>
-                        </div>
-                    </div>
+                <div class="text-center">
+                    <span class="eyebrow">Générateur de menus</span>
+                    <h1 id="meal-generator-title" class="mt-4 text-3xl font-semibold text-slate-900 sm:text-4xl">Votre menu de la semaine</h1>
+                    <p class="mt-3 text-slate-600">Cochez vos exclusions, choisissez la durée, c'est prêt.</p>
                 </div>
 
                 <fieldset class="mt-8">
-                    <legend class="text-lg font-semibold text-slate-900">Restrictions alimentaires</legend>
-                    <p class="mt-2 text-sm text-slate-500">Cochez uniquement les exclusions qui doivent être respectées.</p>
-                    <div class="mt-5 grid gap-3 sm:grid-cols-2">
+                    <legend class="field-label">Je ne mange pas</legend>
+                    <div class="mt-3 flex flex-wrap gap-2.5">
                         @foreach ($availableDietaryRestrictions as $restriction)
-                            <label class="menu-generator-option">
+                            <label class="cursor-pointer">
                                 <input
                                     type="checkbox"
-                                    class="mt-1 rounded border-slate-300 text-emerald-600 focus:ring-emerald-500"
+                                    class="peer sr-only"
                                     name="restrictions[]"
                                     value="{{ $restriction->name }}"
                                     {{ in_array($restriction->id, $userPreferences) ? 'checked' : '' }}
-                                    aria-describedby="restriction-desc-{{ $restriction->id }}"
                                 >
-                                <span>
-                                    <span class="block font-semibold text-slate-900">{{ $displayNames[$restriction->name] }}</span>
-                                    <span id="restriction-desc-{{ $restriction->id }}" class="mt-1 block text-sm text-slate-500">
-                                        Exclure cette catégorie de vos propositions de repas.
-                                    </span>
+                                <span class="inline-flex items-center rounded-full border border-slate-200 bg-white px-4 py-2.5 text-sm font-semibold text-slate-700 transition hover:border-emerald-600/40 peer-checked:border-transparent peer-checked:bg-emerald-700 peer-checked:text-white peer-focus-visible:ring-2 peer-focus-visible:ring-emerald-600 peer-focus-visible:ring-offset-2">
+                                    {{ ucfirst(str_replace('Sans ', '', $displayNames[$restriction->name])) }}
                                 </span>
                             </label>
                         @endforeach
@@ -85,69 +35,47 @@
                 </fieldset>
 
                 <fieldset class="mt-8">
-                    <legend class="text-lg font-semibold text-slate-900">Nombre de jours</legend>
-                    <div class="menu-duration-card mt-4">
-                        <div class="space-y-1">
-                            <label for="days-input" class="field-label">Durée</label>
-                            <p class="text-sm text-slate-500">Définissez la période que vous voulez couvrir.</p>
-                        </div>
-                        <div class="w-full max-w-[11rem]">
-                            <input
-                                type="number"
-                                id="days-input"
-                                name="days"
-                                min="1"
-                                max="14"
-                                value="1"
-                                inputmode="numeric"
-                                class="field-input text-center text-lg font-semibold"
-                                aria-describedby="days-help"
-                            >
-                        </div>
+                    <legend class="field-label">Durée</legend>
+                    <div class="mt-3 flex flex-wrap gap-2.5">
+                        @foreach ([1 => '1 jour', 2 => '2 jours', 3 => '3 jours', 5 => '5 jours', 7 => '1 semaine', 14 => '2 semaines'] as $value => $label)
+                            <label class="cursor-pointer">
+                                <input
+                                    type="radio"
+                                    class="peer sr-only"
+                                    name="days"
+                                    value="{{ $value }}"
+                                    {{ $value === 3 ? 'checked' : '' }}
+                                >
+                                <span class="inline-flex items-center rounded-full border border-slate-200 bg-white px-4 py-2.5 text-sm font-semibold text-slate-700 transition hover:border-emerald-600/40 peer-checked:border-transparent peer-checked:bg-emerald-700 peer-checked:text-white peer-focus-visible:ring-2 peer-focus-visible:ring-emerald-600 peer-focus-visible:ring-offset-2">
+                                    {{ $label }}
+                                </span>
+                            </label>
+                        @endforeach
                     </div>
-                    <p id="days-help" class="mt-3 text-sm text-slate-500">Choisissez entre 1 et 14 jours.</p>
+                </fieldset>
 
-                    <label class="menu-generator-option mt-4">
-                        <input
-                            type="checkbox"
-                            class="mt-1 rounded border-slate-300 text-emerald-600 focus:ring-emerald-500"
-                            name="include_snacks"
-                            value="1"
-                        >
-                        <span>
-                            <span class="block font-semibold text-slate-900">Inclure une collation</span>
-                            <span class="mt-1 block text-sm text-slate-500">Ajoute une pause gourmande (fruit et fruits à coque) chaque jour.</span>
+                <fieldset class="mt-8">
+                    <legend class="field-label">Option</legend>
+                    <label class="mt-3 inline-flex cursor-pointer">
+                        <input type="checkbox" class="peer sr-only" name="include_snacks" value="1">
+                        <span class="inline-flex items-center rounded-full border border-slate-200 bg-white px-4 py-2.5 text-sm font-semibold text-slate-700 transition hover:border-emerald-600/40 peer-checked:border-transparent peer-checked:bg-emerald-700 peer-checked:text-white peer-focus-visible:ring-2 peer-focus-visible:ring-emerald-600 peer-focus-visible:ring-offset-2">
+                            Ajouter une collation
                         </span>
                     </label>
                 </fieldset>
 
-                @guest
-                    <div class="menu-generator-note">
-                        <div>
-                            <p class="font-semibold text-slate-900">Vous voulez garder vos préférences ?</p>
-                            <p class="mt-1 text-sm text-slate-500">Un compte permet de retrouver vos choix sans tout reconfigurer à chaque fois.</p>
-                        </div>
-                        <div class="flex flex-col gap-3 sm:flex-row">
-                            <a href="{{ route('register') }}" class="insta-button insta-button--accent">Créer un compte</a>
-                            <a href="{{ route('login') }}" class="insta-button insta-button--ghost">Se connecter</a>
-                        </div>
-                    </div>
-                @else
-                    <div class="menu-generator-note">
-                        <div>
-                            <p class="font-semibold text-slate-900">Profil connecté</p>
-                            <p class="mt-1 text-sm text-slate-500">Vos préférences enregistrées seront déjà prises en compte si votre profil est à jour.</p>
-                        </div>
-                    </div>
-                @endguest
-
-                <div class="mt-8 flex flex-col gap-3 border-t border-slate-200 pt-6 sm:flex-row sm:items-center sm:justify-center">
-                    <button type="submit" class="insta-button insta-button--primary min-w-[14rem]">
-                        Générer mes repas
+                <div class="mt-10">
+                    <button type="submit" class="insta-button insta-button--primary w-full text-lg">
+                        Générer mon menu
                     </button>
-                    <a href="{{ route('contact') }}" class="insta-button insta-button--ghost min-w-[12rem]">
-                        Besoin d’aide ?
-                    </a>
+                    @guest
+                        <p class="mt-4 text-center text-sm text-slate-500">
+                            <a href="{{ route('register') }}" class="font-semibold text-emerald-700 hover:text-emerald-800">Créez un compte</a>
+                            pour retrouver vos préférences à chaque visite.
+                        </p>
+                    @else
+                        <p class="mt-4 text-center text-sm text-slate-500">Vos préférences enregistrées sont déjà cochées.</p>
+                    @endguest
                 </div>
             </form>
         </div>
