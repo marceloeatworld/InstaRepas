@@ -196,8 +196,9 @@
     </section>
 
     @push('scripts')
-        <script defer src="{{ asset('js/anime.min.js') }}"></script>
-        <script defer src="{{ asset('js/season.js') }}"></script>
+        {{-- Version query busts the CDN cache when these files change --}}
+        <script defer src="{{ asset('js/anime.min.js') }}?v=20260826"></script>
+        <script defer src="{{ asset('js/season.js') }}?v=20260826"></script>
     @endpush
 
     <script type="application/ld+json">

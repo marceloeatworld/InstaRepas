@@ -54,6 +54,9 @@ mkdir -p /app/bootstrap/cache
 chown -R www-data:www-data /app/storage /app/bootstrap/cache
 chmod -R 775 /app/storage /app/bootstrap/cache
 
+# Apply pending database migrations (non-fatal so the site still starts on failure)
+cd /app && php artisan migrate --force || echo "WARNING: migrations failed"
+
 # Start supervisor
 supervisord -c /etc/supervisord.conf -n
 '''
