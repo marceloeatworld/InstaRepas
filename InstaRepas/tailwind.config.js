@@ -14,8 +14,8 @@ module.exports = {
     theme: {
         extend: {
             fontFamily: {
-                sans: ['"Source Sans 3"', ...defaultTheme.fontFamily.sans],
-                display: ['Outfit', ...defaultTheme.fontFamily.sans],
+                sans: ['"Schibsted Grotesk"', ...defaultTheme.fontFamily.sans],
+                display: ['Fraunces', 'Georgia', ...defaultTheme.fontFamily.serif],
             },
         },
     },

@@ -127,6 +127,12 @@ class FoodController extends Controller
     // Méthode pour mettre à jour un aliment
     public function update(Request $request, Food $food)
     {
+        $request->validate([
+            'name' => 'required|string|max:100',
+            'category_id' => 'required|integer|exists:food_categories,id',
+            'nutritional_type' => 'required|in:proteins,carbohydrates,fibers,fruits,lipids',
+        ]);
+
         // Mise à jour de l'aliment
         $food->update($request->all());
 

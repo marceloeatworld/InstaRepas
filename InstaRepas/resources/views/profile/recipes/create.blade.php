@@ -60,6 +60,17 @@
 </div>
 
 <div class="form-group">
+    <label for="new_nutritional_type">Type nutritionnel</label>
+    <select name="new_nutritional_type" id="new_nutritional_type" class="form-control" required>
+        <option value="proteins">Protéines</option>
+        <option value="carbohydrates">Glucides</option>
+        <option value="fibers">Fibres</option>
+        <option value="fruits">Fruits</option>
+        <option value="lipids">Lipides</option>
+    </select>
+</div>
+
+<div class="form-group">
     <label for="new_restrictions">Dietary Restrictions</label><br>
     @foreach($restrictions as $restriction)
         <div class="form-check form-check-inline">
@@ -175,20 +186,22 @@ document.getElementById('add-ingredient').addEventListener('click', () => {
 document.getElementById('submit-new-ingredient').addEventListener('click', async () => {
     const name = document.getElementById('new_name').value;
     const categoryId = document.getElementById('new_category_id').value;
-    const restrictions = Array.from(document.querySelectorAll('input[name="new_restrictions[]"]:checked')).map(input => input.value);
-    const seasons = Array.from(document.querySelectorAll('input[name="new_seasons[]"]:checked')).map(input => input.value);
-    const mealCombinations = Array.from(document.querySelectorAll('input[name="new_meal_combinations[]"]:checked')).map(input => input.value);
+    const nutritionalType = document.getElementById('new_nutritional_type').value;
 
     const response = await fetch('/foods', {
         method: 'POST',
         headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content
         },
-        body: JSON.stringify({name, categoryId, restrictions, seasons, mealCombinations})
+        body: JSON.stringify({name, category_id: categoryId, nutritional_type: nutritionalType})
     });
 
-    const newFood = await response.json();
-    addIngredient(newFood);
+    if (!response.ok) {
+        return;
+    }
+
+    addIngredient({name});
 
     // Réinitialiser le formulaire
     document.getElementById('new_name').value = '';

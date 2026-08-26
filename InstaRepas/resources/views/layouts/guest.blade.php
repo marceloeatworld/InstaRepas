@@ -1,5 +1,5 @@
 @props([
-    'title' => config('app.name', 'InstaRepas') . ' | Connexion & inscription',
+    'title' => 'InstaRepas' . ' | Connexion & inscription',
     'description' => 'Connectez-vous à InstaRepas pour retrouver vos préférences alimentaires, vos menus et vos outils de planification.',
     'canonical' => url()->current(),
     'ogImage' => asset('imgs/logo_for_foodequlibre.webp'),
@@ -31,8 +31,8 @@
 
         <link rel="canonical" href="{{ $canonical }}">
         <link rel="preconnect" href="https://fonts.bunny.net">
-        <link href="https://fonts.bunny.net/css?family=outfit:400,500,600,700,800&display=swap" rel="stylesheet" />
-        <link href="https://fonts.bunny.net/css?family=source-sans-3:400,500,600,700&display=swap" rel="stylesheet" />
+        <link href="https://fonts.bunny.net/css?family=fraunces:400,500,600,700,400i,600i&display=swap" rel="stylesheet" />
+        <link href="https://fonts.bunny.net/css?family=schibsted-grotesk:400,500,600,700&display=swap" rel="stylesheet" />
         <link rel="icon" href="{{ asset('imgs/logo_for_foodequlibre.webp') }}" type="image/x-icon" />
 
         <script defer src="{{ asset('js/7fdee4801e.js') }}"></script>

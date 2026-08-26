@@ -1,6 +1,7 @@
 <?php
 
 use App\Providers\RouteServiceProvider;
+use Illuminate\Support\Facades\Crypt;
 
 test('registration screen can be rendered', function () {
     $response = $this->get('/register');
@@ -18,6 +19,7 @@ test('new users can register', function () {
         'email' => $email,
         'password' => $password,
         'password_confirmation' => $password,
+        'form_token' => Crypt::encryptString((string) now()->subSeconds(10)->timestamp),
     ]);
 
     $this->assertAuthenticated();

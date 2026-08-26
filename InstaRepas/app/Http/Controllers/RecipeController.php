@@ -19,13 +19,13 @@ class RecipeController extends Controller
     public function index()
     {
         $recipes = Recipe::all();
-        return view('recipes.index', compact('recipes'));
+        return view('recipes.recipes', compact('recipes'));
     }
 
     public function userRecipes($userId)
     {
         $recipes = Recipe::where('user_id', $userId)->get();
-        return view('recipes.user_recipes', compact('recipes'));
+        return view('recipes.recipes', compact('recipes'));
     }
 
     public function create()
@@ -65,8 +65,10 @@ class RecipeController extends Controller
 
     public function searchFoods(Request $request)
     {
-        $search = $request->input('search');
-        $foods = Food::where('name', 'LIKE', "%{$search}%")->get();
+        $search = $request->input('search', $request->input('query'));
+        $foods = Food::where('is_valid', 1)
+            ->where('name', 'LIKE', "%{$search}%")
+            ->get();
 
         return response()->json($foods);
     }

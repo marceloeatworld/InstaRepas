@@ -2,25 +2,35 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Http\Controllers\Concerns\ProtectsAgainstSpam;
 use App\Mail\ContactMail;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 
 class ContactController extends Controller
 {
+    use ProtectsAgainstSpam;
+
     public function index()
     {
-        return view('contact');
+        return view('contact', [
+            'formToken' => $this->spamFormToken(),
+        ]);
     }
 
     public function submit(Request $request)
     {
+        if ($this->isSpam($request)) {
+            // Silently drop the message so bots cannot tell they were detected
+            return redirect()->back()->with('success', 'Votre message a été envoyé avec succès.');
+        }
+
         // validation
         $request->validate([
-            'name' => 'required',
-            'email' => 'required|email',
-            'subject' => 'required',
-            'message' => 'required',
+            'name' => 'required|string|max:100',
+            'email' => 'required|email|max:255',
+            'subject' => 'required|in:technical_problem,information,suggestion',
+            'message' => 'required|string|max:5000',
         ]);
 
         $details = [

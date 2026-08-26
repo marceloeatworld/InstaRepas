@@ -1,5 +1,5 @@
 @props([
-    'title' => config('app.name', 'InstaRepas'),
+    'title' => 'InstaRepas',
     'description' => 'InstaRepas vous aide à composer des menus équilibrés, à gérer vos préférences alimentaires et à retrouver des idées utiles pour le quotidien.',
     'canonical' => url()->current(),
     'ogImage' => asset('imgs/logo_for_foodequlibre.webp'),
@@ -20,11 +20,11 @@
             content="{{ $description }}"
         >
         <meta name="author" content="InstaRepas">
-        <meta name="theme-color" content="#fff9f0">
+        <meta name="theme-color" content="#f9f4ea">
 
         <meta property="og:type" content="{{ $ogType }}">
         <meta property="og:url" content="{{ $canonical }}">
-        <meta property="og:site_name" content="{{ config('app.name', 'InstaRepas') }}">
+        <meta property="og:site_name" content="{{ 'InstaRepas' }}">
         <meta property="og:title" content="{{ $title }}">
         <meta property="og:description" content="{{ $description }}">
         <meta property="og:image" content="{{ $ogImage }}">
@@ -39,8 +39,8 @@
 
         <link rel="canonical" href="{{ $canonical }}">
         <link rel="preconnect" href="https://fonts.bunny.net">
-        <link href="https://fonts.bunny.net/css?family=outfit:400,500,600,700,800&display=swap" rel="stylesheet" />
-        <link href="https://fonts.bunny.net/css?family=source-sans-3:400,500,600,700&display=swap" rel="stylesheet" />
+        <link href="https://fonts.bunny.net/css?family=fraunces:400,500,600,700,400i,600i&display=swap" rel="stylesheet" />
+        <link href="https://fonts.bunny.net/css?family=schibsted-grotesk:400,500,600,700&display=swap" rel="stylesheet" />
         <link rel="icon" href="{{ asset('imgs/logo_for_foodequlibre.webp') }}" type="image/x-icon" />
 
         <script defer src="https://analytics.aitek.tech/script.js" data-website-id="1bdf5ef9-5cb0-48bd-be70-dfe773863aca"></script>
@@ -51,9 +51,9 @@
 
         <script type="application/ld+json">
         {
-            "@context": "https://schema.org",
+            "@@context": "https://schema.org",
             "@type": "WebSite",
-            "name": "{{ config('app.name', 'InstaRepas') }}",
+            "name": "{{ 'InstaRepas' }}",
             "url": "{{ url('/') }}",
             "description": "InstaRepas aide à créer des menus personnalisés, équilibrés et adaptés au quotidien."
         }

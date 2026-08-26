@@ -11,7 +11,7 @@
 
                     <div class="space-y-3">
                         <h1 id="hero-title" class="home-hero-title">
-                            Des idées repas simples pour la semaine.
+                            Des idées repas <em>simples</em> pour la semaine.
                         </h1>
                         <p class="home-hero-copy home-hero-lead">
                             Choisissez vos préférences, lancez la génération et partez d’une base claire sans surcharge.
@@ -198,7 +198,7 @@
 
     <script type="application/ld+json">
     {
-        "@context": "https://schema.org",
+        "@@context": "https://schema.org",
         "@type": "WebSite",
         "name": "InstaRepas",
         "url": "{{ url('/') }}",
@@ -208,7 +208,7 @@
 
     <script type="application/ld+json">
     {
-        "@context": "https://schema.org",
+        "@@context": "https://schema.org",
         "@type": "Organization",
         "name": "InstaRepas",
         "url": "{{ url('/') }}",

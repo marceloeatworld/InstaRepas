@@ -18,6 +18,18 @@
             'active' => request()->routeIs('NutritionInfo.index'),
             'icon' => 'fa-book-open',
         ],
+        [
+            'label' => 'À propos',
+            'href' => url('/a-propos'),
+            'active' => request()->is('a-propos'),
+            'icon' => 'fa-circle-info',
+        ],
+        [
+            'label' => 'Contact',
+            'href' => route('contact'),
+            'active' => request()->routeIs('contact'),
+            'icon' => 'fa-envelope',
+        ],
     ];
 
     if (Auth::check()) {
@@ -41,18 +53,6 @@
 
     $secondaryLinks = [
         [
-            'label' => 'Contact',
-            'href' => route('contact'),
-            'active' => request()->routeIs('contact'),
-            'icon' => 'fa-envelope',
-        ],
-        [
-            'label' => 'À propos',
-            'href' => url('/a-propos'),
-            'active' => request()->is('a-propos'),
-            'icon' => 'fa-circle-info',
-        ],
-        [
             'label' => 'Mentions légales',
             'href' => route('legal'),
             'active' => request()->routeIs('legal'),
@@ -71,13 +71,8 @@
     <div class="shell">
         <div class="flex items-center justify-between gap-4 py-4">
             <a href="{{ url('/') }}" class="inline-flex min-w-0 items-center gap-3" aria-label="Retour à l'accueil InstaRepas">
-                <div class="rounded-[1.1rem] bg-white p-2 ring-1 ring-slate-900/5">
-                    <x-application-logo class="h-12 w-auto" alt="Logo InstaRepas" />
-                </div>
-                <div class="min-w-0">
-                    <p class="font-display text-xl font-semibold leading-none text-slate-900" translate="no">InstaRepas</p>
-                    <p class="truncate text-sm text-slate-500">Menus clairs & préférences gardées</p>
-                </div>
+                <x-application-logo class="h-11 w-auto" alt="Logo InstaRepas" />
+                <p class="font-display text-2xl font-semibold leading-none text-slate-900" translate="no">InstaRepas</p>
             </a>
 
             <div class="hidden lg:flex lg:flex-1 lg:items-center lg:justify-center lg:gap-2">
@@ -93,17 +88,7 @@
                 @endforeach
             </div>
 
-            <div class="hidden lg:flex lg:items-center lg:gap-2">
-                @foreach ($secondaryLinks as $link)
-                    <a
-                        href="{{ $link['href'] }}"
-                        class="site-secondary-link {{ $link['active'] ? 'site-secondary-link--active' : '' }}"
-                        @if ($link['active']) aria-current="page" @endif
-                    >
-                        {{ $link['label'] }}
-                    </a>
-                @endforeach
-
+            <div class="hidden lg:flex lg:items-center lg:gap-3">
                 @auth
                     @php
                         $displayName = Auth::user()->username ?: Auth::user()->name;
@@ -158,8 +143,8 @@
                         </div>
                     </div>
                 @else
-                    <a href="{{ route('login') }}" class="insta-button insta-button--ghost">Connexion</a>
-                    <a href="{{ route('register') }}" class="insta-button insta-button--primary">Créer un compte</a>
+                    <a href="{{ route('login') }}" class="site-nav-link">Connexion</a>
+                    <a href="{{ route('register') }}" class="insta-button insta-button--primary insta-button--sm">Créer un compte</a>
                 @endauth
             </div>
 

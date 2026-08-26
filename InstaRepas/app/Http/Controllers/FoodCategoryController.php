@@ -21,7 +21,11 @@ class FoodCategoryController extends Controller
     
     public function store(Request $request)
     {
-        $category = FoodCategory::create($request->all());
+        $data = $request->validate([
+            'name' => 'required|string|max:100|unique:food_categories,name',
+        ]);
+
+        FoodCategory::create($data);
         return redirect()->route('admin.food-categories.index');
     }
     public function edit(FoodCategory $food_category)
@@ -31,7 +35,11 @@ class FoodCategoryController extends Controller
 
 public function update(Request $request, FoodCategory $food_category)
 {
-    $food_category->update($request->all());
+    $data = $request->validate([
+        'name' => 'required|string|max:100|unique:food_categories,name,'.$food_category->id,
+    ]);
+
+    $food_category->update($data);
     return redirect()->route('admin.food-categories.index');
 }
 

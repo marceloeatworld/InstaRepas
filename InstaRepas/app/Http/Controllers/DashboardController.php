@@ -9,8 +9,6 @@ class DashboardController extends Controller
     public function index()
     {
         return view('admin.dashboard');
-        $users = User::all();
-        return view('admin.users.index', compact('users'));
     }
 
     public function users()
@@ -24,7 +22,7 @@ class DashboardController extends Controller
             'is_admin' => 'required|boolean',
         ]);
     
-        $user->update(['is_admin' => $request->is_admin]);
+        $user->forceFill(['is_admin' => $request->boolean('is_admin')])->save();
         return redirect()->route('admin.users.index');
     }
     
@@ -34,7 +32,7 @@ class DashboardController extends Controller
             'points' => 'required|integer',
         ]);
     
-        $user->update(['points' => $request->points]);
+        $user->forceFill(['points' => $request->integer('points')])->save();
         return redirect()->route('admin.users.index');
     }
     

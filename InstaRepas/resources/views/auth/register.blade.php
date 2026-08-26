@@ -10,6 +10,13 @@
 
         <form method="POST" action="{{ route('register') }}" class="space-y-5">
             @csrf
+            <input type="hidden" name="form_token" value="{{ $formToken }}">
+
+            {{-- Honeypot: invisible to humans, bots tend to fill it --}}
+            <div class="absolute -left-[9999px] top-auto h-px w-px overflow-hidden" aria-hidden="true">
+                <label for="website">Website</label>
+                <input id="website" type="text" name="website" tabindex="-1" autocomplete="off">
+            </div>
 
             <div>
                 <x-input-label for="username" :value="__('Nom d’utilisateur')" />

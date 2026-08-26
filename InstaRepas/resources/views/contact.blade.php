@@ -39,6 +39,13 @@
 
                 <form action="{{ route('contact.submit') }}" method="POST" class="mt-8 space-y-5">
                     @csrf
+                    <input type="hidden" name="form_token" value="{{ $formToken }}">
+
+                    {{-- Honeypot: invisible to humans, bots tend to fill it --}}
+                    <div class="absolute -left-[9999px] top-auto h-px w-px overflow-hidden" aria-hidden="true">
+                        <label for="website">Website</label>
+                        <input id="website" type="text" name="website" tabindex="-1" autocomplete="off">
+                    </div>
 
                     <div>
                         <label for="name" class="field-label">Nom</label>

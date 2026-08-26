@@ -142,7 +142,7 @@
 
     <script type="application/ld+json">
     {
-        "@context": "https://schema.org",
+        "@@context": "https://schema.org",
         "@type": "WebPage",
         "name": "Générateur de repas personnalisés - InstaRepas",
         "description": "Générez des repas adaptés à vos préférences alimentaires et restrictions diététiques avec InstaRepas.",

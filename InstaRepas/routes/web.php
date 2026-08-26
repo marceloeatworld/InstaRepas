@@ -31,13 +31,6 @@ Route::get('/', function () {
 })->name('home');
 
 
-//Test
-Route::get('/hello', function () {
-    return 'Hello, World!';
-});
-
-
-
 // Route for the meals generator
 Route::get('/generate', [MealController::class, 'generateForm'])->name('generate');
 Route::post('/generate-meals', [MealController::class, 'generate'])->name('generate_meals');
@@ -82,8 +75,8 @@ Route::get('/', [DashboardController::class, 'index'])->name('admin.index');
 
 
 //google login
-Route::get('/auth/{provider}/redirect', [ProviderController::class, 'redirect']);
-Route::get('/auth/{provider}/callback', [ProviderController::class, 'callback']);
+Route::get('/auth/{provider}/redirect', [ProviderController::class, 'redirect'])->whereIn('provider', ['google']);
+Route::get('/auth/{provider}/callback', [ProviderController::class, 'callback'])->whereIn('provider', ['google']);
 
 
 Route::get('/dashboard', function () {
@@ -111,15 +104,6 @@ Route::post('foods', [RecipeController::class, 'addFood'])->name('foods.add');
 });
 
 
-Route::get('/foods/search', [RecipeController::class, 'searchFoods'])->name('foods.search');
-Route::post('/foods', [RecipeController::class, 'storeFood'])->name('foods.store');
-
-
-    Route::get('/profile/recipes/create', [RecipeController::class, 'create'])->name('recipes.create');
-    Route::post('/recipes', [RecipeController::class, 'store'])->name('recipes.store');
-    Route::post('/recipes/add-food', [RecipeController::class, 'addFood'])->name('recipes.add-food');
-
-
 Route::get('/a-propos', function () {
     return view('about');
 })->name('about');
@@ -137,7 +121,7 @@ Route::get('/legal', function () {
 
 
 // contact
-Route::post('/contact/submit', [ContactController::class, 'submit'])->name('contact.submit');
+Route::post('/contact/submit', [ContactController::class, 'submit'])->middleware('throttle:5,10')->name('contact.submit');
 Route::get('/contact', [ContactController::class, 'index'])->name('contact');
 
 Route::get('/sitemap.xml', function () {

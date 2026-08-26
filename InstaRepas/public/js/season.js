@@ -1,8 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
     const seasonGrid = document.querySelector('.season-grid');
     const seasonButtons = document.querySelectorAll('.season-button');
-    const heroTitle = document.querySelector('#hero-title');
-    const logo = document.querySelector('#logo');
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
     if (!seasonGrid || !seasonButtons.length) {
@@ -103,33 +101,6 @@ document.addEventListener('DOMContentLoaded', () => {
             setActiveSeason(button.dataset.season);
         });
     });
-
-    if (heroTitle && !reduceMotion && typeof window.anime === 'function') {
-        const text = heroTitle.textContent || '';
-        heroTitle.innerHTML = text
-            .split('')
-            .map((character) => `<span class="hero-letter">${character === ' ' ? '&nbsp;' : character}</span>`)
-            .join('');
-
-        window.anime({
-            targets: '.hero-letter',
-            opacity: [0, 1],
-            translateY: [18, 0],
-            easing: 'easeOutQuad',
-            duration: 760,
-            delay: window.anime.stagger(18),
-        });
-    }
-
-    if (logo && !reduceMotion && typeof window.anime === 'function') {
-        window.anime({
-            targets: logo,
-            rotate: [0, 6, 0],
-            duration: 3400,
-            easing: 'easeInOutSine',
-            loop: true,
-        });
-    }
 
     setActiveSeason(getSeasonFromMonth(new Date().getMonth()));
 });
