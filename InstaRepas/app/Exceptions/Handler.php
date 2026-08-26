@@ -28,14 +28,21 @@ class Handler extends ExceptionHandler
         $this->reportable(function (Throwable $e) {
             //
         });
+    }
 
-        // An expired session (CSRF 419) sends visitors back to the form with a
-        // clear message instead of the bare "Page expirée" error screen.
-        $this->renderable(function (TokenMismatchException $e, Request $request) {
+    /**
+     * An expired session (CSRF 419) sends visitors back to the form with a
+     * clear message instead of the bare "Page expirée" error screen.
+     */
+    public function render($request, Throwable $e)
+    {
+        if ($e instanceof TokenMismatchException || $e->getPrevious() instanceof TokenMismatchException) {
             return redirect()
                 ->back()
                 ->withInput($request->except('_token', 'password', 'password_confirmation'))
                 ->with('session_expired', 'Votre session a expiré. Vos choix ont été conservés, cliquez à nouveau sur le bouton.');
-        });
+        }
+
+        return parent::render($request, $e);
     }
 }
