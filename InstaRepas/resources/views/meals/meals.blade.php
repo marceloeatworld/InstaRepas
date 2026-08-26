@@ -19,6 +19,55 @@
     </section>
 
     <section class="section-shell pt-0">
+        @php
+            // Compose une phrase uniquement avec les éléments disponibles.
+            $describeMainMeal = function ($meal) use ($avoid_dairy_styles) {
+                if (empty($meal)) {
+                    return 'Aucune proposition disponible pour vos critères.';
+                }
+                $parts = [];
+                if (!empty($meal['protein'])) {
+                    $parts[] = $meal['protein']->preparation_style;
+                }
+                if (!empty($meal['carbohydrate'])) {
+                    // Les styles "avec une noix de beurre" sont écartés pour les profils sans lactose / végétaliens
+                    $parts[] = $avoid_dairy_styles ? $meal['carbohydrate']->name : $meal['carbohydrate']->preparation_style;
+                }
+                if ($parts === []) {
+                    return 'Aucune proposition disponible pour vos critères.';
+                }
+                $sentence = implode(' et ', $parts);
+                if (!empty($meal['vegetable'])) {
+                    $sentence .= ', servi avec ' . lcfirst($meal['vegetable']->preparation_style);
+                }
+                if (!empty($meal['lipid'])) {
+                    $sentence .= ', le tout avec un filet d\'' . lcfirst($meal['lipid']->name);
+                }
+                return $sentence . '.';
+            };
+
+            $describeBreakfast = function ($meal) use ($avoid_dairy_styles) {
+                if (empty($meal)) {
+                    return 'Aucune proposition disponible pour vos critères.';
+                }
+                $parts = [];
+                if (!empty($meal['protein'])) {
+                    $parts[] = $meal['protein']->name;
+                }
+                if (!empty($meal['carbohydrate'])) {
+                    $parts[] = $avoid_dairy_styles ? $meal['carbohydrate']->name : $meal['carbohydrate']->preparation_style;
+                }
+                if ($parts === []) {
+                    return 'Aucune proposition disponible pour vos critères.';
+                }
+                $sentence = implode(', accompagné de ', $parts);
+                if (!empty($meal['fruit'])) {
+                    $sentence .= " et d'un fruit frais : " . lcfirst($meal['fruit']->preparation_style);
+                }
+                return $sentence . '.';
+            };
+        @endphp
+
         <div class="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
             @for($day = 0; $day < count($breakfasts); $day++)
                 <article class="soft-card print:shadow-none">
@@ -27,44 +76,32 @@
                     <div class="mt-6 space-y-5">
                         <section>
                             <h3 class="text-lg font-semibold text-emerald-700">Petit-déjeuner</h3>
-                            <p class="mt-2 text-slate-600">
-                                {{ sprintf("%s, accompagné de %s et d'un fruit frais : %s.",
-                                    isset($breakfasts[$day]['protein']) ? $breakfasts[$day]['protein']->name : 'Aucune protéine',
-                                    isset($breakfasts[$day]['carbohydrate']) ? $breakfasts[$day]['carbohydrate']->preparation_style : 'Aucun glucide',
-                                    isset($breakfasts[$day]['fruit']) ? $breakfasts[$day]['fruit']->preparation_style : 'Aucun fruit'
-                                ) }}
-                            </p>
+                            <p class="mt-2 text-slate-600">{{ $describeBreakfast($breakfasts[$day]) }}</p>
                         </section>
 
                         <section>
                             <h3 class="text-lg font-semibold text-emerald-700">Déjeuner</h3>
-                            <p class="mt-2 text-slate-600">
-                                {{ sprintf("%s et %s, servi avec %s.",
-                                    isset($lunches[$day]['protein']) ? $lunches[$day]['protein']->preparation_style : 'Aucune protéine',
-                                    isset($lunches[$day]['carbohydrate']) ? $lunches[$day]['carbohydrate']->preparation_style : 'Aucun glucide',
-                                    isset($lunches[$day]['vegetable']) ? $lunches[$day]['vegetable']->preparation_style : 'Aucun légume'
-                                ) }}
-                            </p>
+                            <p class="mt-2 text-slate-600">{{ $describeMainMeal($lunches[$day]) }}</p>
                         </section>
 
                         @if($include_snacks)
                             <section>
                                 <h3 class="text-lg font-semibold text-emerald-700">Collation</h3>
                                 <p class="mt-2 text-slate-600">
-                                    {{ $snacks[$day]['other_snack'] ? $snacks[$day]['other_snack']->name : 'Pas de collation disponible' }}
+                                    @php
+                                        $snackParts = array_filter([
+                                            !empty($snacks[$day]['fruit']) ? $snacks[$day]['fruit']->name : null,
+                                            !empty($snacks[$day]['other_snack']) ? $snacks[$day]['other_snack']->name : null,
+                                        ]);
+                                    @endphp
+                                    {{ $snackParts !== [] ? implode(' et ', $snackParts) : 'Pas de collation disponible' }}
                                 </p>
                             </section>
                         @endif
 
                         <section>
                             <h3 class="text-lg font-semibold text-emerald-700">Dîner</h3>
-                            <p class="mt-2 text-slate-600">
-                                {{ sprintf("%s et %s, servi avec %s.",
-                                    isset($dinners[$day]['protein']) ? $dinners[$day]['protein']->preparation_style : 'Aucune protéine',
-                                    isset($dinners[$day]['carbohydrate']) ? $dinners[$day]['carbohydrate']->preparation_style : 'Aucun glucide',
-                                    isset($dinners[$day]['vegetable']) ? $dinners[$day]['vegetable']->preparation_style : 'Aucun légume'
-                                ) }}
-                            </p>
+                            <p class="mt-2 text-slate-600">{{ $describeMainMeal($dinners[$day]) }}</p>
                         </section>
                     </div>
                 </article>

@@ -17,36 +17,72 @@ use Illuminate\Http\Request;
 // Définition du contrôleur de repas
 class MealController extends Controller
 {
+    // Catégories exclues par restriction, indépendamment du tagging en base.
+    // Sert de filet de sécurité: un aliment mal tagué reste correctement exclu.
+    private const RESTRICTION_CATEGORIES = [
+        'contains_meat' => ['Meat'],
+        'contains_animal_products' => ['Meat', 'Fish', 'Dairy', 'Eggs', 'Crustacean'],
+        'contains_fish' => ['Fish', 'Crustacean'],
+        'contains_crustacean' => ['Crustacean'],
+    ];
+
+    private const MAX_MEAT_MEALS_PER_WEEK = 3;
+    private const MIN_FISH_MEALS_PER_WEEK = 2;
+    private const MEALS_PER_WEEK = 14; // déjeuner + dîner sur 7 jours
+
     private $restrictions = [];
     private $meatCount = 0;
+    private $fishCount = 0;
     private $lastReset = 0;
     private $dayCount = 0;
     private $lastMeatDay = -1;
     private $usedMeats = [];
+    private $lastProteinId = null;
+    private $totalMeals = 0;
 
     // Méthode pour générer des repas
     public function generate(Request $request)
     {
+        $request->validate([
+            'days' => 'nullable|integer|min:1|max:14',
+            'restrictions' => 'nullable|array',
+            'restrictions.*' => 'string|exists:dietary_restrictions,name',
+            'include_snacks' => 'nullable|boolean',
+        ]);
+
         $this->meatCount = 0;
+        $this->fishCount = 0;
         $this->lastReset = 0;
         $this->dayCount = 0;
-        // Récupération des restrictions àN partir de la requête
+        $this->lastMeatDay = -1;
+        $this->usedMeats = [];
+        $this->lastProteinId = null;
+        // Récupération des restrictions à partir de la requête
         $this->restrictions = $request->input('restrictions', []);
-        $include_snacks = $request->input('include_snacks', false);
-        $days = max(1, min($request->input('days', 1), 15));
+        $include_snacks = $request->boolean('include_snacks');
+        $days = (int) $request->input('days', 1);
+        $this->totalMeals = $days * 2;
         $currentMonth = Carbon::now()->month;
         $currentSeason = null;
-        $availableDietaryRestrictions = DietaryRestriction::all();
 
         // Création de la requête pour récupérer les aliments
-        // $foods = Food::query();
         $foods = Food::with('category')->where('is_valid', true);
 
-
-        // Filtrage des aliments en fonction des restrictions
+        // Filtrage des aliments en fonction des restrictions (tags en base)
         foreach ($this->restrictions as $restriction) {
             $foods->whereDoesntHave('restrictions', function ($query) use ($restriction) {
                 $query->where('name', $restriction);
+            });
+        }
+
+        // Filtrage par catégorie: filet de sécurité si un aliment n'est pas tagué
+        $excludedCategories = collect($this->restrictions)
+            ->flatMap(fn ($restriction) => self::RESTRICTION_CATEGORIES[$restriction] ?? [])
+            ->unique()
+            ->all();
+        if ($excludedCategories !== []) {
+            $foods->whereHas('category', function ($query) use ($excludedCategories) {
+                $query->whereNotIn('name', $excludedCategories);
             });
         }
 
@@ -88,6 +124,8 @@ class MealController extends Controller
             'dinners' => $dinners,
             'snacks' => $snacks,
             'include_snacks' => $include_snacks,
+            // Les suggestions de préparation "beurre/fromage" sont écartées pour ces profils
+            'avoid_dairy_styles' => count(array_intersect($this->restrictions, ['contains_lactose', 'contains_animal_products'])) > 0,
             'current_date' => Carbon::now()->toFormattedDateString(),
             'current_season' => $currentSeason ? $currentSeason->season_name : 'Unknown',
         ]);
@@ -149,17 +187,20 @@ class MealController extends Controller
             return $result;
         }
 
+        // Sélectionne un aliment au hasard, ou null si la collection est vide.
+        // Évite les erreurs 500 quand les restrictions vident une catégorie.
+        private function pick($foods)
+        {
+            return $foods->count() > 0 ? $foods->random() : null;
+        }
+
         // Cette fonction génère un petit déjeuner en fonction des aliments disponibles.
         private function generateBreakfast($foods)
         {
-            // Récupère un aliment contenant des protéines.
-            $proteinCategories = ['Dairy', 'Eggs'];
-            $proteinFood = $foods->whereIn('category.name', $proteinCategories)->count() > 0 ? $foods->whereIn('category.name', $proteinCategories)->random() : null;
-
             return [
-                'protein' => $proteinFood,
-                'carbohydrate' => $foods->where('category.name', 'Bread')->where('nutritional_type', 'carbohydrates')->random(),
-                'fruit' => $foods->where('category.name', 'Fruits')->random(),
+                'protein' => $this->pick($foods->whereIn('category.name', ['Dairy', 'Eggs'])),
+                'carbohydrate' => $this->pick($foods->where('category.name', 'Bread')->where('nutritional_type', 'carbohydrates')),
+                'fruit' => $this->pick($foods->where('category.name', 'Fruits')),
             ];
         }
 
@@ -172,68 +213,69 @@ class MealController extends Controller
             // Réinitialisation hebdomadaire
             if (floor($currentDay / 7) > $this->lastReset) {
                 $this->meatCount = 0;
+                $this->fishCount = 0;
                 $this->usedMeats = [];
                 $this->lastReset = floor($currentDay / 7);
             }
 
             // Détection des limites de viande
-            $isMaxMeatWeek = $this->meatCount >= 3; // Max 3 repas avec viande par semaine
+            $isMaxMeatWeek = $this->meatCount >= self::MAX_MEAT_MEALS_PER_WEEK;
             $isSameDayMeat = $currentDay === $this->lastMeatDay; // Pas deux repas viande le même jour
             $isMaxMeat = $isMaxMeatWeek || $isSameDayMeat;
 
-            // Détermination des catégories de protéines
-            $proteinCategory = $isMaxMeat ?
-                ['Fish', 'Eggs', 'Legumes'] : // Alternatives si viande non autorisée
-                (in_array('contains_animal_products', $this->restrictions) ?
-                    'Legumes' : // Protéines végétales si produit animal interdit
-                    ['Meat', 'Fish', 'Eggs', 'Pork'] // Protéines classiques
-                );
+            // Objectif poisson: viser au moins 2 repas de poisson par semaine (repère PNNS).
+            // On force le poisson quand il ne reste plus assez de repas dans la semaine.
+            $mealsLeftInWeek = self::MEALS_PER_WEEK - ($this->dayCount % self::MEALS_PER_WEEK);
+            $mealsLeftToGenerate = $this->totalMeals - $this->dayCount;
+            // Objectif proportionnel à la durée demandée (2 poissons pour 7 jours)
+            $fishTarget = min(
+                self::MIN_FISH_MEALS_PER_WEEK,
+                (int) ceil($this->totalMeals * self::MIN_FISH_MEALS_PER_WEEK / self::MEALS_PER_WEEK)
+            );
+            $fishNeeded = $fishTarget - $this->fishCount;
+            $fishAvailable = $foods->where('category.name', 'Fish')->count() > 0;
+            $mustPickFish = $fishAvailable
+                && $fishNeeded > 0
+                && min($mealsLeftInWeek, $mealsLeftToGenerate) <= $fishNeeded;
 
-            // Sélection de la protéine
-            $proteinFood = $foods->whereIn('category.name', $proteinCategory)
-                ->whereNotIn('id', $this->usedMeats) // Évite les doublons
-                ->count() > 0 ? $foods->whereIn('category.name', $proteinCategory)
-                ->whereNotIn('id', $this->usedMeats)
-                ->random() : null;
-
-            // Mise à jour des compteurs si un aliment de viande est utilisé
-            if ($proteinFood && $proteinFood->category && in_array($proteinFood->category->name, ['Meat', 'Pork'])) {
-                $this->meatCount++;
-                $this->lastMeatDay = $currentDay;
-                $this->usedMeats[] = $proteinFood->id;
+            // Détermination des catégories de protéines.
+            // Les restrictions (végétalien, sans poisson...) vident déjà les
+            // catégories concernées: le tirage retombe sur ce qui reste.
+            if ($mustPickFish) {
+                $proteinCategory = ['Fish'];
+            } elseif ($isMaxMeat) {
+                $proteinCategory = ['Fish', 'Eggs', 'Legumes', 'Crustacean'];
+            } else {
+                $proteinCategory = ['Meat', 'Fish', 'Eggs', 'Legumes', 'Crustacean'];
             }
 
-            // Gestion des glucides et fibres en fonction des restrictions
-            $carbohydrateFood = null;
-            $fiberFood = null;
+            // Sélection de la protéine, en évitant les viandes déjà servies
+            // cette semaine et la protéine du repas précédent quand c'est possible.
+            $proteinPool = $foods->whereIn('category.name', $proteinCategory)
+                ->whereNotIn('id', $this->usedMeats);
+            $variedPool = $proteinPool->where('id', '!=', $this->lastProteinId);
+            $proteinFood = $this->pick($variedPool->count() > 0 ? $variedPool : $proteinPool);
 
-            // Si l'utilisateur a une restriction alimentaire qui interdit les produits animaux
-            if (in_array('contains_animal_products', $this->restrictions)) {
-                $carbohydrateFood = $foods->where('category.name', 'Grains')->where('nutritional_type', 'carbohydrates')->count() > 0
-                    ? $foods->where('category.name', 'Grains')->where('nutritional_type', 'carbohydrates')->random()
-                    : null;
-                $fiberFood = $foods->where('category.name', 'Vegetables')->where('nutritional_type', 'fibers')->count() > 0
-                    ? $foods->where('category.name', 'Vegetables')->where('nutritional_type', 'fibers')->random()
-                    : null;
+            // Mise à jour des compteurs selon la protéine servie
+            if ($proteinFood && $proteinFood->category) {
+                $this->lastProteinId = $proteinFood->id;
+                if ($proteinFood->category->name === 'Meat') {
+                    $this->meatCount++;
+                    $this->lastMeatDay = $currentDay;
+                    $this->usedMeats[] = $proteinFood->id;
+                } elseif ($proteinFood->category->name === 'Fish') {
+                    $this->fishCount++;
+                }
             }
 
-            // Incrémentation du compteur global de jours
+            // Incrémentation du compteur global de repas
             $this->dayCount++;
 
             return [
                 'protein' => $proteinFood,
-                'carbohydrate' => in_array('contains_animal_products', $this->restrictions)
-                    ? $carbohydrateFood
-                    : ($foods->where('category.name', 'Grains')->where('nutritional_type', 'carbohydrates')->count() > 0
-                        ? $foods->where('category.name', 'Grains')->where('nutritional_type', 'carbohydrates')->random()
-                        : null),
-                'fiber' => in_array('contains_animal_products', $this->restrictions) ? $fiberFood : null,
-                'vegetable' => $foods->where('category.name', 'Vegetables')->count() > 0
-                    ? $foods->where('category.name', 'Vegetables')->random()
-                    : null,
-                'lipid' => $foods->where('category.name', 'Oils')->count() > 0
-                    ? $foods->where('category.name', 'Oils')->random()
-                    : null,
+                'carbohydrate' => $this->pick($foods->where('category.name', 'Grains')->where('nutritional_type', 'carbohydrates')),
+                'vegetable' => $this->pick($foods->where('category.name', 'Vegetables')),
+                'lipid' => $this->pick($foods->where('category.name', 'Oils')),
             ];
         }
 

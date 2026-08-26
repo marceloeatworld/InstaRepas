@@ -106,6 +106,19 @@
                         </div>
                     </div>
                     <p id="days-help" class="mt-3 text-sm text-slate-500">Choisissez entre 1 et 14 jours.</p>
+
+                    <label class="menu-generator-option mt-4">
+                        <input
+                            type="checkbox"
+                            class="mt-1 rounded border-slate-300 text-emerald-600 focus:ring-emerald-500"
+                            name="include_snacks"
+                            value="1"
+                        >
+                        <span>
+                            <span class="block font-semibold text-slate-900">Inclure une collation</span>
+                            <span class="mt-1 block text-sm text-slate-500">Ajoute une pause gourmande (fruit et fruits à coque) chaque jour.</span>
+                        </span>
+                    </label>
                 </fieldset>
 
                 @guest

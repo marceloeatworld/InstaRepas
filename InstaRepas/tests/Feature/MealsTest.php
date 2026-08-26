@@ -17,6 +17,11 @@ beforeEach(function () {
     $this->user = User::factory()->create();
     Auth::login($this->user);
 
+    // Création des restrictions alimentaires connues
+    foreach (['contains_meat', 'contains_pork', 'contains_gluten', 'contains_animal_products', 'contains_lactose', 'contains_fish', 'contains_crustacean'] as $name) {
+        \App\Models\DietaryRestriction::firstOrCreate(['name' => $name]);
+    }
+
     // Création de 50 catégories d'aliments
     $categories = collect(range(1, 50))->map(function ($index) {
         return \App\Models\FoodCategory::firstOrCreate(['name' => "Category $index"]);
