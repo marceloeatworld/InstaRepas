@@ -1,6 +1,6 @@
 <x-app-layout
-    title="Générateur de menus | InstaRepas"
-    description="Générez un menu simple selon vos préférences et restrictions alimentaires avec l’outil InstaRepas."
+    title="Générateur de menu de la semaine gratuit | InstaRepas"
+    description="Créez votre menu de la semaine en quelques clics : repas équilibrés, restrictions alimentaires prises en compte, de 1 à 14 jours. Gratuit et sans inscription."
     :canonical="route('generate')"
 >
     <section class="section-shell pb-6 sm:pb-8">

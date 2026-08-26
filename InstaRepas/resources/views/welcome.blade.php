@@ -1,8 +1,12 @@
 <x-app-layout
-    title="InstaRepas | Menus simples et idées repas personnalisées"
-    description="InstaRepas vous aide à générer des idées repas simples, adaptées à vos préférences alimentaires et à votre semaine."
+    title="Idées repas et menus équilibrés pour la semaine | InstaRepas"
+    description="Générez gratuitement des idées de repas équilibrés pour la semaine, adaptées à vos préférences et restrictions alimentaires. Un outil simple conçu avec une diététicienne."
     :canonical="route('home')"
 >
+    @push('head')
+        <link rel="preload" as="image" href="{{ asset('imgs/hero-table.webp') }}" fetchpriority="high">
+    @endpush
+
     <section class="section-shell pt-8 sm:pt-10 lg:pt-14">
         <div class="home-hero overflow-hidden rounded-[1.75rem] border border-white/15 shadow-[0_20px_60px_rgba(18,52,49,0.18)]">
             <div class="home-hero-layout">
@@ -195,16 +199,6 @@
         <script defer src="{{ asset('js/anime.min.js') }}"></script>
         <script defer src="{{ asset('js/season.js') }}"></script>
     @endpush
-
-    <script type="application/ld+json">
-    {
-        "@@context": "https://schema.org",
-        "@type": "WebSite",
-        "name": "InstaRepas",
-        "url": "{{ url('/') }}",
-        "description": "Plateforme de création de repas personnalisés et équilibrés pour la semaine"
-    }
-    </script>
 
     <script type="application/ld+json">
     {

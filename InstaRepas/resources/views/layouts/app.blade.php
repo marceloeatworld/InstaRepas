@@ -2,7 +2,7 @@
     'title' => 'InstaRepas',
     'description' => 'InstaRepas vous aide à composer des menus équilibrés, à gérer vos préférences alimentaires et à retrouver des idées utiles pour le quotidien.',
     'canonical' => url()->current(),
-    'ogImage' => asset('imgs/logo_for_foodequlibre.webp'),
+    'ogImage' => asset('imgs/hero-table.webp'),
     'ogType' => 'website',
 ])
 
@@ -25,10 +25,11 @@
         <meta property="og:type" content="{{ $ogType }}">
         <meta property="og:url" content="{{ $canonical }}">
         <meta property="og:site_name" content="{{ 'InstaRepas' }}">
+        <meta property="og:locale" content="fr_FR">
         <meta property="og:title" content="{{ $title }}">
         <meta property="og:description" content="{{ $description }}">
         <meta property="og:image" content="{{ $ogImage }}">
-        <meta property="og:image:alt" content="Logo InstaRepas">
+        <meta property="og:image:alt" content="InstaRepas, des menus équilibrés pour la semaine">
 
         <meta name="twitter:card" content="summary_large_image">
         <meta name="twitter:url" content="{{ $canonical }}">
@@ -55,6 +56,7 @@
             "@type": "WebSite",
             "name": "{{ 'InstaRepas' }}",
             "url": "{{ url('/') }}",
+            "inLanguage": "fr-FR",
             "description": "InstaRepas aide à créer des menus personnalisés, équilibrés et adaptés au quotidien."
         }
         </script>

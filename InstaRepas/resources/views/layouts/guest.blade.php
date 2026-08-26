@@ -14,6 +14,7 @@
 
         <title>{{ $title }}</title>
 
+        <meta name="robots" content="noindex,follow">
         <meta
             name="description"
             content="{{ $description }}"
