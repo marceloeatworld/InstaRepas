@@ -4,9 +4,9 @@
     :canonical="route('NutritionInfo.index')"
 >
 
-  <main class="container mx-auto my-8">
+  <div class="container mx-auto my-8">
     <section>
-      <h2 class="text-2xl font-bold mb-4">Conseils de Nutrition</h2>
+      <h1 class="text-3xl font-bold mb-4">Conseils de Nutrition</h1>
       <ul class="list-disc pl-8">
         <li>Mangez à heures normales (avec un laps de temps cohérent entre les repas), lentement, dans le calme et avec plaisir.</li>
         <li>Ne pas consommer trop de sel : salez modérément vos aliments. Utilisez plutôt les aromates, épices ou condiments pour donner plus de goût à vos plats.</li>
@@ -73,7 +73,7 @@
 
       </div>
     </section>
-  </main>
+  </div>
 
   
 </x-app-layout>

@@ -3,7 +3,6 @@
 @foreach ($pages as $page)
     <url>
         <loc>{{ $page['loc'] }}</loc>
-        <lastmod>{{ $page['lastmod'] }}</lastmod>
         <priority>{{ $page['priority'] }}</priority>
     </url>
 @endforeach

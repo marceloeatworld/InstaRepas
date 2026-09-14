@@ -125,16 +125,14 @@ Route::post('/contact/submit', [ContactController::class, 'submit'])->middleware
 Route::get('/contact', [ContactController::class, 'index'])->name('contact');
 
 Route::get('/sitemap.xml', function () {
-    $now = now()->toAtomString();
-
     $pages = [
-        ['loc' => route('home'), 'lastmod' => $now, 'priority' => '1.0'],
-        ['loc' => route('generate'), 'lastmod' => $now, 'priority' => '0.9'],
-        ['loc' => route('about'), 'lastmod' => $now, 'priority' => '0.7'],
-        ['loc' => route('CookingAdvice.index'), 'lastmod' => $now, 'priority' => '0.7'],
-        ['loc' => route('NutritionInfo.index'), 'lastmod' => $now, 'priority' => '0.7'],
-        ['loc' => route('contact'), 'lastmod' => $now, 'priority' => '0.6'],
-        ['loc' => route('legal'), 'lastmod' => $now, 'priority' => '0.3'],
+        ['loc' => route('home'), 'priority' => '1.0'],
+        ['loc' => route('generate'), 'priority' => '0.9'],
+        ['loc' => route('about'), 'priority' => '0.7'],
+        ['loc' => route('CookingAdvice.index'), 'priority' => '0.7'],
+        ['loc' => route('NutritionInfo.index'), 'priority' => '0.7'],
+        ['loc' => route('contact'), 'priority' => '0.6'],
+        ['loc' => route('legal'), 'priority' => '0.3'],
     ];
 
     return response()

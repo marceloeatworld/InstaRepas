@@ -1,4 +1,7 @@
-<x-app-layout>
+<x-app-layout title="Votre menu de la semaine | InstaRepas">
+    @push('head')
+        <meta name="robots" content="noindex">
+    @endpush
     <section class="section-shell">
         <div class="mx-auto max-w-3xl">
             <div class="page-hero text-center">
